@@ -634,7 +634,6 @@ namespace Titans
 
                         sfx.setfxfvolume(0.25f*6f);
                         sfx.PlayBuzzer();
-                        sfx.PlayBuzzer();
                         releaseWait = true;
 
                     }
@@ -648,7 +647,6 @@ namespace Titans
                         levelMax_unselected = maxtemp;
                         sfx.setfxfvolume(.5f * 6f);
                         sfx.PlayBuzzer();
-                        sfx.PlayBuzzer();
                         releaseWait = true;
                     }
                     if (sfx3click.Contains(mousePos))
@@ -661,7 +659,6 @@ namespace Titans
                         levelMax_unselected = maxtemp;
                         sfx.setfxfvolume(.75f * 6f);
                         sfx.PlayBuzzer();
-                        sfx.PlayBuzzer();
                         releaseWait = true;
                     }
                     if (sfxmaxclick.Contains(mousePos))
@@ -673,7 +670,6 @@ namespace Titans
                         level3_unselected = level3temp;
                         levelMax_unselected = levelMax;
                         sfx.setfxfvolume(1f);
-                        sfx.PlayBuzzer();
                         sfx.PlayBuzzer();
                         releaseWait = true;
                     }
@@ -876,7 +872,6 @@ namespace Titans
                             special = specialtrue;
                             hilightenabled = true;
                             sfx.PlayBuzzer();
-                            sfx.PlayBuzzer();
                         }
                     }
                         //deselect attack
@@ -925,6 +920,7 @@ namespace Titans
                         special = special_grey;
                         hilightenabled = true;
                         battle.SelectDefend();
+                        
                     }
                         //deselect if in move or attack mode and defend button clicked
                     else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
@@ -965,7 +961,6 @@ namespace Titans
                 {
                     releaseWait = true;
                     sfx.PlayBuzzer();
-                    sfx.PlayBuzzer();
                 }
 
                 //Confirm attack
@@ -998,7 +993,6 @@ namespace Titans
                     else if(!releaseWait)
                     {
                         releaseWait = true;
-                        sfx.PlayBuzzer();
                         sfx.PlayBuzzer();
                     }
                     

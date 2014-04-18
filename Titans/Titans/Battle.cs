@@ -258,6 +258,7 @@ namespace Titans
             ActiveUnit.DefenseModifiers.Add(5);
             ActiveUnit.Defense += 5;
             ActiveUnit.AP = 0;
+            GameUI.sfx.PlayDefendSound(ActiveUnit);
         }
                 
                 

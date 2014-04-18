@@ -22,7 +22,7 @@ namespace Titans
             soundBank = new SoundBank(engine, "Content\\SFX\\Sound Bank.xsb");
             waveBank = new WaveBank(engine, "Content\\SFX\\Wave Bank.xwb");
             fxCat = engine.GetCategory("SFX");
-            fxCat.SetVolume(6.0f);
+            fxCat.SetVolume(10f);
 
 
         }
@@ -190,6 +190,36 @@ namespace Titans
             else
             {
                 cue = soundBank.GetCue("EDefenderPass");
+            }
+
+            cue.Play();
+        }
+
+        public void PlayDefendSound(Unit selected)
+        {
+            if (selected is Soldier && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SoldierDefend");
+            }
+            else if (selected is Soldier && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESoldierDefend");
+            }
+            else if (selected is Ranger && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("RangerDefend");
+            }
+            else if (selected is Ranger && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ERangerDefend");
+            }
+            else if (selected is Defender && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("DefenderDefend");
+            }
+            else
+            {
+                cue = soundBank.GetCue("EDefenderDefend");
             }
 
             cue.Play();
