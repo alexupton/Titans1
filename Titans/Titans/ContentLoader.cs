@@ -20,6 +20,7 @@ namespace Titans
         public ContentLoader(Game1 currentGame)
         {
             game = currentGame;
+            game.sfx = new AudioManager(game);
         }
 
         public void MainMenu()
@@ -37,11 +38,18 @@ namespace Titans
 
             game.quick_battle = game.Content.Load<Texture2D>(@"images\Quick Battle");
             game.campaign = game.Content.Load<Texture2D>(@"images\Campaign");
+            game.campaign_invert = game.Content.Load<Texture2D>(@"images\Campaign(Inverted)");
             game.custom_battle = game.Content.Load<Texture2D>(@"images\Custom Battle");
+            game.custom_battle_invert = game.Content.Load<Texture2D>(@"images\Custom Battle(Inverted)");
             game.options = game.Content.Load<Texture2D>(@"images\Options");
+            game.options_invert = game.Content.Load<Texture2D>(@"images\Options(Inverted)");
             game.exit = game.Content.Load<Texture2D>(@"images\Exit");
-            game.quick_battle_invert = game.Content.Load<Texture2D>(@"images\Quick Battle Invert");
-            game.exit2 = game.Content.Load<Texture2D>(@"images\ExitInvert");
+            game.quick_battle_invert = game.Content.Load<Texture2D>(@"images\Quick Battle(Inverted)");
+            game.exit2 = game.Content.Load<Texture2D>(@"images\Exit(Inverted)");
+
+            game.campaigntemp = game.campaign;
+            game.custom_battletemp = game.custom_battle;
+            game.optionstemp = game.options;
             game.quick_temp = game.quick_battle;
             game.exit_temp = game.exit;
         }
@@ -49,10 +57,12 @@ namespace Titans
         public void CampaignMenu()
         {
             game.newGame = game.Content.Load<Texture2D>(@"images\New Game");
+            game.newGame_invert = game.Content.Load<Texture2D>(@"images\New Game(Inverted)");
             game.loadGame = game.Content.Load<Texture2D>(@"images\Load Game");
-            game.exit = game.Content.Load<Texture2D>(@"images\Exit");
-            game.exit2 = game.Content.Load<Texture2D>(@"images\ExitInvert");
-            game.exit_temp = game.exit;
+            game.loadGame_invert = game.Content.Load<Texture2D>(@"images\Load Game(Inverted)");
+            game.back = game.Content.Load<Texture2D>(@"images\Back");
+            game.back_invert = game.Content.Load<Texture2D>(@"images\Back(Inverted)");
+            game.backtemp = game.back;
             game.newGametemp = game.newGame;
             game.loadGametemp = game.loadGame;
         }
@@ -60,11 +70,13 @@ namespace Titans
         public void OptionsMenu()
         {
             //Content.Unload();
+
             game.resolution = game.Content.Load<Texture2D>(@"images\Resolution");
             game.textSpeed = game.Content.Load<Texture2D>(@"images\Text Speed");
             game.musicLevel = game.Content.Load<Texture2D>(@"images\Music Level");
             game.soundEffects = game.Content.Load<Texture2D>(@"images\Sound Effects");
             game.back = game.Content.Load<Texture2D>(@"images\Back");
+            game.back_invert = game.Content.Load<Texture2D>(@"images\Back(Inverted)");
             game.credits = game.Content.Load<Texture2D>(@"images\Credits");
             game.res1_unselected = game.Content.Load<Texture2D>(@"images\1200-800(Selected)");
             game.res1 = game.Content.Load<Texture2D>(@"images\1200-800(Not Selected)");
@@ -72,6 +84,11 @@ namespace Titans
             game.res2 = game.Content.Load<Texture2D>(@"images\1500-800(Not Selected)");
             game.fullScreen_unselected = game.Content.Load<Texture2D>(@"images\Full Screen(Selected)");
             game.fullScreen = game.Content.Load<Texture2D>(@"images\Full Screen(Not Selected)");
+            game.fullScreen_invert = game.Content.Load<Texture2D>(@"images\Full Screen(Selected)");
+            game.yes_invert = game.Content.Load<Texture2D>(@"images\Yes(Selected)");
+            game.yes = game.Content.Load<Texture2D>(@"images\Yes(Not Selected)");
+            game.no_invert = game.Content.Load<Texture2D>(@"images\No(Selected)");
+            game.no = game.Content.Load<Texture2D>(@"images\No(Not Selected)");
             game.slow_unselected = game.Content.Load<Texture2D>(@"images\Slow(Selected)");
             game.slow = game.Content.Load<Texture2D>(@"images\Slow(Not Selected)");
             game.slowtemp = game.slow;
@@ -81,6 +98,19 @@ namespace Titans
             game.fast_unselected = game.Content.Load<Texture2D>(@"images\Fast(Selected)");
             game.fast = game.Content.Load<Texture2D>(@"images\Fast(Not Selected)");
             game.fasttemp = game.fast;
+            game.volmute_unselected = game.Content.Load<Texture2D>(@"images\Mute(Selected)");
+            game.volmute = game.Content.Load<Texture2D>(@"images\Mute(Not Selected)");
+            game.vollevel1_unselected = game.Content.Load<Texture2D>(@"images\25%(Selected)");
+            game.vollevel1 = game.Content.Load<Texture2D>(@"images\25%(Not Selected)");
+            game.vollevel2_unselected = game.Content.Load<Texture2D>(@"images\50%(Selected)");
+            game.vollevel2 = game.Content.Load<Texture2D>(@"images\50%(Not Selected)");
+            game.vollevel3_unselected = game.Content.Load<Texture2D>(@"images\75%(Selected)");
+            game.vollevel3 = game.Content.Load<Texture2D>(@"images\75%(Not Selected)");
+            game.vollevelMax_unselected = game.Content.Load<Texture2D>(@"images\100%(Selected)");
+            game.vollevelMax = game.Content.Load<Texture2D>(@"images\100%(Not Selected)");
+
+            game.apply = game.Content.Load<Texture2D>(@"images\Apply");
+
             game.mute_unselected = game.Content.Load<Texture2D>(@"images\Mute(Selected)");
             game.mute = game.Content.Load<Texture2D>(@"images\Mute(Not Selected)");
             game.level1_unselected = game.Content.Load<Texture2D>(@"images\25%(Selected)");
@@ -92,7 +122,26 @@ namespace Titans
             game.levelMax_unselected = game.Content.Load<Texture2D>(@"images\100%(Selected)");
             game.levelMax = game.Content.Load<Texture2D>(@"images\100%(Not Selected)");
             game.apply = game.Content.Load<Texture2D>(@"images\Apply");
+
+            game.volmutetemp = game.volmute_unselected;
+            game.vol1temp = game.vollevel1_unselected;
+            game.vol2temp = game.vollevel2_unselected;
+            game.vol3temp = game.vollevel3_unselected;
+            game.volmaxtemp = game.vollevelMax_unselected;
+            game.vollevelMax_unselected = game.vollevelMax;
+
+            game.mutetemp = game.mute_unselected;
+            game.level1temp = game.level1_unselected;
+            game.level2temp = game.level2_unselected;
+            game.level3temp = game.level3_unselected;
+            game.maxtemp = game.levelMax_unselected;
+            game.levelMax_unselected = game.levelMax;
+
             game.fullScreenTemp = game.fullScreen;
+            game.backtemp = game.back;
+            game.yestemp = game.yes_invert;
+            game.yes_invert = game.yes;
+            game.notemp = game.no_invert;
         }
 
         public void Demo()
@@ -101,6 +150,7 @@ namespace Titans
             Map mainMap = MapLoader.LoadMap(@"Content\Demo.txt");
             game.battle = new Battle(mainMap);
             game.battle.GameUI = game;
+            game.battle.RollInitiative();
             game.lastSelectedTile = game.battle.BattleMap.GetTileAt(0, 0);
             game.unit = game.battle.ActiveUnit.GetType();
             game.hp = game.battle.ActiveUnit.HP.ToString();

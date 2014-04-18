@@ -45,7 +45,7 @@ namespace Titans
             game.spriteBatch.Begin();
             game.spriteBatch.Draw(game.newGame, new Vector2(550, 300), Color.White);
             game.spriteBatch.Draw(game.loadGame, new Vector2(550, 343), Color.White);
-            game.spriteBatch.Draw(game.exit, new Vector2(15, 755), Color.White);
+            game.spriteBatch.Draw(game.back, new Vector2(15, 755), Color.White);
             game.spriteBatch.End();
         }
 
@@ -54,6 +54,8 @@ namespace Titans
             game.GraphicsDevice.Clear(Color.White);
             game.spriteBatch.Begin();
             game.spriteBatch.Draw(game.fullScreen, new Vector2(25, 337), Color.White);
+            game.spriteBatch.Draw(game.yes_invert, new Vector2(206, 337), Color.White);
+            game.spriteBatch.Draw(game.no_invert, new Vector2(360, 337), Color.White);
             game.spriteBatch.Draw(game.resolution, new Vector2(25, 385), Color.White);
             game.spriteBatch.Draw(game.res1_unselected, new Vector2(206, 385), Color.White);
             game.spriteBatch.Draw(game.res2, new Vector2(360, 385), Color.White);
@@ -62,22 +64,21 @@ namespace Titans
             game.spriteBatch.Draw(game.regular, new Vector2(360, 433), Color.White);
             game.spriteBatch.Draw(game.fast_unselected, new Vector2(514, 433), Color.White);
             game.spriteBatch.Draw(game.musicLevel, new Vector2(25, 483), Color.White);
-            game.spriteBatch.Draw(game.mute_unselected, new Vector2(206, 483), Color.White);
-            game.spriteBatch.Draw(game.level1_unselected, new Vector2(360, 483), Color.White);
-            game.spriteBatch.Draw(game.level2_unselected, new Vector2(514, 483), Color.White);
-            game.spriteBatch.Draw(game.level2_unselected, new Vector2(669, 483), Color.White);
-            game.spriteBatch.Draw(game.level3_unselected, new Vector2(825, 483), Color.White);
-            game.spriteBatch.Draw(game.levelMax, new Vector2(979, 483), Color.White);
+            game.spriteBatch.Draw(game.volmute_unselected, new Vector2(206, 483), Color.White);
+            game.spriteBatch.Draw(game.vollevel1_unselected, new Vector2(360, 483), Color.White);
+            game.spriteBatch.Draw(game.vollevel2_unselected, new Vector2(514, 483), Color.White);
+            game.spriteBatch.Draw(game.vollevel3_unselected, new Vector2(669, 483), Color.White);
+            game.spriteBatch.Draw(game.vollevelMax_unselected, new Vector2(825, 483), Color.White);
             game.spriteBatch.Draw(game.soundEffects, new Vector2(15, 533), Color.White);
             game.spriteBatch.Draw(game.mute_unselected, new Vector2(206, 533), Color.White);
             game.spriteBatch.Draw(game.level1_unselected, new Vector2(360, 533), Color.White);
             game.spriteBatch.Draw(game.level2_unselected, new Vector2(514, 533), Color.White);
-            game.spriteBatch.Draw(game.level2_unselected, new Vector2(669, 533), Color.White);
-            game.spriteBatch.Draw(game.level3_unselected, new Vector2(825, 533), Color.White);
-            game.spriteBatch.Draw(game.levelMax, new Vector2(979, 533), Color.White);
+            game.spriteBatch.Draw(game.level3_unselected, new Vector2(669, 533), Color.White);
+            game.spriteBatch.Draw(game.levelMax_unselected, new Vector2(825, 533), Color.White);
             game.spriteBatch.Draw(game.credits, new Vector2(550, 755), Color.White);
             game.spriteBatch.Draw(game.back, new Vector2(15, 755), Color.White);
             game.spriteBatch.Draw(game.apply, new Vector2(1115, 755), Color.White);
+
             game.spriteBatch.End();
         }
 
@@ -122,6 +123,8 @@ namespace Titans
                     //Draw units
                     if (game.battle.BattleMap.map[x][y].hasUnit)
                     {
+                        
+                        
                         if (game.battle.BattleMap.map[x][y].TileUnit is Artillery)
                         {
                             game.spriteBatch.Draw(game.Artillery, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
@@ -147,7 +150,9 @@ namespace Titans
                             game.spriteBatch.Draw(game.Soldier, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
                                 new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
                         }
-
+                        
+                            
+                            
 
                     }
 
@@ -184,7 +189,23 @@ namespace Titans
                             game.spriteBatch.DrawString(game.smallText, game.battle.BattleMap.map[x][y].TileUnit.HP + "/" + game.battle.BattleMap.map[x][y].TileUnit.MaxHP,
                                 new Vector2(x * 55 + 2 + game.offsetX, y * 55 + 50 + game.offsetY), Color.Red);
                         }
+
+                        if (game.battle.BattleMap.map[x][y].hasUnit)
+                        {
+                            if (game.battle.BattleMap.map[x][y].TileUnit.DefenseModifiers.Count > 0)
+                            {
+                                int defTotal = 0;
+                                foreach (int mod in game.battle.BattleMap.map[x][y].TileUnit.DefenseModifiers)
+                                {
+                                    defTotal += mod;
+                                }
+                                game.spriteBatch.DrawString(game.text, "+" + defTotal.ToString(), new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42,
+                                    game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.Magenta);
+                            }
+                        }
+                    
                     }
+
                 }
             }
             //draw static UI elements

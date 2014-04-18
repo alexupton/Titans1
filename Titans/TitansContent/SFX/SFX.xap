@@ -970,7 +970,7 @@ Wave Bank
     Wave
     {
         Name = Buzzer;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\Buzzer.wav;
+        File = Buzzer.wav;
         Build Settings Last Modified Low = 320382117;
         Build Settings Last Modified High = 30365788;
 

@@ -45,9 +45,7 @@ namespace Titans
             isPlayerUnit=true;
             Price = 100;
             Location[0]=-1;
-            Location[1] = -1;
-            AttackModifiers.Add(0);
-            DefenseModifiers.Add(0); 
+            Location[1] = -1; 
         }
         public override void Special1()
         {

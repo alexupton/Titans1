@@ -159,6 +159,42 @@ namespace Titans
             fxCat.SetVolume(6f);
         }
 
+        public void setfxfvolume(float volume)
+        {
+            fxCat.SetVolume(volume);
+        }
+
+        public void PlayPassSound(Unit selected)
+        {
+
+            if (selected is Soldier && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SoldierPass");
+            }
+            else if (selected is Soldier && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESoldierPass");
+            }
+            else if (selected is Ranger && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("RangerPass");
+            }
+            else if (selected is Ranger && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ERangerPass");
+            }
+            else if (selected is Defender && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("DefenderPass");
+            }
+            else
+            {
+                cue = soundBank.GetCue("EDefenderPass");
+            }
+
+            cue.Play();
+        }
+
         
         
 

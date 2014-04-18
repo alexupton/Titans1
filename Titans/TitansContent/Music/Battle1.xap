@@ -235,7 +235,7 @@ Wave Bank
     Wave
     {
         Name = Battle1;
-        File = ..\..\..\..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Image-Line\FL Studio 9\Data\Projects\SFX\Battle1.wav;
+        File = Battle.wav;
         Build Settings Last Modified Low = 1110430181;
         Build Settings Last Modified High = 30363177;
 

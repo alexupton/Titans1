@@ -107,6 +107,7 @@ namespace Titans
                 tile.FScore = 0;
                 tile.GScore = 0;
                 tile.HScore = 0;
+                tile.IsRedHighlighted = false;
             }
 
 

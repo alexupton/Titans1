@@ -21,8 +21,14 @@ namespace Titans
         public SpriteBatch spriteBatch;
         public Texture2D quick_battle;
         public Texture2D campaign;
+        public Texture2D campaign_invert;
+        public Texture2D campaigntemp;
         public Texture2D custom_battle;
+        public Texture2D custom_battle_invert;
+        public Texture2D custom_battletemp;
         public Texture2D options;
+        public Texture2D options_invert;
+        public Texture2D optionstemp;
         public Texture2D exit;
         public Texture2D exit_temp;
         public Texture2D exit2;
@@ -64,8 +70,10 @@ namespace Titans
         public Texture2D item_invert;
         public Texture2D item_grey;
         public Texture2D newGame;
+        public Texture2D newGame_invert;
         public Texture2D newGametemp;
         public Texture2D loadGame;
+        public Texture2D loadGame_invert;
         public Texture2D loadGametemp;
         public Texture2D resolution;
         public Texture2D textSpeed;
@@ -85,6 +93,26 @@ namespace Titans
         public Texture2D fast;
         public Texture2D fasttemp;
         public Texture2D fast_unselected;
+        public Texture2D volmute;
+        public Texture2D volmute_unselected;
+        public Texture2D volmutetemp;
+        public Texture2D vollevel1;
+        public Texture2D mutetemp;
+        public Texture2D level1temp;
+        public Texture2D level2temp;
+        public Texture2D level3temp;
+        public Texture2D maxtemp;
+        public Texture2D vol1temp;
+        public Texture2D vol2temp;
+        public Texture2D vol3temp;
+        public Texture2D volmaxtemp;
+        public Texture2D vollevel1_unselected;
+        public Texture2D vollevel2;
+        public Texture2D vollevel2_unselected;
+        public Texture2D vollevel3;
+        public Texture2D vollevel3_unselected;
+        public Texture2D vollevelMax;
+        public Texture2D vollevelMax_unselected;
         public Texture2D mute;
         public Texture2D mute_unselected;
         public Texture2D level1;
@@ -97,11 +125,19 @@ namespace Titans
         public Texture2D levelMax_unselected;
         public Texture2D back;
         public Texture2D back_invert;
+        public Texture2D backtemp;
         public Texture2D apply;
         public Texture2D apply_invert;
         public Texture2D fullScreen;
+        public Texture2D fullScreen_invert;
         public Texture2D fullScreenTemp;
         public Texture2D fullScreen_unselected;
+        public Texture2D yes;
+        public Texture2D yes_invert;
+        public Texture2D yestemp;
+        public Texture2D no;
+        public Texture2D no_invert;
+        public Texture2D notemp;
 
         public SpriteFont text;
         public SpriteFont smallText;
@@ -170,10 +206,11 @@ namespace Titans
         public bool musicStarted;
         Draw draw;
         ContentLoader load;
+        int frameCount;
 
 
         //Global Variables
-        public bool wait;
+        public bool wait; //use to hold action until the end of turn
         public bool p1win;
         public bool p2win;
         public Battle battle;
@@ -182,10 +219,13 @@ namespace Titans
         public bool demo;
         public List<Tile> MoveTiles;
         public bool moveWait;
+        public bool tickWait;
+        public bool endWait;
 
 
         public Game1()
         {
+            
             graphics = new GraphicsDeviceManager(this);
             this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.PreferredBackBufferWidth = 1500;
@@ -207,6 +247,8 @@ namespace Titans
             musicStarted = false;
             MoveTiles = new List<Tile>();
             moveWait = false;
+            tickWait = false;
+            endWait = false;
 
             timeSinceLastFrame = 0;
             millisecondsPerFrame = 100;
@@ -275,8 +317,8 @@ namespace Titans
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            
-            
+
+            MouseState mouseState = Mouse.GetState();
             if (mainMenu)
             {
                 if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
@@ -287,11 +329,14 @@ namespace Titans
                 Rectangle customClick = new Rectangle((Window.ClientBounds.Width / 2) - (custom_battle.Width / 2), (Window.ClientBounds.Height / 2) - (campaign.Height - 95), 175, 36);
                 Rectangle optionsClick = new Rectangle((Window.ClientBounds.Width / 2) - (options.Width / 2), (Window.ClientBounds.Height / 2) - (custom_battle.Height - 140), 141, 33);
                 Rectangle exitclickableArea = new Rectangle((Window.ClientBounds.Width / 2) - (exit.Width / 2), (Window.ClientBounds.Height - 70), 141, 33);
-                MouseState mouseState = Mouse.GetState();
+                
 
                 // mousepos = new Point();
                 bool mousestuffs = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(exitclickableArea);
                 bool mousequick = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(quickClick);
+                bool mousecampaign = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(campaignClick);
+                bool mousecustom = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(customClick);
+                bool mouseoptions = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(optionsClick);
 
                 if (mousestuffs && exit == exit_temp)
                 {
@@ -318,12 +363,62 @@ namespace Titans
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
-                    if (optionsClick.Contains(mousePos))
+                    if (optionsClick.Contains(mousePos) && !releaseWait)
                     {
+                        releaseWait = true;
                         mainMenu = false;
                         optionsMenu = true;
                         LoadContent();
                     }
+                }
+
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+
+                    Point mousePos = new Point(mouseState.X, mouseState.Y);
+                    if (exitclickableArea.Contains(mousePos))
+                    {
+                        this.Exit();
+                    }
+
+                }
+                if (mousecampaign && campaign == campaigntemp)
+                {
+                    campaigntemp = campaign;
+                    campaign = campaign_invert;
+                }
+                else if (!mousecampaign && campaign != campaigntemp)
+                {
+                    campaign = campaigntemp;
+                }
+                if (mousecustom && custom_battle == custom_battletemp)
+                {
+                    custom_battletemp = custom_battle;
+                    custom_battle = custom_battle_invert;
+                }
+                else if (!mousecustom && custom_battle != custom_battletemp)
+                {
+                    custom_battle = custom_battletemp;
+                }
+
+                if (mouseoptions && options == optionstemp)
+                {
+                    optionstemp = options;
+                    options = options_invert;
+                }
+                else if (!mouseoptions && options != optionstemp)
+                {
+                    options = optionstemp;
+                }
+                // TODO: Add your update logic here
+                if (mousequick && quick_battle == quick_temp)
+                {
+                    quick_temp = quick_battle;
+                    quick_battle = quick_battle_invert;
+                }
+                else if (!mousequick && quick_battle != quick_temp)
+                {
+                    quick_battle = quick_temp;
                 }
 
                 if (mouseState.LeftButton == ButtonState.Pressed)
@@ -369,10 +464,40 @@ namespace Titans
             }
             else if (campaignmenu)
             {
-                MouseState mouseState = Mouse.GetState();
                 Rectangle backClick = new Rectangle(15, 755, 141, 33);
                 Rectangle newGameClick = new Rectangle(550, 300, 141, 33);
                 Rectangle loadGameClick = new Rectangle(550, 343, 141, 33);
+                bool mouseback = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(backClick);
+                bool mousenew = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(newGameClick);
+                bool mouseload = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(loadGameClick);
+
+                if (mouseback && back == backtemp)
+                {
+                    backtemp = back;
+                    back = back_invert;
+                }
+                else if (!mouseback && back != backtemp)
+                {
+                    back = backtemp;
+                }
+                if (mousenew && newGame == newGametemp)
+                {
+                    newGametemp = newGame;
+                    newGame = newGame_invert;
+                }
+                else if (!mousenew && newGame != newGametemp)
+                {
+                    newGame = newGametemp;
+                }
+                if (mouseload && loadGame == loadGametemp)
+                {
+                    loadGametemp = loadGame;
+                    loadGame = loadGame_invert;
+                }
+                else if (!mouseload && loadGame != loadGametemp)
+                {
+                    loadGame = loadGametemp;
+                }
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
 
@@ -388,16 +513,173 @@ namespace Titans
 
                 }
             }
+            
+            
             //logic or options buttons
-            else if (optionsMenu)
+                else if (optionsMenu)
             {
-                MouseState mouseState = Mouse.GetState();
+               
 
                 Rectangle backClick = new Rectangle(15, 755, 141, 33);
                 Rectangle textClick = new Rectangle(25, 433, 141, 33);
                 Rectangle fullClick = new Rectangle(25, 337, 141, 33);
+                Rectangle volumemuteclick = new Rectangle(206, 483, 141, 33);
+                Rectangle volume1click = new Rectangle(360, 483, 141, 33);
+                Rectangle volume2click = new Rectangle(514, 483, 141, 33);
+                Rectangle volume3click = new Rectangle(669, 483, 141, 33);
+                Rectangle volumemaxclick = new Rectangle(825, 483, 141, 33);
+
+                Rectangle sfxmuteclick = new Rectangle(206, 533, 141, 33);
+                Rectangle sfx1click = new Rectangle(360, 533, 141, 33);
+                Rectangle sfx2click = new Rectangle(514, 533, 141, 33);
+                Rectangle sfx3click = new Rectangle(669, 533, 141, 33);
+                Rectangle sfxmaxclick = new Rectangle(825, 533, 141, 33);
+
                 int count = 2;
-                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
+                bool mouseback = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(backClick);
+                bool mousefull = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(fullClick);
+                
+             
+
+                //volume logic
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+
+                    Point mousePos = new Point(mouseState.X, mouseState.Y);
+                    if (volumemuteclick.Contains(mousePos))
+                    {
+
+                        
+                        volmute_unselected = volmute;
+                        vollevel1_unselected = vol1temp;
+                        vollevel2_unselected = vol2temp;
+                        vollevel3_unselected= vol3temp;
+                        vollevelMax_unselected= volmaxtemp;
+                        
+                        MediaPlayer.Volume = 0;
+                        
+                    }
+                    if (volume1click.Contains(mousePos))
+                    {
+
+
+                        volmute_unselected = volmutetemp;
+                        vollevel1_unselected = vollevel1;
+                        vollevel2_unselected = vol2temp;
+                        vollevel3_unselected = vol3temp;
+                        vollevelMax_unselected= volmaxtemp;
+                        MediaPlayer.Volume = .25f;
+                      
+                    }
+                    if (volume2click.Contains(mousePos))
+                    {
+
+                        volmute_unselected = volmutetemp;
+                        vollevel1_unselected = vol1temp;
+                        vollevel2_unselected = vollevel2;
+                        vollevel3_unselected = vol3temp;
+                        vollevelMax_unselected = volmaxtemp;
+                        MediaPlayer.Volume = .5f;
+                    }
+                    if (volume3click.Contains(mousePos))
+                    {
+
+                        volmute_unselected = volmutetemp;
+                        vollevel1_unselected = vol1temp;
+                        vollevel2_unselected = vol2temp;
+                        vollevel3_unselected = vollevel3;
+                        vollevelMax_unselected = volmaxtemp;
+                        MediaPlayer.Volume = .75f;
+                    }
+                    if (volumemaxclick.Contains(mousePos))
+                    {
+
+                        volmute_unselected = volmutetemp;
+                        vollevel1_unselected = vol1temp;
+                        vollevel2_unselected = vol2temp;
+                        vollevel3_unselected = vol3temp;
+                        vollevelMax_unselected = vollevelMax;
+                        MediaPlayer.Volume = 1f;
+                    }
+                }
+
+               //soundBank effects logic
+                if (mouseState.LeftButton == ButtonState.Pressed&&!releaseWait)
+                {
+
+                    Point mousePos = new Point(mouseState.X, mouseState.Y);
+                    if (sfxmuteclick.Contains(mousePos))
+                    {
+
+
+                        mute_unselected = mute;
+                        level1_unselected = level1temp;
+                        level2_unselected = level2temp;
+                        level3_unselected = level3temp;
+                        levelMax_unselected = maxtemp;
+
+                        sfx.setfxfvolume(0f);
+                        releaseWait = true;
+
+                    }
+                    if (sfx1click.Contains(mousePos))
+                    {
+
+
+                        mute_unselected = mutetemp;
+                        level1_unselected = level1;
+                        level2_unselected = level2temp;
+                        level3_unselected = level3temp;
+                        levelMax_unselected = maxtemp;
+
+                        sfx.setfxfvolume(0.25f*6f);
+                        sfx.PlayBuzzer();
+                        sfx.PlayBuzzer();
+                        releaseWait = true;
+
+                    }
+                    if (sfx2click.Contains(mousePos))
+                    {
+
+                        mute_unselected = mutetemp;
+                        level1_unselected = level1temp;
+                        level2_unselected = level2;
+                        level3_unselected = level3temp;
+                        levelMax_unselected = maxtemp;
+                        sfx.setfxfvolume(.5f * 6f);
+                        sfx.PlayBuzzer();
+                        sfx.PlayBuzzer();
+                        releaseWait = true;
+                    }
+                    if (sfx3click.Contains(mousePos))
+                    {
+
+                        mute_unselected = mutetemp;
+                        level1_unselected = level1temp;
+                        level2_unselected = level2temp;
+                        level3_unselected = level3;
+                        levelMax_unselected = maxtemp;
+                        sfx.setfxfvolume(.75f * 6f);
+                        sfx.PlayBuzzer();
+                        sfx.PlayBuzzer();
+                        releaseWait = true;
+                    }
+                    if (sfxmaxclick.Contains(mousePos))
+                    {
+
+                        mute_unselected = mutetemp;
+                        level1_unselected = level1temp;
+                        level2_unselected = level2temp;
+                        level3_unselected = level3temp;
+                        levelMax_unselected = levelMax;
+                        sfx.setfxfvolume(1f);
+                        sfx.PlayBuzzer();
+                        sfx.PlayBuzzer();
+                        releaseWait = true;
+                    }
+                }
+              //full screen logic
+                if (mouseState.LeftButton == ButtonState.Pressed)
                 {
 
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
@@ -405,50 +687,43 @@ namespace Titans
                     {
                         if (isFullScreen)
                         {
-                            releaseWait = true;
-                            this.graphics.IsFullScreen = false;
+                           
+                            graphics.ToggleFullScreen();
+                            yes_invert = yestemp;
+                            
+                            no_invert = no;
+                            isFullScreen = false;
+                           
+                           
+
                         }
-                        else
+                        else if (!isFullScreen)
                         {
-                            releaseWait = true;
-                            this.graphics.IsFullScreen = true;
+                            
+                            yes_invert = yes;
+                           
+                            no_invert =notemp;
+                            graphics.ToggleFullScreen();
+                            isFullScreen = true;
+                          
+
                         }
+                       
                     }
                 }
-                if (mouseState.LeftButton == ButtonState.Pressed)
+                
+
+                //back inverter
+                if (mouseback && back == backtemp)
                 {
-
-                    Point mousePos = new Point(mouseState.X, mouseState.Y);
-                    if (textClick.Contains(mousePos))
-                    {
-                        if (count == 1)
-                        {
-                            slowtemp = slow;
-                            slow = slow_unselected;
-                            regular = regulartemp;
-                            regulartemp = regular;
-
-                            count++;
-                        }
-                        if (count == 2)
-                        {
-                            regulartemp = regular;
-                            regular = regular_unselected;
-                            fast = fasttemp;
-                            fasttemp = fast;
-                            count++;
-                        }
-                        if (count == 3)
-                        {
-                            slow = slowtemp;
-                            slowtemp = slow;
-                            fasttemp = fast;
-                            fast = fast_unselected;
-                            count = 1;
-                        }
-                    }
-
+                    backtemp = back;
+                    back = back_invert;
                 }
+                else if (!mouseback && back != backtemp)
+                {
+                    back = backtemp;
+                }                
+                
                 //exits options menu
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
@@ -464,6 +739,8 @@ namespace Titans
                     }
 
                 }
+
+                
             }
             else if (demo && !(p1win || p2win))
             {
@@ -483,7 +760,7 @@ namespace Titans
                 Rectangle defendclick = new Rectangle(796, 727, 116, 27);
                 Rectangle specialclick = new Rectangle(680, 754, 116, 27);
                 Rectangle itemclick = new Rectangle(796, 754, 116, 27);
-                MouseState mouseState = Mouse.GetState();
+                mouseState = Mouse.GetState();
                 bool moveenabled = true;
                 bool hilightenabled = true;
                 //mouse state when on buttons
@@ -495,10 +772,15 @@ namespace Titans
                 bool mouseitems = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(itemclick);
                 Point mousePos = new Point(mouseState.X, mouseState.Y);
 
+
+                //lock buttons during wait times
+                if (tickWait)
+                {
+                    LockButtons();
+                }
                 //Move mode highlighting
                 if (battle.MoveMode)
                 {
-
                     //THE ALL IMPORTANT MAP POSITION ESITMATION FUNCTION
                     int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
                     int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
@@ -534,8 +816,10 @@ namespace Titans
                 {
                     
                     //select move
-                    if (moveclick.Contains(mousePos) && move != move_invert)
+                    if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled)
                     {
+                        
+                        battle.BattleMap.ClearRedHighlights();
                         releaseWait = true;
                         move = move_invert;
                         attack = attack_grey;
@@ -546,7 +830,9 @@ namespace Titans
                         hilightenabled = false;
                         battle.AttackMode = false;
                         battle.SelectMove();
-
+                        battle.BattleMap.ClearRedHighlights();
+                        frameCount = 0;
+                        battle.SelectMove();
                     }
                         //deselect move
                     else if (moveclick.Contains(mousePos) && move == move_invert)
@@ -563,7 +849,7 @@ namespace Titans
                         battle.DeselectMove();
                     }
                         //select attack
-                    else if (attackclick.Contains(mousePos) && attack != attack_invert)
+                    else if (attackclick.Contains(mousePos) && attack != attack_invert && !tickWait && !moveWait && battle.SelectEnabled)
                     {
                         releaseWait = true;
                         move = move_grey;
@@ -581,6 +867,7 @@ namespace Titans
                         //battle will get rid of attack mode if there are no valid targets
                         if (!battle.AttackMode)
                         {
+                            battle.SelectEnabled = true;
                             move = movetrue;
                             attack = attacktrue;
                             defend = defendtrue;
@@ -606,8 +893,12 @@ namespace Titans
                         battle.DeselectAttack();
                     }
                         //select pass
-                    else if(passclick.Contains(mousePos))
+                    else if(passclick.Contains(mousePos) && !tickWait && !moveWait && battle.SelectEnabled)
                     {
+                        sfx.PlayPassSound(battle.ActiveUnit);
+                        pass = pass_invert;
+                        timeSinceLastDamageFrame = 0;
+                        battle.ActiveUnit.AP = 0;
                         releaseWait = true;
                         move = movetrue;
                         attack = attacktrue;
@@ -616,13 +907,41 @@ namespace Titans
                         pass = passtrue;
                         special = specialtrue;
                         hilightenabled = true;
-                        battle.NextPlayer() ;
+                        
+                    }
+                        //select defend
+                    else if(defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled)
+                    {
+                        timeSinceLastDamageFrame = 0;
+                        wait = true;
+                        battle.MoveMode = false;
+                        battle.AttackMode = false;
+                        releaseWait = true;
+                        move = move_grey;
+                        attack = attack_grey;
+                        defend = defend_invert;
+                        item = item_grey;
+                        pass = pass_grey;
+                        special = special_grey;
+                        hilightenabled = true;
+                        battle.SelectDefend();
+                    }
+                        //deselect if in move or attack mode and defend button clicked
+                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
+                    {
+                        battle.MoveMode = false;
+                        battle.AttackMode = false;
+                        battle.SelectEnabled = true;
+                        releaseWait = true;
+                        ResetButtons();
                     }
 
                 }
                 //confirm move
                 if (mouseState.LeftButton == ButtonState.Pressed && battle.MoveMode && !releaseWait && battle.BattleMap.GetTileAt(lastSelectedTile.X, lastSelectedTile.Y).IsRedHighlighted)
                 {
+                    
+                    
                     moveWait = true;
                     move = movetrue;
                     attack = attacktrue;
@@ -635,6 +954,11 @@ namespace Titans
                     battle.DeselectMove();
                     battle.StartMove(lastSelectedTile);
                     battle.BattleMap.ClearRedHighlights();
+                    if (battle.ActiveUnit.AP <= 1)
+                    {
+                        LockButtons();
+                    }
+                    
                     
                 }
                 else if(mouseState.LeftButton == ButtonState.Pressed && battle.MoveMode && !releaseWait && !battle.BattleMap.GetTileAt(lastSelectedTile.X, lastSelectedTile.Y).IsRedHighlighted)
@@ -700,6 +1024,8 @@ namespace Titans
                     offsetX -= 10;
                 }
 
+
+                //update the display with the active unit
                 unit = battle.ActiveUnit.GetType();
                  hp = battle.ActiveUnit.HP.ToString();
                  range = battle.ActiveUnit.Range.ToString() ;
@@ -729,52 +1055,103 @@ namespace Titans
 
                  }
 
-                // Update frame if time to do so based on framerate
+                
                  timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+
+
+                //stuff that happens on the animation tick, about 60fps
+                 if (timeSinceLastFrame > millisecondsPerFrame)
+                 {
+                     timeSinceLastFrame = 0;
+                 }
+
+
                  timeSinceLastDamageFrame += gameTime.ElapsedGameTime.Milliseconds;
+
+                //stuff that happens on the damage tick, including end-of-turn checking
+                //this tick is quite slow
                  if (timeSinceLastDamageFrame > millisecondsPerDamageFrame)
                  {
                      
                      timeSinceLastDamageFrame = 0;
                      // Increment to next frame
-                     displayDamage = false;
                      wait = false;
+                     displayDamage = false;
                      if (battle.ActiveUnit.AP <= 0)
                      {
                          battle.NextPlayer();
                      }
+                     if (battle.gameOver)
+                     {
+                         endWait = false;
+                     }
+
                  }
 
+                //stuff that happens on the move tick, a faster interval
                  timeSinceLastMoveFrame += gameTime.ElapsedGameTime.Milliseconds;
                  if (timeSinceLastMoveFrame > millisecondsPerMoveFrame)
                  {
                      timeSinceLastMoveFrame = 0;
+                     //if a move is ongoing, advance unit to the next tile
                      if (moveWait)
                      {
                          battle.ContinueMove();
+                         timeSinceLastDamageFrame = 0;
                      }
                  }
 
-                 
-                 
-                
-                    //++currentFrame.X;
-                    //if (currentFrame.X >= sheetSize.X)
-                    //{
-                    //    currentFrame.X = 0;
-                    //    ++currentFrame.Y;
-                    //    if (currentFrame.Y >= sheetSize.Y)
-                    //        currentFrame.Y = 0;
-                    //}
-                
+                //if the turn is over, lock everything for a beat
+                 if (battle.ActiveUnit.AP <= 0)
+                 {
+                     tickWait = true;
+                 }
 
-                //Debug method for move testing
+                 
+               
+            }
+            timeSinceLastDamageFrame += gameTime.ElapsedGameTime.Milliseconds;
+            if (timeSinceLastDamageFrame > millisecondsPerDamageFrame && battle != null)
+            {
+
+                timeSinceLastDamageFrame = 0;
+                // Increment to next frame
+                wait = false;
+                displayDamage = false;
+                if (battle.ActiveUnit.AP <= 0)
+                {
+                    battle.NextPlayer();
+                }
+                if (battle.gameOver)
+                {
+                    endWait = false;
+                }
+
             }
 
             if (MediaPlayer.State == MediaState.Stopped && (p1win || p2win))
             {
+
+                cue.Stop(AudioStopOptions.Immediate);
                 Song campaign = Content.Load<Song>(@"music\CampaignMode");
                 MediaPlayer.Play(campaign);
+            }
+
+            if (Keyboard.GetState().GetPressedKeys().Length > 0 && (p1win || p2win) && !endWait)
+            {
+                battle.gameOver = false;
+                p1win = false;
+                p2win = false;
+                musicStarted = false;
+                load.MainMenu();
+                demo = false;
+                mainMenu = true;
+                
+            }
+
+            if (mouseState.LeftButton == ButtonState.Released)
+            {
+                releaseWait = false;
             }
 
 
@@ -830,6 +1207,26 @@ namespace Titans
             MediaPlayer.IsRepeating = false;
             MediaPlayer.Volume = 0.8f;
             MediaPlayer.Play(win);
+        }
+
+        public void ResetButtons()
+        {
+            move = movetrue;
+            attack = attacktrue;
+            defend = defendtrue;
+            item = itemtrue;
+            pass = passtrue;
+            special = specialtrue;
+        }
+
+        public void LockButtons()
+        {
+            move = move_grey;
+            attack = attack_grey;
+            pass = pass_grey;
+            defend = defend_grey;
+            item = item_grey;
+            special = special_grey;
         }
 
     }

@@ -22,6 +22,8 @@ namespace Titans
         public Game1 GameUI { get; set; }
         public Tile[] pendingMoves { get; set; }
         int pendingIndex { get; set; }
+        public bool SelectEnabled { get; set; }
+        public bool gameOver { get; set; }
 
         //any more custom rule options go here
 
@@ -34,6 +36,7 @@ namespace Titans
             AttackMode = false;
             MoveEnabled = true;
             AttackEnabled = true;
+            SelectEnabled = true;
         }
 
         public Battle(Map newMap)
@@ -55,7 +58,6 @@ namespace Titans
                     }
                 }
             }
-            RollInitiative();
         }
 
         //Add units to the pregame roster
@@ -96,26 +98,82 @@ namespace Titans
 
         public List<Unit> RollInitiative()
         {
+            //release the wait hold, other cleanup
+            if (GameUI != null)
+            {
+                GameUI.wait = false;
+                GameUI.ResetButtons();
+                GameUI.moveWait = false;
+                GameUI.tickWait = false;
+            }
+            SelectEnabled = true;
+
+
+
             QueuePosition = 0;
             List<Unit> turnOrder = new List<Unit>();
             Random rand = new Random();
+
+            List<Unit> player1Units = new List<Unit>();
+            List<Unit> player2Units = new List<Unit>();
+            
+
             foreach (Unit unit in Units)
             {
-                unit.Init = unit.Speed + rand.Next(51); //add a random roll to the speed to get initiative
+                unit.Init = unit.Speed + rand.Next(51);
                 unit.AP = 2;
+                if (unit.isPlayerUnit)
+                {
+
+                    player1Units.Add(unit);
+                }
+                else
+                {
+                    player2Units.Add(unit);
+                }
             }
 
-            turnOrder = Units.OrderByDescending(u => u.Init).ToList(); //using LINQ to order by initiative value
+            player1Units = player1Units.OrderByDescending(u => u.Init).ToList();
+            player2Units = player2Units.OrderByDescending(u => u.Init).ToList();
+
+            turnOrder.AddRange(player1Units);
+            turnOrder.AddRange(player2Units);
+
+
+
+            //foreach (Unit unit in Units)
+            //{
+            //    unit.Init = unit.Speed + rand.Next(51); //add a random roll to the speed to get initiative
+            //    unit.AP = 2;
+            //}
+
+            //turnOrder = Units.OrderByDescending(u => u.Init).ToList(); //using LINQ to order by initiative value
             BattleQueue = turnOrder; //save the turn order
             ActiveUnit = BattleQueue.ElementAt(0); //set the ActiveUnit to the first in the turn order
 
-            
+            //clear defense buffs
+            int defMod = 0;
+            if (ActiveUnit.DefenseModifiers.Count > 0)
+            {
+                foreach (int mod in ActiveUnit.DefenseModifiers)
+                {
+                    defMod += mod;
+                }
+                ActiveUnit.DefenseModifiers.Clear();
+            }
+            ActiveUnit.Defense -= defMod;
             return turnOrder;
         }
         
         //after a unit moves, call this method to access the next unit in the battle queue
         public Unit NextPlayer()
         {
+            GameUI.wait = false;
+            GameUI.ResetButtons();
+            MoveMode = false;
+            AttackMode = false;
+            GameUI.moveWait = false;
+            GameUI.tickWait = false;
             if (QueuePosition < BattleQueue.Count - 1)
             {
                 QueuePosition++;
@@ -129,18 +187,22 @@ namespace Titans
                 RollInitiative();
             }
 
-            if (SelectAttack())
-            {
-                AttackEnabled = true;
-            }
-            else
-            {
-                AttackEnabled = false;
-            }
             DeselectAttack();
             GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
 
             GameUI.sfx.PlaySelectSound(ActiveUnit);
+
+            //clear defense buffs
+            int defMod = 0;
+            if (ActiveUnit.DefenseModifiers.Count > 0)
+            {
+                foreach (int mod in ActiveUnit.DefenseModifiers)
+                {
+                    defMod += mod;
+                }
+                ActiveUnit.DefenseModifiers.Clear();
+            }
+            ActiveUnit.Defense -= defMod;
             return ActiveUnit;
         }
 
@@ -148,6 +210,7 @@ namespace Titans
         //This method selects legal moves for the active unit to make
         public void SelectMove()
         {
+            SelectEnabled = false;
             BattleMap.ClearRedHighlights();
             List<int[]> moveTiles = BattleMap.GetLegalMoveCoordinates(ActiveUnit);
             BattleMap.RedHighlightTiles(moveTiles);
@@ -156,6 +219,7 @@ namespace Titans
 
         public void DeselectMove()
         {
+            SelectEnabled = true;
             BattleMap.ClearRedHighlights();
             BattleMap.ClearHighlights();
             MoveMode = false;
@@ -184,9 +248,16 @@ namespace Titans
                     pendingIndex = 0;
                     pendingMoves = new Tile[0];
 
-                    if (ActiveUnit.AP <= 0)
-                        NextPlayer();
                 }
+        }
+
+        public void SelectDefend()
+        {
+            MoveMode = false;
+            AttackMode = false;
+            ActiveUnit.DefenseModifiers.Add(5);
+            ActiveUnit.Defense += 5;
+            ActiveUnit.AP = 0;
         }
                 
                 
@@ -198,6 +269,7 @@ namespace Titans
 
         public bool SelectAttack()
         {
+            SelectEnabled = false;
             int range = ActiveUnit.Range;
             int x = ActiveUnit.Location[0];
             int y = ActiveUnit.Location[1];
@@ -257,6 +329,7 @@ namespace Titans
 
         public void DeselectAttack()
         {
+            SelectEnabled = true;
             AttackMode = false;
             BattleMap.ClearHighlights();
             BattleMap.ClearRedHighlights();
@@ -265,6 +338,7 @@ namespace Titans
         //carry out the attack, once the target is selected
         public int Attack(Unit target)
         {
+            SelectEnabled = true;
             BattleMap.ClearHighlights();
             List<int> combatMods = ActiveUnit.AttackModifiers;
 
@@ -307,12 +381,15 @@ namespace Titans
 
                 if (player1HasUnits && !player2HasUnits)
                 {
-                    
+                    gameOver = true;
+                    GameUI.endWait = true;
                     GameUI.p1win = true;
                     GameUI.PlayWinMusic();
                 }
                 if (player2HasUnits && !player1HasUnits)
                 {
+                    GameUI.endWait = true;
+                    gameOver = true;
                     GameUI.p2win = true;
                     GameUI.PlayWinMusic();
                 }
