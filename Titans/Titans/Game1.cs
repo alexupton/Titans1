@@ -221,6 +221,8 @@ namespace Titans
         public bool moveWait;
         public bool tickWait;
         public bool endWait;
+        public bool AILock;
+        public bool loseMusicStarted = false;
 
 
         public Game1()
@@ -808,13 +810,13 @@ namespace Titans
 
                 //Button clicks
 
-                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock)
                 {
-                    
+
                     //select move
                     if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled)
                     {
-                        
+
                         battle.BattleMap.ClearRedHighlights();
                         releaseWait = true;
                         move = move_invert;
@@ -830,7 +832,7 @@ namespace Titans
                         frameCount = 0;
                         battle.SelectMove();
                     }
-                        //deselect move
+                    //deselect move
                     else if (moveclick.Contains(mousePos) && move == move_invert)
                     {
                         battle.BattleMap.ClearRedHighlights();
@@ -844,7 +846,7 @@ namespace Titans
                         hilightenabled = true;
                         battle.DeselectMove();
                     }
-                        //select attack
+                    //select attack
                     else if (attackclick.Contains(mousePos) && attack != attack_invert && !tickWait && !moveWait && battle.SelectEnabled)
                     {
                         releaseWait = true;
@@ -855,7 +857,7 @@ namespace Titans
                         pass = pass_grey;
                         special = special_grey;
                         hilightenabled = true;
-                        
+
                         //deselect other modes before selecting attack
                         battle.DeselectMove();
                         battle.SelectAttack();
@@ -874,7 +876,7 @@ namespace Titans
                             sfx.PlayBuzzer();
                         }
                     }
-                        //deselect attack
+                    //deselect attack
                     else if (attackclick.Contains(mousePos) && attack == attack_invert)
                     {
                         releaseWait = true;
@@ -887,8 +889,8 @@ namespace Titans
                         hilightenabled = true;
                         battle.DeselectAttack();
                     }
-                        //select pass
-                    else if(passclick.Contains(mousePos) && !tickWait && !moveWait && battle.SelectEnabled)
+                    //select pass
+                    else if (passclick.Contains(mousePos) && !tickWait && !moveWait && battle.SelectEnabled)
                     {
                         sfx.PlayPassSound(battle.ActiveUnit);
                         pass = pass_invert;
@@ -902,10 +904,10 @@ namespace Titans
                         pass = passtrue;
                         special = specialtrue;
                         hilightenabled = true;
-                        
+
                     }
-                        //select defend
-                    else if(defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled)
+                    //select defend
+                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled)
                     {
                         timeSinceLastDamageFrame = 0;
                         wait = true;
@@ -920,9 +922,9 @@ namespace Titans
                         special = special_grey;
                         hilightenabled = true;
                         battle.SelectDefend();
-                        
+
                     }
-                        //deselect if in move or attack mode and defend button clicked
+                    //deselect if in move or attack mode and defend button clicked
                     else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
                     {
                         battle.MoveMode = false;
@@ -932,48 +934,13 @@ namespace Titans
                         ResetButtons();
                     }
 
-                }
-                //confirm move
-                if (mouseState.LeftButton == ButtonState.Pressed && battle.MoveMode && !releaseWait && battle.BattleMap.GetTileAt(lastSelectedTile.X, lastSelectedTile.Y).IsRedHighlighted)
-                {
-                    
-                    
-                    moveWait = true;
-                    move = movetrue;
-                    attack = attacktrue;
-                    defend = defendtrue;
-                    item = itemtrue;
-                    pass = passtrue;
-                    special = specialtrue;
-                    hilightenabled = true;
-                    releaseWait = true;
-                    battle.DeselectMove();
-                    battle.StartMove(lastSelectedTile);
-                    battle.BattleMap.ClearRedHighlights();
-                    if (battle.ActiveUnit.AP <= 1)
-                    {
-                        LockButtons();
-                    }
-                    
-                    
-                }
-                else if(mouseState.LeftButton == ButtonState.Pressed && battle.MoveMode && !releaseWait && !battle.BattleMap.GetTileAt(lastSelectedTile.X, lastSelectedTile.Y).IsRedHighlighted)
-                {
-                    releaseWait = true;
-                    sfx.PlayBuzzer();
-                }
 
-                //Confirm attack
-                if (mouseState.LeftButton == ButtonState.Pressed && battle.AttackMode && !releaseWait)
-                {
-                    int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
-                    int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
-                    if (X >= 0 && X < battle.BattleMap.Size[0] && Y >= 0 && Y < battle.BattleMap.Size[1]
-                        && battle.BattleMap.GetTileAt(X, Y).IsHighlighted && battle.BattleMap.GetTileAt(X, Y).hasUnit &&
-                        (battle.BattleMap.GetTileAt(X, Y).TileUnit.isPlayerUnit != battle.ActiveUnit.isPlayerUnit))
+                    //confirm move
+                    if (mouseState.LeftButton == ButtonState.Pressed && battle.MoveMode && !releaseWait && battle.BattleMap.GetTileAt(lastSelectedTile.X, lastSelectedTile.Y).IsRedHighlighted)
                     {
-                        battle.BattleMap.ClearRedHighlights();
-                        wait = true;
+
+
+                        moveWait = true;
                         move = movetrue;
                         attack = attacktrue;
                         defend = defendtrue;
@@ -982,20 +949,56 @@ namespace Titans
                         special = specialtrue;
                         hilightenabled = true;
                         releaseWait = true;
-                        unitDamage = battle.Attack(battle.BattleMap.GetTileAt(X, Y).TileUnit);
-                        attackedUnitTrueX = X * 55 - 13;
-                        attackedUnitTrueY = Y * 55 - 20;
-                        unitAttacked = true;
-                        displayDamage = true;
-                        timeSinceLastDamageFrame = 0;
+                        battle.DeselectMove();
+                        battle.StartMove(lastSelectedTile);
+                        battle.BattleMap.ClearRedHighlights();
+                        if (battle.ActiveUnit.AP <= 1)
+                        {
+                            LockButtons();
+                        }
+
 
                     }
-                    else if(!releaseWait)
+                    else if (mouseState.LeftButton == ButtonState.Pressed && battle.MoveMode && !releaseWait && !battle.BattleMap.GetTileAt(lastSelectedTile.X, lastSelectedTile.Y).IsRedHighlighted)
                     {
                         releaseWait = true;
                         sfx.PlayBuzzer();
                     }
-                    
+
+                    //Confirm attack
+                    if (mouseState.LeftButton == ButtonState.Pressed && battle.AttackMode && !releaseWait)
+                    {
+                        int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
+                        int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
+                        if (X >= 0 && X < battle.BattleMap.Size[0] && Y >= 0 && Y < battle.BattleMap.Size[1]
+                            && battle.BattleMap.GetTileAt(X, Y).IsHighlighted && battle.BattleMap.GetTileAt(X, Y).hasUnit &&
+                            (battle.BattleMap.GetTileAt(X, Y).TileUnit.isPlayerUnit != battle.ActiveUnit.isPlayerUnit))
+                        {
+                            battle.BattleMap.ClearRedHighlights();
+                            wait = true;
+                            move = movetrue;
+                            attack = attacktrue;
+                            defend = defendtrue;
+                            item = itemtrue;
+                            pass = passtrue;
+                            special = specialtrue;
+                            hilightenabled = true;
+                            releaseWait = true;
+                            unitDamage = battle.Attack(battle.BattleMap.GetTileAt(X, Y).TileUnit);
+                            attackedUnitTrueX = X * 55 - 13;
+                            attackedUnitTrueY = Y * 55 - 20;
+                            unitAttacked = true;
+                            displayDamage = true;
+                            timeSinceLastDamageFrame = 0;
+
+                        }
+                        else if (!releaseWait)
+                        {
+                            releaseWait = true;
+                            sfx.PlayBuzzer();
+                        }
+
+                    }
                 }
 
                 if (mouseState.LeftButton == ButtonState.Released)
@@ -1080,6 +1083,11 @@ namespace Titans
                          endWait = false;
                      }
 
+                     if (AILock && !moveWait)
+                     {
+                         battle.AIMove();
+                     }
+
                  }
 
                 //stuff that happens on the move tick, a faster interval
@@ -1126,9 +1134,19 @@ namespace Titans
             if (MediaPlayer.State == MediaState.Stopped && (p1win || p2win))
             {
 
-                cue.Stop(AudioStopOptions.Immediate);
-                Song campaign = Content.Load<Song>(@"music\CampaignMode");
-                MediaPlayer.Play(campaign);
+                if (p1win)
+                {
+                    cue.Stop(AudioStopOptions.Immediate);
+                    Song campaign = Content.Load<Song>(@"music\CampaignMode");
+                    MediaPlayer.Play(campaign);
+                }
+                else if (p2win && !loseMusicStarted)
+                {
+                    cue.Stop(AudioStopOptions.Immediate);
+                    cue = soundBank.GetCue("LoseBattle");
+                    cue.Play();
+                    loseMusicStarted = true;
+                }
             }
 
             if (Keyboard.GetState().GetPressedKeys().Length > 0 && (p1win || p2win) && !endWait)
@@ -1140,6 +1158,7 @@ namespace Titans
                 load.MainMenu();
                 demo = false;
                 mainMenu = true;
+                cue.Stop(AudioStopOptions.Immediate);
                 
             }
 
@@ -1201,6 +1220,15 @@ namespace Titans
             MediaPlayer.IsRepeating = false;
             MediaPlayer.Volume = 0.8f;
             MediaPlayer.Play(win);
+        }
+
+        public void PlayLoseMusic()
+        {
+            cue.Stop(AudioStopOptions.Immediate);
+            Song lose = Content.Load<Song>(@"Music\LoseBattle");
+            MediaPlayer.IsRepeating = false;
+            MediaPlayer.Volume = 0.8f;
+            MediaPlayer.Play(lose);
         }
 
         public void ResetButtons()

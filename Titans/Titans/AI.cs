@@ -368,6 +368,190 @@ namespace Titans
 
 
         }
+
+        public static void MakeAIMove(Battle battle, Unit active)
+        {
+            Map map = battle.BattleMap;
+            Tile location = map.GetTileAt(active.Location[0], active.Location[1]);
+
+            //the AI favors nearby units with low health, preferrably out of range of enemies
+            List<Unit> enemies = new List<Unit>();
+            foreach (Unit unit in battle.BattleQueue)
+            {
+                if (unit.isPlayerUnit)
+                    enemies.Add(unit);
+            }
+
+            Unit nearestEnemy = new Soldier();
+            int nearestEnemyDistance = 30000;
+            Tile nearestLocation = new Tile();
+
+            //calculate the closest enemy
+            foreach (Unit enemy in enemies)
+            {
+                Tile enemyTile = map.GetTileAt(enemy.Location[0], enemy.Location[1]);
+                
+                List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile);
+                foreach (Tile adj in enemyAdjTiles)
+                {
+                    List<Tile> path = GetPath(location, adj, map);
+                    foreach (Tile p in path)
+                    {
+                        int pathTotal = 0;
+                        p.FScore = 0;
+                        p.GScore = 0;
+                        p.HScore = 0;
+                        p.parentTile = null;
+                        pathTotal += p.MoveCost;
+                        if (pathTotal < nearestEnemyDistance)
+                        {
+                            nearestEnemyDistance = pathTotal;
+                            nearestEnemy = enemy;
+                            nearestLocation = adj;
+                        }
+                    }
+                }
+                
+                
+
+             
+            }
+            //calculate the best unit, if any, in range
+            Unit attackEnemy;
+            int range = active.Range;
+            int x = active.Location[0];
+            int y = active.Location[1];
+            List<int[]> rangeSquare = new List<int[]>() ;
+
+            for (int i = (range * -1); i <= range; i++)
+            {
+                for (int j = (range * -1); j <= range; j++)
+                {
+                    if ((i + x) < map.Size[0] && (j + y) < map.Size[1] && (i + x) >= 0 & (j + y) >= 0)
+                    {
+                        rangeSquare.Add(new int[] { i + x, j + y });
+                    }
+                }
+            }
+            List<Tile> actualRange = new List<Tile>();
+            foreach (int[] tile in rangeSquare)
+            {
+                if ((Math.Abs(tile[0] - x) + Math.Abs(tile[1] - y)) <= range)
+                {
+                    actualRange.Add(map.GetTileAt(tile[0], tile[1]));
+                }
+            }
+
+            List<Unit> attackableUnits = new List<Unit>();
+            foreach (Tile tile in actualRange)
+            {
+                if (tile.hasUnit)
+                {
+                    if (tile.TileUnit.isPlayerUnit)
+                    {
+                        attackableUnits.Add(tile.TileUnit);
+                    }
+                }
+            }
+            
+            //look for the enemy with the highest HP that can be killed in one or two hits
+            if (attackableUnits.Count > 0)
+            {
+                int highestKillableHP = 0;
+                Unit highestKillableUnit = new Soldier();
+                foreach (Unit enemy in attackableUnits)
+                {
+                    if (AttackResolver.Attack(active, enemy, active.AttackModifiers) * active.AP > enemy.HP && enemy.HP > highestKillableHP)
+                    {
+                        highestKillableHP = enemy.HP;
+                        highestKillableUnit = enemy;
+                    }
+                }
+                int highestDamage = 0;
+                Unit highestDamageUnit = new Soldier() ;
+                //if no enemy is killable, find the one we can do the greatest damage to
+                if (highestKillableHP == 0)
+                {
+                    foreach (Unit enemy in attackableUnits)
+                    {
+                        int damage = AttackResolver.Attack(active, enemy, active.AttackModifiers);
+                        if (damage * active.AP > highestDamage)
+                        {
+                            highestDamage = damage * active.AP;
+                            highestDamageUnit = enemy;
+                        }
+                    }
+                    attackEnemy = highestDamageUnit;
+                }
+                else
+                {
+                    attackEnemy = highestKillableUnit;
+                }
+
+                
+                battle.GameUI.unitDamage = battle.Attack(attackEnemy);
+                battle.GameUI.attackedUnitTrueX = attackEnemy.Location[0] * 55 - 13;
+                battle.GameUI.attackedUnitTrueY = attackEnemy.Location[1] * 55 - 20;
+                battle.GameUI.displayDamage = true;
+                
+                return;
+               
+                
+            }
+
+            //if the unit is weak, defend
+            if(active.HP < active.MaxHP / 4 && active.AP == 1)
+            {
+                battle.SelectDefend();
+                return;
+            }
+
+            //now we check on which tile to move to
+            List<int[]> reachableTilesAsInt = map.GetLegalMoveCoordinates(active);
+            List<Tile> reachableTiles = new List<Tile>();
+
+            foreach (int[] coords in reachableTilesAsInt)
+            {
+                reachableTiles.Add(map.GetTileAt(coords[0], coords[1]));
+            }
+
+            Tile closest = map.GetTileAt(active.Location[0], active.Location[1]);
+            int nearestTileToEnemy = 30000;
+
+            foreach (Tile test in reachableTiles)
+            {
+                if (!test.hasUnit)
+                {
+                    int pathCost = 0;
+                    List<Tile> path = GetPath(nearestLocation, test, map);
+                    foreach (Tile p in path)
+                    {
+                        pathCost += p.MoveCost;
+                    }
+
+                    if (pathCost < nearestTileToEnemy)
+                    {
+                        nearestTileToEnemy = pathCost;
+                        closest = test;
+                    }
+                }
+            }
+            if (closest != map.GetTileAt(active.Location[0], active.Location[1]))
+            {
+                battle.StartMove(closest);
+                return;
+            }
+            else
+            {
+                active.AP = 0;
+            }
+            
+
+            
+
+
+
+        }
      
     }
 

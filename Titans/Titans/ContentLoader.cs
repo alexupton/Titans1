@@ -150,6 +150,9 @@ namespace Titans
             Map mainMap = MapLoader.LoadMap(@"Content\Demo.txt");
             game.battle = new Battle(mainMap);
             game.battle.GameUI = game;
+            //
+            game.battle.AIControlled = true;
+            //
             game.battle.RollInitiative();
             game.lastSelectedTile = game.battle.BattleMap.GetTileAt(0, 0);
             game.unit = game.battle.ActiveUnit.GetType();

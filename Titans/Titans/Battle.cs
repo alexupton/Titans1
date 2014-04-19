@@ -24,6 +24,7 @@ namespace Titans
         int pendingIndex { get; set; }
         public bool SelectEnabled { get; set; }
         public bool gameOver { get; set; }
+        public bool AIControlled { get; set; }
 
         //any more custom rule options go here
 
@@ -105,6 +106,7 @@ namespace Titans
                 GameUI.ResetButtons();
                 GameUI.moveWait = false;
                 GameUI.tickWait = false;
+                GameUI.AILock = false;
             }
             SelectEnabled = true;
 
@@ -116,38 +118,36 @@ namespace Titans
 
             List<Unit> player1Units = new List<Unit>();
             List<Unit> player2Units = new List<Unit>();
+
+                foreach (Unit unit in Units)
+                {
+                    unit.Init = unit.Speed + rand.Next(51);
+                    unit.AP = 2;
+                    if (unit.isPlayerUnit)
+                    {
+
+                        player1Units.Add(unit);
+                    }
+                    else
+                    {
+                        player2Units.Add(unit);
+                    }
+                }
+
+                player1Units = player1Units.OrderByDescending(u => u.Init).ToList();
+                player2Units = player2Units.OrderByDescending(u => u.Init).ToList();
+
+                turnOrder.AddRange(player1Units);
+                turnOrder.AddRange(player2Units);
+
             
+            //    foreach (Unit unit in Units)
+            //    {
+            //        unit.Init = unit.Speed + rand.Next(51); //add a random roll to the speed to get initiative
+            //        unit.AP = 2;
+            //    }
+            //    turnOrder = Units.OrderByDescending(u => u.Init).ToList(); //using LINQ to order by initiative value
 
-            foreach (Unit unit in Units)
-            {
-                unit.Init = unit.Speed + rand.Next(51);
-                unit.AP = 2;
-                if (unit.isPlayerUnit)
-                {
-
-                    player1Units.Add(unit);
-                }
-                else
-                {
-                    player2Units.Add(unit);
-                }
-            }
-
-            player1Units = player1Units.OrderByDescending(u => u.Init).ToList();
-            player2Units = player2Units.OrderByDescending(u => u.Init).ToList();
-
-            turnOrder.AddRange(player1Units);
-            turnOrder.AddRange(player2Units);
-
-
-
-            //foreach (Unit unit in Units)
-            //{
-            //    unit.Init = unit.Speed + rand.Next(51); //add a random roll to the speed to get initiative
-            //    unit.AP = 2;
-            //}
-
-            //turnOrder = Units.OrderByDescending(u => u.Init).ToList(); //using LINQ to order by initiative value
             BattleQueue = turnOrder; //save the turn order
             ActiveUnit = BattleQueue.ElementAt(0); //set the ActiveUnit to the first in the turn order
 
@@ -178,6 +178,11 @@ namespace Titans
             {
                 QueuePosition++;
                 ActiveUnit = BattleQueue.ElementAt(QueuePosition);
+                if (!ActiveUnit.isPlayerUnit && AIControlled)
+                {
+                    GameUI.AILock = true;
+                    GameUI.LockButtons();
+                }
                 
             }
             else
@@ -185,6 +190,8 @@ namespace Titans
                 QueuePosition = 0;
                 TurnCount++;
                 RollInitiative();
+                GameUI.AILock = false;
+                GameUI.ResetButtons();
             }
 
             DeselectAttack();
@@ -228,6 +235,7 @@ namespace Titans
         public void StartMove(Tile move)
         {
             List<Tile> movePath = AI.GetPath(BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]), move, BattleMap);
+            GameUI.moveWait = true;
             pendingMoves = movePath.ToArray();
             pendingIndex = pendingMoves.Length - 1;
             GameUI.sfx.PlayMoveSound(ActiveUnit);
@@ -345,12 +353,13 @@ namespace Titans
 
             int storedDefense = target.Defense; //store the defender's defense temporarily
 
-            foreach (int mod in target.DefenseModifiers)
-            {
-                target.Defense += mod; //temporarily add the defense modifiers to the base defense of defender
-            }
+            //foreach (int mod in target.DefenseModifiers)
+            //{
+            //    target.Defense += mod; //temporarily add the defense modifiers to the base defense of defender
+            //}
 
             int damage = AttackResolver.Attack(ActiveUnit, target, combatMods);
+            GameUI.displayDamage = true;
 
             target.Defense = storedDefense; //restore defender base defense
             target.HP -= damage;
@@ -392,7 +401,7 @@ namespace Titans
                     GameUI.endWait = true;
                     gameOver = true;
                     GameUI.p2win = true;
-                    GameUI.PlayWinMusic();
+                    GameUI.PlayLoseMusic();
                 }
             }
             else
@@ -406,6 +415,11 @@ namespace Titans
 
             return damage;
 
+        }
+
+        public void AIMove()
+        {
+            AI.MakeAIMove(this, ActiveUnit);
         }
     }
 }
