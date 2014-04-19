@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Titans
 {
+    //this is a random comment
     /// <summary>
     /// This is the main type for your game
     /// </summary>
