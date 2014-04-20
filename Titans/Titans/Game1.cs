@@ -168,7 +168,7 @@ namespace Titans
         public Point currentFrame;
         public Point sheetSize;
         // Collision data
-        int collisionOffset;
+        //int collisionOffset;
 
         // Framerate stuff
         public int timeSinceLastFrame = 0;
@@ -202,12 +202,12 @@ namespace Titans
         public int attackedUnitTrueX;
         public int attackedUnitTrueY;
         public int unitDamage;
-        bool unitAttacked;
+        //bool unitAttacked;
         public bool displayDamage;
         public bool musicStarted;
         Draw draw;
         ContentLoader load;
-        int frameCount;
+        //int frameCount;
 
 
         //Global Variables
@@ -215,7 +215,7 @@ namespace Titans
         public bool p1win;
         public bool p2win;
         public Battle battle;
-        bool startTurn;
+        //bool startTurn;
         public bool mainMenu;
         public bool demo;
         public List<Tile> MoveTiles;
@@ -239,10 +239,10 @@ namespace Titans
             demo = false;
             offsetY = 0;
             offsetX = 0;
-            startTurn = true;
+            //startTurn = true;
             releaseWait = false;
             lastSelectedTile = new Tile();
-            unitAttacked = false;
+            //unitAttacked = false;
             displayDamage = false;
             wait = false;
             p1win = false;
@@ -538,14 +538,14 @@ namespace Titans
                 Rectangle sfx3click = new Rectangle(669, 533, 141, 33);
                 Rectangle sfxmaxclick = new Rectangle(825, 533, 141, 33);
 
-                int count = 2;
+                //int count = 2;
                 bool mouseback = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(backClick);
                 bool mousefull = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(fullClick);
                 
              
 
                 //volume logic
-                if (mouseState.LeftButton == ButtonState.Pressed)
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
                 {
 
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
@@ -830,7 +830,7 @@ namespace Titans
                         battle.AttackMode = false;
                         battle.SelectMove();
                         battle.BattleMap.ClearRedHighlights();
-                        frameCount = 0;
+                        //frameCount = 0;
                         battle.SelectMove();
                     }
                     //deselect move
@@ -988,7 +988,7 @@ namespace Titans
                             unitDamage = battle.Attack(battle.BattleMap.GetTileAt(X, Y).TileUnit);
                             attackedUnitTrueX = X * 55 - 13;
                             attackedUnitTrueY = Y * 55 - 20;
-                            unitAttacked = true;
+                            //unitAttacked = true;
                             displayDamage = true;
                             timeSinceLastDamageFrame = 0;
 

@@ -395,6 +395,7 @@ namespace Titans
                     GameUI.endWait = true;
                     GameUI.p1win = true;
                     GameUI.PlayWinMusic();
+                    return damage;
                 }
                 if (player2HasUnits && !player1HasUnits)
                 {
@@ -402,6 +403,7 @@ namespace Titans
                     gameOver = true;
                     GameUI.p2win = true;
                     GameUI.PlayLoseMusic();
+                    return damage;
                 }
             }
             else
