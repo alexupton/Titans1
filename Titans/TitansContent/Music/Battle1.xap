@@ -268,7 +268,7 @@ Wave Bank
     Wave
     {
         Name = LoseBattle;
-        File = ..\..\..\..\..\..\..\..\..\Program Files (x86)\Image-Line\FL Studio 9\Data\Projects\SFX\LoseBattle.wav;
+        File = LoseBattle.wav;
         Build Settings Last Modified Low = 946774184;
         Build Settings Last Modified High = 30366562;
         Compression Preset Name = Compression Preset;
