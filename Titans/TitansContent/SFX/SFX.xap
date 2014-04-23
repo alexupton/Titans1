@@ -606,7 +606,7 @@ Wave Bank
     Wave
     {
         Name = ERangerMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerMove.wav;
+        File = ERangerMove.wav;
         Build Settings Last Modified Low = 2355589670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -630,7 +630,7 @@ Wave Bank
     Wave
     {
         Name = ERangerPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerPass.wav;
+        File = ERangerPass.wav;
         Build Settings Last Modified Low = 2355589670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -654,7 +654,7 @@ Wave Bank
     Wave
     {
         Name = ERangerSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerSelect.wav;
+        File = ERangerSelect.wav;
         Build Settings Last Modified Low = 2355589670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -678,7 +678,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierAttack.wav;
+        File = ESoldierAttack.wav;
         Build Settings Last Modified Low = 2355589670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -702,7 +702,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierDefend.wav;
+        File = ESoldierDefend.wav;
         Build Settings Last Modified Low = 2355589670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -726,7 +726,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierDie.wav;
+        File = ESoldierDie.wav;
         Build Settings Last Modified Low = 2355689670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -750,7 +750,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierMove.wav;
+        File = ESoldierMove.wav;
         Build Settings Last Modified Low = 2355689670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -774,7 +774,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierPass.wav;
+        File = ESoldierPass.wav;
         Build Settings Last Modified Low = 2355689670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -798,7 +798,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierSelect.wav;
+        File = ESoldierSelect.wav;
         Build Settings Last Modified Low = 2355689670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -822,7 +822,7 @@ Wave Bank
     Wave
     {
         Name = RangerAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerAttack.wav;
+        File = RangerAttack.wav;
         Build Settings Last Modified Low = 2355689670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
@@ -846,7 +846,7 @@ Wave Bank
     Wave
     {
         Name = RangerDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerDefend.wav;
+        File = RangerDefend.wav;
         Build Settings Last Modified Low = 2355289670;
         Build Settings Last Modified High = 30366390;
         Compression Preset Name = Compression Preset;
