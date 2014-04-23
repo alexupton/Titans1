@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Titans
 {
+    //Create the Cavalry unit
     class Cavalry : Unit
     {
         public override int HP { get; set; }
@@ -24,6 +25,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+	//Set all attributes of the unit Cavalry
         public Cavalry()
         {
             MaxHP = 50;
@@ -45,6 +47,7 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
         }
+        //Set Pierce ability which has an attack modifier of 20 and uses 5 MP
         public override void Special1()
         {
 
@@ -55,6 +58,7 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(20);
         }
+        //Set Charge ability which adds 5 to the speed, not allowing the unit to attack this turn, and uses 10 MP
         public override void Special2()
         {
 
@@ -67,6 +71,7 @@ namespace Titans
             Speed -= 5;
             Range = 1;
         }
+        //Set Swap ability which allows the cavalry unit to swap places with another friendly unit using 10 MP
         public override void Special3()
         {
 

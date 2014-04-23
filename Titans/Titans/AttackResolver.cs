@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +12,7 @@ namespace Titans
         //return the amount of damage done to the defending unit
         public static int Attack(Unit attacker, Unit defender, List<int> combatModifiers)
         {
+            //Add a random element to add variety to damage dealt
             Random rand = new Random();
             int damage = attacker.Attack + (rand.Next(-6, 6));
 

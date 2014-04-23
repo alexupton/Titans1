@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Titans
 {
-    
+    //Create the Defender unit
     class Defender : Unit
     {
         public override int HP { get; set; }
@@ -24,6 +24,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+	//Set all the attributes of the unit Defender
         public Defender()
         {
             Abilities = new List<string>();
@@ -47,6 +48,7 @@ namespace Titans
             Location[0]=-1;
             Location[1] = -1; 
         }
+        //Set Shield Bash ability with an attack modifier of 10, will stun the enemy unit, and uses 10 MP
         public override void Special1()
         {
             
@@ -58,6 +60,7 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(10);
         }
+        //Set Defensive Strike ability uses 10 MP.......
         public override void Special2()
         {
              
@@ -66,6 +69,7 @@ namespace Titans
             //code for calling animation
             //post abbility modifiers 
         }
+        //Set Taunt ability which uses 15 MP and increases the unit's range to 5 for one turn
         public override void Special3()
         {
              

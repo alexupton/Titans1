@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +17,7 @@ namespace Titans
 
         public AudioManager(Game1 currentGame)
         {
+            //Set up respective sound engines for different types of sounds; music and SFX
             game = currentGame;
             engine = new AudioEngine("Content\\SFX\\SFX.xgs");
             soundBank = new SoundBank(engine, "Content\\SFX\\Sound Bank.xsb");
@@ -27,6 +28,7 @@ namespace Titans
 
         }
 
+	//Determines what sound to play when a friendly or enemy unit is attacking
         public void PlayAttackSound(Unit attacker)
         {
             if (attacker is Soldier && attacker.isPlayerUnit)
@@ -57,6 +59,7 @@ namespace Titans
             cue.Play();
         }
 
+	//Determines what sound to play when a friendly or enemy unit is dead
         public void PlayDieSound(Unit deadUnit)
         {
             if (deadUnit is Soldier && deadUnit.isPlayerUnit)
@@ -86,6 +89,7 @@ namespace Titans
             cue.Play();
         }
 
+	//Determines what sound to play based on wether a friendly or enemy unit is moving
         public void PlayMoveSound(Unit mover)
         {
             if (mover is Soldier && mover.isPlayerUnit)
@@ -116,6 +120,7 @@ namespace Titans
             cue.Play();
         }
 
+	//Determines what sound to play on wether a friendly or enemy unit is active(at beginning of that units turn)
         public void PlaySelectSound(Unit selected)
         {
             if (selected is Soldier && selected.isPlayerUnit)
@@ -146,11 +151,13 @@ namespace Titans
             cue.Play();
         }
 
+	//Apply changes
         public void Update()
         {
             engine.Update();
         }
 
+	//Play a buzzer sound when player clicks on something that doesn't do anything
         public void PlayBuzzer()
         {
             fxCat.SetVolume(10f);
@@ -159,11 +166,13 @@ namespace Titans
             fxCat.SetVolume(6f);
         }
 
+	//Set volume based on currently selected volume
         public void setfxfvolume(float volume)
         {
             fxCat.SetVolume(volume);
         }
 
+	//Determines what sound to make when an enemy or friendly unit passes
         public void PlayPassSound(Unit selected)
         {
 
@@ -195,6 +204,7 @@ namespace Titans
             cue.Play();
         }
 
+	//Determines what sound to make when an enemy or friendly unit defends
         public void PlayDefendSound(Unit selected)
         {
             if (selected is Soldier && selected.isPlayerUnit)

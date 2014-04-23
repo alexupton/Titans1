@@ -1,10 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
 namespace Titans
 {
+    //Create the bomber unit
     class Bomber : Unit
     {
         public override int HP { get; set; }
@@ -25,6 +26,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+	//Set all attributes of the unit Bomber
         public Bomber()
         {
             MaxHP = 100;
@@ -36,7 +38,7 @@ namespace Titans
             Speed = 125;
             Init = 20;
             AP = 2;
-            Abilities.Add("Inferno Bmomb");
+            Abilities.Add("Inferno Bomb");
             Abilities.Add("Heal Bomb");
             Abilities.Add("Machine Gun");
             isPlayerUnit = true;
@@ -46,6 +48,7 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
         }
+        //Set Inferno Bomb ability which has an attack modifier of 5 and using 5 MP
         public override void Special1()
         {
             //pre abbility modifiers
@@ -55,6 +58,7 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(5);
         }
+        //Set Heal Bomb ability which uses 10 MP and....
         public override void Special2()
         {
             //pre abbility modifiers
@@ -64,6 +68,7 @@ namespace Titans
             //post abbility modifiers 
 
         }
+        //Set Machine Gun ablity which has a range of 1, attack modifier of 10, and uses 15 MP
         public override void Special3()
         {
             //pre abbility modifiers

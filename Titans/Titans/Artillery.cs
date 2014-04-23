@@ -25,7 +25,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
         
-
+	//Set all attributes of the unit artillery
         public Artillery()
         {
             MaxHP = 50;
@@ -47,6 +47,7 @@ namespace Titans
         
         }
 
+	//Set all special abilities here
         public override void Special1() { }
         public override void Special2() { }
         public override void Special3() { }

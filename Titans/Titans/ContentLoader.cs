@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +25,7 @@ namespace Titans
 
         public void MainMenu()
         {
+            //Start main menu music and loop it
             if (!game.musicStarted)
             {
                 Song title = game.Content.Load<Song>(@"Music\Title Theme");
@@ -33,7 +34,8 @@ namespace Titans
                 MediaPlayer.Volume = 1.0f;
                 game.musicStarted = true;
             }
-
+            
+	    //Load all images for the main menu buttons
             game.spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
             game.quick_battle = game.Content.Load<Texture2D>(@"images\Quick Battle");
@@ -53,9 +55,11 @@ namespace Titans
             game.quick_temp = game.quick_battle;
             game.exit_temp = game.exit;
         }
-
+        
+	
         public void CampaignMenu()
         {
+            //Load all buttons for the campaign menu once campaign is clicked
             game.newGame = game.Content.Load<Texture2D>(@"images\New Game");
             game.newGame_invert = game.Content.Load<Texture2D>(@"images\New Game(Inverted)");
             game.loadGame = game.Content.Load<Texture2D>(@"images\Load Game");
@@ -70,7 +74,7 @@ namespace Titans
         public void OptionsMenu()
         {
             //Content.Unload();
-
+	    //Load all buttons for the options menu when the options button is clicked
             game.resolution = game.Content.Load<Texture2D>(@"images\Resolution");
             game.textSpeed = game.Content.Load<Texture2D>(@"images\Text Speed");
             game.musicLevel = game.Content.Load<Texture2D>(@"images\Music Level");
@@ -144,10 +148,13 @@ namespace Titans
             game.notemp = game.no_invert;
         }
 
+	//Load the demo, currently only map we can have running when clicking quick battle
         public void Demo()
         {
             game.Content.Unload();
+            //Access file where map data is located
             Map mainMap = MapLoader.LoadMap(@"Content\Demo.txt");
+            //Read map data and translate that to tiles and units placed on-screen
             game.battle = new Battle(mainMap);
             game.battle.GameUI = game;
             //
@@ -155,6 +162,8 @@ namespace Titans
             //
             game.battle.RollInitiative();
             game.lastSelectedTile = game.battle.BattleMap.GetTileAt(0, 0);
+            
+            //Get the active units data to display in the information box
             game.unit = game.battle.ActiveUnit.GetType();
             game.hp = game.battle.ActiveUnit.HP.ToString();
             game.range = game.battle.ActiveUnit.Range.ToString();
@@ -163,6 +172,7 @@ namespace Titans
             game.mp = game.battle.ActiveUnit.MP.ToString();
             game.attackText = game.battle.ActiveUnit.Attack.ToString();
             game.moveText = game.battle.ActiveUnit.AP.ToString();
+            
             game.SetOffsetValue(game.battle.ActiveUnit.Location[0] * -55 + 750, game.battle.ActiveUnit.Location[1] * -55 + 400);
             game.nextUnits = new List<string>();
             for (int i = game.battle.QueuePosition + 1; i < game.battle.QueuePosition + 6; i++)
@@ -191,6 +201,7 @@ namespace Titans
             game.engine = new AudioEngine("Content\\Music\\Battle1.xgs");
             game.soundBank = new SoundBank(game.engine, "Content\\Music\\Sound Bank.xsb");
             game.waveBank = new WaveBank(game.engine, "Content\\Music\\Wave Bank.xwb");
+            //Start battle music in-game
             game.cue = game.soundBank.GetCue("Battle");
             AudioCategory music = game.engine.GetCategory("Music");
             music.SetVolume(3.0f);
