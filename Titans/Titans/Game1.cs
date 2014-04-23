@@ -11,13 +11,11 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Titans
 {
-    //this is a random comment
     /// <summary>
     /// This is the main type for your game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        //I'm making a sample change. Aw yeah
         public GraphicsDeviceManager graphics;
         public SpriteBatch spriteBatch;
         public Texture2D quick_battle;
@@ -178,6 +176,7 @@ namespace Titans
         int timeSinceLastDamageFrame = 0;
         int millisecondsPerMoveFrame = 50;
         int timeSinceLastMoveFrame = 0;
+        int frameCount = 0;
 
         //for moving the map
         public int offsetY;
@@ -202,6 +201,7 @@ namespace Titans
         public int attackedUnitTrueX;
         public int attackedUnitTrueY;
         public int unitDamage;
+
         //bool unitAttacked;
         public bool displayDamage;
         public bool musicStarted;
@@ -923,6 +923,7 @@ namespace Titans
                         special = special_grey;
                         hilightenabled = true;
                         battle.SelectDefend();
+                        frameCount = 0;
 
                     }
                     //deselect if in move or attack mode and defend button clicked
@@ -953,6 +954,7 @@ namespace Titans
                         battle.DeselectMove();
                         battle.StartMove(lastSelectedTile);
                         battle.BattleMap.ClearRedHighlights();
+                        frameCount = 0;
                         if (battle.ActiveUnit.AP <= 1)
                         {
                             LockButtons();
@@ -991,6 +993,7 @@ namespace Titans
                             //unitAttacked = true;
                             displayDamage = true;
                             timeSinceLastDamageFrame = 0;
+                            frameCount = 0;
 
                         }
                         else if (!releaseWait)
@@ -1075,9 +1078,10 @@ namespace Titans
                      // Increment to next frame
                      wait = false;
                      displayDamage = false;
-                     if (battle.ActiveUnit.AP <= 0)
+                     if (battle.ActiveUnit.AP <= 0 && frameCount == 2)
                      {
                          battle.NextPlayer();
+                         
                      }
                      if (battle.gameOver)
                      {
@@ -1088,6 +1092,7 @@ namespace Titans
                      {
                          battle.AIMove();
                      }
+                     frameCount++;
 
                  }
 
