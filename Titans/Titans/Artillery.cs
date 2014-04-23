@@ -53,5 +53,7 @@ namespace Titans
         public override void Special4() { }
         public override void Special5() { }
         public override void Special6() { }
+		
+		//yo no hablo ingles
     }
 }
