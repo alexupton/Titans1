@@ -24,6 +24,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+        //Set all attributes of the unit Soldier
         public Soldier()
         {
             MaxHP = 70;
@@ -47,29 +48,33 @@ namespace Titans
             Location[0] = -1;
             Location[1] = -1;
         }
+        //Set the Whirlwind ability which adds an attack modifier of 15 and costs 5 MP
         public override void Special1()
         {
-            //pre abbility modifiers
+            //pre ability modifiers
             AttackModifiers.Add(15);
             MP -= 5;
             //code for calling animation
-            //post abbility modifiers 
+            //post ability modifiers 
             AttackModifiers.Remove(15);
 
         }
+        //Set the Double Attack ability which adds an attack modifier of 80 and costs 10 MP
         public override void Special2()
         {
-            //pre abbility modifiers
+            //pre ability modifiers
             AttackModifiers.Add(80);
             MP -= 10;
             //code for calling animation
+            //post ability modifiers
             AttackModifiers.Remove(40);
 
         }
+        //Set the First Aid ability which adds 5 HP, costs 10 MP, and reduces the range to 0
         public override void Special3()
         {
 
-            //pre abbility modifiers
+            //pre ability modifiers
             HP += 5;
             MP -= 10;
             Range = 0;
@@ -77,7 +82,7 @@ namespace Titans
             //post abbility modifiers 
             Defense = 25;
             Range = 1;
-            Speed = 6;
+            Speed = 150;
             Init = 50;
 
         }

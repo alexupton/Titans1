@@ -24,6 +24,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+        //Set all attributes of the unit Mage
         public Mage()
         {
             MaxHP = 25;
@@ -48,6 +49,7 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
         }
+        //Set the Firebolt ability which adds an attack modifier of 50 and costs 30 MP
         public override void Special1()
         {
             //pre abbility modifiers
@@ -57,6 +59,7 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(50);
         }
+        //Set the Poison ability which adds an attack modifier of 5 and costs 20 MP
         public override void Special2()
         {
             //pre abbility modifiers
@@ -66,6 +69,7 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(5);
         }
+        //Set the Heal ability which costs 15 MP and.....
         public override void Special3()
         {
             //pre abbility modifiers
@@ -75,6 +79,7 @@ namespace Titans
             //post abbility modifiers 
 
         }
+        //Set the Refresh ability which costs 20 MP and.....
         public override void Special4()
         {
             //pre abbility modifiers
@@ -83,6 +88,7 @@ namespace Titans
             //code for calling animation
             //post abbility modifiers 
         }
+        //Set the Haste ability which costs 20 MP and.....
         public override void Special5()
         {
             //pre abbility modifiers
@@ -92,6 +98,7 @@ namespace Titans
             //post abbility modifiers 
 
         }
+        //Set the Slow ability which costs 20 MP and....
         public override void Special6()
         {
             //pre abbility modifiers

@@ -25,6 +25,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+        //Set all attributes of the unit Fighter
         public Fighter()
         {
             MaxHP = 60;
@@ -37,7 +38,7 @@ namespace Titans
             Init = 50;
             AP = 2;
             Abilities.Add("Flares");
-            Abilities.Add("Heat Seeking Missle");
+            Abilities.Add("Heat Seeking Missile");
             Abilities.Add("Sonic Strike");
             isPlayerUnit = true;
             Price = 100;
@@ -46,6 +47,7 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
         }
+        //Set the Flares ability which costs 10 MP and is used on the units current tile
         public override void Special1()
         {
             //pre abbility modifiers
@@ -55,6 +57,7 @@ namespace Titans
             //post abbility modifiers 
             Range = 1;
         }
+        //Set the Heat Seeking Missile ability which adds an attack modifier of 15, costs 10 MP, and has a range of 6
         public override void Special2()
         {
             //pre abbility modifiers
@@ -66,16 +69,17 @@ namespace Titans
             AttackModifiers.Remove(15);
             Range = 2;
         }
+        //Set the Sonic Strike ability which adds an attack modifier of 10, reduce speed to 100, and costs 15 MP
         public override void Special3()
         {
             //pre abbility modifiers
             AttackModifiers.Add(10);
-            Speed = 4;
+            Speed = 100;
             MP -= 15;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(10);
-            Speed = 7;
+            Speed = 175;
         }
         public override void Special4()
         {

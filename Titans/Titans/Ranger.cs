@@ -24,6 +24,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+        //Set all attributes of the unit Ranger
         public Ranger()
         {
             MaxHP = 30;
@@ -40,13 +41,14 @@ namespace Titans
             Init = 40;
             AP = 2;
             Abilities.Add("Headshot");
-            Abilities.Add("Imobilize");
+            Abilities.Add("Immobilize");
             Abilities.Add("Target");
             isPlayerUnit = true;
             Price = 100;
             Location[0] = -1;
             Location[1] = -1;
         }
+        //Set the Headshot ability which adds an attack modifier of 40 and costs 15 MP
         public override void Special1()
         {
 
@@ -57,6 +59,7 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(40);
         }
+        //Set the Immobilize ability which adds an attack modifier of 15 and costs 10 MP
         public override void Special2()
         {
 
@@ -67,6 +70,7 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(15);
         }
+        //Set the Target ability which costs 10 MP and....
         public override void Special3()
         {
             //pre abbility modifiers

@@ -24,6 +24,7 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+        //Set all attributes of the unit Scout
         public Scout()
         {
             MaxHP = 30;
@@ -45,6 +46,7 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
         }
+        //Set the Bridge ability which sets the range to 1 and costs 10 MP
         public override void Special1()
         {
             //pre abbility modifiers
@@ -55,6 +57,7 @@ namespace Titans
             Range = 0;
 
         }
+        //Set the Sikes ability which sets the range to 1 and costs 10 MP
         public override void Special2()
         {
             //pre abbility modifiers
@@ -64,6 +67,7 @@ namespace Titans
             //post abbility modifiers 
             Range = 0;
         }
+        //Set the Remove ability which sets the range to 1 and costs 10 MP
         public override void Special3()
         {
             //pre abbility modifiers

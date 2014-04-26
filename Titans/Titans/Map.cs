@@ -53,6 +53,7 @@ namespace Titans
                 return new Tile();
         }
 
+        //Get tile where selected unit is at and find possible reachable tiles
         public List<int[]> GetLegalMoveCoordinates(Unit selected)
         {
             List<int[]> legalmoves = new List<int[]>();
@@ -82,7 +83,7 @@ namespace Titans
                     trueReachableTiles.Add(tile);
                 }
             }
-            //...
+            //Run possible tiles through pathfinding algorithm to see what tiles can actually be reached
             List<Tile> tempTileList = new List<Tile>();
             foreach (Tile tile in trueReachableTiles)
             {
@@ -96,7 +97,7 @@ namespace Titans
                     tempTileList.Add(tile);
                 }
             }
-            //...
+            //Set list equal to actual tiles you can move to
             trueReachableTiles = tempTileList;
 
             //cleanup

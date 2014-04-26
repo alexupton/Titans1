@@ -24,6 +24,7 @@ namespace Titans
 
         }
 
+        //Draw the initial main menu you see at startup
         public void MainMenu()
         {
             game.GraphicsDevice.Clear(Color.White);
@@ -39,6 +40,7 @@ namespace Titans
             game.spriteBatch.End();
         }
 
+        //Draw the campaign menu that you see once clicking on campaign
         public void CampaignMenu()
         {
             game.GraphicsDevice.Clear(Color.White);
@@ -49,6 +51,7 @@ namespace Titans
             game.spriteBatch.End();
         }
 
+        //Draw the options menu that you see once clicking on options
         public void OptionsMenu()
         {
             game.GraphicsDevice.Clear(Color.White);
@@ -82,6 +85,7 @@ namespace Titans
             game.spriteBatch.End();
         }
 
+        //Draw in our Demo game map
         public void Demo()
         {
             game.GraphicsDevice.Clear(Color.Black);
