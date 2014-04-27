@@ -870,6 +870,283 @@
       <Processor>SoundEffectProcessor</Processor>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="images\Menu%28InGame%29\100%25%28Inverted%29.png">
+      <Name>100%25%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\100%25%28Not Selected%29.png">
+      <Name>100%25%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\100%25%28Selected%29.png">
+      <Name>100%25%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\1200X800%28Inverted%29.png">
+      <Name>1200X800%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\1200X800%28Not Selected%29.png">
+      <Name>1200X800%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\1200X800%28Selected.png">
+      <Name>1200X800%28Selected</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\1500X800%28Inverted%29.png">
+      <Name>1500X800%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\1500X800%28Not Selected%29.png">
+      <Name>1500X800%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\1500X800%28Selected%29.png">
+      <Name>1500X800%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\25%25%28Inverted%29.png">
+      <Name>25%25%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\25%25%28Not Selected%29.png">
+      <Name>25%25%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\25%25%28Selected%29.png">
+      <Name>25%25%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\50%25%28Inverted%29.png">
+      <Name>50%25%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\50%25%28Not Selected%29.png">
+      <Name>50%25%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\50%25%28Selected%29.png">
+      <Name>50%25%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\75%25%28Inverted%29.png">
+      <Name>75%25%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\75%25%28Not Selected%29.png">
+      <Name>75%25%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\75%25%28Selected%29.png">
+      <Name>75%25%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Apply%28Inverted%29.png">
+      <Name>Apply%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Apply.png">
+      <Name>Apply</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Back%28Inverted%29.png">
+      <Name>Back%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Back.png">
+      <Name>Back</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Exit%28Inverted%29.png">
+      <Name>Exit%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Exit.png">
+      <Name>Exit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Fast%28Inverted%29.png">
+      <Name>Fast%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Fast%28Not Selected%29.png">
+      <Name>Fast%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Fast%28Selected%29.png">
+      <Name>Fast%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Full Screen.png">
+      <Name>Full Screen</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Menu Box.png">
+      <Name>Menu Box</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Music Level.png">
+      <Name>Music Level</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Mute%28Inverted%29.png">
+      <Name>Mute%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Mute%28Not Selected%29.png">
+      <Name>Mute%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Mute%28Selected%29.png">
+      <Name>Mute%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\No%28Inverted%29.png">
+      <Name>No%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\No%28Not Selected%29.png">
+      <Name>No%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\No%28Selected%29.png">
+      <Name>No%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Options Box.png">
+      <Name>Options Box</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Options%28Inverted%29.png">
+      <Name>Options%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Options.png">
+      <Name>Options</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Regular%28Inverted%29.png">
+      <Name>Regular%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Regular%28Not Selected%29.png">
+      <Name>Regular%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Regular%28Selected%29.png">
+      <Name>Regular%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Resolution.png">
+      <Name>Resolution</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Resume%28Inverted%29.png">
+      <Name>Resume%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Resume.png">
+      <Name>Resume</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Save%28Inverted%29.png">
+      <Name>Save%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Save.png">
+      <Name>Save</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Slow%28Inverted%29.png">
+      <Name>Slow%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Slow%28Not Selected%29.png">
+      <Name>Slow%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Slow%28Selected%29.png">
+      <Name>Slow%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Sound Effects.png">
+      <Name>Sound Effects</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Text Speed.png">
+      <Name>Text Speed</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Yes%28Inverted%29.png">
+      <Name>Yes%28Inverted%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Yes%28Not Selected%29.png">
+      <Name>Yes%28Not Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Menu%28InGame%29\Yes%28Selected%29.png">
+      <Name>Yes%28Selected%29</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

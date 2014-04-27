@@ -144,8 +144,9 @@ namespace Titans
             game.fullScreenTemp = game.fullScreen;
             game.backtemp = game.back;
             game.yestemp = game.yes_invert;
-            game.yes_invert = game.yes;
+           
             game.notemp = game.no_invert;
+            game.no_invert = game.no;
         }
 
 	//Load the demo, currently only map we can have running when clicking quick battle
@@ -262,6 +263,9 @@ namespace Titans
 
 
             game.UI = game.Content.Load<Texture2D>(@"images\UI Fixed");
+
+            //in Game Menu items
+            game.menuBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Menu Box");
             //sheetSize.X = 128;
             //sheetSize.Y = 192;
 
@@ -271,5 +275,7 @@ namespace Titans
             game.text = game.Content.Load<SpriteFont>(@"Courier");
             game.smallText = game.Content.Load<SpriteFont>(@"CourierSmall");
         }
+      
+          
     }
 }

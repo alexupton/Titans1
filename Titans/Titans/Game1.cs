@@ -138,13 +138,17 @@ namespace Titans
         public Texture2D no_invert;
         public Texture2D notemp;
 
+        //ingame menu
+        public Texture2D menuBox;
+        public Texture2D backIG;
+        //text stuff
         public SpriteFont text;
         public SpriteFont smallText;
 
         Vector2 pos1 = Vector2.Zero;
         public bool optionsMenu;
         public bool campaignmenu;
-        public bool isFullScreen = true;
+        public bool isFullScreen = false;
 
         //Audio
         public AudioEngine engine;
@@ -215,6 +219,7 @@ namespace Titans
         public bool p1win;
         public bool p2win;
         public Battle battle;
+        public bool ismenu=false;
         //bool startTurn;
         public bool mainMenu;
         public bool demo;
@@ -770,7 +775,18 @@ namespace Titans
                 bool mousespecial = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(specialclick);
                 bool mouseitems = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(itemclick);
                 Point mousePos = new Point(mouseState.X, mouseState.Y);
-
+                
+                //in game menu with esape key 
+                if(Keyboard.GetState().IsKeyDown(Keys.Escape)&&!releaseWait&&!ismenu)
+                {
+                    ismenu = true;
+                    releaseWait = true;
+                }
+                else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !releaseWait && ismenu)
+                {
+                    ismenu = false;
+                    releaseWait = true;
+                }
 
                 //lock buttons during wait times
                 if (tickWait)
@@ -1203,6 +1219,10 @@ namespace Titans
             else if (demo)
             {
                 draw.Demo();
+            }
+            else if (ismenu)
+            {
+                draw.ingamemenu();
             }
 
             

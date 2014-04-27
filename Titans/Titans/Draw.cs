@@ -223,7 +223,7 @@ namespace Titans
             game.spriteBatch.Draw(game.special, new Vector2(680, 754), Color.White);
             game.spriteBatch.Draw(game.item, new Vector2(796, 754), Color.White);
             game.spriteBatch.Draw(game.UI, new Vector2(0, 0), Color.White);
-
+            
 
             //draw dynamic UI elements
             Vector2 textLoc = new Vector2(1255, 704);
@@ -272,6 +272,10 @@ namespace Titans
 
 
             game.spriteBatch.End();
+        }
+        public void ingamemenu()
+        {
+            game.spriteBatch.Draw(game.menuBox, new Vector2(150, 337), Color.White);
         }
     }
 }
