@@ -1088,7 +1088,7 @@ namespace Titans
                 {
                     offsetX += 10;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && offsetX > battle.BattleMap.Size[0] * -30)
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && offsetX > battle.BattleMap.Size[0] * -51)
                 {
                     offsetX -= 10;
                 }
