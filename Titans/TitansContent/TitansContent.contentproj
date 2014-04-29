@@ -914,8 +914,16 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
+<<<<<<< HEAD
 =======
 >>>>>>> bf0a5054cc8387d9242770c2d3c3e03e0c922710
+=======
+  <ItemGroup>
+    <Compile Include="Demo2.txt">
+      <Name>Demo2</Name>
+    </Compile>
+  </ItemGroup>
+>>>>>>> parent of 49342aa... Tweaks2
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!--  To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

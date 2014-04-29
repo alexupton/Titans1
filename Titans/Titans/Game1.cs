@@ -1076,19 +1076,19 @@ namespace Titans
                 if (mouseState.LeftButton == ButtonState.Released)
                     releaseWait = false;
                 //move the view with WASD
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && offsetY < battle.BattleMap.Size[1] + 350)
+                if (Keyboard.GetState().IsKeyDown(Keys.W) && offsetY < 500)
                 {
                     offsetY += 10;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.S) && offsetY > battle.BattleMap.Size[1] * -51)
+                if (Keyboard.GetState().IsKeyDown(Keys.S) && offsetY > -1000)
                 {
                     offsetY -= 10;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.A) && offsetX < battle.BattleMap.Size[0] + 750)
+                if (Keyboard.GetState().IsKeyDown(Keys.A) && offsetX < 750)
                 {
                     offsetX += 10;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && offsetX > battle.BattleMap.Size[0] * -51)
+                if (Keyboard.GetState().IsKeyDown(Keys.D) && offsetX > -750)
                 {
                     offsetX -= 10;
                 }
