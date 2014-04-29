@@ -30,9 +30,9 @@ namespace Titans
             MaxHP = 25;
             HP = 25;
             MP = 100;
-            Attack = 30;
+            Attack = 15;
             Defense = 10;
-            Range = 6;
+            Range = 3;
             Speed = 125;
             Init = 30;
             AP = 2;
