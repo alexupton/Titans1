@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+
 namespace Titans
 {
     /// <summary>
@@ -80,8 +81,10 @@ namespace Titans
         public Texture2D soundEffects;
         public Texture2D credits;
         public Texture2D res1;
+        public Texture2D res1temp;
         public Texture2D res1_unselected;
         public Texture2D res2;
+        public Texture2D res2temp;
         public Texture2D res2_unselected;
         public Texture2D slow;
         public Texture2D slowtemp;
@@ -139,11 +142,17 @@ namespace Titans
         public Texture2D notemp;
 
         //ingame menu
+        public Texture2D[] menuButtons;
         public Texture2D menuBox;
-        public Texture2D backIG;
+        public Texture2D normal;
+        public Texture2D invert;
+        public Texture2D notSelected;
+        public Texture2D normalTemp;
+
         //text stuff
         public SpriteFont text;
         public SpriteFont smallText;
+        public SpriteFont bigText;
 
         Vector2 pos1 = Vector2.Zero;
         public bool optionsMenu;
@@ -198,7 +207,8 @@ namespace Titans
         public List<string> nextUnits;
 
         //button controls
-        bool releaseWait;
+        public bool releaseWait;
+        public bool keyreleasewait;
 
         //various
         public Tile lastSelectedTile;
@@ -209,7 +219,7 @@ namespace Titans
         //bool unitAttacked;
         public bool displayDamage;
         public bool musicStarted;
-        Draw draw;
+       public Draw draw;
         ContentLoader load;
         //int frameCount;
 
@@ -229,6 +239,8 @@ namespace Titans
         public bool endWait;
         public bool AILock;
         public bool loseMusicStarted = false;
+        public Buttons buttons;
+
 
 
         public Game1()
@@ -237,6 +249,7 @@ namespace Titans
             graphics = new GraphicsDeviceManager(this);
             this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.PreferredBackBufferWidth = 1500;
+            
             this.graphics.IsFullScreen = false;
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
@@ -263,7 +276,7 @@ namespace Titans
 
             draw = new Draw(this);
             load = new ContentLoader(this);
-
+            buttons = new Buttons(this);
 
 
         }
@@ -277,7 +290,7 @@ namespace Titans
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            
             base.Initialize();
 
         }
@@ -531,6 +544,10 @@ namespace Titans
                 Rectangle backClick = new Rectangle(15, 755, 141, 33);
                 Rectangle textClick = new Rectangle(25, 433, 141, 33);
                 Rectangle fullClick = new Rectangle(25, 337, 141, 33);
+                Rectangle res1Click = new Rectangle(206, 385, 141, 33);
+                Rectangle res2Click = new Rectangle(360, 385, 141, 33);
+                Rectangle yesClick = new Rectangle(206, 337, 141, 33);
+                Rectangle noClick = new Rectangle(360, 337, 141, 33);
                 Rectangle volumemuteclick = new Rectangle(206, 483, 141, 33);
                 Rectangle volume1click = new Rectangle(360, 483, 141, 33);
                 Rectangle volume2click = new Rectangle(514, 483, 141, 33);
@@ -547,7 +564,52 @@ namespace Titans
                 bool mouseback = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(backClick);
                 bool mousefull = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(fullClick);
                 
-             
+                if(mouseState.LeftButton==ButtonState.Pressed&&!releaseWait)
+                {
+                    Point mousePos= new Point(mouseState.X,mouseState.Y);
+                    if(res1Click.Contains(mousePos))
+                    {
+                         this.graphics.PreferredBackBufferHeight = 800;
+                         this.graphics.PreferredBackBufferWidth = 1280;
+                         graphics.ApplyChanges();
+                         res1_unselected = res1;
+                         res2 = res2_unselected;
+                         releaseWait = true;
+                    }
+                    else if(res2Click.Contains(mousePos))
+                    {
+                         this.graphics.PreferredBackBufferHeight = 800;
+                         this.graphics.PreferredBackBufferWidth = 1500;
+                         graphics.ApplyChanges();
+                         res1_unselected = res1temp;
+                         res2 = res2temp;
+                         releaseWait = true;
+                    }
+                }
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
+                {
+                    Point mousePos = new Point(mouseState.X, mouseState.Y);
+                    if (yesClick.Contains(mousePos))
+                    {
+                        yes_invert = yes;
+
+                        no_invert = notemp;
+                        graphics.IsFullScreen = true;
+                        graphics.ApplyChanges();
+                        isFullScreen = true;
+                    }
+                    else if (noClick.Contains(mousePos))
+                    {
+
+
+                        graphics.IsFullScreen = false;
+                        graphics.ApplyChanges();
+                        yes_invert = yestemp;
+
+                        no_invert = no;
+                        isFullScreen = false;
+                    }
+                }
 
                 //volume logic
                 if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
@@ -746,7 +808,7 @@ namespace Titans
 
                 
             }
-            else if (demo && !(p1win || p2win))
+            else if (demo && !(p1win || p2win)&&!ismenu)
             {
                 engine.Update();
                 sfx.Update();
@@ -776,17 +838,7 @@ namespace Titans
                 bool mouseitems = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(itemclick);
                 Point mousePos = new Point(mouseState.X, mouseState.Y);
                 
-                //in game menu with esape key 
-                if(Keyboard.GetState().IsKeyDown(Keys.Escape)&&!releaseWait&&!ismenu)
-                {
-                    ismenu = true;
-                    releaseWait = true;
-                }
-                else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !releaseWait && ismenu)
-                {
-                    ismenu = false;
-                    releaseWait = true;
-                }
+             
 
                 //lock buttons during wait times
                 if (tickWait)
@@ -1188,10 +1240,28 @@ namespace Titans
             {
                 releaseWait = false;
             }
+            if (Keyboard.GetState().IsKeyUp(Keys.Escape))
+            {
+                keyreleasewait = false;
+            }
 
 
-            
-            
+            //in game menu escape(to the new wolrd) logic
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && !ismenu&&demo)
+            {
+                ismenu = true;
+                
+                keyreleasewait = true;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && ismenu&&demo)
+            {
+                ismenu = false;
+                keyreleasewait = true;
+            }
+            if (ismenu&&!keyreleasewait)
+            {
+                buttons.InGameButtons(mouseState);
+            }
 
             base.Update(gameTime);
         }
@@ -1216,12 +1286,13 @@ namespace Titans
             {
                 draw.OptionsMenu();
             }
-            else if (demo)
+            else if (demo&!ismenu)
             {
                 draw.Demo();
             }
             else if (ismenu)
             {
+                draw.Demo();
                 draw.ingamemenu();
             }
 

@@ -113,6 +113,8 @@
     <Reference Include="System">
       <Private>False</Private>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml">
       <Private>False</Private>
     </Reference>
@@ -133,6 +135,7 @@
     <Compile Include="AudioManager.cs" />
     <Compile Include="Battle.cs" />
     <Compile Include="Bomber.cs" />
+    <Compile Include="Buttons.cs" />
     <Compile Include="Cavalry.cs" />
     <Compile Include="ContentLoader.cs" />
     <Compile Include="Defender.cs" />

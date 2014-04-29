@@ -12,15 +12,20 @@ using Microsoft.Xna.Framework.Media;
 
 namespace Titans
 {
-    class Draw
+    public class Draw
     {
         public Game1 game { get; set; }
-
+        public Color[] textColor; 
+        
 
         public Draw(Game1 currentGame)
         {
             game = currentGame;
-
+            textColor = new Color[5];
+            for (int i = 0; i < 5; i++)
+            {
+                textColor[i] = Color.Black;
+            }
 
         }
 
@@ -275,7 +280,22 @@ namespace Titans
         }
         public void ingamemenu()
         {
-            game.spriteBatch.Draw(game.menuBox, new Vector2(150, 337), Color.White);
+            
+            game.spriteBatch.Begin();
+            game.spriteBatch.Draw(game.menuBox, new Vector2(450, 137), Color.White);
+            game.spriteBatch.DrawString(game.bigText, "Menu", new Vector2(705,160), Color.Black);
+            game.spriteBatch.Draw(game.menuButtons[0], new Vector2(700, 227), Color.White);
+            game.spriteBatch.DrawString(game.text, "Resume", new Vector2(725, 230), textColor[0]);
+            game.spriteBatch.Draw(game.menuButtons[1], new Vector2(700, 264), Color.White);
+            game.spriteBatch.DrawString(game.text, " Save", new Vector2(725, 267), textColor[1]);
+            game.spriteBatch.Draw(game.menuButtons[2], new Vector2(700, 301), Color.White);
+            game.spriteBatch.DrawString(game.text, " Load", new Vector2(725, 304), textColor[2]);
+            game.spriteBatch.Draw(game.menuButtons[3], new Vector2(700, 338), Color.White);
+            game.spriteBatch.DrawString(game.text, "Options", new Vector2(725, 341), textColor[3]);
+            game.spriteBatch.Draw(game.menuButtons[4], new Vector2(700, 400), Color.White);
+            game.spriteBatch.DrawString(game.text, " Exit", new Vector2(725, 403), textColor[4]);
+            
+            game.spriteBatch.End();
         }
     }
 }

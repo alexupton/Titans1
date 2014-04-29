@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Titans
 {
@@ -21,6 +23,8 @@ namespace Titans
         {
             game = currentGame;
             game.sfx = new AudioManager(game);
+            //var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(game.Window.Handle);
+            //form.Location = new System.Drawing.Point(700,1200);
         }
 
         public void MainMenu()
@@ -144,6 +148,9 @@ namespace Titans
             game.fullScreenTemp = game.fullScreen;
             game.backtemp = game.back;
             game.yestemp = game.yes_invert;
+
+            game.res1temp = game.res1_unselected;
+            game.res2temp = game.res2;
            
             game.notemp = game.no_invert;
             game.no_invert = game.no;
@@ -265,7 +272,16 @@ namespace Titans
             game.UI = game.Content.Load<Texture2D>(@"images\UI Fixed");
 
             //in Game Menu items
+            game.menuButtons = new Texture2D[5];
             game.menuBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Menu Box");
+            game.normal = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Normal");
+            for (int i = 0; i < 5; i++)
+            {
+                game.menuButtons[i]=game.normal;
+            }
+            game.invert = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Invert");
+            game.notSelected = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Not Selected");
+            game.normalTemp = game.normal;
             //sheetSize.X = 128;
             //sheetSize.Y = 192;
 
@@ -274,6 +290,7 @@ namespace Titans
             //fonts
             game.text = game.Content.Load<SpriteFont>(@"Courier");
             game.smallText = game.Content.Load<SpriteFont>(@"CourierSmall");
+            game.bigText = game.Content.Load<SpriteFont>(@"CourierBig");
         }
       
           
