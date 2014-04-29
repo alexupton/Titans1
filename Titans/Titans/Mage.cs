@@ -36,6 +36,7 @@ namespace Titans
             Speed = 125;
             Init = 30;
             AP = 2;
+            Abilities = new List<string>();
             Abilities.Add("Firebolt");
             Abilities.Add("Poison");
             Abilities.Add("Heal");
@@ -44,10 +45,11 @@ namespace Titans
             Abilities.Add("Slow");
             isPlayerUnit = true;
             Price = 100;
+            Location = new int[2];
             Location[0] = -1;
             Location[1] = -1;
-            AttackModifiers.Add(0);
-            DefenseModifiers.Add(0);
+            AttackModifiers = new List<int>();
+            DefenseModifiers = new List<int>();
         }
         //Set the Firebolt ability which adds an attack modifier of 50 and costs 30 MP
         public override void Special1()

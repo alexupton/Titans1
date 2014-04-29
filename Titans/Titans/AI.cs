@@ -520,6 +520,7 @@ namespace Titans
                 reachableTiles.Add(map.GetTileAt(coords[0], coords[1]));
             }
 
+
             Tile closest = map.GetTileAt(active.Location[0], active.Location[1]);
             int nearestTileToEnemy = 30000;
 

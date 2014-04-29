@@ -161,7 +161,7 @@ namespace Titans
         {
             game.Content.Unload();
             //Access file where map data is located
-            Map mainMap = MapLoader.LoadMap(@"Content\Demo.txt");
+            Map mainMap = MapLoaderUltimate.LoadMap(@"Content\TestMap.bmp", @"Content\Demo2.txt");
             //Read map data and translate that to tiles and units placed on-screen
             game.battle = new Battle(mainMap);
             game.battle.GameUI = game;

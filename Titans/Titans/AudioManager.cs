@@ -82,7 +82,7 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderDie");
             }
-            else if (deadUnit is Defender && !deadUnit.isPlayerUnit)
+            else
             {
                 cue = soundBank.GetCue("EDefenderDie");
             }

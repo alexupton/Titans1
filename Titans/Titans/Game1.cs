@@ -477,7 +477,7 @@ namespace Titans
                         mainMenu = false;
                         demo = true;
                         MediaPlayer.Stop();
-                        Map mainMap = MapLoader.LoadMap(@"Content\Demo.txt");
+                        
                         LoadContent();
                     }
 
