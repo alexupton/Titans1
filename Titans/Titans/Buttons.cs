@@ -106,12 +106,12 @@ namespace Titans
             
             
         }
-<<<<<<< HEAD
 
         public void SpecialButtons()
         {
+        }
 
-=======
+
         private void optionButtons(MouseState mouseState)
         {
             Game.ismenu = false;
@@ -131,7 +131,6 @@ namespace Titans
                 Game.optionsButtons[5] = Game.normal;
                 Game.draw.optionsColor[5] = Color.Black;
             }
->>>>>>> 58a7ac67ca35e0f9542d247ad32c8d6736a39750
         }
     }
 
