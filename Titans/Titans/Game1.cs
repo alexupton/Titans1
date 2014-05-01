@@ -171,6 +171,7 @@ namespace Titans
         public Cue cue;
         public AudioCategory music;
         public AudioManager sfx;
+        
 
         
 
@@ -191,10 +192,10 @@ namespace Titans
         public int millisecondsPerFrame;
         const int defaultMillisecondsPerFrame = 100;
         int millisecondsPerDamageFrame = 800;
-        int timeSinceLastDamageFrame = 0;
+        public int timeSinceLastDamageFrame = 0;
         int millisecondsPerMoveFrame = 50;
         int timeSinceLastMoveFrame = 0;
-        int frameCount = 0;
+        public int frameCount = 0;
 
         //for moving the map
         public int offsetY;
@@ -288,6 +289,7 @@ namespace Titans
             draw = new Draw(this);
             load = new ContentLoader(this);
             buttons = new Buttons(this);
+            
 
           
 
@@ -902,6 +904,21 @@ namespace Titans
                     {
                         battle.BattleMap.AddSpecificHighlight(X, Y);
                         lastSelectedTile = battle.BattleMap.GetTileAt(X, Y);
+
+                        if (battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted && battle.ActiveUnit is Artillery)
+                        {
+                            List<Tile> splashTiles = AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(X, Y));
+                            foreach (Tile test in splashTiles)
+                            {
+                                if (test.hasUnit)
+                                {
+                                    if (test.TileUnit.isPlayerUnit != battle.ActiveUnit.isPlayerUnit)
+                                    {
+                                        battle.BattleMap.AddSpecificHighlight(test.X, test.Y);
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
 

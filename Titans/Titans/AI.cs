@@ -568,11 +568,7 @@ namespace Titans
             if (x - 1 >= 0)
             {
                 Tile left = map.map[x - 1][y];
-                if (!left.IsImpassible)
-                {
                     adjacentTiles.Add(left);
-
-                }
             }
 
             if (x + 1 < map.Size[0])
@@ -593,7 +589,6 @@ namespace Titans
             {
                 Tile down = map.map[x][y + 1];
                     adjacentTiles.Add(down);
-
             }
 
             return adjacentTiles;

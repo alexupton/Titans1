@@ -23,6 +23,7 @@ namespace Titans
 
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
+        public bool DefenseMode { get; set; }
 
 	//Set all the attributes of the unit Defender
         public Defender()
@@ -46,7 +47,8 @@ namespace Titans
             isPlayerUnit=true;
             Price = 100;
             Location[0]=-1;
-            Location[1] = -1; 
+            Location[1] = -1;
+            DefenseMode = false;
         }
         //Set Shield Bash ability with an attack modifier of 10, will stun the enemy unit, and uses 10 MP
         public override void Special1()

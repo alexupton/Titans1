@@ -165,6 +165,8 @@ namespace Titans
             //Read map data and translate that to tiles and units placed on-screen
             game.battle = new Battle(mainMap);
             game.battle.GameUI = game;
+
+            
             //
             game.battle.AIControlled = true;
             //
@@ -201,6 +203,29 @@ namespace Titans
                     game.nextUnits.Add(unitText);
                 }
 
+            }
+            //Add unit passives
+            foreach (Unit unit in game.battle.BattleQueue)
+            {
+                unit.DefenseModifiers.Clear();
+            }
+            foreach (Unit unit in game.battle.BattleQueue)
+            {
+                if (unit is Defender)
+                {
+                    List<Tile> adjacent = AI.GetAllAdjacentTiles(game.battle.BattleMap, game.battle.BattleMap.GetTileAt(unit.Location[0], unit.Location[1]));
+                    foreach (Tile adj in adjacent)
+                    {
+                        if (adj.hasUnit)
+                        {
+                            if (adj.TileUnit.isPlayerUnit == unit.isPlayerUnit)
+                            {
+                                adj.TileUnit.Defense += 5;
+                                adj.TileUnit.DefenseModifiers.Add(5);
+                            }
+                        }
+                    }
+                }
             }
             // Audio objects
 

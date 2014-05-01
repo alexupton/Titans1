@@ -165,7 +165,23 @@ namespace Titans
                 }
                 ActiveUnit.DefenseModifiers.Clear();
             }
+            
             ActiveUnit.Defense -= defMod;
+            defMod = 0;
+            //add passive defense from defenders back in
+            List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
+            foreach(Tile adj in adjacent)
+            {
+                if(adj.hasUnit)
+                {
+                    if(adj.TileUnit is Defender && adj.TileUnit.isPlayerUnit == ActiveUnit.isPlayerUnit)
+                    {
+                        defMod += 5;
+                        ActiveUnit.DefenseModifiers.Add(5);
+                    }
+                }
+            }
+            ActiveUnit.Defense += defMod;
             return turnOrder;
         }
         
@@ -213,7 +229,24 @@ namespace Titans
                 }
                 ActiveUnit.DefenseModifiers.Clear();
             }
+
+
             ActiveUnit.Defense -= defMod;
+            defMod = 0;
+            //add passive defense from defenders back in
+            List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
+            foreach (Tile adj in adjacent)
+            {
+                if (adj.hasUnit)
+                {
+                    if (adj.TileUnit is Defender && adj.TileUnit.isPlayerUnit == ActiveUnit.isPlayerUnit)
+                    {
+                        defMod += 5;
+                        ActiveUnit.DefenseModifiers.Add(5);
+                    }
+                }
+            }
+            ActiveUnit.Defense += defMod;
             return ActiveUnit;
         }
 
@@ -238,6 +271,36 @@ namespace Titans
         //generate a list of moves between the unit and desired tile, for animation purposes
         public void StartMove(Tile move)
         {
+            //remove defender buffs from nearby units
+            if (ActiveUnit is Defender)
+            {
+                List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
+                foreach (Tile adj in adjacent)
+                {
+                    if (adj.hasUnit)
+                    {
+                        if (adj.TileUnit.isPlayerUnit == ActiveUnit.isPlayerUnit)
+                        {
+                            adj.TileUnit.DefenseModifiers.Remove(5);
+                        }
+                    }
+                }
+            }
+            else //look for nearby defenders and remove buffs if they are found
+            {
+                List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
+                foreach (Tile adj in adjacent)
+                {
+                    if (adj.hasUnit)
+                    {
+                        if (adj.TileUnit is Defender && adj.TileUnit.isPlayerUnit == ActiveUnit.isPlayerUnit)
+                        {
+                            ActiveUnit.Defense -= 5;
+                            ActiveUnit.DefenseModifiers.Remove(5);
+                        }
+                    }
+                }
+            }
             List<Tile> movePath = AI.GetPath(BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]), move, BattleMap);
             GameUI.moveWait = true;
             pendingMoves = movePath.ToArray();
@@ -259,6 +322,35 @@ namespace Titans
                     MoveMode = false;
                     pendingIndex = 0;
                     pendingMoves = new Tile[0];
+
+                    if (ActiveUnit is Defender) //if the unit is a defender, add its passive defense to nearby units
+                    {
+                        List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
+                        foreach (Tile adj in adjacent)
+                        {
+                            if (adj.hasUnit)
+                            {
+                                if (adj.TileUnit.isPlayerUnit == ActiveUnit.isPlayerUnit)
+                                {
+                                    adj.TileUnit.Defense += 5;
+                                    adj.TileUnit.DefenseModifiers.Add(5);
+                                }
+                            }
+                        }
+                    }
+                    //add nearby defender bonuses to your own
+                        List<Tile> adja = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
+                        foreach (Tile adj in adja)
+                        {
+                            if (adj.hasUnit)
+                            {
+                                if (adj.TileUnit is Defender && adj.TileUnit.isPlayerUnit == ActiveUnit.isPlayerUnit)
+                                {
+                                    ActiveUnit.Defense += 5;
+                                    ActiveUnit.DefenseModifiers.Add(5);
+                                }
+                            }
+                        }
 
                 }
         }
@@ -444,6 +536,7 @@ namespace Titans
 
         }
 
+        //make an AI move
         public void AIMove()
         {
             AI.MakeAIMove(this, ActiveUnit);
