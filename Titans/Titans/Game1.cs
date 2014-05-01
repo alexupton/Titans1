@@ -144,7 +144,9 @@ namespace Titans
 
         //ingame menu
         public Texture2D[] menuButtons;
+        public Texture2D[] optionsButtons;
         public Texture2D menuBox;
+        public Texture2D optionsBox;
         public Texture2D normal;
         public Texture2D invert;
         public Texture2D notSelected;
@@ -234,6 +236,7 @@ namespace Titans
         public bool p2win;
         public Battle battle;
         public bool ismenu=false;
+        public bool isOptions = false;
         //bool startTurn;
         public bool mainMenu;
         public bool demo;
@@ -1316,6 +1319,7 @@ namespace Titans
             else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && ismenu&&demo)
             {
                 ismenu = false;
+                isOptions = false;
                 keyreleasewait = true;
             }
             if (ismenu&&!keyreleasewait)
@@ -1346,7 +1350,7 @@ namespace Titans
             {
                 draw.OptionsMenu();
             }
-            else if (demo&!ismenu)
+            else if (demo&&!ismenu&&!isOptions)
             {
                 draw.Demo();
             }
@@ -1355,6 +1359,13 @@ namespace Titans
                 draw.Demo();
                 draw.ingamemenu();
             }
+            
+            else if (isOptions)
+            {
+                draw.Demo();
+                draw.optionsIngame();
+            }
+            
 
             
 
