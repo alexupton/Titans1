@@ -19,6 +19,7 @@ namespace Titans
         public bool IsImpassible { get; set; }
         public bool IsHighlighted { get; set; }
         public bool IsRedHighlighted { get; set; }
+        public bool IsBlueHighlighted { get; set; }
         public bool hasUnit { get; set; }
         public int MoveCost { get; set; } //How many movement points are consumed by moving over the tile
                                             
@@ -58,6 +59,16 @@ namespace Titans
         public void RedHighlight()
         {
             IsRedHighlighted = true;
+        }
+
+        public void BlueHighlight()
+        {
+            IsBlueHighlighted = true;
+        }
+
+        public void ClearBlueHighlight()
+        {
+            IsBlueHighlighted = false;
         }
 
         public void ClearRedHighlight()

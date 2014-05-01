@@ -45,6 +45,7 @@ namespace Titans
         public Texture2D Highlight;
         public Texture2D RedHighlight;
         public Texture2D GreenHighlight;
+        public Texture2D BlueHighlight;
         public Texture2D move;
         public Texture2D movetrue;
         public Texture2D move_invert;
@@ -209,12 +210,15 @@ namespace Titans
         //button controls
         public bool releaseWait;
         public bool keyreleasewait;
+        public bool rightReleaseWait;
 
         //various
         public Tile lastSelectedTile;
         public int attackedUnitTrueX;
         public int attackedUnitTrueY;
         public int unitDamage;
+        public List<int> splashDamage;
+        public List<Tile> splashLocations;
 
         //bool unitAttacked;
         public bool displayDamage;
@@ -260,8 +264,9 @@ namespace Titans
             //startTurn = true;
             releaseWait = false;
             lastSelectedTile = new Tile();
-            //unitAttacked = false;
             displayDamage = false;
+            splashDamage = new List<int>();
+            splashLocations = new List<Tile>();
             wait = false;
             p1win = false;
             p2win = false;
@@ -812,9 +817,10 @@ namespace Titans
             {
                 engine.Update();
                 sfx.Update();
-                if (!battle.AttackMode)
+                if (!battle.AttackMode && !battle.AttackRangeDisplayed)
                 {
                     battle.BattleMap.ClearHighlights();
+                    battle.BattleMap.ClearBlueHighlights();
                 }
                 battle.BattleMap.ClearHighlights();
 
@@ -879,9 +885,9 @@ namespace Titans
 
                 //Button clicks
 
-                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock)
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock && mouseState.RightButton != ButtonState.Pressed)
                 {
-
+                    
                     //select move
                     if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled)
                     {
@@ -964,6 +970,7 @@ namespace Titans
                         sfx.PlayPassSound(battle.ActiveUnit);
                         pass = pass_invert;
                         timeSinceLastDamageFrame = 0;
+                        frameCount = 0;
                         battle.ActiveUnit.AP = 0;
                         releaseWait = true;
                         move = movetrue;
@@ -1058,7 +1065,10 @@ namespace Titans
                             unitDamage = battle.Attack(battle.BattleMap.GetTileAt(X, Y).TileUnit);
                             attackedUnitTrueX = X * 55 - 13;
                             attackedUnitTrueY = Y * 55 - 20;
-                            //unitAttacked = true;
+                            if (battle.ActiveUnit is Artillery)
+                            {
+                                splashDamage = battle.GetSplashDamage(battle.BattleMap.GetTileAt(X, Y).TileUnit, unitDamage);
+                            }
                             displayDamage = true;
                             timeSinceLastDamageFrame = 0;
                             frameCount = 0;
@@ -1071,10 +1081,58 @@ namespace Titans
                         }
 
                     }
+
+                    //select another unit to view attack range
+                    if (!battle.AttackMode && !battle.MoveMode && !releaseWait && !wait && !tickWait && !moveWait && battle.SelectEnabled)
+                    {
+
+                        int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
+                        int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
+
+                        if (battle.BattleMap.GetTileAt(X, Y).hasUnit)
+                        {
+                            battle.ShowAttackRange(battle.BattleMap.GetTileAt(X, Y).TileUnit);
+                        }
+                    }
+
                 }
 
                 if (mouseState.LeftButton == ButtonState.Released)
+                {
                     releaseWait = false;
+                    if (battle.AttackRangeDisplayed)
+                    {
+                        battle.BattleMap.ClearBlueHighlights();
+                        battle.AttackRangeDisplayed = false;
+                    }
+                }
+
+                //right mouse click
+                if (mouseState.RightButton == ButtonState.Pressed && mouseState.LeftButton != ButtonState.Pressed)
+                {
+                    //view move highlights of another unit
+                    if (!battle.AttackMode && !battle.MoveMode && !rightReleaseWait && !wait && !tickWait && !moveWait && battle.SelectEnabled)
+                    {
+                        int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
+                        int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
+
+                        if (battle.BattleMap.GetTileAt(X, Y).hasUnit)
+                        {
+                            battle.ShowMoveRange(battle.BattleMap.GetTileAt(X, Y).TileUnit);
+                        }
+                    }
+                }
+
+                //right mouse unclick
+                if (mouseState.RightButton == ButtonState.Released)
+                {
+                    rightReleaseWait = false;
+                    if (battle.MoveRangeDisplayed)
+                    {
+                        battle.BattleMap.ClearRedHighlights();
+                        battle.MoveRangeDisplayed = false;
+                    }
+                }
                 //move the view with WASD
                 if (Keyboard.GetState().IsKeyDown(Keys.W) && offsetY < battle.BattleMap.Size[1] + 350)
                 {
@@ -1146,6 +1204,8 @@ namespace Titans
                      // Increment to next frame
                      wait = false;
                      displayDamage = false;
+                     splashDamage.Clear();
+                     splashLocations.Clear();
                      if (battle.ActiveUnit.AP <= 0 && frameCount == 2)
                      {
                          battle.NextPlayer();

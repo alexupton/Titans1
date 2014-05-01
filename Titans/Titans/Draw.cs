@@ -41,7 +41,6 @@ namespace Titans
             game.spriteBatch.Draw(game.options, new Vector2((game.Window.ClientBounds.Width / 2) - (game.options.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.custom_battle.Height - 140)), Color.White);
             game.spriteBatch.Draw(game.exit, new Vector2((game.Window.ClientBounds.Width / 2) - (game.exit.Width / 2), (game.Window.ClientBounds.Height - 70)), Color.White);
             game.spriteBatch.Draw(game.exit2, new Vector2((game.Window.ClientBounds.Width / 2) - (game.exit2.Width / 2), (game.Window.ClientBounds.Height - 70)), null, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, -1);
-
             game.spriteBatch.End();
         }
 
@@ -178,6 +177,10 @@ namespace Titans
                     {
                         game.spriteBatch.Draw(game.Highlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
                     }
+                    else if (game.battle.BattleMap.map[x][y].IsBlueHighlighted)
+                    {
+                        game.spriteBatch.Draw(game.BlueHighlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
+                    }
                     
                 }
             }
@@ -260,6 +263,15 @@ namespace Titans
             if (game.displayDamage)
             {
                 game.spriteBatch.DrawString(game.text, game.unitDamage.ToString() + " damage", new Vector2(game.attackedUnitTrueX + game.offsetX, game.attackedUnitTrueY + game.offsetY), Color.Red);
+                if (game.splashDamage.Count > 0)
+                {
+                    for (int i = 0; i < game.splashDamage.Count; i++)
+                    {
+                        game.spriteBatch.DrawString(game.smallText, game.splashDamage.ElementAt(i) + " damage",
+                            new Vector2(game.splashLocations.ElementAt(i).X * 55 + game.offsetX - 13, game.splashLocations.ElementAt(i).Y * 55 + game.offsetY + 20),
+                            Color.Red);
+                    }
+                }
             }
 
             if (game.p1win)

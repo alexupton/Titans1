@@ -228,6 +228,8 @@ namespace Titans
             game.Highlight = game.Content.Load<Texture2D>(@"images\Tiles\BlackBorder");
             game.RedHighlight = game.Content.Load<Texture2D>(@"images\RedBorder");
             game.GreenHighlight = game.Content.Load<Texture2D>(@"images\GreenBorder");
+            game.BlueHighlight = game.Content.Load<Texture2D>(@"images\BlueBorder");
+
             //Units
             game.Artillery = game.Content.Load<Texture2D>(@"images\Units\Artillery");
             game.Defender = game.Content.Load<Texture2D>(@"images\Units\Defender");

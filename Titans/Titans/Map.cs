@@ -45,7 +45,7 @@ namespace Titans
         //return the tile object at a given coordinate pair
         public Tile GetTileAt(int X, int Y)
         {
-            if (X >= 0 && Y >= 0)
+            if (X >= 0 && Y >= 0 && X < Size[0] && Y < Size[1])
             {
                 return map[X][Y];
             }
@@ -170,6 +170,29 @@ namespace Titans
             }
         }
 
+        public void ClearBlueHighlights()
+        {
+            for (int i = 0; i < map.Length; i++)
+            {
+                for (int j = 0; j < map[i].Length; j++)
+                {
+                    map[i][j].ClearBlueHighlight();
+                }
+            }
+        }
+        public void ClearAllHighlights()
+        {
+            for (int i = 0; i < map.Length; i++)
+            {
+                for (int j = 0; j < map[i].Length; j++)
+                {
+                    map[i][j].ClearHighlight();
+                    map[i][j].ClearRedHighlight();
+                    map[i][j].ClearBlueHighlight();
+                }
+            }
+        }
+
         //Add one particular Highlight
         public void AddSpecificHighlight(int x, int y)
         {
@@ -181,6 +204,12 @@ namespace Titans
         {
             map[x][y].RedHighlight();
         }
+
+        public void AddSpecificBlueHighlight(int x, int y)
+        {
+            map[x][y].BlueHighlight();
+        }
+
 
         //Clear one particular Highlight
         public void ClearSpecificHighlight(int x, int y)

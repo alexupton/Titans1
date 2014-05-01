@@ -25,6 +25,8 @@ namespace Titans
         public bool SelectEnabled { get; set; }
         public bool gameOver { get; set; }
         public bool AIControlled { get; set; }
+        public bool AttackRangeDisplayed { get; set; }
+        public bool MoveRangeDisplayed { get; set; }
 
         //any more custom rule options go here
 
@@ -38,6 +40,8 @@ namespace Titans
             MoveEnabled = true;
             AttackEnabled = true;
             SelectEnabled = true;
+            AttackRangeDisplayed = false;
+            MoveRangeDisplayed = false;
         }
 
         public Battle(Map newMap)
@@ -278,6 +282,12 @@ namespace Titans
 
         public bool SelectAttack()
         {
+            if (ActiveUnit is Artillery && ActiveUnit.AP - 2 < 0)
+            {
+                BattleMap.ClearHighlights();
+                AttackMode = false;
+                return false;
+            }
             SelectEnabled = false;
             int range = ActiveUnit.Range;
             int x = ActiveUnit.Location[0];
@@ -311,6 +321,7 @@ namespace Titans
             //now we check the tiles in reach for units and highlight them if they exist
             foreach (int[] coords in actualRange)
             {
+                BattleMap.AddSpecificBlueHighlight(coords[0], coords[1]);
                 if (BattleMap.map[coords[0]][coords[1]].hasUnit)
                 {
                     if (BattleMap.map[coords[0]][coords[1]].TileUnit.isPlayerUnit != ActiveUnit.isPlayerUnit)
@@ -321,12 +332,11 @@ namespace Titans
                 }
             }
 
-            if (!validTargetExists)
-            {
-                BattleMap.ClearHighlights();
-                AttackMode = false;
-            }
-            else
+            //if (!validTargetExists)
+            //{
+            //    BattleMap.ClearHighlights();
+            //}
+            //else
                 AttackMode = true;
             return validTargetExists;
 
@@ -347,6 +357,12 @@ namespace Titans
         //carry out the attack, once the target is selected
         public int Attack(Unit target)
         {
+            //prevents AI artillery from cheating
+            if (ActiveUnit is Artillery && GameUI.AILock && ActiveUnit.AP - 2 < 0)
+            {
+                ActiveUnit.AP = 0;
+                return 0;
+            }
             SelectEnabled = true;
             BattleMap.ClearHighlights();
             List<int> combatMods = ActiveUnit.AttackModifiers;
@@ -359,6 +375,8 @@ namespace Titans
             //}
 
             int damage = AttackResolver.Attack(ActiveUnit, target, combatMods);
+
+
             GameUI.displayDamage = true;
 
             target.Defense = storedDefense; //restore defender base defense
@@ -411,7 +429,14 @@ namespace Titans
                 GameUI.sfx.PlayAttackSound(ActiveUnit);
             }
             AttackMode = false;
-            ActiveUnit.AP--;
+            if (ActiveUnit is Artillery)
+            {
+                ActiveUnit.AP -= 2;
+            }
+            else
+            {
+                ActiveUnit.AP--;
+            }
             if (ActiveUnit.AP == 0 && !GameUI.wait)
                 NextPlayer();
 
@@ -423,5 +448,75 @@ namespace Titans
         {
             AI.MakeAIMove(this, ActiveUnit);
         }
+
+        public void ShowAttackRange(Unit selected)
+        {
+            AttackRangeDisplayed = true;
+            int range = selected.Range;
+            int x = selected.Location[0];
+            int y = selected.Location[1];
+            List<int[]> rangeSquare = new List<int[]>();
+            List<int[]> actualRange = new List<int[]>();
+
+            for (int i = (range * -1); i <= range; i++)
+            {
+                for (int j = (range * -1); j <= range; j++)
+                {
+                    if ((i + x) < BattleMap.Size[0] && (j + y) < BattleMap.Size[1] && (i + x) >= 0 & (j + y) >= 0)
+                    {
+                        rangeSquare.Add(new int[] { i + x, j + y });
+                    }
+                }
+            }
+
+            foreach (int[] tile in rangeSquare)
+            {
+                if ((Math.Abs(tile[0] - x) + Math.Abs(tile[1] - y)) <= range)
+                {
+                    actualRange.Add(tile);
+                }
+            }
+
+            foreach (int[] tile in actualRange)
+            {
+                BattleMap.AddSpecificBlueHighlight(tile[0], tile[1]);
+            }
+        }
+
+        public void ShowMoveRange(Unit selected)
+        {
+            MoveRangeDisplayed = true;
+            List<int[]> moveTiles = BattleMap.GetLegalMoveCoordinates(selected);
+            BattleMap.RedHighlightTiles(moveTiles);
+        }
+
+        //artillery does splash damage
+        public List<int> GetSplashDamage(Unit attacked, int damage)
+        {
+            List<int> splash = new List<int>();
+
+            List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(attacked.Location[0], attacked.Location[1]));
+            List<Tile> splashTiles = new List<Tile>();
+
+            foreach (Tile adj in adjacent)
+            {
+                if (adj.hasUnit)
+                {
+                    if (adj.TileUnit.isPlayerUnit != ActiveUnit.isPlayerUnit)
+                    {
+                        splash.Add(damage / 2);
+                        splashTiles.Add(adj);
+                    }
+                }
+            }
+
+            for (int i = 0; i < splash.Count; i++)
+            {
+                splashTiles.ElementAt(i).TileUnit.HP -= splash.ElementAt(i);
+            }
+            GameUI.splashLocations = splashTiles;
+            return splash;
+        }
+
     }
 }

@@ -281,7 +281,6 @@ namespace Titans
         //same as above, only returns the path
         public static List<Tile> GetPath(Tile startTile, Tile endTile, Map map)
         {
-
             //HOLY SHIT, ANOTHER WORKING A* ALGORITHM
             startTile.IsRoot = true;
             List<Tile> open = new List<Tile>();
@@ -557,6 +556,47 @@ namespace Titans
 
 
 
+        }
+        //get all adjacent tiles, for splash damage purposes
+        public static List<Tile> GetAllAdjacentTiles(Map map, Tile currentTile)
+        {
+            List<Tile> adjacentTiles = new List<Tile>();
+
+            int x = currentTile.X;
+            int y = currentTile.Y;
+
+            if (x - 1 >= 0)
+            {
+                Tile left = map.map[x - 1][y];
+                if (!left.IsImpassible)
+                {
+                    adjacentTiles.Add(left);
+
+                }
+            }
+
+            if (x + 1 < map.Size[0])
+            {
+                Tile right = map.map[x + 1][y];
+                    adjacentTiles.Add(right);
+
+            }
+
+            if (y - 1 >= 0)
+            {
+                Tile up = map.map[x][y - 1];
+                    adjacentTiles.Add(up);
+
+            }
+
+            if (y + 1 < map.Size[1])
+            {
+                Tile down = map.map[x][y + 1];
+                    adjacentTiles.Add(down);
+
+            }
+
+            return adjacentTiles;
         }
      
     }

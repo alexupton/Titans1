@@ -85,6 +85,11 @@ namespace Titans
             
             
         }
+
+        public void SpecialButtons()
+        {
+
+        }
     }
 
 }
