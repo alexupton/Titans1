@@ -279,17 +279,136 @@ namespace Titans
             game.menuBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Menu Box");
             game.optionsBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Options Box");
             game.normal = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Normal");
+            game.invert = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Invert");
+            game.notSelected = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Not Selected");
+            game.normalTemp = game.normal;
+
             for (int i = 0; i < 5; i++)
             {
                 game.menuButtons[i]=game.normal;
             }
             for (int i = 0; i < 25; i++)
             {
-                game.optionsButtons[i] = game.normal;
+                game.optionsButtons[i] = game.notSelected;
             }
-            game.invert = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Invert");
-            game.notSelected = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Not Selected");
-            game.normalTemp = game.normal;
+           
+                if (game.optionsSettings[0] == 1)
+                {
+                    game.optionsButtons[6] = game.normal;
+                    game.optionsButtons[7] = game.notSelected;
+                }
+                else if (game.optionsSettings[0] == 1)
+                {
+                    game.optionsButtons[6] = game.notSelected;
+                    game.optionsButtons[7] = game.normal;
+                }
+                if (game.optionsSettings[1] == 1)
+                {
+                    game.optionsButtons[8] = game.normal;
+                    game.optionsButtons[9] = game.notSelected;
+                }
+                else if (game.optionsSettings[1] == 2)
+                {
+                    game.optionsButtons[8] = game.notSelected;
+                    game.optionsButtons[9] = game.normal;
+                }
+                if (game.optionsSettings[3] == 1)
+                {
+                    game.optionsButtons[13] = game.normal;
+                    game.optionsButtons[14] = game.notSelected;
+                    game.optionsButtons[15] = game.notSelected;
+                    game.optionsButtons[16] = game.notSelected;
+                    game.optionsButtons[17] = game.notSelected;
+
+                    game.engine.GetCategory("Music").SetVolume(0f);
+                }
+                else if (game.optionsSettings[3] == 2)
+                {
+                    game.optionsButtons[13] = game.notSelected;
+                    game.optionsButtons[14] = game.normal;
+                    game.optionsButtons[15] = game.notSelected;
+                    game.optionsButtons[16] = game.notSelected;
+                    game.optionsButtons[17] = game.notSelected;
+
+                    game.engine.GetCategory("Music").SetVolume(.25f*2);
+                }
+                else if (game.optionsSettings[3] == 3)
+                {
+                    game.optionsButtons[13] = game.notSelected;
+                    game.optionsButtons[14] = game.notSelected;
+                    game.optionsButtons[15] = game.normal;
+                    game.optionsButtons[16] = game.notSelected;
+                    game.optionsButtons[17] = game.notSelected;
+
+                    game.engine.GetCategory("Music").SetVolume(.5f*2);
+                }
+                else if (game.optionsSettings[3] == 4)
+                {
+                    game.optionsButtons[13] = game.notSelected;
+                    game.optionsButtons[14] = game.notSelected;
+                    game.optionsButtons[15] = game.notSelected;
+                    game.optionsButtons[16] = game.normal;
+                    game.optionsButtons[17] = game.notSelected;
+
+                    game.engine.GetCategory("Music").SetVolume(.75f*2);
+                }
+                else if (game.optionsSettings[3] == 5)
+                {
+
+                    game.optionsButtons[13] = game.notSelected;
+                    game.optionsButtons[14] = game.notSelected;
+                    game.optionsButtons[15] = game.notSelected;
+                    game.optionsButtons[16] = game.notSelected;
+                    game.optionsButtons[17] = game.normal;
+
+                    game.engine.GetCategory("Music").SetVolume(1f*2);
+                }
+                if (game.optionsSettings[4] == 1)
+                {
+                    game.optionsButtons[18] = game.normal;
+                    game.optionsButtons[19] = game.notSelected;
+                    game.optionsButtons[20] = game.notSelected;
+                    game.optionsButtons[21] = game.notSelected;
+                    game.optionsButtons[22] = game.notSelected;
+                }
+                else if (game.optionsSettings[4] == 2)
+                {
+                    game.optionsButtons[18] = game.notSelected;
+                    game.optionsButtons[19] = game.normal;
+                    game.optionsButtons[20] = game.notSelected;
+                    game.optionsButtons[21] = game.notSelected;
+                    game.optionsButtons[22] = game.notSelected;
+                }
+                else if (game.optionsSettings[4] == 3)
+                {
+                    game.optionsButtons[18] = game.notSelected;
+                    game.optionsButtons[19] = game.notSelected;
+                    game.optionsButtons[20] = game.normal;
+                    game.optionsButtons[21] = game.notSelected;
+                    game.optionsButtons[22] = game.notSelected;
+                }
+                else if (game.optionsSettings[4] == 4)
+                {
+                    game.optionsButtons[18] = game.notSelected;
+                    game.optionsButtons[19] = game.notSelected;
+                    game.optionsButtons[20] = game.notSelected;
+                    game.optionsButtons[21] = game.normal;
+                    game.optionsButtons[22] = game.notSelected;
+                }
+                else if (game.optionsSettings[4] == 5)
+                {
+                    game.optionsButtons[18] = game.notSelected;
+                    game.optionsButtons[19] = game.notSelected;
+                    game.optionsButtons[20] = game.notSelected;
+                    game.optionsButtons[21] = game.notSelected;
+                    game.optionsButtons[22] = game.normal;
+                }
+
+
+
+
+
+                   
             //sheetSize.X = 128;
             //sheetSize.Y = 192;
 

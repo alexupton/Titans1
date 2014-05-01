@@ -300,6 +300,7 @@ namespace Titans
         {
             
             game.spriteBatch.Begin();
+
             game.spriteBatch.Draw(game.menuBox, new Vector2(450, 137), Color.White);
             game.spriteBatch.DrawString(game.bigText, "Menu", new Vector2(705,160), Color.Black);
             game.spriteBatch.Draw(game.menuButtons[0], new Vector2(700, 227), Color.White);
@@ -350,24 +351,24 @@ namespace Titans
         game.spriteBatch.DrawString(game.text, "Mute", new Vector2(660, 338), optionsColor[13]);
         game.spriteBatch.Draw(game.optionsButtons[14], new Vector2(750, 335), Color.White);
         game.spriteBatch.DrawString(game.text, "25%", new Vector2(793, 338), optionsColor[14]);
-        game.spriteBatch.Draw(game.optionsButtons[14], new Vector2(875, 335), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[15], new Vector2(875, 335), Color.White);
         game.spriteBatch.DrawString(game.text, "50%", new Vector2(920, 338), optionsColor[14]);
-        game.spriteBatch.Draw(game.optionsButtons[15], new Vector2(1000, 335), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[16], new Vector2(1000, 335), Color.White);
         game.spriteBatch.DrawString(game.text, "75%", new Vector2(1045, 338), optionsColor[15]);
-        game.spriteBatch.Draw(game.optionsButtons[16], new Vector2(1125, 335), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[17], new Vector2(1125, 335), Color.White);
         game.spriteBatch.DrawString(game.text, "100%", new Vector2(1165, 338), optionsColor[16]);
 
         game.spriteBatch.Draw(game.optionsButtons[4], new Vector2(500, 367), Color.White);
         game.spriteBatch.DrawString(game.text, "SFX Vol", new Vector2(515, 370), optionsColor[4]);
-        game.spriteBatch.Draw(game.optionsButtons[17], new Vector2(625, 367), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[18], new Vector2(625, 367), Color.White);
         game.spriteBatch.DrawString(game.text, "Mute", new Vector2(660, 370), optionsColor[17]);
-        game.spriteBatch.Draw(game.optionsButtons[18], new Vector2(750, 367), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[19], new Vector2(750, 367), Color.White);
         game.spriteBatch.DrawString(game.text, "25%", new Vector2(793, 370), optionsColor[18]);
-        game.spriteBatch.Draw(game.optionsButtons[19], new Vector2(875, 367), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[20], new Vector2(875, 367), Color.White);
         game.spriteBatch.DrawString(game.text, "50%", new Vector2(920, 370), optionsColor[19]);
-        game.spriteBatch.Draw(game.optionsButtons[20], new Vector2(1000, 367), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[21], new Vector2(1000, 367), Color.White);
         game.spriteBatch.DrawString(game.text, "75%", new Vector2(1045, 370), optionsColor[20]);
-        game.spriteBatch.Draw(game.optionsButtons[21], new Vector2(1125, 367), Color.White);
+        game.spriteBatch.Draw(game.optionsButtons[22], new Vector2(1125, 367), Color.White);
         game.spriteBatch.DrawString(game.text, "100%", new Vector2(1165, 370), optionsColor[21]);
 
         game.spriteBatch.Draw(game.optionsButtons[5], new Vector2(500, 475), Color.White);

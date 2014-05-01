@@ -142,6 +142,8 @@ namespace Titans
         public Texture2D no_invert;
         public Texture2D notemp;
 
+        public int[] optionsSettings;
+
         //ingame menu
         public Texture2D[] menuButtons;
         public Texture2D[] optionsButtons;
@@ -279,6 +281,7 @@ namespace Titans
             tickWait = false;
             endWait = false;
 
+            optionsSettings = new int []{1,2,2,5,5};
             timeSinceLastFrame = 0;
             millisecondsPerFrame = 100;
 
@@ -286,6 +289,7 @@ namespace Titans
             load = new ContentLoader(this);
             buttons = new Buttons(this);
 
+          
 
         }
 
@@ -582,6 +586,7 @@ namespace Titans
                          graphics.ApplyChanges();
                          res1_unselected = res1;
                          res2 = res2_unselected;
+                         optionsSettings[1] = 1;
                          releaseWait = true;
                     }
                     else if(res2Click.Contains(mousePos))
@@ -591,6 +596,7 @@ namespace Titans
                          graphics.ApplyChanges();
                          res1_unselected = res1temp;
                          res2 = res2temp;
+                         optionsSettings[1] = 2;
                          releaseWait = true;
                     }
                 }
@@ -605,6 +611,7 @@ namespace Titans
                         graphics.IsFullScreen = true;
                         graphics.ApplyChanges();
                         isFullScreen = true;
+                        optionsSettings[0] = 1;
                     }
                     else if (noClick.Contains(mousePos))
                     {
@@ -615,6 +622,7 @@ namespace Titans
                         yes_invert = yestemp;
 
                         no_invert = no;
+                        optionsSettings[0] = 2;
                         isFullScreen = false;
                     }
                 }
@@ -633,7 +641,7 @@ namespace Titans
                         vollevel2_unselected = vol2temp;
                         vollevel3_unselected= vol3temp;
                         vollevelMax_unselected= volmaxtemp;
-                        
+                        optionsSettings[3] = 1;
                         MediaPlayer.Volume = 0;
                         
                     }
@@ -646,6 +654,7 @@ namespace Titans
                         vollevel2_unselected = vol2temp;
                         vollevel3_unselected = vol3temp;
                         vollevelMax_unselected= volmaxtemp;
+                        optionsSettings[3] = 2;
                         MediaPlayer.Volume = .25f;
                       
                     }
@@ -657,6 +666,7 @@ namespace Titans
                         vollevel2_unselected = vollevel2;
                         vollevel3_unselected = vol3temp;
                         vollevelMax_unselected = volmaxtemp;
+                        optionsSettings[3] = 3;
                         MediaPlayer.Volume = .5f;
                     }
                     if (volume3click.Contains(mousePos))
@@ -667,6 +677,7 @@ namespace Titans
                         vollevel2_unselected = vol2temp;
                         vollevel3_unselected = vollevel3;
                         vollevelMax_unselected = volmaxtemp;
+                        optionsSettings[3] = 4;
                         MediaPlayer.Volume = .75f;
                     }
                     if (volumemaxclick.Contains(mousePos))
@@ -677,6 +688,7 @@ namespace Titans
                         vollevel2_unselected = vol2temp;
                         vollevel3_unselected = vol3temp;
                         vollevelMax_unselected = vollevelMax;
+                        optionsSettings[3] = 5;
                         MediaPlayer.Volume = 1f;
                     }
                 }
@@ -697,6 +709,7 @@ namespace Titans
                         levelMax_unselected = maxtemp;
 
                         sfx.setfxfvolume(0f);
+                        optionsSettings[4] = 1;
                         releaseWait = true;
 
                     }
@@ -712,6 +725,7 @@ namespace Titans
 
                         sfx.setfxfvolume(0.25f*6f);
                         sfx.PlayBuzzer();
+                        optionsSettings[4] = 2;
                         releaseWait = true;
 
                     }
@@ -725,6 +739,7 @@ namespace Titans
                         levelMax_unselected = maxtemp;
                         sfx.setfxfvolume(.5f * 6f);
                         sfx.PlayBuzzer();
+                        optionsSettings[4] = 3;
                         releaseWait = true;
                     }
                     if (sfx3click.Contains(mousePos))
@@ -737,6 +752,7 @@ namespace Titans
                         levelMax_unselected = maxtemp;
                         sfx.setfxfvolume(.75f * 6f);
                         sfx.PlayBuzzer();
+                        optionsSettings[4] = 4;
                         releaseWait = true;
                     }
                     if (sfxmaxclick.Contains(mousePos))
@@ -747,8 +763,11 @@ namespace Titans
                         level2_unselected = level2temp;
                         level3_unselected = level3temp;
                         levelMax_unselected = levelMax;
+
                         sfx.setfxfvolume(1f);
                         sfx.PlayBuzzer();
+                        optionsSettings[4] = 5;
+                        
                         releaseWait = true;
                     }
                 }
@@ -816,7 +835,7 @@ namespace Titans
 
                 
             }
-            else if (demo && !(p1win || p2win)&&!ismenu)
+            else if (demo && !(p1win || p2win)&&!ismenu&&!isOptions)
             {
                 engine.Update();
                 sfx.Update();
@@ -1325,6 +1344,10 @@ namespace Titans
             if (ismenu&&!keyreleasewait)
             {
                 buttons.InGameButtons(mouseState);
+            }
+            if (isOptions && !keyreleasewait)
+            {
+                buttons.optionButtons(mouseState);
             }
 
             base.Update(gameTime);
