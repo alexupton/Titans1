@@ -273,11 +273,17 @@ namespace Titans
 
             //in Game Menu items
             game.menuButtons = new Texture2D[5];
+            game.optionsButtons = new Texture2D[25];
             game.menuBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Menu Box");
+            game.optionsBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Options Box");
             game.normal = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Normal");
             for (int i = 0; i < 5; i++)
             {
                 game.menuButtons[i]=game.normal;
+            }
+            for (int i = 0; i < 25; i++)
+            {
+                game.optionsButtons[i] = game.normal;
             }
             game.invert = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Invert");
             game.notSelected = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Not Selected");

@@ -15,7 +15,8 @@ namespace Titans
     public class Draw
     {
         public Game1 game { get; set; }
-        public Color[] textColor; 
+        public Color[] textColor;
+        public Color[] optionsColor; 
         
 
         public Draw(Game1 currentGame)
@@ -25,6 +26,11 @@ namespace Titans
             for (int i = 0; i < 5; i++)
             {
                 textColor[i] = Color.Black;
+            }
+            optionsColor = new Color[25];
+            for (int i = 0; i < 25; i++)
+            {
+                optionsColor[i] = Color.Black;
             }
 
         }
@@ -297,5 +303,68 @@ namespace Titans
             
             game.spriteBatch.End();
         }
+        public void optionsIngame()
+    {
+        game.spriteBatch.Begin();
+        game.spriteBatch.Draw(game.optionsBox, new Vector2(468, 137), Color.White);
+        game.spriteBatch.DrawString(game.bigText, "Options", new Vector2(745, 160), Color.Black);
+
+        game.spriteBatch.Draw(game.optionsButtons[0], new Vector2(500, 227), Color.White);
+        game.spriteBatch.DrawString(game.text, "FullScreen", new Vector2(503, 230), optionsColor[0]);
+        game.spriteBatch.Draw(game.optionsButtons[6], new Vector2(625, 227), Color.White);
+        game.spriteBatch.DrawString(game.text, "Yes", new Vector2(668, 230), optionsColor[6]);
+        game.spriteBatch.Draw(game.optionsButtons[7], new Vector2(750, 227), Color.White);
+        game.spriteBatch.DrawString(game.text, "No", new Vector2(800, 230), optionsColor[7]);
+
+        game.spriteBatch.Draw(game.optionsButtons[1], new Vector2(500, 264), Color.White);
+        game.spriteBatch.DrawString(game.text, "Resolution", new Vector2(503, 267), optionsColor[1]);
+        game.spriteBatch.Draw(game.optionsButtons[8], new Vector2(625, 264), Color.White);
+        game.spriteBatch.DrawString(game.text, "1200X800", new Vector2(640, 267), optionsColor[8]);
+        game.spriteBatch.Draw(game.optionsButtons[9], new Vector2(750, 264), Color.White);
+        game.spriteBatch.DrawString(game.text, "1500X800", new Vector2(765, 267), optionsColor[9]);
+
+        game.spriteBatch.Draw(game.optionsButtons[2], new Vector2(500, 301), Color.White);
+        game.spriteBatch.DrawString(game.text, "Text Speed", new Vector2(503, 304), optionsColor[2]);
+        game.spriteBatch.Draw(game.optionsButtons[10], new Vector2(625, 301), Color.White);
+        game.spriteBatch.DrawString(game.text, "Slow", new Vector2(660, 304), optionsColor[10]);
+        game.spriteBatch.Draw(game.optionsButtons[11], new Vector2(750, 301), Color.White);
+        game.spriteBatch.DrawString(game.text, "Normal", new Vector2(780, 304), optionsColor[11]);
+        game.spriteBatch.Draw(game.optionsButtons[12], new Vector2(875, 301), Color.White);
+        game.spriteBatch.DrawString(game.text, "Fast", new Vector2(915, 304), optionsColor[12]);
+
+        game.spriteBatch.Draw(game.optionsButtons[3], new Vector2(500, 335), Color.White);
+        game.spriteBatch.DrawString(game.text, "Music Vol", new Vector2(510, 338), optionsColor[3]);
+        game.spriteBatch.Draw(game.optionsButtons[13], new Vector2(625, 335), Color.White);
+        game.spriteBatch.DrawString(game.text, "Mute", new Vector2(660, 338), optionsColor[13]);
+        game.spriteBatch.Draw(game.optionsButtons[14], new Vector2(750, 335), Color.White);
+        game.spriteBatch.DrawString(game.text, "25%", new Vector2(793, 338), optionsColor[14]);
+        game.spriteBatch.Draw(game.optionsButtons[14], new Vector2(875, 335), Color.White);
+        game.spriteBatch.DrawString(game.text, "50%", new Vector2(920, 338), optionsColor[14]);
+        game.spriteBatch.Draw(game.optionsButtons[15], new Vector2(1000, 335), Color.White);
+        game.spriteBatch.DrawString(game.text, "75%", new Vector2(1045, 338), optionsColor[15]);
+        game.spriteBatch.Draw(game.optionsButtons[16], new Vector2(1125, 335), Color.White);
+        game.spriteBatch.DrawString(game.text, "100%", new Vector2(1165, 338), optionsColor[16]);
+
+        game.spriteBatch.Draw(game.optionsButtons[4], new Vector2(500, 367), Color.White);
+        game.spriteBatch.DrawString(game.text, "SFX Vol", new Vector2(515, 370), optionsColor[4]);
+        game.spriteBatch.Draw(game.optionsButtons[17], new Vector2(625, 367), Color.White);
+        game.spriteBatch.DrawString(game.text, "Mute", new Vector2(660, 370), optionsColor[17]);
+        game.spriteBatch.Draw(game.optionsButtons[18], new Vector2(750, 367), Color.White);
+        game.spriteBatch.DrawString(game.text, "25%", new Vector2(793, 370), optionsColor[18]);
+        game.spriteBatch.Draw(game.optionsButtons[19], new Vector2(875, 367), Color.White);
+        game.spriteBatch.DrawString(game.text, "50%", new Vector2(920, 370), optionsColor[19]);
+        game.spriteBatch.Draw(game.optionsButtons[20], new Vector2(1000, 367), Color.White);
+        game.spriteBatch.DrawString(game.text, "75%", new Vector2(1045, 370), optionsColor[20]);
+        game.spriteBatch.Draw(game.optionsButtons[21], new Vector2(1125, 367), Color.White);
+        game.spriteBatch.DrawString(game.text, "100%", new Vector2(1165, 370), optionsColor[21]);
+
+        game.spriteBatch.Draw(game.optionsButtons[5], new Vector2(500, 475), Color.White);
+        game.spriteBatch.DrawString(game.text,"Back", new Vector2(535, 478), optionsColor[5]);
+        
+            
+
+        
+        game.spriteBatch.End();
+    }
     }
 }
