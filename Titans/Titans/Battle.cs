@@ -190,12 +190,25 @@ namespace Titans
                 GameUI.defend = GameUI.defend_grey;
             }
 
+            //regen unit MP
             foreach (Unit unit in BattleQueue)
             {
-                
-                if (unit is Mage)
+                if (unit.MP < unit.MaxMP)
                 {
-
+                    if (unit is Mage)
+                    {
+                        unit.MP += 15;
+                        
+                    }
+                    else
+                    {
+                        unit.MP += (int)Math.Round((double)unit.MaxMP * (10.0 / 100.0));
+                    }
+                    //can't have more MP than max
+                    if (unit.MP > unit.MaxMP)
+                    {
+                        unit.MP = unit.MaxMP;
+                    }
                 }
             }
 
@@ -718,6 +731,50 @@ namespace Titans
         {
             specialMode = false;
             SelectEnabled = true;
+        }
+
+        public void DeathCheck(Unit target)
+        {
+            if (target.HP <= 0)
+            {
+                GameUI.sfx.PlayDieSound(target);
+                //This is where a death animation would go IF WE HAD ONE
+                RemoveUnit(target.Location[0], target.Location[1]);
+                Units.Remove(target);
+                BattleQueue.Remove(target);
+
+                bool player1HasUnits = false;
+                bool player2HasUnits = false;
+
+                foreach (Unit unit in BattleQueue)
+                {
+                    if (unit.isPlayerUnit)
+                    {
+                        player1HasUnits = true;
+                    }
+                    else
+                    {
+                        player2HasUnits = true;
+                    }
+                }
+
+                if (player1HasUnits && !player2HasUnits)
+                {
+                    gameOver = true;
+                    GameUI.endWait = true;
+                    GameUI.p1win = true;
+                    GameUI.PlayWinMusic();
+                    return;
+                }
+                if (player2HasUnits && !player1HasUnits)
+                {
+                    GameUI.endWait = true;
+                    gameOver = true;
+                    GameUI.p2win = true;
+                    GameUI.PlayLoseMusic();
+                    return;
+                }
+            }
         }
     }
    

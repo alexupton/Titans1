@@ -593,6 +593,26 @@ namespace Titans
 
             return adjacentTiles;
         }
+
+        public static List<Tile> GetAdjacentEnemyTiles(Unit ally, Map map)
+        {
+            List<Tile> adjacent = GetAllAdjacentTiles(map, map.GetTileAt(ally.Location[0], ally.Location[1]));
+            List<Tile> enemyTiles = new List<Tile>();
+
+            foreach (Tile adj in adjacent)
+            {
+                if (adj.hasUnit)
+                {
+                    if (adj.TileUnit.isPlayerUnit != ally.isPlayerUnit)
+                    {
+                        enemyTiles.Add(adj);
+                    }
+                }
+
+            }
+
+            return enemyTiles;
+        }
      
     }
 

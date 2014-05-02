@@ -51,16 +51,21 @@ namespace Titans
             Location[0] = -1;
             Location[1] = -1;
         }
-        //Set the Whirlwind ability which adds an attack modifier of 15 and costs 5 MP
+        //Set the Whirlwind ability which attacks all units in a splash area around the unit
         public override void Special1(Battle battle)
         {
-            //pre ability modifiers
-            AttackModifiers.Add(15);
-            MP -= 5;
-            //code for calling animation
-            //post ability modifiers 
-            AttackModifiers.Remove(15);
 
+            List<Tile> enemyTiles = AI.GetAdjacentEnemyTiles(this, battle.BattleMap);
+            foreach (Tile tile in enemyTiles)
+            {
+                battle.GameUI.splashLocations.Add(tile);
+                battle.GameUI.splashDamage.Add(15);
+                battle.GameUI.displayDamage = true;
+
+                tile.TileUnit.HP -= 15;
+
+                battle.DeathCheck(tile.TileUnit);
+            }
         }
         //Set the Double Attack ability which adds an attack modifier of 80 and costs 10 MP
         public override void Special2(Battle battle)
@@ -97,6 +102,57 @@ namespace Titans
         }
         public override void Special6(Battle battle)
         {
+        }
+
+        public override void SelectSpecial1(Battle battle)
+        {
+            battle.BattleMap.BlueHighlightTiles(AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(this.Location[0], this.Location[1])));
+            battle.BattleMap.RedHighlightTiles(AI.GetAdjacentEnemyTiles(this, battle.BattleMap));
+            battle.GameUI.selfSelect = true;
+        }
+        public override void SelectSpecial2(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial3(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial4(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial5(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial6(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial1(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial2(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial3(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial4(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial5(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial6(Battle battle)
+        {
+
         }
 
     }
