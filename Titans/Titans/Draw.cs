@@ -230,14 +230,27 @@ namespace Titans
             Vector2 unitLoc = new Vector2(game.battle.ActiveUnit.Location[0] * 55 + game.offsetX, game.battle.ActiveUnit.Location[1] * 55 + game.offsetY);
             game.spriteBatch.Draw(game.Highlight, unitLoc, Color.White);
             game.spriteBatch.Draw(game.move, new Vector2(680, 700), Color.White);
-            game.spriteBatch.Draw(game.move, new Vector2(680, 700), Color.White);
             game.spriteBatch.Draw(game.pass, new Vector2(796, 700), Color.White);
             game.spriteBatch.Draw(game.attack, new Vector2(680, 727), Color.White);
             game.spriteBatch.Draw(game.defend, new Vector2(796, 727), Color.White);
             game.spriteBatch.Draw(game.special, new Vector2(680, 754), Color.White);
             game.spriteBatch.Draw(game.item, new Vector2(796, 754), Color.White);
             game.spriteBatch.Draw(game.UI, new Vector2(0, 0), Color.White);
-            
+
+            //special buttons
+            if (game.isSpecial)
+            {
+                game.spriteBatch.Draw(game.specialButtons[0], new Vector2(565, 700), Color.White);
+                float x = (game.text.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(0))).X;
+                game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(0), new Vector2((x/2)+500, 703), textColor[0]);
+                game.spriteBatch.Draw(game.specialButtons[1], new Vector2(565, 727), Color.White);
+                x = (game.text.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(1))).X;
+                game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(1), new Vector2((x/2)+500, 730), textColor[0]);
+                game.spriteBatch.Draw(game.specialButtons[2], new Vector2(565, 754), Color.White);
+                x = (game.text.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(2))).X;
+                game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(2), new Vector2((x / 2) + 500, 757), textColor[0]);
+                
+            }
 
             //draw dynamic UI elements
             Vector2 textLoc = new Vector2(1255, 704);
@@ -292,10 +305,11 @@ namespace Titans
                 game.spriteBatch.DrawString(game.text, "Player 2 wins!", new Vector2(740, 400), Color.Black);
                 game.displayDamage = false;
             }
-
+            
 
             game.spriteBatch.End();
         }
+        
         public void ingamemenu()
         {
             

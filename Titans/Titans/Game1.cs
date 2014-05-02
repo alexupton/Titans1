@@ -154,10 +154,15 @@ namespace Titans
         public Texture2D notSelected;
         public Texture2D normalTemp;
 
+        public Texture2D[] specialButtons;
+        public Texture2D specialNor;
+        public Texture2D specialSel;
+        public Texture2D specialUn;
         //text stuff
         public SpriteFont text;
         public SpriteFont smallText;
         public SpriteFont bigText;
+        public SpriteFont specialText;
 
         Vector2 pos1 = Vector2.Zero;
         public bool optionsMenu;
@@ -250,6 +255,7 @@ namespace Titans
         public bool AILock;
         public bool loseMusicStarted = false;
         public Buttons buttons;
+        public bool isSpecial = false;
 
 
 
@@ -282,7 +288,9 @@ namespace Titans
             tickWait = false;
             endWait = false;
 
-            optionsSettings = new int []{1,2,2,5,5};
+
+            optionsSettings = new int []{2,2,2,5,5};
+            specialButtons = new Texture2D[6];
             timeSinceLastFrame = 0;
             millisecondsPerFrame = 100;
 
@@ -1039,6 +1047,12 @@ namespace Titans
                         battle.SelectDefend();
                         frameCount = 0;
 
+                    }
+                    //select special 
+                    else if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
+                    {
+                        buttons.SpecialButtons(mouseState, specialclick);
+                        
                     }
                     //deselect if in move or attack mode and defend button clicked
                     else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)

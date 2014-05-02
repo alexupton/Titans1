@@ -27,6 +27,7 @@ namespace Titans
         public bool AIControlled { get; set; }
         public bool AttackRangeDisplayed { get; set; }
         public bool MoveRangeDisplayed { get; set; }
+        public bool specialMode { get; set; }
 
         //any more custom rule options go here
 
@@ -42,6 +43,7 @@ namespace Titans
             SelectEnabled = true;
             AttackRangeDisplayed = false;
             MoveRangeDisplayed = false;
+            specialMode = false;
         }
 
         public Battle(Map newMap)
@@ -666,6 +668,18 @@ namespace Titans
             GameUI.splashLocations = splashTiles;
             return splash;
         }
-
+        public void SelectSpecial()
+        {
+            specialMode = true;
+            SelectEnabled = false;
+            
+        }
+        public void DeselectSpecial()
+        {
+            specialMode = false;
+            SelectEnabled = true;
+        }
     }
+   
+
 }

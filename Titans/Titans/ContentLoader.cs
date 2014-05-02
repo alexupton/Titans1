@@ -308,7 +308,13 @@ namespace Titans
             game.invert = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Invert");
             game.notSelected = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Not Selected");
             game.normalTemp = game.normal;
-
+            game.specialNor = game.Content.Load<Texture2D>(@"images\BlankInGameButton");
+            game.specialSel = game.Content.Load<Texture2D>(@"images\BlankInGame(Selected)");
+            game.specialUn = game.Content.Load<Texture2D>(@"images\BlankInGame(Unselected)");
+            for (int i = 0; i < 5; i++)
+            {
+                game.specialButtons[i] = game.specialNor;
+            }
             for (int i = 0; i < 5; i++)
             {
                 game.menuButtons[i]=game.normal;
@@ -449,6 +455,7 @@ namespace Titans
             game.text = game.Content.Load<SpriteFont>(@"Courier");
             game.smallText = game.Content.Load<SpriteFont>(@"CourierSmall");
             game.bigText = game.Content.Load<SpriteFont>(@"CourierBig");
+            game.specialText = game.Content.Load<SpriteFont>(@"SpecialFont");
         }
       
           

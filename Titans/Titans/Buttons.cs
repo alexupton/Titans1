@@ -107,8 +107,36 @@ namespace Titans
             
         }
 
-        public void SpecialButtons()
+        public void SpecialButtons(MouseState mouseState,Rectangle specialClick)
         {
+
+            if (!Game.battle.specialMode)
+            {
+                Game.releaseWait = true;
+                Game.isSpecial = true;
+                Game.move = Game.move_grey;
+                Game.attack = Game.attack_grey;
+                Game.defend = Game.defend_grey;
+                Game.item = Game.item_grey;
+                Game.pass = Game.pass_grey;
+                Game.special = Game.special_invert;
+                Game.battle.SelectSpecial();
+            }
+            else
+            {
+                    Game.releaseWait = true;
+                    Game.isSpecial = false;
+                    Game.move = Game.movetrue;
+                    Game.attack = Game.attacktrue;
+                    Game.defend = Game.defendtrue;
+                    Game.item = Game.itemtrue;
+                    Game.pass = Game.passtrue;
+                    Game.special = Game.specialtrue;
+                    Game.battle.DeselectSpecial();
+                    
+             
+            }
+           
         }
 
 
