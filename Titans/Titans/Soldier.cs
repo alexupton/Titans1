@@ -56,6 +56,8 @@ namespace Titans
         {
 
             List<Tile> enemyTiles = AI.GetAdjacentEnemyTiles(this, battle.BattleMap);
+            battle.GameUI.splashDamage.Clear();
+            battle.GameUI.splashLocations.Clear();
             foreach (Tile tile in enemyTiles)
             {
                 battle.GameUI.splashLocations.Add(tile);
@@ -66,32 +68,47 @@ namespace Titans
 
                 battle.DeathCheck(tile.TileUnit);
             }
+            this.AP--;
+            this.MP -= 5;
+
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
         }
-        //Set the Double Attack ability which adds an attack modifier of 80 and costs 10 MP
+        //Set the Double Attack ability which attacks a unit for 150% basic damage
         public override void Special2(Battle battle)
         {
-            //pre ability modifiers
-            AttackModifiers.Add(80);
-            MP -= 10;
-            //code for calling animation
-            //post ability modifiers
-            AttackModifiers.Remove(40);
+            Unit target = battle.CurrentTarget;
+            int damage = AttackResolver.Attack(this, target, this.AttackModifiers);
+
+            battle.GameUI.unitDamage = damage;
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+
+            battle.GameUI.splashDamage.Clear();
+            battle.GameUI.splashLocations.Clear();
+            battle.GameUI.splashDamage.Add(damage / 2);
+            battle.GameUI.splashLocations.Add(battle.BattleMap.GetTileAt(target.Location[0], target.Location[1]));
+
+            this.AP--;
+            this.MP -= 10;
+
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
+
 
         }
         //Set the First Aid ability which adds 5 HP, costs 10 MP, and reduces the range to 0
         public override void Special3(Battle battle)
         {
-
-            //pre ability modifiers
-            HP += 5;
-            MP -= 10;
-            Range = 0;
-            //code for calling animation
-            //post abbility modifiers 
-            Defense = 25;
-            Range = 1;
-            Speed = 150;
-            Init = 50;
+            //TODO: trigger animation for +5 HP
+            this.HP += 5;
+            //TODO: remove other statuses
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
+            
 
         }
         public override void Special4(Battle battle)

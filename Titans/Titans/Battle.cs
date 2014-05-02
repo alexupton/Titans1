@@ -28,6 +28,7 @@ namespace Titans
         public bool AttackRangeDisplayed { get; set; }
         public bool MoveRangeDisplayed { get; set; }
         public bool specialMode { get; set; }
+        public Unit CurrentTarget { get; set; }
 
         //any more custom rule options go here
 
