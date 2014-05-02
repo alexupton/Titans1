@@ -311,7 +311,7 @@ namespace Titans
             game.specialNor = game.Content.Load<Texture2D>(@"images\BlankInGameButton");
             game.specialSel = game.Content.Load<Texture2D>(@"images\BlankInGame(Selected)");
             game.specialUn = game.Content.Load<Texture2D>(@"images\BlankInGame(Unselected)");
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 6; i++)
             {
                 game.specialButtons[i] = game.specialNor;
             }

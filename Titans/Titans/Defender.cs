@@ -42,7 +42,7 @@ namespace Titans
             Init = 25;
             AP = 2;
             Abilities.Add("Shield Bash");
-            Abilities.Add("Defensive Strike");
+            Abilities.Add("Def. Strike");
             Abilities.Add("Taunt");
             isPlayerUnit=true;
             Price = 100;

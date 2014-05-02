@@ -122,19 +122,23 @@ namespace Titans
                 Game.special = Game.special_invert;
                 Game.battle.SelectSpecial();
             }
-            else
+            else if (Game.battle.ActiveUnit is Artillery)
             {
-                    Game.releaseWait = true;
-                    Game.isSpecial = false;
-                    Game.move = Game.movetrue;
-                    Game.attack = Game.attacktrue;
-                    Game.defend = Game.defendtrue;
-                    Game.item = Game.itemtrue;
-                    Game.pass = Game.passtrue;
-                    Game.special = Game.specialtrue;
-                    Game.battle.DeselectSpecial();
-                    
-             
+                Game.sfx.PlayBuzzer();
+            }
+           else
+            {
+                Game.releaseWait = true;
+                Game.isSpecial = false;
+                Game.move = Game.movetrue;
+                Game.attack = Game.attacktrue;
+                Game.defend = Game.defendtrue;
+                Game.item = Game.itemtrue;
+                Game.pass = Game.passtrue;
+                Game.special = Game.specialtrue;
+                Game.battle.DeselectSpecial();
+
+
             }
            
         }
