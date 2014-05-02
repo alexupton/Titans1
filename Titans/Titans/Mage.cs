@@ -54,21 +54,22 @@ namespace Titans
             AttackModifiers = new List<int>();
             DefenseModifiers = new List<int>();
         }
-        //Set the Firebolt ability which adds an attack modifier of 50 and costs 30 MP
+        //Set the Firebolt ability which adds an attack modifier of 50 and costs 40 MP
         public override void Special1(Battle battle)
         {
             //pre abbility modifiers
+
             AttackModifiers.Add(50);
-            MP -= 30;
+            MP -= 40;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(50);
         }
-        //Set the Poison ability which adds an attack modifier of 5 and costs 20 MP
+        //Set the Magic Slice ability which adds an attack modifier of 25 and costs 20 MP
         public override void Special2(Battle battle)
         {
             //pre abbility modifiers
-            AttackModifiers.Add(5);
+            AttackModifiers.Add(25);
             MP -= 20;
             //code for calling animation
             //post abbility modifiers 

@@ -70,6 +70,8 @@ namespace Titans
              
             //pre abbility modifiers
             MP-=10;
+            AP -= 2;
+            
             //code for calling animation
             //post abbility modifiers 
         }
