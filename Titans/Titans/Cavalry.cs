@@ -53,22 +53,101 @@ namespace Titans
         //Set Pierce ability which has an attack modifier of 20 and uses 5 MP
         public override void Special1(Battle battle)
         {
+            Unit target = battle.CurrentTarget;
 
-            //pre abbility modifiers
-            AttackModifiers.Add(20);
-            MP -= 5;
-            this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
-            AttackModifiers.Remove(20);
+            //0 - left
+            //1 - right
+            //2 - up
+            //3 - down
+            int direction = 4;
+
+            if (target.Location[0] == this.Location[0] - 1)
+            {
+                direction = 0;
+            }
+            else if (target.Location[0] == this.Location[0] + 1)
+            {
+                direction = 1;
+            }
+            else if (target.Location[1] == this.Location[1] - 1)
+            {
+                direction = 2;
+            }
+            else if (target.Location[1] == this.Location[1] + 1)
+            {
+                direction = 3;
+            }
+
+            Unit secondary = new Soldier();
+            if (direction == 0)
+            {
+                if (battle.BattleMap.GetTileAt(target.Location[0] - 1, target.Location[1]).hasUnit)
+                {
+                    if (battle.BattleMap.GetTileAt(target.Location[0] - 1, target.Location[1]).TileUnit.isPlayerUnit == target.isPlayerUnit)
+                    {
+                        secondary = battle.BattleMap.GetTileAt(target.Location[0] - 1, target.Location[1]).TileUnit;
+                    }
+                }
+            }
+            else if (direction == 1)
+            {
+                if (battle.BattleMap.GetTileAt(target.Location[0] + 1, target.Location[1]).hasUnit)
+                {
+                    if (battle.BattleMap.GetTileAt(target.Location[0] +1, target.Location[1]).TileUnit.isPlayerUnit == target.isPlayerUnit)
+                    {
+                        secondary = battle.BattleMap.GetTileAt(target.Location[0] + 1, target.Location[1]).TileUnit;
+                    }
+                }
+            }
+            else if (direction == 2)
+            {
+                if (battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] - 1).hasUnit)
+                {
+                    if (battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] - 1).TileUnit.isPlayerUnit == target.isPlayerUnit)
+                    {
+                        secondary = battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] - 1).TileUnit;
+                    }
+                }
+            }
+            else if (direction == 3)
+            {
+                if (battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] + 1).hasUnit)
+                {
+                    if (battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] + 1).TileUnit.isPlayerUnit == target.isPlayerUnit)
+                    {
+                        secondary = battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] + 1).TileUnit;
+                    }
+                }
+            }
+
+            int damage = AttackResolver.Attack(this, target, this.AttackModifiers);
+            battle.GameUI.unitDamage = damage;
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            if (direction < 4)
+            {
+                battle.GameUI.splashDamage.Clear();
+                battle.GameUI.splashLocations.Clear();
+                battle.GameUI.splashDamage.Add(damage / 2);
+                battle.GameUI.splashLocations.Add(battle.BattleMap.GetTileAt(secondary.Location[0], secondary.Location[1]));
+            }
+
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+
+            battle.DeathCheck(target);
+            battle.DeathCheck(secondary);
+
+            this.AP--;
+            this.MP -= 5;
         }
         //Set Charge ability which adds 5 to the speed, not allowing the unit to attack this turn, and uses 10 MP
         public override void Special2(Battle battle)
         {
 
+            //NOT YET DONE
             //pre abbility modifiers
             Speed += 5;
             Range = 0;
@@ -86,11 +165,42 @@ namespace Titans
         public override void Special3(Battle battle)
         {
 
-            //pre abbility modifiers
-            MP -= 10;
+            Unit target = battle.CurrentTarget;
+
+            battle.RemoveUnit(this.Location[0], this.Location[1]);
+            battle.RemoveUnit(target.Location[0], target.Location[1]);
+
+            
+
+            //calculate defender bonuses on the new locations
+            List<Tile> adja = AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(this.Location[0], this.Location[1]));
+            foreach (Tile adj in adja)
+            {
+                if (adj.hasUnit)
+                {
+                    if (adj.TileUnit is Defender && adj.TileUnit.isPlayerUnit == this.isPlayerUnit)
+                    {
+                        this.Defense += 5;
+                        this.DefenseModifiers.Add(5);
+                    }
+                }
+            }
+
+            adja = AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(target.Location[0], target.Location[1]));
+            foreach (Tile adj in adja)
+            {
+                if (adj.hasUnit)
+                {
+                    if (adj.TileUnit is Defender && adj.TileUnit.isPlayerUnit == target.isPlayerUnit)
+                    {
+                        target.Defense += 5;
+                        target.DefenseModifiers.Add(5);
+                    }
+                }
+            }
+
             this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
+            this.MP -= 10;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;

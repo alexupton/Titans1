@@ -97,6 +97,8 @@ namespace Titans
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
 
+            battle.DeathCheck(target);
+
 
         }
         //Set the First Aid ability which adds 5 HP, costs 10 MP, and reduces the range to 0

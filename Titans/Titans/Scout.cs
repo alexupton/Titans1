@@ -49,48 +49,86 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
         }
-        //Set the Bridge ability which sets the range to 1 and costs 10 MP
+        //Change a water tile into a bridge tile
         public override void Special1(Battle battle)
         {
-            //pre abbility modifiers
-            Range = 1;
-            MP -= 10;
-            this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
-            Range = 0;
+            Tile tile = battle.SelectedTile;
+
+            battle.BattleMap.map[tile.X][tile.Y] = new Tile();
+            tile.MoveCost = 10;
+            tile.type = "scoutBridge";
+            tile.AssignFileName();
+            tile.IsRedHighlighted = false;
+            tile.IsRoot = false;
+            tile.Searched = false;
+            tile.FScore = 0;
+            tile.GScore = 0;
+            tile.HScore = 0;
+            tile.HasTrap = false;
+            tile.hasUnit = false;
+            tile.TileUnit = null;
+            tile.IsImpassible = false;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
 
+
+            this.AP--;
+            this.MP -= 10;
+
+
+
         }
-        //Set the Sikes ability which sets the range to 1 and costs 10 MP
+        //Set spikes on a specific tile
         public override void Special2(Battle battle)
         {
-            //pre abbility modifiers
-            Range = 1;
-            MP -= 10;
-            this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
-            Range = 0;
+            Tile selected = battle.SelectedTile;
+
+            selected.HasTrap = true;
+
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+
+
+            this.AP--;
+            this.MP -= 10;
         }
-        //Set the Remove ability which sets the range to 1 and costs 10 MP
+        //Remove spikes or scout bridges
         public override void Special3(Battle battle)
         {
-            //pre abbility modifiers
-            Range = 1;
-            MP -= 10;
-            this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
-            Range = 0;
+            Tile tile = battle.SelectedTile;
+
+            tile.HasTrap = false;
+
+            if (tile.type == "scoutBridge")
+            {
+                battle.BattleMap.map[tile.X][tile.Y] = new Tile();
+                tile.MoveCost = 10;
+                tile.type = "water";
+                tile.AssignFileName();
+                tile.IsRedHighlighted = false;
+                tile.IsRoot = false;
+                tile.Searched = false;
+                tile.FScore = 0;
+                tile.GScore = 0;
+                tile.HScore = 0;
+                tile.HasTrap = false;
+                tile.hasUnit = false;
+                tile.TileUnit = null;
+                tile.IsImpassible = true;
+            }
+
+
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+
+
+            this.AP--;
+            this.MP -= 10;
+
+            
         }
         public override void Special4(Battle battle)
         {

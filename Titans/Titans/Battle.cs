@@ -29,6 +29,7 @@ namespace Titans
         public bool MoveRangeDisplayed { get; set; }
         public bool specialMode { get; set; }
         public Unit CurrentTarget { get; set; }
+        public Tile SelectedTile { get; set; }
 
         //any more custom rule options go here
 
@@ -94,6 +95,16 @@ namespace Titans
             BattleMap.map[X][Y].hasUnit = true;
             Units.ElementAt(rosterIndex).Location[0] = X; //update unit coordinates
             Units.ElementAt(rosterIndex).Location[1] = Y;
+        }
+
+        //overload method for placing arbitrary unit on arbitrary tile
+        //suck it, old method
+        public void PlaceUnit(Unit unit, Tile location)
+        {
+            location.TileUnit = unit;
+            location.hasUnit = true;
+            unit.Location[0] = location.X;
+            unit.Location[1] = location.Y;
         }
 
         //Remove unit FROM THE MAP at the specified coodinates
