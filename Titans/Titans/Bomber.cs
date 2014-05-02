@@ -146,7 +146,6 @@ namespace Titans
         {
            
             
-            Range = 1;
             Unit target = battle.CurrentTarget;
             int damage = 10;
             battle.GameUI.unitDamage = damage;
@@ -157,7 +156,6 @@ namespace Titans
             battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
             this.MP -= 15;
             this.AP --;
-            Range = 4;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;

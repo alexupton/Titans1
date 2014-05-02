@@ -109,7 +109,6 @@ namespace Titans
            
           
             
-            Range = 1;
             MP -= 15;
             this.AP--;
 
