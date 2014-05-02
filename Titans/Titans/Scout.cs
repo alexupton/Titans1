@@ -52,7 +52,6 @@ namespace Titans
         //Change a water tile into a bridge tile
         public override void Special1(Battle battle)
         {
-<<<<<<< HEAD
             Tile tile = battle.SelectedTile;
 
             battle.BattleMap.map[tile.X][tile.Y] = new Tile();
@@ -69,22 +68,13 @@ namespace Titans
             tile.hasUnit = false;
             tile.TileUnit = null;
             tile.IsImpassible = false;
-=======
           
-            Range = 1;
-
 
             MP -= 10;
             this.AP--;
-            Range = 0;
->>>>>>> 73683bf05db4e868cceaebbf8f7322e9284e406f
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
-
-
-            this.AP--;
-            this.MP -= 10;
 
 
 
@@ -92,31 +82,24 @@ namespace Titans
         //Set spikes on a specific tile
         public override void Special2(Battle battle)
         {
-<<<<<<< HEAD
             Tile selected = battle.SelectedTile;
 
             selected.HasTrap = true;
 
-=======
             
-            Range = 1;
             MP -= 10;
             this.AP--;
            
-            Range = 0;
->>>>>>> 73683bf05db4e868cceaebbf8f7322e9284e406f
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
 
 
-            this.AP--;
-            this.MP -= 10;
+
         }
         //Remove spikes or scout bridges
         public override void Special3(Battle battle)
         {
-<<<<<<< HEAD
             Tile tile = battle.SelectedTile;
 
             tile.HasTrap = false;
@@ -140,21 +123,13 @@ namespace Titans
             }
 
 
-=======
             
-            Range = 1;
             MP -= 10;
             this.AP--;
            
-            Range = 0;
->>>>>>> 73683bf05db4e868cceaebbf8f7322e9284e406f
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
-
-
-            this.AP--;
-            this.MP -= 10;
 
             
         }
