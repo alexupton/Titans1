@@ -9,6 +9,7 @@ namespace Titans
     {
         public abstract int HP { get; set; }
         public abstract int MP { get; set; }
+        public abstract int MaxMP { get; set; }
         public abstract int Attack { get; set; }
         public abstract int Defense { get; set; }
         public abstract int Range { get; set; }
@@ -28,15 +29,15 @@ namespace Titans
         //Add any additional properties you may need to this class AND NOT SUBCLASSES
  
         //special ability methods
-        public abstract void Special1();
-        public abstract void Special2();
-        public abstract void Special3();
+        public abstract void Special1(Battle battle);
+        public abstract void Special2(Battle battle);
+        public abstract void Special3(Battle battle);
 
         //additional methods for mage spells only
         //leave blank for other classes
-        public abstract void Special4();
-        public abstract void Special5();
-        public abstract void Special6();
+        public abstract void Special4(Battle battle);
+        public abstract void Special5(Battle battle);
+        public abstract void Special6(Battle battle);
 
         public string GetType()
         {

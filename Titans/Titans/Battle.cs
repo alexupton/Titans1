@@ -190,6 +190,15 @@ namespace Titans
                 GameUI.defend = GameUI.defend_grey;
             }
 
+            foreach (Unit unit in BattleQueue)
+            {
+                
+                if (unit is Mage)
+                {
+
+                }
+            }
+
             ActiveUnit.Defense += defMod;
             return turnOrder;
         }

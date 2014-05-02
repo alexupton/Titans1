@@ -10,6 +10,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -31,7 +32,8 @@ namespace Titans
         {
             MaxHP = 60;
             HP = 60;
-            MP = 200;
+            MP = 20;
+            MaxMP = 20;
             Attack = 25;
             Defense = 15;
             Range = 2;
@@ -49,7 +51,7 @@ namespace Titans
             DefenseModifiers.Add(0);
         }
         //Set the Flares ability which costs 10 MP and is used on the units current tile
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
             //pre abbility modifiers
             Range = 0;
@@ -59,7 +61,7 @@ namespace Titans
             Range = 1;
         }
         //Set the Heat Seeking Missile ability which adds an attack modifier of 15, costs 10 MP, and has a range of 6
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
             //pre abbility modifiers
             AttackModifiers.Add(15);
@@ -71,7 +73,7 @@ namespace Titans
             Range = 2;
         }
         //Set the Sonic Strike ability which adds an attack modifier of 10, reduce speed to 100, and costs 15 MP
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
             //pre abbility modifiers
             AttackModifiers.Add(10);
@@ -82,13 +84,13 @@ namespace Titans
             AttackModifiers.Remove(10);
             Speed = 175;
         }
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
         }
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
         }
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
         }
 

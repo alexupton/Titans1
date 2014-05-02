@@ -9,6 +9,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -35,6 +36,7 @@ namespace Titans
             Location = new int[2];
             HP = 70;
             MP = 20;
+            MaxMP = 20;
             Attack = 40;
             Defense = 25;
             Range = 1;
@@ -50,7 +52,7 @@ namespace Titans
             Location[1] = -1;
         }
         //Set the Whirlwind ability which adds an attack modifier of 15 and costs 5 MP
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
             //pre ability modifiers
             AttackModifiers.Add(15);
@@ -61,7 +63,7 @@ namespace Titans
 
         }
         //Set the Double Attack ability which adds an attack modifier of 80 and costs 10 MP
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
             //pre ability modifiers
             AttackModifiers.Add(80);
@@ -72,7 +74,7 @@ namespace Titans
 
         }
         //Set the First Aid ability which adds 5 HP, costs 10 MP, and reduces the range to 0
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
 
             //pre ability modifiers
@@ -87,13 +89,13 @@ namespace Titans
             Init = 50;
 
         }
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
         }
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
         }
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
         }
 

@@ -9,6 +9,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -31,6 +32,7 @@ namespace Titans
             MaxHP = 25;
             HP = 25;
             MP = 100;
+            MaxMP = 100;
             Attack = 15;
             Defense = 10;
             Range = 3;
@@ -53,7 +55,7 @@ namespace Titans
             DefenseModifiers = new List<int>();
         }
         //Set the Firebolt ability which adds an attack modifier of 50 and costs 30 MP
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
             //pre abbility modifiers
             AttackModifiers.Add(50);
@@ -63,7 +65,7 @@ namespace Titans
             AttackModifiers.Remove(50);
         }
         //Set the Poison ability which adds an attack modifier of 5 and costs 20 MP
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
             //pre abbility modifiers
             AttackModifiers.Add(5);
@@ -73,7 +75,7 @@ namespace Titans
             AttackModifiers.Remove(5);
         }
         //Set the Heal ability which costs 15 MP and.....
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
             //pre abbility modifiers
 
@@ -83,7 +85,7 @@ namespace Titans
 
         }
         //Set the Refresh ability which costs 20 MP and.....
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
             //pre abbility modifiers
 
@@ -92,7 +94,7 @@ namespace Titans
             //post abbility modifiers 
         }
         //Set the Haste ability which costs 20 MP and.....
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
             //pre abbility modifiers
 
@@ -102,7 +104,7 @@ namespace Titans
 
         }
         //Set the Slow ability which costs 20 MP and....
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
             //pre abbility modifiers
 

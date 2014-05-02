@@ -10,6 +10,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -32,6 +33,7 @@ namespace Titans
             MaxHP = 50;
             HP = 50;
             MP = 0;
+            MaxMP = 0;
             Attack = 35;
             Defense = 0;
             Range = 10;
@@ -50,12 +52,12 @@ namespace Titans
         }
 
 	    //Set all special abilities here
-        public override void Special1() { }
-        public override void Special2() { }
-        public override void Special3() { }
-        public override void Special4() { }
-        public override void Special5() { }
-        public override void Special6() { }
+        public override void Special1(Battle battle) { }
+        public override void Special2(Battle battle) { }
+        public override void Special3(Battle battle) { }
+        public override void Special4(Battle battle) { }
+        public override void Special5(Battle battle) { }
+        public override void Special6(Battle battle) { }
 		
     }
 }

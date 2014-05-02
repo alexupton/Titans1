@@ -10,6 +10,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -33,6 +34,7 @@ namespace Titans
             MaxHP = 100;
             HP = 100;
             MP = 15;
+            MaxMP = 15;
             Attack = 40;
             Defense = 5;
             Range = 4;
@@ -50,7 +52,7 @@ namespace Titans
             DefenseModifiers.Add(0);
         }
         //Set Inferno Bomb ability which has an attack modifier of 5 and using 5 MP
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
             //pre abbility modifiers
             AttackModifiers.Add(5);
@@ -60,7 +62,7 @@ namespace Titans
             AttackModifiers.Remove(5);
         }
         //Set Heal Bomb ability which uses 10 MP and....
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
             //pre abbility modifiers
 
@@ -70,7 +72,7 @@ namespace Titans
 
         }
         //Set Machine Gun ablity which has a range of 1, attack modifier of 10, and uses 15 MP
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
             //pre abbility modifiers
             AttackModifiers.Add(10);
@@ -81,13 +83,13 @@ namespace Titans
             AttackModifiers.Remove(10);
             Range = 4;
         }
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
         }
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
         }
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
         }
 

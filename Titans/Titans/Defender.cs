@@ -9,6 +9,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -35,6 +36,7 @@ namespace Titans
             HP = 100;
             MaxHP = 100;
             MP = 30;
+            MaxMP = 30;
             Attack = 20;
             Defense = 50;
             Range = 1;
@@ -51,7 +53,7 @@ namespace Titans
             DefendMode = false;
         }
         //Set Shield Bash ability with an attack modifier of 10, will stun the enemy unit, and uses 10 MP
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
             
             //pre abbility modifiers
@@ -63,7 +65,7 @@ namespace Titans
             AttackModifiers.Remove(10);
         }
         //Set Defensive Strike ability uses 10 MP.......
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
              
             //pre abbility modifiers
@@ -72,7 +74,7 @@ namespace Titans
             //post abbility modifiers 
         }
         //Set Taunt ability which uses 15 MP and increases the unit's range to 5 for one turn
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
              
             //pre abbility modifiers
@@ -82,13 +84,13 @@ namespace Titans
             //post abbility modifiers 
             Range = 1;
         }
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
         }
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
         }
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
         }
         }

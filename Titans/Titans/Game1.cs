@@ -1051,18 +1051,19 @@ namespace Titans
                     //select special 
                     else if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
                     {
-                        buttons.SpecialButtons(mouseState, specialclick);
+                        buttons.SpecialButtons();
                         
                     }
-                    //deselect if in move or attack mode and defend button clicked
-                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
-                    {
-                        battle.MoveMode = false;
-                        battle.AttackMode = false;
-                        battle.SelectEnabled = true;
-                        releaseWait = true;
-                        ResetButtons();
-                    }
+                    ////deselect if in move or attack mode and defend button clicked
+                    //else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
+                    //{
+                    //    battle.MoveMode = false;
+                    //    battle.AttackMode = false;
+                    //    battle.SelectEnabled = true;
+                    //    buttons.SpecialButtons();
+                    //    releaseWait = true;
+                    //    ResetButtons();
+                    //}
 
 
                     //confirm move

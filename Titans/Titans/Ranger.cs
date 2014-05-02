@@ -9,6 +9,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -35,6 +36,7 @@ namespace Titans
             Location = new int[2];
             HP = 30;
             MP = 25;
+            MaxMP = 25;
             Attack = 30;
             Defense = 10;
             Range = 7;
@@ -50,7 +52,7 @@ namespace Titans
             Location[1] = -1;
         }
         //Set the Headshot ability which adds an attack modifier of 40 and costs 15 MP
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
 
             //pre abbility modifiers
@@ -61,7 +63,7 @@ namespace Titans
             AttackModifiers.Remove(40);
         }
         //Set the Immobilize ability which adds an attack modifier of 15 and costs 10 MP
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
 
             //pre abbility modifiers
@@ -72,7 +74,7 @@ namespace Titans
             AttackModifiers.Remove(15);
         }
         //Set the Target ability which costs 10 MP and....
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
             //pre abbility modifiers
             MP -= 10;
@@ -80,13 +82,13 @@ namespace Titans
             //post abbility modifiers 
 
         }
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
         }
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
         }
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
         }
 

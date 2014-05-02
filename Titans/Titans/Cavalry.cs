@@ -10,6 +10,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -32,6 +33,7 @@ namespace Titans
             MaxHP = 50;
             HP = 50;
             MP = 30;
+            MaxMP = 30;
             Attack = 20;
             Defense = 15;
             Range = 1;
@@ -49,7 +51,7 @@ namespace Titans
             DefenseModifiers.Add(0);
         }
         //Set Pierce ability which has an attack modifier of 20 and uses 5 MP
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
 
             //pre abbility modifiers
@@ -60,7 +62,7 @@ namespace Titans
             AttackModifiers.Remove(20);
         }
         //Set Charge ability which adds 5 to the speed, not allowing the unit to attack this turn, and uses 10 MP
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
 
             //pre abbility modifiers
@@ -73,7 +75,7 @@ namespace Titans
             Range = 1;
         }
         //Set Swap ability which allows the cavalry unit to swap places with another friendly unit using 10 MP
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
 
             //pre abbility modifiers
@@ -81,13 +83,13 @@ namespace Titans
             //code for calling animation
             //post abbility modifiers 
         }
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
         }
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
         }
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
         }
 

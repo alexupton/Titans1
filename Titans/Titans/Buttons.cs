@@ -107,7 +107,7 @@ namespace Titans
             
         }
 
-        public void SpecialButtons(MouseState mouseState,Rectangle specialClick)
+        public void SpecialButtons()
         {
 
             if (!Game.battle.specialMode)
@@ -121,10 +121,6 @@ namespace Titans
                 Game.pass = Game.pass_grey;
                 Game.special = Game.special_invert;
                 Game.battle.SelectSpecial();
-            }
-            else if (Game.battle.ActiveUnit is Artillery)
-            {
-                Game.sfx.PlayBuzzer();
             }
            else
             {

@@ -9,6 +9,7 @@ namespace Titans
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
+        public override int MaxMP { get; set; }
         public override int Attack { get; set; }
         public override int Defense { get; set; }
         public override int Range { get; set; }
@@ -31,6 +32,7 @@ namespace Titans
             MaxHP = 30;
             HP = 30;
             MP = 30;
+            MaxMP = 30;
             Attack = 30;
             Defense = 10;
             Range = 0;
@@ -48,7 +50,7 @@ namespace Titans
             DefenseModifiers.Add(0);
         }
         //Set the Bridge ability which sets the range to 1 and costs 10 MP
-        public override void Special1()
+        public override void Special1(Battle battle)
         {
             //pre abbility modifiers
             Range = 1;
@@ -59,7 +61,7 @@ namespace Titans
 
         }
         //Set the Sikes ability which sets the range to 1 and costs 10 MP
-        public override void Special2()
+        public override void Special2(Battle battle)
         {
             //pre abbility modifiers
             Range = 1;
@@ -69,7 +71,7 @@ namespace Titans
             Range = 0;
         }
         //Set the Remove ability which sets the range to 1 and costs 10 MP
-        public override void Special3()
+        public override void Special3(Battle battle)
         {
             //pre abbility modifiers
             Range = 1;
@@ -78,13 +80,13 @@ namespace Titans
             //post abbility modifiers 
             Range = 0;
         }
-        public override void Special4()
+        public override void Special4(Battle battle)
         {
         }
-        public override void Special5()
+        public override void Special5(Battle battle)
         {
         }
-        public override void Special6()
+        public override void Special6(Battle battle)
         {
         }
 
