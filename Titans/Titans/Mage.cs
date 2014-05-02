@@ -54,85 +54,123 @@ namespace Titans
             AttackModifiers = new List<int>();
             DefenseModifiers = new List<int>();
         }
-        //Set the Firebolt ability which adds an attack modifier of 50 and costs 40 MP
+        //Set the Firebolt ability which deals 50 damage to one target and half that to adjecent and costs 40 MP
         public override void Special1(Battle battle)
         {
-            //pre abbility modifiers
+            Unit target = battle.CurrentTarget;
+            int damage = 50;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= 50;
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.DeathCheck(target);
 
-            AttackModifiers.Add(50);
+            List<Tile> enemyTiles = AI.GetAdjacentEnemyTiles(target, battle.BattleMap);
+            battle.GameUI.splashDamage.Clear();
+            battle.GameUI.splashLocations.Clear();
+            foreach (Tile tile in enemyTiles)
+            {
+                battle.GameUI.splashLocations.Add(tile);
+                battle.GameUI.splashDamage.Add(25);
+                battle.GameUI.displayDamage = true;
+
+                tile.TileUnit.HP -= 25;
+
+                battle.DeathCheck(tile.TileUnit);
+            }
+         
             MP -= 40;
-            this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
-            AttackModifiers.Remove(50);
+            this.AP-=2;
+            
+            
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
         }
-        //Set the Magic Slice ability which adds an attack modifier of 25 and costs 20 MP
+        //Set the Magic Slice ability which deals 25  damage and costs 20 MP
         public override void Special2(Battle battle)
         {
-            //pre abbility modifiers
-            AttackModifiers.Add(25);
-            MP -= 20;
+           
+            Unit target = battle.CurrentTarget;
+            int damage = 25;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= 25;
+
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.DeathCheck(target);
+
+            this.MP -= 20;
             this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
-            AttackModifiers.Remove(5);
+           
+            
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
         }
-        //Set the Heal ability which costs 15 MP and.....
+        //Set the Heal ability which costs 15 MP and heals target ally for 20 hp
         public override void Special3(Battle battle)
         {
-            //pre abbility modifiers
+            
+            Unit target = battle.CurrentTarget;
+            int heal = 20;
+            target.HP += heal;
+            //text animation for healing 
 
-            MP -= 15;
+            this.MP -= 15;
+            this.AP--;
+
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
+          
+
+        }
+        //Set the Refresh ability which costs 20 MP and removes all status effects
+        public override void Special4(Battle battle)
+        {
+           
+            Unit target = battle.CurrentTarget;
+            //remove status effect on ally
+            //text animatoin
+            this.MP -= 20;
             this.AP--;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
-            //code for calling animation
-            //post abbility modifiers 
-
+            
         }
-        //Set the Refresh ability which costs 20 MP and.....
-        public override void Special4(Battle battle)
-        {
-            //pre abbility modifiers
-
-            MP -= 20;
-            battle.GameUI.timeSinceLastDamageFrame = 0;
-            battle.GameUI.frameCount = 0;
-            battle.GameUI.wait = true;
-            //code for calling animation
-            //post abbility modifiers 
-        }
-        //Set the Haste ability which costs 20 MP and.....
+        //Set the Haste ability which costs 20 MP and gives target ally a 50 bounus to movement for three rounds
         public override void Special5(Battle battle)
         {
-            //pre abbility modifiers
-
-            MP -= 20;
+            Unit target = battle.CurrentTarget;
+           
+            //set targets status
+            //text animation
+            this.MP -= 20;
+            this.AP--;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
-            //code for calling animation
-            //post abbility modifiers 
+         
 
         }
-        //Set the Slow ability which costs 20 MP and....
+        //Set the Slow ability which costs 20 MP and makes target unit go last
         public override void Special6(Battle battle)
         {
-            //pre abbility modifiers
+            
+            Unit target = battle.CurrentTarget;
+            //sets target status
+            //text animation
 
-            MP -= 20;
+            this.MP -= 20;
+            this.AP--;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
-            //code for calling animation
-            //post abbility modifiers 
+            
 
         }
         public override void SelectSpecial1(Battle battle)
