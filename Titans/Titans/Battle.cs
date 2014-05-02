@@ -484,6 +484,12 @@ namespace Titans
             //    target.Defense += mod; //temporarily add the defense modifiers to the base defense of defender
             //}
 
+            //defenders get a bonus to defense against flying units
+            if ((ActiveUnit is Scout || ActiveUnit is Fighter || ActiveUnit is Bomber) && target is Defender)
+            {
+                target.Defense += 10;
+                target.DefenseModifiers.Add(10);
+            }
             //Soldiers get a flanking bonus to attack
             if (ActiveUnit is Soldier)
             {
@@ -510,6 +516,12 @@ namespace Titans
             if (ActiveUnit is Ranger && target is Scout)
             {
                 damage = (int)(Math.Round(damage + damage * (10.0 / 100)));
+            }
+
+            //remove defender bonus vs air
+            if ((ActiveUnit is Scout || ActiveUnit is Fighter || ActiveUnit is Bomber) && target is Defender)
+            {
+                target.DefenseModifiers.Remove(10);
             }
 
 
