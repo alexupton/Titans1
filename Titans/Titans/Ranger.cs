@@ -58,9 +58,13 @@ namespace Titans
             //pre abbility modifiers
             AttackModifiers.Add(40);
             MP -= 15;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(40);
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set the Immobilize ability which adds an attack modifier of 15 and costs 10 MP
         public override void Special2(Battle battle)
@@ -69,17 +73,25 @@ namespace Titans
             //pre abbility modifiers
             AttackModifiers.Add(15);
             MP -= 10;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(15);
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set the Target ability which costs 10 MP and....
         public override void Special3(Battle battle)
         {
             //pre abbility modifiers
             MP -= 10;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
 
         }
         public override void Special4(Battle battle)

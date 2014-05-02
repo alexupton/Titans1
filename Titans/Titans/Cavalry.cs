@@ -57,9 +57,13 @@ namespace Titans
             //pre abbility modifiers
             AttackModifiers.Add(20);
             MP -= 5;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(20);
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set Charge ability which adds 5 to the speed, not allowing the unit to attack this turn, and uses 10 MP
         public override void Special2(Battle battle)
@@ -69,10 +73,14 @@ namespace Titans
             Speed += 5;
             Range = 0;
             MP -= 10;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
             Speed -= 5;
             Range = 1;
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set Swap ability which allows the cavalry unit to swap places with another friendly unit using 10 MP
         public override void Special3(Battle battle)
@@ -80,8 +88,12 @@ namespace Titans
 
             //pre abbility modifiers
             MP -= 10;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         public override void Special4(Battle battle)
         {

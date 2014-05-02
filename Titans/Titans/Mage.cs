@@ -61,9 +61,13 @@ namespace Titans
 
             AttackModifiers.Add(50);
             MP -= 40;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(50);
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set the Magic Slice ability which adds an attack modifier of 25 and costs 20 MP
         public override void Special2(Battle battle)
@@ -71,9 +75,13 @@ namespace Titans
             //pre abbility modifiers
             AttackModifiers.Add(25);
             MP -= 20;
+            this.AP--;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(5);
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set the Heal ability which costs 15 MP and.....
         public override void Special3(Battle battle)
@@ -81,6 +89,10 @@ namespace Titans
             //pre abbility modifiers
 
             MP -= 15;
+            this.AP--;
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
             //code for calling animation
             //post abbility modifiers 
 
@@ -91,6 +103,9 @@ namespace Titans
             //pre abbility modifiers
 
             MP -= 20;
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
             //code for calling animation
             //post abbility modifiers 
         }
@@ -100,6 +115,9 @@ namespace Titans
             //pre abbility modifiers
 
             MP -= 20;
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
             //code for calling animation
             //post abbility modifiers 
 
@@ -110,6 +128,9 @@ namespace Titans
             //pre abbility modifiers
 
             MP -= 20;
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
             //code for calling animation
             //post abbility modifiers 
 

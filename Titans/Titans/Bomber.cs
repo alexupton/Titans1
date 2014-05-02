@@ -61,6 +61,9 @@ namespace Titans
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(5);
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set Heal Bomb ability which uses 10 MP and....
         public override void Special2(Battle battle)
@@ -69,8 +72,12 @@ namespace Titans
 
             MP -= 10;
             AP -= 1;
+
             //code for calling animation
             //post abbility modifiers 
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
 
         }
         //Set Machine Gun ablity which has a range of 1, attack modifier of 10, and uses 15 MP
@@ -85,6 +92,9 @@ namespace Titans
             //post abbility modifiers 
             AttackModifiers.Remove(10);
             Range = 4;
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         public override void Special4(Battle battle)
         {

@@ -59,10 +59,14 @@ namespace Titans
             //pre abbility modifiers
             AttackModifiers.Add(10);
             MP-=10;
+            this.AP--;
             //stun enemy unit
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(10);
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         //Set Defensive Strike ability uses 10 MP.......
         public override void Special2(Battle battle)
@@ -71,7 +75,9 @@ namespace Titans
             //pre abbility modifiers
             MP-=10;
             AP -= 2;
-            
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
             //code for calling animation
             //post abbility modifiers 
         }
@@ -81,10 +87,14 @@ namespace Titans
              
             //pre abbility modifiers
             MP-=15;
+            this.AP--;
             Range = 5;
             //code for calling animation
             //post abbility modifiers 
             Range = 1;
+            battle.GameUI.timeSinceLastDamageFrame = 0;
+            battle.GameUI.frameCount = 0;
+            battle.GameUI.wait = true;
         }
         public override void Special4(Battle battle)
         {
