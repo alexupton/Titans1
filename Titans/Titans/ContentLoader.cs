@@ -211,6 +211,7 @@ namespace Titans
             }
             foreach (Unit unit in game.battle.BattleQueue)
             {
+                unit.DefendMode = false;
                 if (unit is Defender)
                 {
                     List<Tile> adjacent = AI.GetAllAdjacentTiles(game.battle.BattleMap, game.battle.BattleMap.GetTileAt(unit.Location[0], unit.Location[1]));

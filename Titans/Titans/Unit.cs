@@ -20,6 +20,7 @@ namespace Titans
         public abstract int Price { get; set; }//for custom battles, each unit has a cost to add it to the player roster
         public abstract int[] Location { get; set; } //Array size 2. First is X location, second is Y location. set to {-1, -1} if the unit is not on the map
         public abstract int MaxHP { get; set; }
+        public abstract bool DefendMode { get; set; }
 
         public abstract List<int> AttackModifiers{get; set;} //list of modifiers applied to attacks
         public abstract List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction

@@ -159,6 +159,7 @@ namespace Titans
             int defMod = 0;
             if (ActiveUnit.DefenseModifiers.Count > 0)
             {
+                ActiveUnit.DefendMode = false;
                 foreach (int mod in ActiveUnit.DefenseModifiers)
                 {
                     defMod += mod;
@@ -223,6 +224,7 @@ namespace Titans
             int defMod = 0;
             if (ActiveUnit.DefenseModifiers.Count > 0)
             {
+                ActiveUnit.DefendMode = false;
                 foreach (int mod in ActiveUnit.DefenseModifiers)
                 {
                     defMod += mod;
@@ -357,6 +359,7 @@ namespace Titans
 
         public void SelectDefend()
         {
+            ActiveUnit.DefendMode = true;
             MoveMode = false;
             AttackMode = false;
             ActiveUnit.DefenseModifiers.Add(5);
@@ -457,7 +460,9 @@ namespace Titans
             }
             SelectEnabled = true;
             BattleMap.ClearHighlights();
-            List<int> combatMods = ActiveUnit.AttackModifiers;
+
+
+            
 
             int storedDefense = target.Defense; //store the defender's defense temporarily
 
@@ -466,6 +471,24 @@ namespace Titans
             //    target.Defense += mod; //temporarily add the defense modifiers to the base defense of defender
             //}
 
+            //Soldiers get a flanking bonus to attack
+            if (ActiveUnit is Soldier)
+            {
+                List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(target.Location[1], target.Location[1]));
+                bool flanked = false;
+                foreach (Tile adj in adjacent)
+                {
+                    if (adj.hasUnit && !flanked)
+                    {
+                        if (adj.TileUnit.isPlayerUnit != target.isPlayerUnit && adj.TileUnit != ActiveUnit)
+                        {
+                            flanked = true;
+                            ActiveUnit.AttackModifiers.Add(5);
+                        }
+                    }
+                }
+            }
+            List<int> combatMods = ActiveUnit.AttackModifiers;
             int damage = AttackResolver.Attack(ActiveUnit, target, combatMods);
 
 
@@ -473,6 +496,8 @@ namespace Titans
 
             target.Defense = storedDefense; //restore defender base defense
             target.HP -= damage;
+
+            
 
             
             //check if the unit is dead. if it is, turf it
@@ -483,6 +508,17 @@ namespace Titans
                 RemoveUnit(target.Location[0], target.Location[1]);
                 Units.Remove(target);
                 BattleQueue.Remove(target);
+
+                //Soldiers get a chance to attack again
+                if (ActiveUnit is Soldier)
+                {
+                    Random rand = new Random();
+                    int cleaveChance = rand.Next(100);
+                    if (cleaveChance < 15)
+                    {
+                        ActiveUnit.AP++;
+                    }
+                }
 
                 bool player1HasUnits = false;
                 bool player2HasUnits = false;
@@ -519,7 +555,25 @@ namespace Titans
             else
             {
                 GameUI.sfx.PlayAttackSound(ActiveUnit);
+
+                if(target is Soldier &&target.DefendMode && !(ActiveUnit is Ranger))
+                {
+                    Random rand = new Random();
+
+                    int counterRoll = rand.Next(100);
+                    if (counterRoll < 25) //25% chance for soldier to counter
+                    {
+                        List<int> attackModifiers = target.AttackModifiers;
+                        int counterDamage = AttackResolver.Attack(target, ActiveUnit, attackModifiers);
+                        ActiveUnit.HP -= counterDamage;
+                        GameUI.splashDamage.Clear();
+                        GameUI.splashDamage.Add(counterDamage);
+                        GameUI.splashLocations.Clear();
+                        GameUI.splashLocations.Add(BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
+                    }
+                }
             }
+            ActiveUnit.AttackModifiers.Clear();
             AttackMode = false;
             if (ActiveUnit is Artillery)
             {
@@ -531,6 +585,8 @@ namespace Titans
             }
             if (ActiveUnit.AP == 0 && !GameUI.wait)
                 NextPlayer();
+
+            
 
             return damage;
 

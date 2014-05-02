@@ -21,6 +21,7 @@ namespace Titans
         public override int Price { get; set; } //for custom battles, each unit has a cost to add it to the player roster
         public override int[] Location { get; set; } //Array size 2. First is X location, second is Y location. set to {-1, -1} if the unit is not on the map
         public override int MaxHP { get; set; }
+        public override bool DefendMode { get; set; }
 
 
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks

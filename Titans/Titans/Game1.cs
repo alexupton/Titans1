@@ -907,7 +907,7 @@ namespace Titans
 
                         if (battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted && battle.ActiveUnit is Artillery)
                         {
-                            List<Tile> splashTiles = AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(X, Y));
+                            List<Tile> splashTiles = AI.GetAllAdjacentTiles(battle.BattleMap, lastSelectedTile);
                             foreach (Tile test in splashTiles)
                             {
                                 if (test.hasUnit)
@@ -1106,7 +1106,7 @@ namespace Titans
                             attackedUnitTrueY = Y * 55 - 20;
                             if (battle.ActiveUnit is Artillery)
                             {
-                                splashDamage = battle.GetSplashDamage(battle.BattleMap.GetTileAt(X, Y).TileUnit, unitDamage);
+                                splashDamage = battle.GetSplashDamage(lastSelectedTile.TileUnit, unitDamage);
                             }
                             displayDamage = true;
                             timeSinceLastDamageFrame = 0;
