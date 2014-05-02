@@ -52,12 +52,12 @@ namespace Titans
         //Set the Bridge ability which sets the range to 1 and costs 10 MP
         public override void Special1(Battle battle)
         {
-            //pre abbility modifiers
+          
             Range = 1;
+
+
             MP -= 10;
             this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
             Range = 0;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
@@ -67,12 +67,11 @@ namespace Titans
         //Set the Sikes ability which sets the range to 1 and costs 10 MP
         public override void Special2(Battle battle)
         {
-            //pre abbility modifiers
+            
             Range = 1;
             MP -= 10;
             this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
+           
             Range = 0;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
@@ -81,12 +80,11 @@ namespace Titans
         //Set the Remove ability which sets the range to 1 and costs 10 MP
         public override void Special3(Battle battle)
         {
-            //pre abbility modifiers
+            
             Range = 1;
             MP -= 10;
             this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
+           
             Range = 0;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;

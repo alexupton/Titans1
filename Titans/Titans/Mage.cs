@@ -65,8 +65,19 @@ namespace Titans
             battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
             battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
             battle.DeathCheck(target);
-
+            //splash damage
             List<Tile> enemyTiles = AI.GetAdjacentEnemyTiles(target, battle.BattleMap);
+            List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(target.Location[0], target.Location[1]));
+            foreach (Tile tile in adjacent)
+            {
+                if (tile.hasUnit)
+                {
+                    if (tile.TileUnit.isPlayerUnit == this.isPlayerUnit)
+                    {
+                        enemyTiles.Add(tile);
+                    }
+                }
+            }
             battle.GameUI.splashDamage.Clear();
             battle.GameUI.splashLocations.Clear();
             foreach (Tile tile in enemyTiles)
