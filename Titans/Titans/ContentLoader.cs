@@ -317,7 +317,12 @@ namespace Titans
             {
                 game.optionsButtons[i] = game.notSelected;
             }
-           
+            game.optionsButtons[0] = game.normal;
+            game.optionsButtons[1] = game.normal;
+            game.optionsButtons[2] = game.normal;
+            game.optionsButtons[3] = game.normal; 
+            game.optionsButtons[4] = game.normal;
+            game.optionsButtons[5] = game.normal;
                 if (game.optionsSettings[0] == 1)
                 {
                     game.optionsButtons[6] = game.normal;
