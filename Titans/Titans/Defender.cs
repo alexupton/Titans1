@@ -93,5 +93,54 @@ namespace Titans
         public override void Special6(Battle battle)
         {
         }
+
+        public override void SelectSpecial1(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial2(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial3(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial4(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial5(Battle battle)
+        {
+
+        }
+        public override void SelectSpecial6(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial1(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial2(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial3(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial4(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial5(Battle battle)
+        {
+
+        }
+        public override void DeselectSpecial6(Battle battle)
+        {
+
+        }
         }
     }

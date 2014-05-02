@@ -39,6 +39,20 @@ namespace Titans
         public abstract void Special5(Battle battle);
         public abstract void Special6(Battle battle);
 
+        public abstract void SelectSpecial1(Battle battle);
+        public abstract void SelectSpecial2(Battle battle);
+        public abstract void SelectSpecial3(Battle battle);
+        public abstract void SelectSpecial4(Battle battle);
+        public abstract void SelectSpecial5(Battle battle);
+        public abstract void SelectSpecial6(Battle battle);
+
+        public abstract void DeselectSpecial1(Battle battle);
+        public abstract void DeselectSpecial2(Battle battle);
+        public abstract void DeselectSpecial3(Battle battle);
+        public abstract void DeselectSpecial4(Battle battle);
+        public abstract void DeselectSpecial5(Battle battle);
+        public abstract void DeselectSpecial6(Battle battle);
+
         public string GetType()
         {
             if (this is Artillery)

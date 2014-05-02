@@ -256,6 +256,7 @@ namespace Titans
         public bool loseMusicStarted = false;
         public Buttons buttons;
         public bool isSpecial = false;
+        public bool selfSelect = false;
 
 
 

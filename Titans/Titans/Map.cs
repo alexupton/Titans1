@@ -147,6 +147,31 @@ namespace Titans
             }
         }
 
+        public void HighlightTiles(List<Tile> tiles)
+        {
+            foreach (Tile t in tiles)
+            {
+                t.Highlight();
+            }
+        }
+
+        public void RedHighlightTiles(List<Tile> tiles)
+        {
+            foreach (Tile t in tiles)
+            {
+                t.RedHighlight();
+            }
+        }
+
+        public void BlueHighlightTiles(List<Tile> tiles)
+        {
+            foreach (Tile t in tiles)
+            {
+                t.BlueHighlight();
+            }
+        }
+        
+
         //Remove any and all highlighting from the map
         public void ClearHighlights()
         {
