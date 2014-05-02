@@ -57,6 +57,7 @@ namespace Titans
             //pre abbility modifiers
             AttackModifiers.Add(5);
             MP -= 5;
+            AP -= 1;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(5);
@@ -67,6 +68,7 @@ namespace Titans
             //pre abbility modifiers
 
             MP -= 10;
+            AP -= 1;
             //code for calling animation
             //post abbility modifiers 
 
@@ -78,6 +80,7 @@ namespace Titans
             AttackModifiers.Add(10);
             Range = 1;
             MP -= 15;
+            AP -= 1;
             //code for calling animation
             //post abbility modifiers 
             AttackModifiers.Remove(10);

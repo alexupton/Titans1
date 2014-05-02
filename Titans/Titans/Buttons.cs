@@ -106,7 +106,172 @@ namespace Titans
             
             
         }
+        public void SelectSpecial(MouseState mouseState)
+        {
+            if (Game.battle.ActiveUnit is Mage)
+            {
+                
+                if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
+                {
+                    Point mousePos = new Point(mouseState.X, mouseState.Y);
+                    Rectangle one = new Rectangle(565, 673, 161, 27);
+                    Rectangle two = new Rectangle(565, 646, 161, 27);
+                    Rectangle three = new Rectangle(565, 619, 161, 27);
+                    Rectangle four = new Rectangle(565, 700, 161, 27);
+                    Rectangle five = new Rectangle(565, 727, 161, 27);
+                    Rectangle six = new Rectangle(565, 754, 161, 27);
+                    if (one.Contains(mousePos))
+                    {
+                        Game.releaseWait = true;
+                        Game.specialButtons[0] = Game.specialSel;
+                        Game.specialButtons[1] = Game.specialUn;
+                        Game.specialButtons[2] = Game.specialUn;
+                        Game.specialButtons[3] = Game.specialUn;
+                        Game.specialButtons[4] = Game.specialUn;
+                        Game.specialButtons[5] = Game.specialUn;
 
+                        Game.draw.specialColor[0] = Color.White;
+                        Game.draw.specialColor[1] = Color.White;
+                        Game.draw.specialColor[2] = Color.White;
+                        Game.draw.specialColor[3] = Color.White;
+                        Game.draw.specialColor[4] = Color.White;
+                        Game.draw.specialColor[5] = Color.White;
+                    }
+                    else if (two.Contains(mousePos))
+                    {
+                        Game.releaseWait = true;
+                        Game.specialButtons[0] = Game.specialUn;
+                        Game.specialButtons[1] = Game.specialSel;
+                        Game.specialButtons[2] = Game.specialUn;
+                        Game.specialButtons[3] = Game.specialUn;
+                        Game.specialButtons[4] = Game.specialUn;
+                        Game.specialButtons[5] = Game.specialUn;
+
+                        Game.draw.specialColor[0] = Color.White;
+                        Game.draw.specialColor[1] = Color.White;
+                        Game.draw.specialColor[2] = Color.White;
+                        Game.draw.specialColor[3] = Color.White;
+                        Game.draw.specialColor[4] = Color.White;
+                        Game.draw.specialColor[5] = Color.White;
+                    }
+                    else if (three.Contains(mousePos))
+                    {
+                        Game.releaseWait = true;
+                        Game.specialButtons[0] = Game.specialUn;
+                        Game.specialButtons[1] = Game.specialUn;
+                        Game.specialButtons[2] = Game.specialSel;
+                        Game.specialButtons[3] = Game.specialUn;
+                        Game.specialButtons[4] = Game.specialUn;
+                        Game.specialButtons[5] = Game.specialUn;
+
+                        Game.draw.specialColor[0] = Color.White;
+                        Game.draw.specialColor[1] = Color.White;
+                        Game.draw.specialColor[2] = Color.White;
+                        Game.draw.specialColor[3] = Color.White;
+                        Game.draw.specialColor[4] = Color.White;
+                        Game.draw.specialColor[5] = Color.White;
+                    }
+                    else if (four.Contains(mousePos))
+                    {
+                        Game.releaseWait = true;
+                        Game.specialButtons[0] = Game.specialUn;
+                        Game.specialButtons[1] = Game.specialUn;
+                        Game.specialButtons[2] = Game.specialUn;
+                        Game.specialButtons[3] = Game.specialSel;
+                        Game.specialButtons[4] = Game.specialUn;
+                        Game.specialButtons[5] = Game.specialUn;
+
+                        Game.draw.specialColor[0] = Color.White;
+                        Game.draw.specialColor[1] = Color.White;
+                        Game.draw.specialColor[2] = Color.White;
+                        Game.draw.specialColor[3] = Color.White;
+                        Game.draw.specialColor[4] = Color.White;
+                        Game.draw.specialColor[5] = Color.White;
+                    }
+                    else if (five.Contains(mousePos))
+                    {
+                        Game.releaseWait = true;
+                        Game.specialButtons[0] = Game.specialUn;
+                        Game.specialButtons[1] = Game.specialUn;
+                        Game.specialButtons[2] = Game.specialUn;
+                        Game.specialButtons[3] = Game.specialUn;
+                        Game.specialButtons[4] = Game.specialSel;
+                        Game.specialButtons[5] = Game.specialUn;
+
+                        Game.draw.specialColor[0] = Color.White;
+                        Game.draw.specialColor[1] = Color.White;
+                        Game.draw.specialColor[2] = Color.White;
+                        Game.draw.specialColor[3] = Color.White;
+                        Game.draw.specialColor[4] = Color.White;
+                        Game.draw.specialColor[5] = Color.White;
+                    }
+                    else if (six.Contains(mousePos))
+                    {
+                        Game.releaseWait = true;
+                        Game.specialButtons[0] = Game.specialUn;
+                        Game.specialButtons[1] = Game.specialUn;
+                        Game.specialButtons[2] = Game.specialUn;
+                        Game.specialButtons[3] = Game.specialUn;
+                        Game.specialButtons[4] = Game.specialUn;
+                        Game.specialButtons[5] = Game.specialSel;
+
+                        Game.draw.specialColor[0] = Color.White;
+                        Game.draw.specialColor[1] = Color.White;
+                        Game.draw.specialColor[2] = Color.White;
+                        Game.draw.specialColor[3] = Color.White;
+                        Game.draw.specialColor[4] = Color.White;
+                        Game.draw.specialColor[5] = Color.White;
+                    }
+                }
+            }
+                else
+                {
+                    Rectangle one = new Rectangle(565, 700, 161, 27);
+                    Rectangle two = new Rectangle(565, 727, 161, 27);
+                    Rectangle three = new Rectangle(565, 754, 161, 27);
+                    if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
+                    {
+                        Point mousePos = new Point(mouseState.X, mouseState.Y);
+                        if (one.Contains(mousePos))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialSel;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialUn;
+
+
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                        }
+                        else if (two.Contains(mousePos))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialSel;
+                            Game.specialButtons[2] = Game.specialUn;
+
+
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                        }
+                        else if (three.Contains(mousePos))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialSel;
+
+
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                        }
+                    }
+                
+            }
+        }
         public void SpecialButtons()
         {
 
@@ -121,6 +286,7 @@ namespace Titans
                 Game.pass = Game.pass_grey;
                 Game.special = Game.special_invert;
                 Game.battle.SelectSpecial();
+
             }
            else
             {
@@ -128,10 +294,31 @@ namespace Titans
                 Game.isSpecial = false;
                 Game.move = Game.movetrue;
                 Game.attack = Game.attacktrue;
-                Game.defend = Game.defendtrue;
+                if (Game.battle.ActiveUnit is Ranger)
+                {
+                    Game.defend = Game.defend_grey;
+                }
+                else
+                {
+                    Game.defend = Game.defendtrue;
+                }
                 Game.item = Game.itemtrue;
                 Game.pass = Game.passtrue;
                 Game.special = Game.specialtrue;
+                
+                Game.specialButtons[0] = Game.specialNor;
+                Game.specialButtons[1] = Game.specialNor;
+                Game.specialButtons[2] = Game.specialNor;
+                Game.specialButtons[3] = Game.specialNor;
+                Game.specialButtons[4] = Game.specialNor;
+                Game.specialButtons[5] = Game.specialNor;
+
+                Game.draw.specialColor[0] = Color.Black;
+                Game.draw.specialColor[1] = Color.Black;
+                Game.draw.specialColor[2] = Color.Black;
+                Game.draw.specialColor[3] = Color.Black;
+                Game.draw.specialColor[4] = Color.Black;
+                Game.draw.specialColor[5] = Color.Black;
                 Game.battle.DeselectSpecial();
 
 

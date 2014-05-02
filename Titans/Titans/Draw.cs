@@ -16,7 +16,8 @@ namespace Titans
     {
         public Game1 game { get; set; }
         public Color[] textColor;
-        public Color[] optionsColor; 
+        public Color[] optionsColor;
+        public Color[] specialColor;
         
 
         public Draw(Game1 currentGame)
@@ -31,6 +32,11 @@ namespace Titans
             for (int i = 0; i < 25; i++)
             {
                 optionsColor[i] = Color.Black;
+            }
+            specialColor = new Color[6];
+            for (int i = 0; i < 6; i++)
+            {
+                specialColor[i] = Color.Black;
             }
 
         }
@@ -242,30 +248,30 @@ namespace Titans
             {
                 if (game.battle.ActiveUnit is Mage )
                 {
-                    game.spriteBatch.Draw(game.specialButtons[3], new Vector2(565, 673), Color.White);
+                    game.spriteBatch.Draw(game.specialButtons[0], new Vector2(565, 673), Color.White);
                     float x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(0))).X;
                     float buttonx = 116 / 2;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(0), new Vector2((buttonx-(x / 2) )+565 , 676),Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(0), new Vector2((buttonx-(x / 2) )+565 , 676),specialColor[0]);
 
-                    game.spriteBatch.Draw(game.specialButtons[4], new Vector2(565, 646), Color.White);
+                    game.spriteBatch.Draw(game.specialButtons[1], new Vector2(565, 646), Color.White);
                     x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(1))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(1), new Vector2(buttonx-(x / 2) + 565, 649), Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(1), new Vector2(buttonx-(x / 2) + 565, 649), specialColor[1]);
                     
-                    game.spriteBatch.Draw(game.specialButtons[5], new Vector2(565, 619), Color.White);
+                    game.spriteBatch.Draw(game.specialButtons[2], new Vector2(565, 619), Color.White);
                     x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(2))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(2), new Vector2(buttonx-(x / 2) + 565, 622), Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(2), new Vector2(buttonx-(x / 2) + 565, 622), specialColor[2]);
                 
-                     game.spriteBatch.Draw(game.specialButtons[0], new Vector2(565, 700), Color.White);
+                     game.spriteBatch.Draw(game.specialButtons[3], new Vector2(565, 700), Color.White);
                      x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(3))).X;
-                     game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(3), new Vector2(buttonx-(x / 2) + 565, 703), Color.Black);
+                     game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(3), new Vector2(buttonx-(x / 2) + 565, 703), specialColor[3]);
                     
-                    game.spriteBatch.Draw(game.specialButtons[1], new Vector2(565, 727), Color.White);
+                    game.spriteBatch.Draw(game.specialButtons[4], new Vector2(565, 727), Color.White);
                     x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(4))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(4), new Vector2(buttonx-(x / 2) + 565, 730), Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(4), new Vector2(buttonx-(x / 2) + 565, 730), specialColor[4]);
                     
-                    game.spriteBatch.Draw(game.specialButtons[2], new Vector2(565, 754), Color.White);
+                    game.spriteBatch.Draw(game.specialButtons[5], new Vector2(565, 754), Color.White);
                     x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(5))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(5), new Vector2(buttonx-(x / 2) + 565, 757), Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(5), new Vector2(buttonx-(x / 2) + 565, 757), specialColor[5]);
                 
                 }
                 else
@@ -273,13 +279,13 @@ namespace Titans
                     game.spriteBatch.Draw(game.specialButtons[0], new Vector2(565, 700), Color.White);
                     float buttonx = 116 / 2;
                     float x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(0))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(0), new Vector2(buttonx-(x / 2) + 565, 703), Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(0), new Vector2(buttonx-(x / 2) + 565, 703), specialColor[0]);
                     game.spriteBatch.Draw(game.specialButtons[1], new Vector2(565, 727), Color.White);
                     x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(1))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(1), new Vector2(buttonx-(x / 2) + 565, 730), Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(1), new Vector2(buttonx-(x / 2) + 565, 730), specialColor[1]);
                     game.spriteBatch.Draw(game.specialButtons[2], new Vector2(565, 754), Color.White);
                     x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(2))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(2), new Vector2(buttonx-(x / 2) + 565, 757), Color.Black);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(2), new Vector2(buttonx-(x / 2) + 565, 757), specialColor[2]);
                 }
             }
 

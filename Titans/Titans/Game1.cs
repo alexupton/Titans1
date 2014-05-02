@@ -961,7 +961,14 @@ namespace Titans
                         releaseWait = true;
                         move = movetrue;
                         attack = attacktrue;
-                        defend = defendtrue;
+                        if (battle.ActiveUnit is Ranger)
+                        {
+                            defend = defend_grey;
+                        }
+                        else
+                        {
+                            defend = defendtrue;
+                        }
                         item = itemtrue;
                         pass = passtrue;
                         special = specialtrue;
@@ -1004,7 +1011,14 @@ namespace Titans
                         releaseWait = true;
                         move = movetrue;
                         attack = attacktrue;
-                        defend = defendtrue;
+                        if (battle.ActiveUnit is Ranger)
+                        {
+                            defend = defend_grey;
+                        }
+                        else
+                        {
+                            defend = defendtrue;
+                        }
                         item = itemtrue;
                         pass = passtrue;
                         special = specialtrue;
@@ -1048,12 +1062,7 @@ namespace Titans
                         frameCount = 0;
 
                     }
-                    //select special 
-                    else if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
-                    {
-                        buttons.SpecialButtons();
-                        
-                    }
+                   
                     ////deselect if in move or attack mode and defend button clicked
                     //else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
                     //{
@@ -1148,7 +1157,18 @@ namespace Titans
                             battle.ShowAttackRange(battle.BattleMap.GetTileAt(X, Y).TileUnit);
                         }
                     }
+                    //select special
+                     if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
+                    {
+                        buttons.SpecialButtons();
 
+                    }
+                    //choose special attacks
+                    else if (battle.specialMode && !releaseWait && !wait && !tickWait && !moveWait)
+                    {
+                        buttons.SelectSpecial(mouseState);
+                    }
+                   
                 }
 
                 if (mouseState.LeftButton == ButtonState.Released)

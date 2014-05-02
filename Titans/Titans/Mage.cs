@@ -41,7 +41,7 @@ namespace Titans
             AP = 2;
             Abilities = new List<string>();
             Abilities.Add("Firebolt");
-            Abilities.Add("Poison");
+            Abilities.Add("Magic Slice");
             Abilities.Add("Heal");
             Abilities.Add("Refresh");
             Abilities.Add("Haste");
