@@ -54,20 +54,9 @@ namespace Titans
         {
             Tile tile = battle.SelectedTile;
 
-            battle.BattleMap.map[tile.X][tile.Y] = new Tile();
-            tile.MoveCost = 10;
-            tile.type = "scoutBridge";
-            tile.AssignFileName();
-            tile.IsRedHighlighted = false;
-            tile.IsRoot = false;
-            tile.Searched = false;
-            tile.FScore = 0;
-            tile.GScore = 0;
-            tile.HScore = 0;
-            tile.HasTrap = false;
-            tile.hasUnit = false;
-            tile.TileUnit = null;
+            tile.HasBridge = true;
             tile.IsImpassible = false;
+            tile.MoveCost = 10;
           
 
             MP -= 10;
@@ -104,22 +93,11 @@ namespace Titans
 
             tile.HasTrap = false;
 
-            if (tile.type == "scoutBridge")
+            if (tile.HasBridge)
             {
-                battle.BattleMap.map[tile.X][tile.Y] = new Tile();
-                tile.MoveCost = 10;
-                tile.type = "water";
-                tile.AssignFileName();
-                tile.IsRedHighlighted = false;
-                tile.IsRoot = false;
-                tile.Searched = false;
-                tile.FScore = 0;
-                tile.GScore = 0;
-                tile.HScore = 0;
-                tile.HasTrap = false;
-                tile.hasUnit = false;
-                tile.TileUnit = null;
+                tile.HasBridge = false;
                 tile.IsImpassible = true;
+                tile.MoveCost = 0;
             }
 
 
