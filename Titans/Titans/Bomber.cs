@@ -51,30 +51,91 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
         }
-        //Set Inferno Bomb ability which has an attack modifier of 5 and using 5 MP
+        //Releases a bomb that deals 25 damage over 5 turns for the units hit
         public override void Special1(Battle battle)
         {
-            //pre abbility modifiers
-            AttackModifiers.Add(5);
-            MP -= 5;
-            AP -= 1;
-            //code for calling animation
-            //post abbility modifiers 
+            Unit target = battle.CurrentTarget;
+            int damage = 5;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= 5;
+            //set damage over time counter to 5
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.DeathCheck(target);
+            List<Tile> enemyTiles = AI.GetAdjacentEnemyTiles(target, battle.BattleMap);
+            List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(target.Location[0], target.Location[1]));
+            foreach (Tile tile in adjacent)
+            {
+                if (tile.hasUnit)
+                {
+                    if (tile.TileUnit.isPlayerUnit == this.isPlayerUnit)
+                    {
+                        enemyTiles.Add(tile);
+                    }
+                }
+            }
+            battle.GameUI.splashDamage.Clear();
+            battle.GameUI.splashLocations.Clear();
+            foreach (Tile tile in enemyTiles)
+            {
+                battle.GameUI.splashLocations.Add(tile);
+                battle.GameUI.splashDamage.Add(5);
+                battle.GameUI.displayDamage = true;
+
+                tile.TileUnit.HP -= 5;
+                //set damage over time counter to 5
+                battle.DeathCheck(tile.TileUnit);
+            }
+          
+            this.MP -= 5;
+            this.AP --;
+            
             AttackModifiers.Remove(5);
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
         }
-        //Set Heal Bomb ability which uses 10 MP and....
+        //Set Heal Bomb ability which uses 10 MP and heals targets affected by 10
         public override void Special2(Battle battle)
         {
-            //pre abbility modifiers
+            Unit target = battle.CurrentTarget;
+            
+            target.HP += 5;
+            
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            
 
-            MP -= 10;
-            AP -= 1;
+            List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap,battle.BattleMap.GetTileAt(target.Location[0],target.Location[1]) );
+            List<Tile> allyTiles= new List<Tile>();
 
-            //code for calling animation
-            //post abbility modifiers 
+            foreach (Tile tile in adjacent)
+            {
+                if (tile.hasUnit)
+                {
+                    if (tile.TileUnit.isPlayerUnit == this.isPlayerUnit)
+                    {
+                        allyTiles.Add(tile);
+                    }
+                }
+            }
+            //ally splash heal text
+            foreach (Tile tile in allyTiles)
+            {
+                battle.GameUI.splashLocations.Add(tile);
+                
+
+                tile.TileUnit.HP += 10;
+                
+               
+            }
+
+            this.MP -= 10;
+            this.AP--;
+
+           
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
@@ -83,14 +144,19 @@ namespace Titans
         //Set Machine Gun ablity which has a range of 1, attack modifier of 10, and uses 15 MP
         public override void Special3(Battle battle)
         {
-            //pre abbility modifiers
-            AttackModifiers.Add(10);
+           
+            
             Range = 1;
-            MP -= 15;
-            AP -= 1;
-            //code for calling animation
-            //post abbility modifiers 
-            AttackModifiers.Remove(10);
+            Unit target = battle.CurrentTarget;
+            int damage = 10;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= 10;
+            //animation for damage text
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            this.MP -= 15;
+            this.AP --;
             Range = 4;
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;

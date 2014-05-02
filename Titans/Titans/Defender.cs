@@ -57,41 +57,62 @@ namespace Titans
         {
             
             //pre abbility modifiers
-            AttackModifiers.Add(10);
+            Unit target = battle.CurrentTarget;
+            int damage = 10 ;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= 50;
+            //animation for damage text
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            //yet to be added stun effect
             MP-=10;
             this.AP--;
-            //stun enemy unit
-            //code for calling animation
-            //post abbility modifiers 
-            AttackModifiers.Remove(10);
+            battle.DeathCheck(target);
+
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
         }
-        //Set Defensive Strike ability uses 10 MP.......
+        //Attacks enemy for half damage and puts defender in defensive position
         public override void Special2(Battle battle)
         {
              
             //pre abbility modifiers
-            MP-=10;
-            AP -= 2;
+            
+            Unit target = battle.CurrentTarget;
+            int damage = AttackResolver.Attack(this, target, this.AttackModifiers)/2;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= 50;
+            //animation for damage text
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            
+
+            this.DefendMode = true;
+            this.MP-=10;
+            this.AP -= 2;
+
+            battle.DeathCheck(target);
+
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
-            //code for calling animation
-            //post abbility modifiers 
+            
         }
         //Set Taunt ability which uses 15 MP and increases the unit's range to 5 for one turn
         public override void Special3(Battle battle)
         {
              
             //pre abbility modifiers
-            MP-=15;
-            this.AP--;
-            Range = 5;
-            //code for calling animation
-            //post abbility modifiers 
+           
+          
+            
             Range = 1;
+            MP -= 15;
+            this.AP--;
+
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
