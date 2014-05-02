@@ -1030,7 +1030,7 @@ namespace Titans
 
                     }
                     //select defend
-                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled)
+                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled && defend !=defend_grey)
                     {
                         timeSinceLastDamageFrame = 0;
                         wait = true;

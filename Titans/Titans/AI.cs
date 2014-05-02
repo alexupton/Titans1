@@ -504,7 +504,7 @@ namespace Titans
             }
 
             //if the unit is weak, defend
-            if(active.HP < active.MaxHP / 4 && active.AP == 1)
+            if(active.HP < active.MaxHP / 4 && active.AP == 1 && !(active is Ranger))
             {
                 battle.SelectDefend();
                 return;

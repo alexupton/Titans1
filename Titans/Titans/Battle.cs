@@ -184,6 +184,12 @@ namespace Titans
                     }
                 }
             }
+            //rangers can't defend
+            if (ActiveUnit is Ranger)
+            {
+                GameUI.defend = GameUI.defend_grey;
+            }
+
             ActiveUnit.Defense += defMod;
             return turnOrder;
         }
@@ -221,6 +227,11 @@ namespace Titans
             GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
 
             GameUI.sfx.PlaySelectSound(ActiveUnit);
+            if (ActiveUnit is Ranger)
+            {
+                GameUI.defend = GameUI.defend_grey;
+            }
+
 
             //clear defense buffs
             int defMod = 0;
@@ -491,7 +502,15 @@ namespace Titans
                 }
             }
             List<int> combatMods = ActiveUnit.AttackModifiers;
-            int damage = AttackResolver.Attack(ActiveUnit, target, combatMods);
+
+
+            int damage = AttackResolver.Attack(ActiveUnit, target, combatMods); //calculate the attack
+
+            //Rangers get a 10% attack bonus against scouts
+            if (ActiveUnit is Ranger && target is Scout)
+            {
+                damage = (int)(Math.Round(damage + damage * (10.0 / 100)));
+            }
 
 
             GameUI.displayDamage = true;
