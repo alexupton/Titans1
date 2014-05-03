@@ -7,6 +7,8 @@ namespace Titans
 {
     public class Slow : StatusEffect
     {
+        protected override Unit unit { get; set; }
+        protected override int timeRemaining { get; set; }
         public Slow(Unit target)
         {
             unit = target;

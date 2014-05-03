@@ -7,6 +7,8 @@ namespace Titans
 {
     public class Haste : StatusEffect
     {
+        protected override Unit unit { get; set; }
+        protected override int timeRemaining { get; set; }
         private int originalSpeed;
         public Haste(Unit target)
         {

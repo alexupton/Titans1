@@ -7,6 +7,8 @@ namespace Titans
 {
     public class Stun : StatusEffect
     {
+        protected override Unit unit { get; set; }
+        protected override int timeRemaining { get; set; }
         public Stun(Unit target)
         {
             unit = target;

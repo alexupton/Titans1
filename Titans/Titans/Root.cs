@@ -7,6 +7,8 @@ namespace Titans
 {
     public class Root : StatusEffect
     {
+        protected override Unit unit { get; set; }
+        protected override int timeRemaining { get; set; }
         public Root(Unit target)
         {
             unit = target;

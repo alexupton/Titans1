@@ -7,8 +7,8 @@ namespace Titans
 {
     public abstract class StatusEffect
     {
-        protected abstract Unit unit;
-        protected abstract int timeRemaining;
+        protected abstract Unit unit { get; set; }
+        protected abstract int timeRemaining { get; set; }
 
         public abstract void DecreaseTime();
         public abstract void Invoke(Battle battle);
