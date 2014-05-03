@@ -1411,11 +1411,18 @@ namespace Titans
                 
                 keyreleasewait = true;
             }
-            else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && ismenu&&demo)
+            else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && isOptions && demo)
             {
-                ismenu = false;
                 isOptions = false;
+                ismenu = true;
                 keyreleasewait = true;
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && ismenu && demo)
+            {
+                keyreleasewait = true;
+               
+                ismenu = false;
+
             }
             if (ismenu&&!keyreleasewait)
             {
@@ -1445,7 +1452,8 @@ namespace Titans
             {
                 draw.CampaignMenu();
             }
-            else if (optionsMenu)
+
+            else if (optionsMenu&&!ismenu)
             {
                 draw.OptionsMenu();
             }
@@ -1453,7 +1461,7 @@ namespace Titans
             {
                 draw.Demo();
             }
-            else if (ismenu)
+            else if (ismenu&&!isOptions)
             {
                 draw.Demo();
                 draw.ingamemenu();

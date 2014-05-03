@@ -136,6 +136,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial1(Game.battle);
                     }
                     else if (two.Contains(mousePos))
                     {
@@ -153,6 +154,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial2(Game.battle);
                     }
                     else if (three.Contains(mousePos))
                     {
@@ -170,6 +172,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial3(Game.battle);
                     }
                     else if (four.Contains(mousePos))
                     {
@@ -187,6 +190,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial4(Game.battle);
                     }
                     else if (five.Contains(mousePos))
                     {
@@ -204,6 +208,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial5(Game.battle);
                     }
                     else if (six.Contains(mousePos))
                     {
@@ -221,6 +226,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial6(Game.battle);
                     }
                 }
             }
@@ -237,6 +243,7 @@ namespace Titans
                         if (one.Contains(mousePos))
                         {
                             Game.releaseWait = true;
+<<<<<<< HEAD
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 1))
                             {
 
@@ -258,10 +265,22 @@ namespace Titans
                                 Game.sfx.PlayBuzzer();
                                 Game.sfx.PlayBuzzer();
                             }
+=======
+                            Game.specialButtons[0] = Game.specialSel;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialUn;
+
+
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.battle.ActiveUnit.SelectSpecial1(Game.battle);
+>>>>>>> ad9cce12051865d42d9ad95bcf5d22361e84fe0d
                         }
                         else if (two.Contains(mousePos))
                         {
                             Game.releaseWait = true;
+<<<<<<< HEAD
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 2))
                             {
                                 Game.specialButtons[0] = Game.specialUn;
@@ -281,10 +300,22 @@ namespace Titans
                                 Game.sfx.PlayBuzzer();
                                 Game.sfx.PlayBuzzer();
                             }
+=======
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialSel;
+                            Game.specialButtons[2] = Game.specialUn;
+
+
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.battle.ActiveUnit.SelectSpecial2(Game.battle);
+>>>>>>> ad9cce12051865d42d9ad95bcf5d22361e84fe0d
                         }
                         else if (three.Contains(mousePos))
                         {
                             Game.releaseWait = true;
+<<<<<<< HEAD
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 3))
                             {
                                 Game.specialButtons[0] = Game.specialUn;
@@ -304,6 +335,17 @@ namespace Titans
                                 Game.sfx.PlayBuzzer();
                                 Game.sfx.PlayBuzzer();
                             }
+=======
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialSel;
+
+
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.battle.ActiveUnit.SelectSpecial3(Game.battle);
+>>>>>>> ad9cce12051865d42d9ad95bcf5d22361e84fe0d
                         }
                     }
                 
@@ -511,8 +553,9 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(0f);
-                    Game.sfx.PlayBuzzer();
+                    
+                    Game.sfx.setfxfvolume(0f);
+                    
                     Game.releaseWait = true;
 
                 }
@@ -525,7 +568,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(.25f);
+                    Game.sfx.setfxfvolume(.25f*2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
 
@@ -538,7 +582,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.normal;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(.5f);
+                    Game.sfx.setfxfvolume(.5f * 2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
@@ -550,7 +595,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.normal;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(.75f);
+                    Game.sfx.setfxfvolume(.75f * 2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
@@ -562,7 +608,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.normal;
-                    //Game.engine.GetCategory("SFX").SetVolume(1f);
+                    Game.sfx.setfxfvolume(.1f * 2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
