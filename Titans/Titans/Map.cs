@@ -243,6 +243,12 @@ namespace Titans
             map[x][y].IsHighlighted = false;
         }
 
+        public void ClearSpecificRedHighlight(int x, int y)
+        {
+            map[x][y].ClearRedHighlight();
+            map[x][y].IsRedHighlighted = false;
+        }
+
 
 
     }

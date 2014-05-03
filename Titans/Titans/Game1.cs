@@ -260,8 +260,10 @@ namespace Titans
         public bool loseMusicStarted = false;
         public Buttons buttons;
         public SpecialHighlighting specialHighlight;
+        public SpecialClicks specialClicks;
         public bool isSpecial = false;
         public bool selfSelect = false;
+        public bool specialAttack = false;
 
 
 
@@ -298,6 +300,7 @@ namespace Titans
             optionsSettings = new int []{2,2,2,5,5};
             specialButtons = new Texture2D[6];
             specialHighlight = new SpecialHighlighting(this);
+            specialClicks = new SpecialClicks(this);
             timeSinceLastFrame = 0;
             millisecondsPerFrame = 100;
 
@@ -856,7 +859,7 @@ namespace Titans
             {
                 engine.Update();
                 sfx.Update();
-                if (!battle.AttackMode && !battle.AttackRangeDisplayed)
+                if (!battle.AttackMode && !battle.AttackRangeDisplayed && !battle.AnySpecialMoveSelected())
                 {
                     battle.BattleMap.ClearHighlights();
                     battle.BattleMap.ClearBlueHighlights();
@@ -910,7 +913,7 @@ namespace Titans
 
                 }
                     //AttackMode Highlighting
-                else if(battle.AttackMode)
+                else if(battle.AttackMode || specialAttack)
                 {
 
                     int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
@@ -937,7 +940,7 @@ namespace Titans
                         }
                     }
                 }
-                else if (battle.specialMode1 || battle.specialMode2 || battle.specialMode3 || battle.specialMode4 || battle.specialMode5 || battle.specialMode6)
+                if (battle.specialMode1 || battle.specialMode2 || battle.specialMode3 || battle.specialMode4 || battle.specialMode5 || battle.specialMode6)
                 {
                     specialHighlight.SpecialHighlight(mousePos);
                 }
@@ -1175,11 +1178,20 @@ namespace Titans
                         buttons.SpecialButtons();
 
                     }
+
                     //choose special attacks
-                    else if (battle.specialMode && !releaseWait && !wait && !tickWait && !moveWait)
-                    {
-                        buttons.SelectSpecial(mouseState);
-                    }
+                     if (battle.specialMode && !releaseWait && !wait && !tickWait && !moveWait)
+                     {
+                         buttons.SelectSpecial(mouseState);
+                     }
+                     //confirm special
+                     if (battle.AnySpecialMoveSelected() && !releaseWait && !wait && !tickWait && !moveWait)
+                     {
+                         specialClicks.EvaluateSpecialClick(mousePos);
+                     }
+                    
+
+                    
                    
                 }
 

@@ -229,44 +229,81 @@ namespace Titans
                     Rectangle one = new Rectangle(565, 700, 161, 27);
                     Rectangle two = new Rectangle(565, 727, 161, 27);
                     Rectangle three = new Rectangle(565, 754, 161, 27);
+
+                //button clicks
                     if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
                     {
                         Point mousePos = new Point(mouseState.X, mouseState.Y);
                         if (one.Contains(mousePos))
                         {
                             Game.releaseWait = true;
-                            Game.specialButtons[0] = Game.specialSel;
-                            Game.specialButtons[1] = Game.specialUn;
-                            Game.specialButtons[2] = Game.specialUn;
+                            if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 1))
+                            {
+
+                                
+                                Game.specialButtons[0] = Game.specialSel;
+                                Game.specialButtons[1] = Game.specialUn;
+                                Game.specialButtons[2] = Game.specialUn;
 
 
-                            Game.draw.specialColor[0] = Color.White;
-                            Game.draw.specialColor[1] = Color.White;
-                            Game.draw.specialColor[2] = Color.White;
+                                Game.draw.specialColor[0] = Color.White;
+                                Game.draw.specialColor[1] = Color.White;
+                                Game.draw.specialColor[2] = Color.White;
+                                Game.battle.DeselectSpecialNumber();
+                                Game.battle.ActiveUnit.SelectSpecial1(Game.battle);
+                                Game.battle.SelectSpecialNumber(1);
+                            }
+                            else
+                            {
+                                Game.sfx.PlayBuzzer();
+                                Game.sfx.PlayBuzzer();
+                            }
                         }
                         else if (two.Contains(mousePos))
                         {
                             Game.releaseWait = true;
-                            Game.specialButtons[0] = Game.specialUn;
-                            Game.specialButtons[1] = Game.specialSel;
-                            Game.specialButtons[2] = Game.specialUn;
+                            if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 2))
+                            {
+                                Game.specialButtons[0] = Game.specialUn;
+                                Game.specialButtons[1] = Game.specialSel;
+                                Game.specialButtons[2] = Game.specialUn;
 
 
-                            Game.draw.specialColor[0] = Color.White;
-                            Game.draw.specialColor[1] = Color.White;
-                            Game.draw.specialColor[2] = Color.White;
+                                Game.draw.specialColor[0] = Color.White;
+                                Game.draw.specialColor[1] = Color.White;
+                                Game.draw.specialColor[2] = Color.White;
+                                Game.battle.DeselectSpecialNumber();
+                                Game.battle.ActiveUnit.SelectSpecial2(Game.battle);
+                                Game.battle.SelectSpecialNumber(2);
+                            }
+                            else
+                            {
+                                Game.sfx.PlayBuzzer();
+                                Game.sfx.PlayBuzzer();
+                            }
                         }
                         else if (three.Contains(mousePos))
                         {
                             Game.releaseWait = true;
-                            Game.specialButtons[0] = Game.specialUn;
-                            Game.specialButtons[1] = Game.specialUn;
-                            Game.specialButtons[2] = Game.specialSel;
+                            if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 3))
+                            {
+                                Game.specialButtons[0] = Game.specialUn;
+                                Game.specialButtons[1] = Game.specialUn;
+                                Game.specialButtons[2] = Game.specialSel;
 
 
-                            Game.draw.specialColor[0] = Color.White;
-                            Game.draw.specialColor[1] = Color.White;
-                            Game.draw.specialColor[2] = Color.White;
+                                Game.draw.specialColor[0] = Color.White;
+                                Game.draw.specialColor[1] = Color.White;
+                                Game.draw.specialColor[2] = Color.White;
+                                Game.battle.DeselectSpecialNumber();
+                                Game.battle.ActiveUnit.SelectSpecial3(Game.battle);
+                                Game.battle.SelectSpecialNumber(3);
+                            }
+                            else
+                            {
+                                Game.sfx.PlayBuzzer();
+                                Game.sfx.PlayBuzzer();
+                            }
                         }
                     }
                 
@@ -275,7 +312,7 @@ namespace Titans
         public void SpecialButtons()
         {
 
-            if (!Game.battle.specialMode)
+            if (!Game.battle.specialMode && !Game.battle.MoveMode && !Game.battle.AttackMode)
             {
                 Game.releaseWait = true;
                 Game.isSpecial = true;
@@ -288,10 +325,13 @@ namespace Titans
                 Game.battle.SelectSpecial();
 
             }
-           else
+           else if(Game.battle.specialMode && !Game.battle.MoveMode && !Game.battle.AttackMode)
             {
                 Game.releaseWait = true;
                 Game.isSpecial = false;
+                Game.battle.DeselectSpecialNumber();
+                Game.battle.DeselectSpecial();
+                Game.specialAttack = false;
                 Game.move = Game.movetrue;
                 Game.attack = Game.attacktrue;
                 if (Game.battle.ActiveUnit is Ranger)

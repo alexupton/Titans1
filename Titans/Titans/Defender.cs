@@ -128,15 +128,18 @@ namespace Titans
 
         public override void SelectSpecial1(Battle battle)
         {
+            battle.DeselectSpecialNumber();
             battle.SelectSpecialNumber(1);
         }
         public override void SelectSpecial2(Battle battle)
         {
+            battle.DeselectSpecialNumber();
             battle.SelectSpecialNumber(2);
 
         }
         public override void SelectSpecial3(Battle battle)
         {
+            battle.DeselectSpecialNumber();
             battle.SelectSpecialNumber(3);
         }
         public override void SelectSpecial4(Battle battle)
@@ -153,6 +156,11 @@ namespace Titans
         }
         public override void DeselectSpecial1(Battle battle)
         {
+            List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap,battle.BattleMap.GetTileAt( this.Location[0], this.Location[1]));
+            foreach (Tile adj in adjacent)
+            {
+                adj.ClearBlueHighlight();
+            }
             battle.DeselectSpecialNumber();
         }
         public override void DeselectSpecial2(Battle battle)

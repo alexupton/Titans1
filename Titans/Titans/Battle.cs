@@ -47,7 +47,7 @@ namespace Titans
             MoveMode = false;
             AttackMode = false;
             MoveEnabled = true;
-            AttackEnabled = true;
+            AttackEnabled = false;
             SelectEnabled = true;
             AttackRangeDisplayed = false;
             MoveRangeDisplayed = false;
@@ -68,7 +68,7 @@ namespace Titans
             MoveMode = false;
             AttackMode = false;
             MoveEnabled = true;
-            AttackEnabled = true;
+            AttackEnabled = false;
             for (int x = 0; x < newMap.Size[0]; x++)
             {
                 for (int y = 0; y < newMap.Size[1]; y++)
@@ -806,12 +806,26 @@ namespace Titans
 
         public void DeselectSpecialNumber()
         {
+            BattleMap.ClearBlueHighlights();
+            GameUI.specialAttack = false;
+            BattleMap.ClearAllHighlights();
             specialMode1 = false;
             specialMode2 = false;
             specialMode3 = false;
             specialMode4 = false;
             specialMode5 = false;
             specialMode6 = false;
+        }
+
+        //Is any special move selected?
+        public bool AnySpecialMoveSelected()
+        {
+            if (specialMode1 || specialMode2 || specialMode3 || specialMode4 || specialMode5 || specialMode6)
+            {
+                return true;
+            }
+            else
+                return false;
         }
 
         public void DeathCheck(Unit target)

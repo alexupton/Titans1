@@ -142,6 +142,7 @@
     <Compile Include="Draw.cs" />
     <Compile Include="Fighter.cs" />
     <Compile Include="Mage.cs" />
+    <Compile Include="ManaEvaluator.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapLoaderUltimate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,6 +151,7 @@
     <Compile Include="Ranger.cs" />
     <Compile Include="Scout.cs" />
     <Compile Include="Soldier.cs" />
+    <Compile Include="SpecialClicks.cs" />
     <Compile Include="SpecialHighlighting.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Unit.cs" />

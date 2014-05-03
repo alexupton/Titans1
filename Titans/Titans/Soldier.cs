@@ -68,6 +68,7 @@ namespace Titans
 
                 battle.DeathCheck(tile.TileUnit);
             }
+
             this.AP--;
             this.MP -= 5;
 
@@ -82,8 +83,8 @@ namespace Titans
 
             battle.GameUI.unitDamage = damage;
             battle.GameUI.displayDamage = true;
-            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
-            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55  - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55  - 20;
 
             battle.GameUI.splashDamage.Clear();
             battle.GameUI.splashLocations.Clear();
@@ -104,6 +105,7 @@ namespace Titans
         //Set the First Aid ability which adds 5 HP, costs 10 MP, and reduces the range to 0
         public override void Special3(Battle battle)
         {
+
             //TODO: trigger animation for +5 HP
             this.HP += 5;
             //TODO: remove other statuses
@@ -125,17 +127,20 @@ namespace Titans
 
         public override void SelectSpecial1(Battle battle)
         {
-            battle.BattleMap.BlueHighlightTiles(AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(this.Location[0], this.Location[1])));
-            battle.BattleMap.RedHighlightTiles(AI.GetAdjacentEnemyTiles(this, battle.BattleMap));
-            battle.GameUI.selfSelect = true;
+            battle.DeselectSpecialNumber();
+            battle.SelectSpecialNumber(1);
         }
         public override void SelectSpecial2(Battle battle)
         {
+            battle.DeselectSpecialNumber();
+            battle.SelectSpecialNumber(2);
 
         }
         public override void SelectSpecial3(Battle battle)
         {
-
+            
+            battle.DeselectSpecialNumber();
+            battle.SelectSpecialNumber(3);
         }
         public override void SelectSpecial4(Battle battle)
         {

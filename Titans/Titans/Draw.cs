@@ -195,21 +195,23 @@ namespace Titans
                     }
 
                     //Draw highlights
+                    
+                   if(game.battle.BattleMap.map[x][y].IsRedHighlighted)
+                    {
+                        game.spriteBatch.Draw(game.RedHighlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
+                    }
+                    
+                    else if (game.battle.BattleMap.map[x][y].IsBlueHighlighted)
+                    {
+                        game.spriteBatch.Draw(game.BlueHighlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
+                    }
                     if (game.battle.BattleMap.map[x][y].IsRedHighlighted && game.battle.BattleMap.map[x][y].IsHighlighted)
                     {
                         game.spriteBatch.Draw(game.GreenHighlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
                     }
-                    else if (game.battle.BattleMap.map[x][y].IsRedHighlighted)
-                    {
-                        game.spriteBatch.Draw(game.RedHighlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
-                    }
                     else if (game.battle.BattleMap.map[x][y].IsHighlighted)
                     {
                         game.spriteBatch.Draw(game.Highlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
-                    }
-                    else if (game.battle.BattleMap.map[x][y].IsBlueHighlighted)
-                    {
-                        game.spriteBatch.Draw(game.BlueHighlight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
                     }
                     
                 }
