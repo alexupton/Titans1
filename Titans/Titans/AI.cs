@@ -548,6 +548,7 @@ namespace Titans
             }
             else
             {
+                battle.GameUI.sfx.PlayPassSound(active);
                 active.AP = 0;
             }
             
@@ -612,6 +613,127 @@ namespace Titans
             }
 
             return enemyTiles;
+        }
+
+        public static void MakeTauntedMove(Battle battle, Unit active, Unit target)
+        {
+
+            Map map = battle.BattleMap;
+            Tile location = map.GetTileAt(active.Location[0], active.Location[1]);
+
+
+            int range = active.Range;
+            int x = active.Location[0];
+            int y = active.Location[1];
+            List<int[]> rangeSquare = new List<int[]>();
+
+            for (int i = (range * -1); i <= range; i++)
+            {
+                for (int j = (range * -1); j <= range; j++)
+                {
+                    if ((i + x) < map.Size[0] && (j + y) < map.Size[1] && (i + x) >= 0 & (j + y) >= 0)
+                    {
+                        rangeSquare.Add(new int[] { i + x, j + y });
+                    }
+                }
+            }
+            List<Tile> actualRange = new List<Tile>();
+            foreach (int[] tile in rangeSquare)
+            {
+                if ((Math.Abs(tile[0] - x) + Math.Abs(tile[1] - y)) <= range)
+                {
+                    actualRange.Add(map.GetTileAt(tile[0], tile[1]));
+                }
+            }
+
+            bool targetInRange = false;
+
+            foreach (Tile tile in actualRange)
+            {
+                if (tile.hasUnit)
+                {
+                    if (tile.TileUnit == target)
+                    {
+                        targetInRange = true;
+                    }
+                }
+            }
+
+            if (targetInRange)
+            {
+                battle.GameUI.unitDamage = battle.Attack(target);
+                battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
+                battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 - 20;
+                battle.GameUI.displayDamage = true;
+            }
+            else //calculate the closest tile to the target that is reachable
+            {
+                Tile activeLocation = map.GetTileAt(active.Location[0], active.Location[1]);
+                Tile targetLocation = map.GetTileAt(target.Location[0], target.Location[1]);
+
+                List<int[]> reachableTilesAsInt = map.GetLegalMoveCoordinates(active);
+                List<Tile> reachableTiles = new List<Tile>();
+
+                foreach (int[] coords in reachableTilesAsInt)
+                {
+                    reachableTiles.Add(map.GetTileAt(coords[0], coords[1]));
+                }
+
+                List<Tile> enemyAdjacent = GetAdjacentLegalTiles(map, targetLocation);
+                int closestPathCost = 500000;
+                Tile closest = new Tile();
+
+                foreach (Tile adj in enemyAdjacent)
+                {
+                    
+                    List<Tile> path = GetPath(activeLocation, adj, map);
+                    int pathCost = 0;
+                    foreach (Tile tile in path)
+                    {
+                        pathCost += tile.MoveCost;
+                    }
+                    if (pathCost < closestPathCost)
+                    {
+                        closest = adj;
+                        closestPathCost = pathCost;
+                    }
+                }
+                Tile destination = closest;
+                List<Tile> destinationPath = GetPath(activeLocation, destination, map);
+                if (Reachable(destinationPath, active.Speed) && destination != activeLocation)
+                {
+                    battle.StartMove(destination);
+                }
+                else if (destination != activeLocation)
+                {
+                    Tile closestReachableTile = new Tile();
+                    int closestReachableTileCost = 10000;
+                    foreach (Tile test in reachableTiles)
+                    {
+                        List<Tile> path = GetPath(test, destination, map);
+                        int pathCost = 0;
+                        foreach (Tile tile in path)
+                        {
+                            pathCost += tile.MoveCost;
+                        }
+                        if (pathCost < closestReachableTileCost)
+                        {
+                            closestReachableTile = test;
+                            closestReachableTileCost = pathCost;
+                        }
+                    }
+                    battle.StartMove(closestReachableTile);
+                }
+                else
+                {
+                    battle.GameUI.sfx.PlayPassSound(active);
+                    active.AP = 0;
+                }
+            }
+
+
+
+            
         }
      
     }
