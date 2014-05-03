@@ -136,6 +136,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial1(Game.battle);
                     }
                     else if (two.Contains(mousePos))
                     {
@@ -153,6 +154,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial2(Game.battle);
                     }
                     else if (three.Contains(mousePos))
                     {
@@ -170,6 +172,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial3(Game.battle);
                     }
                     else if (four.Contains(mousePos))
                     {
@@ -187,6 +190,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial4(Game.battle);
                     }
                     else if (five.Contains(mousePos))
                     {
@@ -204,6 +208,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial5(Game.battle);
                     }
                     else if (six.Contains(mousePos))
                     {
@@ -221,6 +226,7 @@ namespace Titans
                         Game.draw.specialColor[3] = Color.White;
                         Game.draw.specialColor[4] = Color.White;
                         Game.draw.specialColor[5] = Color.White;
+                        Game.battle.ActiveUnit.SelectSpecial6(Game.battle);
                     }
                 }
             }
@@ -243,6 +249,7 @@ namespace Titans
                             Game.draw.specialColor[0] = Color.White;
                             Game.draw.specialColor[1] = Color.White;
                             Game.draw.specialColor[2] = Color.White;
+                            Game.battle.ActiveUnit.SelectSpecial1(Game.battle);
                         }
                         else if (two.Contains(mousePos))
                         {
@@ -255,6 +262,7 @@ namespace Titans
                             Game.draw.specialColor[0] = Color.White;
                             Game.draw.specialColor[1] = Color.White;
                             Game.draw.specialColor[2] = Color.White;
+                            Game.battle.ActiveUnit.SelectSpecial2(Game.battle);
                         }
                         else if (three.Contains(mousePos))
                         {
@@ -267,6 +275,7 @@ namespace Titans
                             Game.draw.specialColor[0] = Color.White;
                             Game.draw.specialColor[1] = Color.White;
                             Game.draw.specialColor[2] = Color.White;
+                            Game.battle.ActiveUnit.SelectSpecial3(Game.battle);
                         }
                     }
                 
