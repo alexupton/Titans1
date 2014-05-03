@@ -145,7 +145,9 @@ namespace Titans
         public Texture2D no;
         public Texture2D no_invert;
         public Texture2D notemp;
-
+        public Texture2D blankButton;
+        public Texture2D blankButtonUn;
+        public Texture2D blankButtonIn;
         public int[] optionsSettings;
 
         //ingame menu
@@ -251,6 +253,7 @@ namespace Titans
         public bool isOptions = false;
         //bool startTurn;
         public bool mainMenu;
+        public bool customMenu;
         public bool demo;
         public List<Tile> MoveTiles;
         public bool moveWait;
@@ -274,6 +277,7 @@ namespace Titans
             this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.PreferredBackBufferWidth = 1500;
             
+            
             this.graphics.IsFullScreen = false;
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
@@ -295,7 +299,7 @@ namespace Titans
             moveWait = false;
             tickWait = false;
             endWait = false;
-
+            graphics.ApplyChanges();
 
             optionsSettings = new int []{2,2,2,5,5};
             specialButtons = new Texture2D[6];
@@ -341,7 +345,10 @@ namespace Titans
             {
                 load.CampaignMenu();
             }
-
+            else if (customMenu)
+            {
+                load.CustomGame();
+            }
             else if (optionsMenu)
             {
                 load.OptionsMenu();
@@ -411,6 +418,19 @@ namespace Titans
                         LoadContent();
                     }
 
+                }
+                if (mouseState.LeftButton == ButtonState.Pressed&&!releaseWait)
+                {
+                    Point mousePos = new Point(mouseState.X, mouseState.Y);
+                    if (customClick.Contains(mousePos) && !releaseWait)
+                    {
+                        releaseWait = true;
+                        mainMenu = false;
+                        customMenu = true;
+                        LoadContent();
+                       
+                        
+                    }
                 }
                 //options menu button logic
                 if (mouseState.LeftButton == ButtonState.Pressed)
@@ -1448,25 +1468,29 @@ namespace Titans
             {
                 draw.MainMenu();
             }
+            else if (customMenu)
+            {
+                draw.customGame();
+            }
             else if (campaignmenu)
             {
                 draw.CampaignMenu();
             }
 
-            else if (optionsMenu&&!ismenu)
+            else if (optionsMenu && !ismenu)
             {
                 draw.OptionsMenu();
             }
-            else if (demo&&!ismenu&&!isOptions)
+            else if (demo && !ismenu && !isOptions)
             {
                 draw.Demo();
             }
-            else if (ismenu&&!isOptions)
+            else if (ismenu && !isOptions)
             {
                 draw.Demo();
                 draw.ingamemenu();
             }
-            
+
             else if (isOptions)
             {
                 draw.Demo();

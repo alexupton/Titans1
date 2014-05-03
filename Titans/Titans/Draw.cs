@@ -66,12 +66,25 @@ namespace Titans
             game.spriteBatch.Draw(game.back, new Vector2(15, 755), Color.White);
             game.spriteBatch.End();
         }
+        public void customGame()
+        {
+            game.GraphicsDevice.Clear(Color.White);
+            game.spriteBatch.Begin();
+            game.spriteBatch.DrawString(game.bigText, "Custom Game", new Vector2(645, 160), Color.Black);
 
+           
+            float buttonx = 141 / 2;
+            game.spriteBatch.Draw(game.blankButton, new Vector2(15, 755), Color.White);
+            float x = game.specialText.MeasureString("Back").Length();
+            game.spriteBatch.DrawString(game.specialText, "Back", new Vector2((buttonx - (x / 2)) + 15, 759), Color.Black);
+            game.spriteBatch.End();
+        }
         //Draw the options menu that you see once clicking on options
         public void OptionsMenu()
         {
             game.GraphicsDevice.Clear(Color.White);
             game.spriteBatch.Begin();
+            game.spriteBatch.DrawString(game.bigText, "Options", new Vector2(645, 160), Color.Black);
             game.spriteBatch.Draw(game.fullScreen, new Vector2(25, 337), Color.White);
             game.spriteBatch.Draw(game.yes_invert, new Vector2(206, 337), Color.White);
             game.spriteBatch.Draw(game.no_invert, new Vector2(360, 337), Color.White);

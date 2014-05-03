@@ -23,6 +23,7 @@ namespace Titans
         {
             game = currentGame;
             game.sfx = new AudioManager(game);
+
             //var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(game.Window.Handle);
             //form.Location = new System.Drawing.Point(700,1200);
         }
@@ -74,11 +75,28 @@ namespace Titans
             game.newGametemp = game.newGame;
             game.loadGametemp = game.loadGame;
         }
+        public void CustomGame()
+        {
+            //text loader
+            game.text = game.Content.Load<SpriteFont>(@"Courier");
+            game.smallText = game.Content.Load<SpriteFont>(@"CourierSmall");
+            game.bigText = game.Content.Load<SpriteFont>(@"CourierBig");
+            game.specialText = game.Content.Load<SpriteFont>(@"SpecialFont");
 
+            //image loader
+            game.blankButton = game.Content.Load<Texture2D>(@"images\Blank");
+            game.blankButtonUn = game.Content.Load<Texture2D>(@"images\Blank Not Selected");
+            game.blankButtonUn = game.Content.Load<Texture2D>(@"images\Blank Higlight");
+
+        }
         public void OptionsMenu()
         {
             //Content.Unload();
 	    //Load all buttons for the options menu when the options button is clicked
+            game.text = game.Content.Load<SpriteFont>(@"Courier");
+            game.smallText = game.Content.Load<SpriteFont>(@"CourierSmall");
+            game.bigText = game.Content.Load<SpriteFont>(@"CourierBig");
+            game.specialText = game.Content.Load<SpriteFont>(@"SpecialFont");
             game.resolution = game.Content.Load<Texture2D>(@"images\Resolution");
             game.textSpeed = game.Content.Load<Texture2D>(@"images\Text Speed");
             game.musicLevel = game.Content.Load<Texture2D>(@"images\Music Level");
