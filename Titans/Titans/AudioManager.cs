@@ -160,16 +160,17 @@ namespace Titans
 	//Play a buzzer sound when player clicks on something that doesn't do anything
         public void PlayBuzzer()
         {
-            fxCat.SetVolume(10f);
+            //fxCat.SetVolume(10f);
             cue = soundBank.GetCue("Buzzer");
             cue.Play();
-            fxCat.SetVolume(6f);
+            //fxCat.SetVolume(6f);
         }
 
 	//Set volume based on currently selected volume
         public void setfxfvolume(float volume)
         {
             fxCat.SetVolume(volume);
+            
         }
 
 	//Determines what sound to make when an enemy or friendly unit passes

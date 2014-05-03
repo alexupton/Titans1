@@ -480,8 +480,9 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(0f);
-                    Game.sfx.PlayBuzzer();
+                    
+                    Game.sfx.setfxfvolume(0f);
+                    
                     Game.releaseWait = true;
 
                 }
@@ -494,7 +495,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(.25f);
+                    Game.sfx.setfxfvolume(.25f*2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
 
@@ -507,7 +509,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.normal;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(.5f);
+                    Game.sfx.setfxfvolume(.5f * 2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
@@ -519,7 +522,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.normal;
                     Game.optionsButtons[22] = Game.notSelected;
-                    //Game.engine.GetCategory("SFX").SetVolume(.75f);
+                    Game.sfx.setfxfvolume(.75f * 2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
@@ -531,7 +535,8 @@ namespace Titans
                     Game.optionsButtons[20] = Game.notSelected;
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.normal;
-                    //Game.engine.GetCategory("SFX").SetVolume(1f);
+                    Game.sfx.setfxfvolume(.1f * 2);
+                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
