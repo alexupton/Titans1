@@ -264,7 +264,8 @@ namespace Titans
         public bool isSpecial = false;
         public bool selfSelect = false;
         public bool specialAttack = false;
-
+        public bool taunted = false;
+        public bool rooted = false;
 
 
         public Game1()
@@ -947,11 +948,11 @@ namespace Titans
 
                 //Button clicks
 
-                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock && mouseState.RightButton != ButtonState.Pressed)
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock && mouseState.RightButton != ButtonState.Pressed &&!taunted)
                 {
                     
                     //select move
-                    if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled)
+                    if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled && !rooted)
                     {
 
                         battle.BattleMap.ClearRedHighlights();
@@ -1010,7 +1011,10 @@ namespace Titans
                         if (!battle.AttackMode)
                         {
                             battle.SelectEnabled = true;
-                            move = movetrue;
+                            if (!rooted)
+                            {
+                                move = movetrue;
+                            }
                             attack = attacktrue;
                             defend = defendtrue;
                             item = itemtrue;
@@ -1024,7 +1028,10 @@ namespace Titans
                     else if (attackclick.Contains(mousePos) && attack == attack_invert)
                     {
                         releaseWait = true;
-                        move = movetrue;
+                        if (!rooted)
+                        {
+                            move = movetrue;
+                        }
                         attack = attacktrue;
                         if (battle.ActiveUnit is Ranger)
                         {
@@ -1132,7 +1139,10 @@ namespace Titans
                         {
                             battle.BattleMap.ClearRedHighlights();
                             wait = true;
-                            move = movetrue;
+                            if (!rooted)
+                            {
+                                move = movetrue;
+                            }
                             attack = attacktrue;
                             defend = defendtrue;
                             item = itemtrue;

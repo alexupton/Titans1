@@ -141,6 +141,7 @@
     <Compile Include="Defender.cs" />
     <Compile Include="Draw.cs" />
     <Compile Include="Fighter.cs" />
+    <Compile Include="Haste.cs" />
     <Compile Include="Mage.cs" />
     <Compile Include="ManaEvaluator.cs" />
     <Compile Include="Map.cs" />
@@ -149,10 +150,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Ranger.cs" />
+    <Compile Include="Root.cs" />
     <Compile Include="Scout.cs" />
+    <Compile Include="Slow.cs" />
     <Compile Include="Soldier.cs" />
     <Compile Include="SpecialClicks.cs" />
     <Compile Include="SpecialHighlighting.cs" />
+    <Compile Include="StatusEffect.cs" />
+    <Compile Include="Stun.cs" />
+    <Compile Include="Taunt.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Unit.cs" />
   </ItemGroup>

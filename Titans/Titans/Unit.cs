@@ -22,6 +22,8 @@ namespace Titans
         public abstract int[] Location { get; set; } //Array size 2. First is X location, second is Y location. set to {-1, -1} if the unit is not on the map
         public abstract int MaxHP { get; set; }
         public abstract bool DefendMode { get; set; }
+        public abstract List<StatusEffect> StatusEffects { get; set; }
+        public abstract bool HasStatusEffects { get; set; }
 
         public abstract List<int> AttackModifiers{get; set;} //list of modifiers applied to attacks
         public abstract List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction

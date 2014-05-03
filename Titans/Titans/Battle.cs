@@ -809,6 +809,12 @@ namespace Titans
 
         public void DeselectSpecialNumber()
         {
+            ActiveUnit.DeselectSpecial1(this);
+            ActiveUnit.DeselectSpecial2(this);
+            ActiveUnit.DeselectSpecial3(this);
+            ActiveUnit.DeselectSpecial4(this);
+            ActiveUnit.DeselectSpecial5(this);
+            ActiveUnit.DeselectSpecial6(this);
             BattleMap.ClearBlueHighlights();
             GameUI.specialAttack = false;
             BattleMap.ClearAllHighlights();
