@@ -105,6 +105,72 @@ namespace Titans
 
                     
                 }
+
+            }
+
+            //bridge algorithm
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    Tile bridgeTile = gameMap.GetTileAt(i, j);
+                    if(bridgeTile.type == "bridge")
+                    {
+                        int X = bridgeTile.X;
+                        int Y = bridgeTile.Y;
+                        Tile up = new Tile();
+                        Tile down = new Tile();
+                        Tile left = new Tile();
+                        Tile right = new Tile();
+
+                        up.type = "grass";
+                        down.type = "grass";
+                        left.type = "grass";
+                        right.type = "grass";
+                        if (Y - 1 >= 0)
+                        {
+                            up = gameMap.GetTileAt(X, Y - 1);
+                        }
+                        if (Y + 1 < gameMap.Size[1])
+                        {
+                            down = gameMap.GetTileAt(X, Y + 1);
+                        }
+                        if (X - 1 >= 0)
+                        {
+                            left = gameMap.GetTileAt(X - 1, Y);
+                        }
+                        if (X + 1 < gameMap.Size[0])
+                        {
+                            right = gameMap.GetTileAt(X + 1, Y);
+                        }
+
+                        //check adjacent tiles to determine bridge type
+                        if (up.type == "water" && down.type != "water")
+                        {
+                            bridgeTile.Filename = "Bridge Top";
+                        }
+                        else if (up.type != "water" && down.type == "water")
+                        {
+                            bridgeTile.Filename = "Bridge Bottom";
+                        }
+                        else if (left.type == "water" && right.type != "water")
+                        {
+                            bridgeTile.Filename = "Bridge Left";
+                        }
+                        else if (left.type != "water" && right.type == "water")
+                        {
+                            bridgeTile.Filename = "Bridge Right";
+                        }
+                        else
+                        {
+                            bridgeTile.Filename = "Bridge1";
+                        }
+
+                       
+                    }
+
+
+                }
             }
             for (int i = 2; i < lines.Length; i++)
             {

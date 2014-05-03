@@ -23,7 +23,7 @@ namespace Titans
         public bool hasUnit { get; set; }
         public int MoveCost { get; set; } //How many movement points are consumed by moving over the tile
         public bool HasTrap { get; set; }
-        public bool HasBridge { get; set; }
+        public bool HasBridge{get; set;}
                                             
         public string type { get; set; }
 
@@ -83,7 +83,11 @@ namespace Titans
             switch (type)
             {
                 case "grass": Filename = "Grass1"; break;
-                case "bridge": Filename = "Bridge1"; break;
+                case "bridge":
+                    {
+
+                        break;
+                    }
                 case "sand":
                     {
                         if (Height == 0)
