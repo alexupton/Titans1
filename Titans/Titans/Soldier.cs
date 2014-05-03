@@ -54,26 +54,35 @@ namespace Titans
         //Set the Whirlwind ability which attacks all units in a splash area around the unit
         public override void Special1(Battle battle)
         {
-
+            
             List<Tile> enemyTiles = AI.GetAdjacentEnemyTiles(this, battle.BattleMap);
-            battle.GameUI.splashDamage.Clear();
-            battle.GameUI.splashLocations.Clear();
-            foreach (Tile tile in enemyTiles)
+            if (enemyTiles.Count > 0)
             {
-                battle.GameUI.splashLocations.Add(tile);
-                battle.GameUI.splashDamage.Add(15);
-                battle.GameUI.displayDamage = true;
+                battle.GameUI.splashDamage.Clear();
+                battle.GameUI.splashLocations.Clear();
 
-                tile.TileUnit.HP -= 15;
+                foreach (Tile tile in enemyTiles)
+                {
+                    battle.GameUI.splashLocations.Add(tile);
+                    battle.GameUI.splashDamage.Add(15);
+                    battle.GameUI.displayDamage = true;
 
-                battle.DeathCheck(tile.TileUnit);
+                    tile.TileUnit.HP -= 15;
+
+                    battle.DeathCheck(tile.TileUnit);
+                }
+
+                this.AP--;
+                this.MP -= 5;
+
+                battle.GameUI.timeSinceLastDamageFrame = 0;
+                battle.GameUI.frameCount = 0;
             }
-
-            this.AP--;
-            this.MP -= 5;
-
-            battle.GameUI.timeSinceLastDamageFrame = 0;
-            battle.GameUI.frameCount = 0;
+            else
+            {
+                battle.GameUI.sfx.PlayBuzzer();
+                battle.GameUI.sfx.PlayBuzzer();
+            }
         }
         //Set the Double Attack ability which attacks a unit for 150% basic damage
         public override void Special2(Battle battle)
@@ -107,11 +116,25 @@ namespace Titans
         {
 
             //TODO: trigger animation for +5 HP
-            this.HP += 5;
-            //TODO: remove other statuses
-            battle.GameUI.timeSinceLastDamageFrame = 0;
-            battle.GameUI.frameCount = 0;
-            battle.GameUI.wait = true;
+            if (this.HP != this.MaxHP)
+            {
+                this.HP += 5;
+                if (this.HP > this.MaxHP)
+                {
+                    HP = MaxHP;
+                }
+                //TODO: remove other statuses
+                MP -= 10;
+                AP--;
+                battle.GameUI.timeSinceLastDamageFrame = 0;
+                battle.GameUI.frameCount = 0;
+                battle.GameUI.wait = true;
+            }
+            else
+            {
+                battle.GameUI.sfx.PlayBuzzer();
+                battle.GameUI.sfx.PlayBuzzer();
+            }
             
 
         }
