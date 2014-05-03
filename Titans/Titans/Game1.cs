@@ -1145,7 +1145,7 @@ namespace Titans
                             attackedUnitTrueY = Y * 55 - 20;
                             if (battle.ActiveUnit is Artillery)
                             {
-                                splashDamage = battle.GetSplashDamage(lastSelectedTile.TileUnit, unitDamage);
+                                splashDamage = battle.GetSplashDamage(battle.BattleMap.GetTileAt(X, Y), unitDamage);
                             }
                             displayDamage = true;
                             timeSinceLastDamageFrame = 0;

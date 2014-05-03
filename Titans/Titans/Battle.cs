@@ -753,30 +753,33 @@ namespace Titans
         }
 
         //artillery does splash damage
-        public List<int> GetSplashDamage(Unit attacked, int damage)
+        public List<int> GetSplashDamage(Tile attacked, int damage)
         {
             List<int> splash = new List<int>();
-
-            List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(attacked.Location[0], attacked.Location[1]));
-            List<Tile> splashTiles = new List<Tile>();
-
-            foreach (Tile adj in adjacent)
+            if (attacked != null)
             {
-                if (adj.hasUnit)
+
+                List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, attacked);
+                List<Tile> splashTiles = new List<Tile>();
+
+                foreach (Tile adj in adjacent)
                 {
-                    if (adj.TileUnit.isPlayerUnit != ActiveUnit.isPlayerUnit)
+                    if (adj.hasUnit)
                     {
-                        splash.Add(damage / 2);
-                        splashTiles.Add(adj);
+                        if (adj.TileUnit.isPlayerUnit != ActiveUnit.isPlayerUnit)
+                        {
+                            splash.Add(damage / 2);
+                            splashTiles.Add(adj);
+                        }
                     }
                 }
-            }
 
-            for (int i = 0; i < splash.Count; i++)
-            {
-                splashTiles.ElementAt(i).TileUnit.HP -= splash.ElementAt(i);
+                for (int i = 0; i < splash.Count; i++)
+                {
+                    splashTiles.ElementAt(i).TileUnit.HP -= splash.ElementAt(i);
+                }
+                GameUI.splashLocations = splashTiles;
             }
-            GameUI.splashLocations = splashTiles;
             return splash;
         }
         public void SelectSpecial()
