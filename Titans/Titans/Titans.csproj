@@ -150,6 +150,7 @@
     <Compile Include="Ranger.cs" />
     <Compile Include="Scout.cs" />
     <Compile Include="Soldier.cs" />
+    <Compile Include="SpecialHighlighting.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="Unit.cs" />
   </ItemGroup>

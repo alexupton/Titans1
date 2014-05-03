@@ -60,7 +60,7 @@ namespace Titans
             Unit target = battle.CurrentTarget;
             int damage = 10 ;
             battle.GameUI.unitDamage = damage;
-            target.HP -= 50;
+            target.HP -= 10;
             //animation for damage text
             battle.GameUI.displayDamage = true;
             battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
@@ -128,15 +128,16 @@ namespace Titans
 
         public override void SelectSpecial1(Battle battle)
         {
-
+            battle.SelectSpecialNumber(1);
         }
         public override void SelectSpecial2(Battle battle)
         {
+            battle.SelectSpecialNumber(2);
 
         }
         public override void SelectSpecial3(Battle battle)
         {
-
+            battle.SelectSpecialNumber(3);
         }
         public override void SelectSpecial4(Battle battle)
         {
@@ -152,15 +153,15 @@ namespace Titans
         }
         public override void DeselectSpecial1(Battle battle)
         {
-
+            battle.DeselectSpecialNumber();
         }
         public override void DeselectSpecial2(Battle battle)
         {
-
+            battle.DeselectSpecialNumber();
         }
         public override void DeselectSpecial3(Battle battle)
         {
-
+            battle.DeselectSpecialNumber();
         }
         public override void DeselectSpecial4(Battle battle)
         {

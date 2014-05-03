@@ -43,6 +43,8 @@ namespace Titans
             FScore = 0;
             GScore = 0;
             HScore = 0;
+            HasTrap = false;
+            HasBridge = false;
 
         }
 

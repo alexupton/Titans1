@@ -259,6 +259,7 @@ namespace Titans
         public bool AILock;
         public bool loseMusicStarted = false;
         public Buttons buttons;
+        public SpecialHighlighting specialHighlight;
         public bool isSpecial = false;
         public bool selfSelect = false;
 
@@ -296,6 +297,7 @@ namespace Titans
 
             optionsSettings = new int []{2,2,2,5,5};
             specialButtons = new Texture2D[6];
+            specialHighlight = new SpecialHighlighting(this);
             timeSinceLastFrame = 0;
             millisecondsPerFrame = 100;
 
@@ -918,6 +920,7 @@ namespace Titans
                         battle.BattleMap.AddSpecificHighlight(X, Y);
                         lastSelectedTile = battle.BattleMap.GetTileAt(X, Y);
 
+                        //artillery splash highlighting
                         if (battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted && battle.ActiveUnit is Artillery)
                         {
                             List<Tile> splashTiles = AI.GetAllAdjacentTiles(battle.BattleMap, lastSelectedTile);
@@ -933,6 +936,10 @@ namespace Titans
                             }
                         }
                     }
+                }
+                else if (battle.specialMode1 || battle.specialMode2 || battle.specialMode3 || battle.specialMode4 || battle.specialMode5 || battle.specialMode6)
+                {
+                    specialHighlight.SpecialHighlight(mousePos);
                 }
 
                 //Button clicks

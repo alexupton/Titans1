@@ -28,6 +28,12 @@ namespace Titans
         public bool AttackRangeDisplayed { get; set; }
         public bool MoveRangeDisplayed { get; set; }
         public bool specialMode { get; set; }
+        public bool specialMode1 { get; set; }
+        public bool specialMode2 { get; set; }
+        public bool specialMode3 { get; set; }
+        public bool specialMode4 { get; set; }
+        public bool specialMode5 { get; set; }
+        public bool specialMode6 { get; set; }
         public Unit CurrentTarget { get; set; }
         public Tile SelectedTile { get; set; }
 
@@ -46,6 +52,12 @@ namespace Titans
             AttackRangeDisplayed = false;
             MoveRangeDisplayed = false;
             specialMode = false;
+            specialMode1 = false;
+            specialMode2 = false;
+            specialMode3 = false;
+            specialMode4 = false;
+            specialMode5 = false;
+            specialMode6 = false;
         }
 
         public Battle(Map newMap)
@@ -699,6 +711,40 @@ namespace Titans
             }
         }
 
+        public void ShowSpecificAttackRange(Unit selected, int Range)
+        {
+            AttackRangeDisplayed = true;
+            int range = Range;
+            int x = selected.Location[0];
+            int y = selected.Location[1];
+            List<int[]> rangeSquare = new List<int[]>();
+            List<int[]> actualRange = new List<int[]>();
+
+            for (int i = (range * -1); i <= range; i++)
+            {
+                for (int j = (range * -1); j <= range; j++)
+                {
+                    if ((i + x) < BattleMap.Size[0] && (j + y) < BattleMap.Size[1] && (i + x) >= 0 & (j + y) >= 0)
+                    {
+                        rangeSquare.Add(new int[] { i + x, j + y });
+                    }
+                }
+            }
+
+            foreach (int[] tile in rangeSquare)
+            {
+                if ((Math.Abs(tile[0] - x) + Math.Abs(tile[1] - y)) <= range)
+                {
+                    actualRange.Add(tile);
+                }
+            }
+
+            foreach (int[] tile in actualRange)
+            {
+                BattleMap.AddSpecificBlueHighlight(tile[0], tile[1]);
+            }
+        }
+
         public void ShowMoveRange(Unit selected)
         {
             MoveRangeDisplayed = true;
@@ -743,6 +789,29 @@ namespace Titans
         {
             specialMode = false;
             SelectEnabled = true;
+        }
+
+        public void SelectSpecialNumber(int specialNumber)
+        {
+            switch (specialNumber)
+            {
+                case 2: specialMode2 = true; break;
+                case 3: specialMode3 = true; break;
+                case 4: specialMode4 = true; break;
+                case 5: specialMode5 = true; break;
+                case 6: specialMode6 = true; break;
+                default: specialMode1 = true; break;
+            }
+        }
+
+        public void DeselectSpecialNumber()
+        {
+            specialMode1 = false;
+            specialMode2 = false;
+            specialMode3 = false;
+            specialMode4 = false;
+            specialMode5 = false;
+            specialMode6 = false;
         }
 
         public void DeathCheck(Unit target)
