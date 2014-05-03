@@ -43,7 +43,7 @@ namespace Titans
             AP = 2;
             Abilities = new List<string>();
             Abilities.Add("Firebolt");
-            Abilities.Add("Magic Slice");
+            Abilities.Add("Magic Strike");
             Abilities.Add("Heal");
             Abilities.Add("Refresh");
             Abilities.Add("Haste");
@@ -62,7 +62,7 @@ namespace Titans
             Unit target = battle.CurrentTarget;
             int damage = 50;
             battle.GameUI.unitDamage = damage;
-            target.HP -= 50;
+            target.HP -= damage;
             battle.GameUI.displayDamage = true;
             battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
             battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
@@ -101,7 +101,7 @@ namespace Titans
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
         }
-        //Set the Magic Slice ability which deals 25  damage and costs 20 MP
+        //Set the Magic Strike ability which deals 25  damage and costs 20 MP
         public override void Special2(Battle battle)
         {
            
@@ -162,6 +162,7 @@ namespace Titans
            
             //set targets status
             //text animation
+            Haste haste = new Haste(target);
             this.MP -= 20;
             this.AP--;
             battle.GameUI.timeSinceLastDamageFrame = 0;
@@ -177,7 +178,7 @@ namespace Titans
             Unit target = battle.CurrentTarget;
             //sets target status
             //text animation
-
+            Slow slow = new Slow(target);
             this.MP -= 20;
             this.AP--;
             battle.GameUI.timeSinceLastDamageFrame = 0;

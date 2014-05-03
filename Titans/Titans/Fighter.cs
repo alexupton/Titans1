@@ -55,36 +55,43 @@ namespace Titans
         //Set the Flares ability which costs 10 MP and is used on the units current tile
         public override void Special1(Battle battle)
         {
-            //pre abbility modifiers
-            Range = 0;
+            
+            
             MP -= 10;
-            //code for calling animation
-            //post abbility modifiers 
-            Range = 1;
+            
         }
         //Set the Heat Seeking Missile ability which adds an attack modifier of 15, costs 10 MP, and has a range of 6
         public override void Special2(Battle battle)
         {
-            //pre abbility modifiers
-            AttackModifiers.Add(15);
-            Range = 6;
-            MP -= 10;
-            //code for calling animation
-            //post abbility modifiers 
-            AttackModifiers.Remove(15);
-            Range = 2;
+            Unit target = battle.CurrentTarget;
+            int damage = 15;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= damage;
+
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+           
+            this.MP -= 10;
+            this.AP--;
         }
         //Set the Sonic Strike ability which adds an attack modifier of 10, reduce speed to 100, and costs 15 MP
         public override void Special3(Battle battle)
         {
-            //pre abbility modifiers
-            AttackModifiers.Add(10);
-            Speed = 100;
-            MP -= 15;
-            //code for calling animation
-            //post abbility modifiers 
-            AttackModifiers.Remove(10);
-            Speed = 175;
+            Unit target = battle.CurrentTarget;
+            int damage = 10;
+            battle.GameUI.unitDamage = damage;
+            target.HP -= damage;
+
+            battle.GameUI.displayDamage = true;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+           
+            this.MP -= 15;
+            
+            this.AP--;
+           
+          
         }
         public override void Special4(Battle battle)
         {

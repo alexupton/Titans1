@@ -83,7 +83,8 @@ namespace Titans
             Unit target = battle.CurrentTarget;
             int damage = 15;
             battle.GameUI.unitDamage = damage;
-            target.HP -= 50;
+            target.HP -= damage;
+            Root root = new Root(target);
             //yet to be added imobilize effect
 
             //animation for damage text

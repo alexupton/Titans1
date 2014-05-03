@@ -24,6 +24,33 @@ namespace Titans
             Game = game;
             
         }
+        public void CustomGameMenu(MouseState mouseState)
+        {
+            Rectangle backClick = new Rectangle(15, 755, 141, 33);
+            bool mouseback = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(backClick);
+            if (mouseback && Game.blankButton == Game.blankButton)
+                {
+                   Game.blankButton = Game.blankButtonIn;
+                }
+                else 
+                {
+                    Game.blankButton = Game.blankButton;
+                }                
+                
+                //exits custom game menu
+            if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
+            {
+
+                Point mousePos = new Point(mouseState.X, mouseState.Y);
+                if (backClick.Contains(mousePos))
+                {
+                    Game.releaseWait = true;
+                    Game.mainMenu = true;
+                    Game.customMenu = false;
+                    
+                }
+            }
+        }
         public void InGameButtons(MouseState mouseState)
         {
             Rectangle resume = new Rectangle( 700, 227,116, 27);

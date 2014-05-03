@@ -63,6 +63,7 @@ namespace Titans
             int damage = 10 ;
             battle.GameUI.unitDamage = damage;
             target.HP -= 10;
+            Stun stun = new Stun(target);
             //animation for damage text
             battle.GameUI.displayDamage = true;
             battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
@@ -85,7 +86,7 @@ namespace Titans
             Unit target = battle.CurrentTarget;
             int damage = AttackResolver.Attack(this, target, this.AttackModifiers)/2;
             battle.GameUI.unitDamage = damage;
-            target.HP -= 50;
+            target.HP -= damage;
             //animation for damage text
             battle.GameUI.displayDamage = true;
             battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
@@ -107,9 +108,8 @@ namespace Titans
         public override void Special3(Battle battle)
         {
              
-            //pre abbility modifiers
-           
-          
+            Unit target = battle.CurrentTarget;
+            Taunt taunt = new Taunt(this,target);
             
             MP -= 15;
             this.AP--;
