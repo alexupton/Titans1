@@ -139,6 +139,24 @@ namespace Titans
                     {
                         game.spriteBatch.Draw(game.Water1, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
                     }
+                    else if (game.battle.BattleMap.map[x][y].Filename == "Bridge Top")
+                    {
+                        game.spriteBatch.Draw(game.bridgeTop, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
+                    }
+                    else if (game.battle.BattleMap.map[x][y].Filename == "Bridge Bottom")
+                    {
+                        game.spriteBatch.Draw(game.bridgeBottom, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
+                    }
+                    else if (game.battle.BattleMap.map[x][y].Filename == "Bridge Left")
+                    {
+                        game.spriteBatch.Draw(game.bridgeLeft, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
+                    }
+                    else if (game.battle.BattleMap.map[x][y].Filename == "Bridge Right")
+                    {
+                        game.spriteBatch.Draw(game.bridgeRight, new Vector2(x * 55 + game.offsetX, y * 55 + game.offsetY), Color.White);
+                    }
+                    
+
 
                     //Draw units
                     if (game.battle.BattleMap.map[x][y].hasUnit)

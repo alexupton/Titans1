@@ -41,6 +41,10 @@ namespace Titans
         public Texture2D Sand1_Height3;
         public Texture2D Sand1_Height4;
         public Texture2D Water1;
+        public Texture2D bridgeTop;
+        public Texture2D bridgeLeft;
+        public Texture2D bridgeRight;
+        public Texture2D bridgeBottom;
         public Texture2D UI;
         public Texture2D Highlight;
         public Texture2D RedHighlight;

@@ -255,6 +255,11 @@ namespace Titans
             game.RedHighlight = game.Content.Load<Texture2D>(@"images\RedBorder");
             game.GreenHighlight = game.Content.Load<Texture2D>(@"images\GreenBorder");
             game.BlueHighlight = game.Content.Load<Texture2D>(@"images\BlueBorder");
+            game.bridgeBottom = game.Content.Load<Texture2D>(@"images\Tiles\Bridge Bottom");
+            game.bridgeTop = game.Content.Load<Texture2D>(@"images\Tiles\Bridge Top");
+            game.bridgeLeft = game.Content.Load<Texture2D>(@"images\Tiles\Bridge Left");
+            game.bridgeRight = game.Content.Load<Texture2D>(@"images\Tiles\Bridge Right");
+
 
             //Units
             game.Artillery = game.Content.Load<Texture2D>(@"images\Units\Artillery");
