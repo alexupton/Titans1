@@ -140,7 +140,6 @@ namespace Titans
                 if (!left.IsImpassible)
                 {
                     adjacentTiles.Add(left);
-
                 }
             }
 
