@@ -148,11 +148,14 @@ namespace Titans
         public Texture2D blankButton;
         public Texture2D blankButtonUn;
         public Texture2D blankButtonIn;
+        public List<Texture2D> customButtons;
+        public List<Color> customColors;
         public int[] optionsSettings;
 
         //ingame menu
         public Texture2D[] menuButtons;
         public Texture2D[] optionsButtons;
+
         public Texture2D menuBox;
         public Texture2D optionsBox;
         public Texture2D normal;
@@ -420,6 +423,7 @@ namespace Titans
                     }
 
                 }
+                //custom game logic
                 if (mouseState.LeftButton == ButtonState.Pressed&&!releaseWait)
                 {
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
@@ -429,6 +433,7 @@ namespace Titans
                         mainMenu = false;
                         customMenu = true;
                         LoadContent();
+                        
                        
                         
                     }
@@ -536,6 +541,10 @@ namespace Titans
 
                 }
             }
+            else if (customMenu)
+            {
+                buttons.CustomGameMenu();
+            }
             else if (campaignmenu)
             {
                 Rectangle backClick = new Rectangle(15, 755, 141, 33);
@@ -587,12 +596,12 @@ namespace Titans
 
                 }
             }
-            
-            
+
+
             //logic or options buttons
-                else if (optionsMenu)
+            else if (optionsMenu)
             {
-               
+
 
                 Rectangle backClick = new Rectangle(15, 755, 141, 33);
                 Rectangle textClick = new Rectangle(25, 433, 141, 33);
@@ -616,29 +625,29 @@ namespace Titans
                 //int count = 2;
                 bool mouseback = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(backClick);
                 bool mousefull = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(fullClick);
-                
-                if(mouseState.LeftButton==ButtonState.Pressed&&!releaseWait)
+
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
                 {
-                    Point mousePos= new Point(mouseState.X,mouseState.Y);
-                    if(res1Click.Contains(mousePos))
+                    Point mousePos = new Point(mouseState.X, mouseState.Y);
+                    if (res1Click.Contains(mousePos))
                     {
-                         this.graphics.PreferredBackBufferHeight = 800;
-                         this.graphics.PreferredBackBufferWidth = 1280;
-                         graphics.ApplyChanges();
-                         res1_unselected = res1;
-                         res2 = res2_unselected;
-                         optionsSettings[1] = 1;
-                         releaseWait = true;
+                        this.graphics.PreferredBackBufferHeight = 800;
+                        this.graphics.PreferredBackBufferWidth = 1280;
+                        graphics.ApplyChanges();
+                        res1_unselected = res1;
+                        res2 = res2_unselected;
+                        optionsSettings[1] = 1;
+                        releaseWait = true;
                     }
-                    else if(res2Click.Contains(mousePos))
+                    else if (res2Click.Contains(mousePos))
                     {
-                         this.graphics.PreferredBackBufferHeight = 800;
-                         this.graphics.PreferredBackBufferWidth = 1500;
-                         graphics.ApplyChanges();
-                         res1_unselected = res1temp;
-                         res2 = res2temp;
-                         optionsSettings[1] = 2;
-                         releaseWait = true;
+                        this.graphics.PreferredBackBufferHeight = 800;
+                        this.graphics.PreferredBackBufferWidth = 1500;
+                        graphics.ApplyChanges();
+                        res1_unselected = res1temp;
+                        res2 = res2temp;
+                        optionsSettings[1] = 2;
+                        releaseWait = true;
                     }
                 }
                 if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
@@ -676,15 +685,15 @@ namespace Titans
                     if (volumemuteclick.Contains(mousePos))
                     {
 
-                        
+
                         volmute_unselected = volmute;
                         vollevel1_unselected = vol1temp;
                         vollevel2_unselected = vol2temp;
-                        vollevel3_unselected= vol3temp;
-                        vollevelMax_unselected= volmaxtemp;
+                        vollevel3_unselected = vol3temp;
+                        vollevelMax_unselected = volmaxtemp;
                         optionsSettings[3] = 1;
                         MediaPlayer.Volume = 0;
-                        
+
                     }
                     if (volume1click.Contains(mousePos))
                     {
@@ -694,10 +703,10 @@ namespace Titans
                         vollevel1_unselected = vollevel1;
                         vollevel2_unselected = vol2temp;
                         vollevel3_unselected = vol3temp;
-                        vollevelMax_unselected= volmaxtemp;
+                        vollevelMax_unselected = volmaxtemp;
                         optionsSettings[3] = 2;
                         MediaPlayer.Volume = .25f;
-                      
+
                     }
                     if (volume2click.Contains(mousePos))
                     {
@@ -734,8 +743,8 @@ namespace Titans
                     }
                 }
 
-               //soundBank effects logic
-                if (mouseState.LeftButton == ButtonState.Pressed&&!releaseWait)
+                //soundBank effects logic
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait)
                 {
 
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
@@ -764,7 +773,7 @@ namespace Titans
                         level3_unselected = level3temp;
                         levelMax_unselected = maxtemp;
 
-                        sfx.setfxfvolume(0.25f*6f);
+                        sfx.setfxfvolume(0.25f * 6f);
                         sfx.PlayBuzzer();
                         optionsSettings[4] = 2;
                         releaseWait = true;
@@ -808,11 +817,11 @@ namespace Titans
                         sfx.setfxfvolume(1f);
                         sfx.PlayBuzzer();
                         optionsSettings[4] = 5;
-                        
+
                         releaseWait = true;
                     }
                 }
-              //full screen logic
+                //full screen logic
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
 
@@ -821,31 +830,31 @@ namespace Titans
                     {
                         if (isFullScreen)
                         {
-                           
+
                             graphics.ToggleFullScreen();
                             yes_invert = yestemp;
-                            
+
                             no_invert = no;
                             isFullScreen = false;
-                           
-                           
+
+
 
                         }
                         else if (!isFullScreen)
                         {
-                            
+
                             yes_invert = yes;
-                           
-                            no_invert =notemp;
+
+                            no_invert = notemp;
                             graphics.ToggleFullScreen();
                             isFullScreen = true;
-                          
+
 
                         }
-                       
+
                     }
                 }
-                
+
 
                 //back inverter
                 if (mouseback && back == backtemp)
@@ -856,8 +865,8 @@ namespace Titans
                 else if (!mouseback && back != backtemp)
                 {
                     back = backtemp;
-                }                
-                
+                }
+
                 //exits options menu
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
@@ -874,9 +883,9 @@ namespace Titans
 
                 }
 
-                
+
             }
-            else if (demo && !(p1win || p2win)&&!ismenu&&!isOptions)
+            else if (demo && !(p1win || p2win) && !ismenu && !isOptions)
             {
                 engine.Update();
                 sfx.Update();
@@ -906,8 +915,8 @@ namespace Titans
                 bool mousespecial = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(specialclick);
                 bool mouseitems = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(itemclick);
                 Point mousePos = new Point(mouseState.X, mouseState.Y);
-                
-             
+
+
 
                 //lock buttons during wait times
                 if (tickWait)
@@ -933,8 +942,8 @@ namespace Titans
                     }
 
                 }
-                    //AttackMode Highlighting
-                else if(battle.AttackMode || specialAttack)
+                //AttackMode Highlighting
+                else if (battle.AttackMode || specialAttack)
                 {
 
                     int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
@@ -968,9 +977,9 @@ namespace Titans
 
                 //Button clicks
 
-                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock && mouseState.RightButton != ButtonState.Pressed &&!taunted)
+                if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock && mouseState.RightButton != ButtonState.Pressed && !taunted)
                 {
-                    
+
                     //select move
                     if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled && !rooted)
                     {
@@ -1086,7 +1095,7 @@ namespace Titans
 
                     }
                     //select defend
-                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled && defend !=defend_grey)
+                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled && defend != defend_grey)
                     {
                         timeSinceLastDamageFrame = 0;
                         wait = true;
@@ -1104,7 +1113,7 @@ namespace Titans
                         frameCount = 0;
 
                     }
-                   
+
                     ////deselect if in move or attack mode and defend button clicked
                     //else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
                     //{
@@ -1203,26 +1212,26 @@ namespace Titans
                         }
                     }
                     //select special
-                     if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
+                    if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
                     {
                         buttons.SpecialButtons();
 
                     }
 
                     //choose special attacks
-                     if (battle.specialMode && !releaseWait && !wait && !tickWait && !moveWait)
-                     {
-                         buttons.SelectSpecial(mouseState);
-                     }
-                     //confirm special
-                     if (battle.AnySpecialMoveSelected() && !releaseWait && !wait && !tickWait && !moveWait)
-                     {
-                         specialClicks.EvaluateSpecialClick(mousePos);
-                     }
-                    
+                    if (battle.specialMode && !releaseWait && !wait && !tickWait && !moveWait)
+                    {
+                        buttons.SelectSpecial(mouseState);
+                    }
+                    //confirm special
+                    if (battle.AnySpecialMoveSelected() && !releaseWait && !wait && !tickWait && !moveWait)
+                    {
+                        specialClicks.EvaluateSpecialClick(mousePos);
+                    }
 
-                    
-                   
+
+
+
                 }
 
                 if (mouseState.LeftButton == ButtonState.Released)
@@ -1282,97 +1291,97 @@ namespace Titans
 
                 //update the display with the active unit
                 unit = battle.ActiveUnit.GetType();
-                 hp = battle.ActiveUnit.HP.ToString();
-                 range = battle.ActiveUnit.Range.ToString() ;
-                 defense = battle.ActiveUnit.Defense.ToString();
-                 speed = battle.ActiveUnit.Speed.ToString() ;
-                 mp = battle.ActiveUnit.MP.ToString();
-                 attackText = battle.ActiveUnit.Attack.ToString();
-                 moveText = battle.ActiveUnit.AP.ToString();
-                 nextUnits = new List<string>();
-                 for (int i = battle.QueuePosition + 1; i < battle.QueuePosition + 6; i++)
-                 {
-                     if (i < battle.BattleQueue.Count)
-                     {
-                         string belongsTo;
-                         if (battle.BattleQueue.ElementAt(i).isPlayerUnit)
-                         {
-                             belongsTo = "Player 1";
-                         }
-                         else
-                         {
-                             belongsTo = "Player 2";
-                         }
+                hp = battle.ActiveUnit.HP.ToString();
+                range = battle.ActiveUnit.Range.ToString();
+                defense = battle.ActiveUnit.Defense.ToString();
+                speed = battle.ActiveUnit.Speed.ToString();
+                mp = battle.ActiveUnit.MP.ToString();
+                attackText = battle.ActiveUnit.Attack.ToString();
+                moveText = battle.ActiveUnit.AP.ToString();
+                nextUnits = new List<string>();
+                for (int i = battle.QueuePosition + 1; i < battle.QueuePosition + 6; i++)
+                {
+                    if (i < battle.BattleQueue.Count)
+                    {
+                        string belongsTo;
+                        if (battle.BattleQueue.ElementAt(i).isPlayerUnit)
+                        {
+                            belongsTo = "Player 1";
+                        }
+                        else
+                        {
+                            belongsTo = "Player 2";
+                        }
 
-                         string unitText = belongsTo + ": " +  battle.BattleQueue.ElementAt(i).GetType() + " " + battle.BattleQueue.ElementAt(i).HP.ToString() + " HP";
-                         nextUnits.Add(unitText);
-                     }
+                        string unitText = belongsTo + ": " + battle.BattleQueue.ElementAt(i).GetType() + " " + battle.BattleQueue.ElementAt(i).HP.ToString() + " HP";
+                        nextUnits.Add(unitText);
+                    }
 
-                 }
+                }
 
-                
-                 timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
+
+                timeSinceLastFrame += gameTime.ElapsedGameTime.Milliseconds;
 
 
                 //stuff that happens on the animation tick, about 60fps
-                 if (timeSinceLastFrame > millisecondsPerFrame)
-                 {
-                     timeSinceLastFrame = 0;
-                 }
+                if (timeSinceLastFrame > millisecondsPerFrame)
+                {
+                    timeSinceLastFrame = 0;
+                }
 
 
-                 timeSinceLastDamageFrame += gameTime.ElapsedGameTime.Milliseconds;
+                timeSinceLastDamageFrame += gameTime.ElapsedGameTime.Milliseconds;
 
                 //stuff that happens on the damage tick, including end-of-turn checking
                 //this tick is quite slow
-                 if (timeSinceLastDamageFrame > millisecondsPerDamageFrame)
-                 {
-                     
-                     timeSinceLastDamageFrame = 0;
-                     // Increment to next frame
-                     wait = false;
-                     displayDamage = false;
-                     splashDamage.Clear();
-                     splashLocations.Clear();
-                     if (battle.ActiveUnit.AP <= 0 && frameCount == 2)
-                     {
-                         battle.NextPlayer();
-                         
-                     }
-                     if (battle.gameOver)
-                     {
-                         endWait = false;
-                     }
+                if (timeSinceLastDamageFrame > millisecondsPerDamageFrame)
+                {
 
-                     if (AILock && !moveWait)
-                     {
-                         battle.AIMove();
-                     }
-                     frameCount++;
+                    timeSinceLastDamageFrame = 0;
+                    // Increment to next frame
+                    wait = false;
+                    displayDamage = false;
+                    splashDamage.Clear();
+                    splashLocations.Clear();
+                    if (battle.ActiveUnit.AP <= 0 && frameCount == 2)
+                    {
+                        battle.NextPlayer();
 
-                 }
+                    }
+                    if (battle.gameOver)
+                    {
+                        endWait = false;
+                    }
+
+                    if (AILock && !moveWait)
+                    {
+                        battle.AIMove();
+                    }
+                    frameCount++;
+
+                }
 
                 //stuff that happens on the move tick, a faster interval
-                 timeSinceLastMoveFrame += gameTime.ElapsedGameTime.Milliseconds;
-                 if (timeSinceLastMoveFrame > millisecondsPerMoveFrame)
-                 {
-                     timeSinceLastMoveFrame = 0;
-                     //if a move is ongoing, advance unit to the next tile
-                     if (moveWait)
-                     {
-                         battle.ContinueMove();
-                         timeSinceLastDamageFrame = 0;
-                     }
-                 }
+                timeSinceLastMoveFrame += gameTime.ElapsedGameTime.Milliseconds;
+                if (timeSinceLastMoveFrame > millisecondsPerMoveFrame)
+                {
+                    timeSinceLastMoveFrame = 0;
+                    //if a move is ongoing, advance unit to the next tile
+                    if (moveWait)
+                    {
+                        battle.ContinueMove();
+                        timeSinceLastDamageFrame = 0;
+                    }
+                }
 
                 //if the turn is over, lock everything for a beat
-                 if (battle.ActiveUnit.AP <= 0)
-                 {
-                     tickWait = true;
-                 }
+                if (battle.ActiveUnit.AP <= 0)
+                {
+                    tickWait = true;
+                }
 
-                 
-               
+
+
             }
             timeSinceLastDamageFrame += gameTime.ElapsedGameTime.Milliseconds;
             if (timeSinceLastDamageFrame > millisecondsPerDamageFrame && battle != null)
@@ -1486,7 +1495,7 @@ namespace Titans
             {
                 draw.CampaignMenu();
             }
-
+                
             else if (optionsMenu && !ismenu)
             {
                 draw.OptionsMenu();

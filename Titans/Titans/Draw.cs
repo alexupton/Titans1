@@ -68,15 +68,38 @@ namespace Titans
         }
         public void customGame()
         {
+            float x;
+            
             game.GraphicsDevice.Clear(Color.White);
             game.spriteBatch.Begin();
-            game.spriteBatch.DrawString(game.bigText, "Custom Game", new Vector2(645, 160), Color.Black);
 
+            game.spriteBatch.DrawString(game.bigText, "Custom Game", new Vector2(645, 60), Color.Black);
+                       
+            float buttonx = 144 / 2;
+            game.spriteBatch.DrawString(game.bigText, "Settings", new Vector2(250, 170), Color.Black);
+            game.spriteBatch.DrawString(game.bigText, "Maps", new Vector2(1000, 170), Color.Black);
+
+
+            game.spriteBatch.Draw(game.customButtons[1], new Vector2(25, 237), Color.White);
+            x = game.text.MeasureString("VS.").X;
+            game.spriteBatch.DrawString(game.specialText, "VS.", new Vector2((buttonx - (x / 2)) + 25, 242), game.customColors[1]);
            
-            float buttonx = 141 / 2;
-            game.spriteBatch.Draw(game.blankButton, new Vector2(15, 755), Color.White);
-            float x = game.specialText.MeasureString("Back").Length();
-            game.spriteBatch.DrawString(game.specialText, "Back", new Vector2((buttonx - (x / 2)) + 15, 759), Color.Black);
+            game.spriteBatch.Draw(game.customButtons[4], new Vector2(206, 237), Color.White);
+            game.spriteBatch.Draw(game.customButtons[5], new Vector2(360, 237), Color.White);
+
+            game.spriteBatch.Draw(game.customButtons[2], new Vector2(25, 285), Color.White);
+           
+            x = game.text.MeasureString("Game Mode").X;
+            game.spriteBatch.DrawString(game.specialText, "Game Mode", new Vector2((buttonx - (x / 2)) + 25, 290), game.customColors[2]);
+            game.spriteBatch.Draw(game.customButtons[6], new Vector2(206, 285), Color.White);
+            game.spriteBatch.Draw(game.customButtons[7], new Vector2(360, 285), Color.White);
+            game.spriteBatch.Draw(game.customButtons[8], new Vector2(514, 285), Color.White);
+
+            game.spriteBatch.Draw(game.customButtons[0], new Vector2(15, 755), Color.White);
+             x = game.text.MeasureString("Back").X;
+            game.spriteBatch.DrawString(game.specialText, "Back", new Vector2((buttonx - (x / 2)) + 15, 760), game.customColors[0]);
+
+            game.spriteBatch.Draw(game.customButtons[3], new Vector2(1200, 755), Color.White);
             game.spriteBatch.End();
         }
         //Draw the options menu that you see once clicking on options
