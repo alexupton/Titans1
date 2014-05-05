@@ -540,11 +540,10 @@ namespace Titans
 
             if (ActiveUnit is Ranger)
             {
-                if(rangersWithTargets.Contains(ActiveUnit))
+                Ranger ranger = (Ranger)ActiveUnit;
+                if (ranger.specialTarget != null)
                 {
-                    int rangerIndex = rangersWithTargets.IndexOf((Ranger)ActiveUnit);
-                    Unit special = rangerTarget.ElementAt(rangerIndex);
-                    BattleMap.AddSpecificRedHighlight(special.Location[0], special.Location[1]);
+                    BattleMap.AddSpecificRedHighlight(ranger.specialTarget.Location[0], ranger.specialTarget.Location[1]);
                 }
             }
                 AttackMode = true;
@@ -577,11 +576,9 @@ namespace Titans
             //ranger gets to attack his special target once
             if (ActiveUnit is Ranger)
             {
-                if (rangerTarget.Contains(target) && rangersWithTargets.Contains((Ranger)ActiveUnit))
-                {
-                    int rangerIndex = rangerTarget.IndexOf(target);
-                    rangersWithTargets.Remove((Ranger)ActiveUnit);
-                }
+                Ranger dummy = (Ranger)ActiveUnit;
+                dummy.specialTarget = null;
+                ActiveUnit = dummy;
             }
             SelectEnabled = true;
             BattleMap.ClearHighlights();
@@ -648,22 +645,21 @@ namespace Titans
             //check if the unit is dead. if it is, turf it
             if (target.HP <= 0)
             {
-                //if a ranger dies, it's target must be removed from the list
-                if (target is Ranger)
+                //if the unit is a ranger's special target, that status must be removed
+                Ranger test = new Ranger();
+                for (int i = 0; i < BattleQueue.Count; i++)
                 {
-                    if (rangersWithTargets.Contains(target))
+                    Unit unit = BattleQueue.ElementAt(i);
+                    if (unit is Ranger)
                     {
-                        int rangerIndex = rangersWithTargets.IndexOf((Ranger)target);
-                        rangersWithTargets.RemoveAt(rangerIndex);
-                        rangerTarget.RemoveAt(rangerIndex);
+                        test = (Ranger)unit;
+                        if (test.specialTarget == target)
+                        {
+                            test.specialTarget = null;
+                            unit = test;
+                        }
                     }
                 }
-                if (rangerTarget.Contains(target))
-                {
-                    int rangerIndex = rangerTarget.IndexOf(target);
-                    rangersWithTargets.RemoveAt(rangerIndex);
-                }
-                
                 
                 GameUI.sfx.PlayDieSound(target);
                 //This is where a death animation would go IF WE HAD ONE
@@ -926,22 +922,21 @@ namespace Titans
         {
             if (target.HP <= 0)
             {
-                //if a ranger dies, it's target must be removed from the list
-                if (target is Ranger)
+                Ranger test = new Ranger();
+                for (int i = 0; i < BattleQueue.Count; i++)
                 {
-                    if (rangersWithTargets.Contains(target))
+                    Unit unit = BattleQueue.ElementAt(i);
+                    if (unit is Ranger)
                     {
-                        int rangerIndex = rangersWithTargets.IndexOf((Ranger)target);
-                        rangersWithTargets.RemoveAt(rangerIndex);
-                        rangerTarget.RemoveAt(rangerIndex);
+                        test = (Ranger)unit;
+                        if (test.specialTarget == target)
+                        {
+                            test.specialTarget = null;
+                            unit = test;
+                        }
                     }
                 }
-
-                if (rangerTarget.Contains(target))
-                {
-                    int rangerIndex = rangerTarget.IndexOf(target);
-                    rangersWithTargets.RemoveAt(rangerIndex);
-                }
+                
                 GameUI.sfx.PlayDieSound(target);
                 //This is where a death animation would go IF WE HAD ONE
                 RemoveUnit(target.Location[0], target.Location[1]);

@@ -24,6 +24,8 @@ namespace Titans
         public abstract bool DefendMode { get; set; }
         public abstract List<StatusEffect> StatusEffects { get; set; }
         public abstract bool HasStatusEffects { get; set; }
+        public abstract int StatusIndex{ get; set; } //for status animation purposes
+
 
         public abstract List<int> AttackModifiers{get; set;} //list of modifiers applied to attacks
         public abstract List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
