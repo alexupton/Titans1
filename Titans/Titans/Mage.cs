@@ -28,6 +28,8 @@ namespace Titans
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
 
+        public override int StatusIndex { get; set; } //for status animation purposes
+
         //Set all attributes of the unit Mage
         public Mage()
         {

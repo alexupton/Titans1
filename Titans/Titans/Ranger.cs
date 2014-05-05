@@ -31,6 +31,8 @@ namespace Titans
         public Unit specialTarget { get; set; }
         public int targetTimeRemaining { get; set; }
 
+        public override int StatusIndex { get; set; } //for status animation purposes
+
         //Set all attributes of the unit Ranger
         public Ranger()
         {
@@ -79,7 +81,7 @@ namespace Titans
                 {
                     if (effect is Stun)
                     {
-                        
+                        effect.ResetTime();
                     }
                 }
             }
@@ -101,8 +103,21 @@ namespace Titans
             int damage = 15;
             battle.GameUI.unitDamage = damage;
             target.HP -= damage;
-            Root root = new Root(target);
-            //yet to be added imobilize effect
+            if (!AI.HasStatusEffect(target, "Root"))
+            {
+                Root root = new Root(target);
+            }
+            else
+            {
+                foreach (StatusEffect status in target.StatusEffects)
+                {
+                    if (status is Root)
+                    {
+                        status.ResetTime();
+                    }
+                }
+            }
+            
 
             //animation for damage text
             battle.GameUI.displayDamage = true;
@@ -128,8 +143,7 @@ namespace Titans
             }
             else
             {
-                battle.rangersWithTargets.Add(this);
-                battle.rangerTarget.Add(battle.CurrentTarget);
+                this.specialTarget = battle.CurrentTarget;
                 this.MP -= 10;
                 this.AP--;
 
