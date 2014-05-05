@@ -150,6 +150,7 @@ namespace Titans
         public Texture2D blankButtonIn;
         public List<Texture2D> customButtons;
         public List<Texture2D> maps;
+        public List<Texture2D> drawStatus;
         public List<Color> customColors;
         public int[] optionsSettings;
         public Texture2D divider;

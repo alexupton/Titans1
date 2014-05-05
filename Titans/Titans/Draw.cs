@@ -46,7 +46,7 @@ namespace Titans
         public void MainMenu()
         {
             game.GraphicsDevice.Clear(Color.White);
-            //// TODO: Add your drawing code here
+            
             game.spriteBatch.Begin();
             game.spriteBatch.Draw(game.quick_battle, new Vector2((game.Window.ClientBounds.Width / 2) - (game.quick_battle.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.quick_battle.Height / 2)), Color.White);
             game.spriteBatch.Draw(game.campaign, new Vector2((game.Window.ClientBounds.Width / 2) - (game.campaign.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.quick_battle.Height - 55)), Color.White);
@@ -304,6 +304,54 @@ namespace Titans
                                 game.spriteBatch.DrawString(game.text, "+" + defTotal.ToString(), new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42,
                                     game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.Magenta);
                             }
+                        }
+                        if (game.battle.BattleMap.map[x][y].TileUnit.StatusEffects.Count > 0)
+                        {
+                            StatusEffect effect = game.battle.BattleMap.map[x][y].TileUnit.StatusEffects.ElementAt(0);
+                            if (effect is Stun)
+                            {
+                                Point frameSize = new Point(13, 11);
+                                
+                                game.spriteBatch.Draw(game.drawStatus[3], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5),new Rectangle(0,0,frameSize.X,frameSize.Y), Color.White);
+                 
+                            }
+                            else if (effect is Root)
+                            {
+                                game.spriteBatch.Draw(game.drawStatus[6], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
+                 
+                            }
+                            else if (effect is Haste)
+                            {
+                                game.spriteBatch.Draw(game.drawStatus[1], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
+                 
+                            }
+                            else if (effect is Slow)
+                            {
+                                Point frameSize = new Point(15, 26);
+                                game.spriteBatch.Draw(game.drawStatus[2], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), new Rectangle(0, 0, frameSize.X, frameSize.Y), Color.White);
+                 
+                            }
+                            else if (effect is Taunt)
+                            {
+                                game.spriteBatch.Draw(game.drawStatus[5], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
+                 
+                            }
+                            foreach (Ranger er in game.battle.BattleQueue)
+                            {
+                                if (er is Ranger)
+                                {
+                                    Ranger dummy = (Ranger)er;
+                                    if (dummy.specialTarget != null)
+                                    {
+                                        if (dummy.specialTarget == game.battle.BattleMap.map[x][y].TileUnit)
+                                        {
+                                            game.spriteBatch.Draw(game.drawStatus[4], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
+                 
+                                        }
+                                    }
+                                }
+                            }
+
                         }
                     
                     }
