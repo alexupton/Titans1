@@ -375,7 +375,7 @@ namespace Titans
                                 game.spriteBatch.Draw(game.drawStatus[5], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
                  
                             }
-                            foreach (Ranger er in game.battle.BattleQueue)
+                            foreach (Unit er in game.battle.BattleQueue)
                             {
                                 if (er is Ranger)
                                 {

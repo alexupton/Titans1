@@ -198,21 +198,32 @@ namespace Titans
                     Rectangle six = new Rectangle(565, 754, 161, 27);
                     if (one.Contains(mousePos))
                     {
-                        Game.releaseWait = true;
-                        Game.specialButtons[0] = Game.specialSel;
-                        Game.specialButtons[1] = Game.specialUn;
-                        Game.specialButtons[2] = Game.specialUn;
-                        Game.specialButtons[3] = Game.specialUn;
-                        Game.specialButtons[4] = Game.specialUn;
-                        Game.specialButtons[5] = Game.specialUn;
+                        if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 1))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialSel;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialUn;
+                            Game.specialButtons[3] = Game.specialUn;
+                            Game.specialButtons[4] = Game.specialUn;
+                            Game.specialButtons[5] = Game.specialUn;
 
-                        Game.draw.specialColor[0] = Color.White;
-                        Game.draw.specialColor[1] = Color.White;
-                        Game.draw.specialColor[2] = Color.White;
-                        Game.draw.specialColor[3] = Color.White;
-                        Game.draw.specialColor[4] = Color.White;
-                        Game.draw.specialColor[5] = Color.White;
-                        Game.battle.ActiveUnit.SelectSpecial1(Game.battle);
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.draw.specialColor[3] = Color.White;
+                            Game.draw.specialColor[4] = Color.White;
+                            Game.draw.specialColor[5] = Color.White;
+                            Game.battle.DeselectSpecialNumber();
+                            Game.battle.ActiveUnit.SelectSpecial1(Game.battle);
+                            Game.battle.SelectSpecialNumber(1);
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
+
                     }
                     else if (two.Contains(mousePos))
                     {
