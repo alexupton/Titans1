@@ -44,6 +44,10 @@ namespace Titans
             Speed = 175;
             Init = 50;
             AP = 2;
+            Abilities = new List<string>();
+            AttackModifiers = new List<int>();
+            DefenseModifiers = new List<int>();
+            Location = new int[2];
             Abilities.Add("Flares");
             Abilities.Add("Heat Seeking Missile");
             Abilities.Add("Sonic Strike");

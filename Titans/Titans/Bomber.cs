@@ -45,6 +45,10 @@ namespace Titans
             Speed = 125;
             Init = 20;
             AP = 2;
+            Abilities = new List<string>();
+            AttackModifiers = new List<int>();
+            DefenseModifiers = new List<int>();
+            Location = new int[2];
             Abilities.Add("Inferno Bomb");
             Abilities.Add("Heal Bomb");
             Abilities.Add("Machine Gun");

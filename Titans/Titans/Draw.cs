@@ -223,26 +223,65 @@ namespace Titans
                         
                         if (game.battle.BattleMap.map[x][y].TileUnit is Artillery)
                         {
+                            game.frameSize.X = 32;
+                            game.frameSize.Y = 48;
                             game.spriteBatch.Draw(game.Artillery, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
                                 new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
                         }
                         else if (game.battle.BattleMap.map[x][y].TileUnit is Defender)
                         {
+                            game.frameSize.X = 32;
+                            game.frameSize.Y = 48;
                             game.spriteBatch.Draw(game.Defender, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
                                 new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
                         }
                         else if (game.battle.BattleMap.map[x][y].TileUnit is Mage)
                         {
+                            game.frameSize.X = 32;
+                            game.frameSize.Y = 48;
                             game.spriteBatch.Draw(game.Mage, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
                                 new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
                         }
                         else if (game.battle.BattleMap.map[x][y].TileUnit is Ranger)
                         {
+                            game.frameSize.X = 32;
+                            game.frameSize.Y = 48;
                             game.spriteBatch.Draw(game.Ranger, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                        }
+                        else if (game.battle.BattleMap.map[x][y].TileUnit is Cavalry)
+                        {
+                            game.frameSize.X = 32;
+                            game.frameSize.Y = 48;
+                            game.spriteBatch.Draw(game.Cavalry, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                        }
+                        else if (game.battle.BattleMap.map[x][y].TileUnit is Bomber)
+                        {
+                            game.frameSize.X = 29;
+                            game.frameSize.Y = 31;
+                            game.spriteBatch.Draw(game.Bomber, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                        }
+                        else if (game.battle.BattleMap.map[x][y].TileUnit is Fighter)
+                        {
+                            game.frameSize.X = 31;
+                            game.frameSize.Y = 31;
+                            game.spriteBatch.Draw(game.Fighter, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                        }
+                        else if (game.battle.BattleMap.map[x][y].TileUnit is Scout)
+                        {
+
+                            game.frameSize.X = 31;
+                            game.frameSize.Y = 31;
+                            game.spriteBatch.Draw(game.Scout, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
                                 new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
                         }
                         else
                         {
+                            game.frameSize.X = 32;
+                            game.frameSize.Y = 48;
                             game.spriteBatch.Draw(game.Soldier, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
                                 new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
                         }
@@ -374,18 +413,18 @@ namespace Titans
             {
                 if (game.battle.ActiveUnit is Mage )
                 {
-                    game.spriteBatch.Draw(game.specialButtons[0], new Vector2(565, 673), Color.White);
-                    float x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(0))).X;
+                    game.spriteBatch.Draw(game.specialButtons[2], new Vector2(565, 673), Color.White);
+                    float x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(2))).X;
                     float buttonx = 116 / 2;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(0), new Vector2((buttonx-(x / 2) )+565 , 676),specialColor[0]);
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(2), new Vector2((buttonx-(x / 2) )+565 , 676),specialColor[0]);
 
                     game.spriteBatch.Draw(game.specialButtons[1], new Vector2(565, 646), Color.White);
                     x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(1))).X;
                     game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(1), new Vector2(buttonx-(x / 2) + 565, 649), specialColor[1]);
                     
-                    game.spriteBatch.Draw(game.specialButtons[2], new Vector2(565, 619), Color.White);
-                    x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(2))).X;
-                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(2), new Vector2(buttonx-(x / 2) + 565, 622), specialColor[2]);
+                    game.spriteBatch.Draw(game.specialButtons[0], new Vector2(565, 619), Color.White);
+                    x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(0))).X;
+                    game.spriteBatch.DrawString(game.specialText, game.battle.ActiveUnit.Abilities.ElementAt(0), new Vector2(buttonx-(x / 2) + 565, 622), specialColor[2]);
                 
                      game.spriteBatch.Draw(game.specialButtons[3], new Vector2(565, 700), Color.White);
                      x = (game.specialText.MeasureString(game.battle.ActiveUnit.Abilities.ElementAt(3))).X;

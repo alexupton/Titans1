@@ -299,6 +299,11 @@ namespace Titans
             game.Mage = game.Content.Load<Texture2D>(@"images\Units\Mage");
             game.Ranger = game.Content.Load<Texture2D>(@"images\Units\Ranger");
             game.Soldier = game.Content.Load<Texture2D>(@"images\Units\Soldier");
+            game.Cavalry = game.Content.Load<Texture2D>(@"images\Units\Spearman");
+            game.Bomber = game.Content.Load<Texture2D>(@"images\Units\Bomber");
+            game.Scout = game.Content.Load<Texture2D>(@"images\Units\Scout");
+            game.Fighter = game.Content.Load<Texture2D>(@"images\Units\Fighter");
+            
             game.frameSize.X = 32;
             game.frameSize.Y = 48;
 

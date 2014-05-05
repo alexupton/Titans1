@@ -43,6 +43,10 @@ namespace Titans
             Speed = 375;
             Init = 100;
             AP = 2;
+            Abilities = new List<string>();
+            AttackModifiers = new List<int>();
+            DefenseModifiers = new List<int>();
+            Location = new int[2];
             Abilities.Add("Bridge");
             Abilities.Add("Sikes");
             Abilities.Add("Remove");

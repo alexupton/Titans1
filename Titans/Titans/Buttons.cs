@@ -190,9 +190,9 @@ namespace Titans
                 if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
                 {
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
-                    Rectangle one = new Rectangle(565, 673, 161, 27);
+                    Rectangle three = new Rectangle(565, 673, 161, 27);
                     Rectangle two = new Rectangle(565, 646, 161, 27);
-                    Rectangle three = new Rectangle(565, 619, 161, 27);
+                    Rectangle one = new Rectangle(565, 619, 161, 27);
                     Rectangle four = new Rectangle(565, 700, 161, 27);
                     Rectangle five = new Rectangle(565, 727, 161, 27);
                     Rectangle six = new Rectangle(565, 754, 161, 27);

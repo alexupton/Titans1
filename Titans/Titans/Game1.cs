@@ -198,6 +198,10 @@ namespace Titans
         public Texture2D Mage;
         public Texture2D Ranger;
         public Texture2D Soldier;
+        public Texture2D Cavalry;
+        public Texture2D Fighter;
+        public Texture2D Bomber;
+        public Texture2D Scout;
         public Point frameSize;
         public Point currentFrame;
         public Point sheetSize;
