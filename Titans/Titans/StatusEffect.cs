@@ -14,6 +14,7 @@ namespace Titans
         public abstract void Invoke(Battle battle);
         public abstract void UnInvoke(Battle battle);
         public abstract int GetTimeRemaining();
+        public abstract void ResetTime();
 
         public static List<StatusEffect> SortEffects(List<StatusEffect> effects)
         {

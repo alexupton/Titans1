@@ -514,74 +514,92 @@ namespace Titans
                     return;
                 }
 
-                //now we check on which tile to move to
-                List<int[]> reachableTilesAsInt = map.GetLegalMoveCoordinates(active);
-                List<Tile> reachableTiles = new List<Tile>();
-
-                foreach (int[] coords in reachableTilesAsInt)
+                if (!battle.GameUI.rooted)
                 {
-                    reachableTiles.Add(map.GetTileAt(coords[0], coords[1]));
-                }
+                    //now we check on which tile to move to
+                    List<int[]> reachableTilesAsInt = map.GetLegalMoveCoordinates(active);
+                    List<Tile> reachableTiles = new List<Tile>();
 
-
-                Tile closest = map.GetTileAt(active.Location[0], active.Location[1]);
-                int nearestTileToEnemy = 30000;
-
-                foreach (Tile test in reachableTiles)
-                {
-                    if (!test.hasUnit)
+                    foreach (int[] coords in reachableTilesAsInt)
                     {
-                        int pathCost = 0;
-                        List<Tile> path = GetPath(nearestLocation, test, map);
-                        foreach (Tile p in path)
-                        {
-                            pathCost += p.MoveCost;
-                        }
+                        reachableTiles.Add(map.GetTileAt(coords[0], coords[1]));
+                    }
 
-                        if (pathCost < nearestTileToEnemy)
+
+                    Tile closest = map.GetTileAt(active.Location[0], active.Location[1]);
+                    int nearestTileToEnemy = 30000;
+
+                    foreach (Tile test in reachableTiles)
+                    {
+                        if (!test.hasUnit)
                         {
-                            nearestTileToEnemy = pathCost;
-                            closest = test;
+                            int pathCost = 0;
+                            List<Tile> path = GetPath(nearestLocation, test, map);
+                            foreach (Tile p in path)
+                            {
+                                pathCost += p.MoveCost;
+                            }
+
+                            if (pathCost < nearestTileToEnemy)
+                            {
+                                nearestTileToEnemy = pathCost;
+                                closest = test;
+                            }
                         }
                     }
+                    if (closest != map.GetTileAt(active.Location[0], active.Location[1]))
+                    {
+                        battle.StartMove(closest);
+                        battle.GameUI.timeSinceLastDamageFrame = 0;
+                        battle.GameUI.wait = true;
+                        return;
+                    }
+                    else
+                    {
+                        battle.GameUI.sfx.PlayPassSound(active);
+                        active.AP = 0;
+                    }
                 }
-                if (closest != map.GetTileAt(active.Location[0], active.Location[1]))
+                else if (active.AP > 0)
                 {
-                    battle.StartMove(closest);
-                    battle.GameUI.timeSinceLastDamageFrame = 0;
-                    battle.GameUI.wait = true;
-                    return;
+                    Taunt effect = null;
+                    Unit Target = new Soldier();
+                    Target.StatusEffects = new List<StatusEffect>();
+                    foreach (StatusEffect status in active.StatusEffects)
+                    {
+                        if (status is Taunt)
+                        {
+                            effect = (Taunt)status;
+                        }
+                    }
+                    Target = effect.TauntTarget;
+                    if (active.StatusEffects.Count > 0)
+                    {
+                        MakeTauntedMove(battle, active, Target);
+                    }
                 }
                 else
                 {
-                    battle.GameUI.sfx.PlayPassSound(active);
                     active.AP = 0;
-                }
-            }
-            else if (active.AP > 0)
-            {
-                Taunt effect = null;
-                Unit Target = new Soldier();
-                Target.StatusEffects = new List<StatusEffect>();
-                foreach (StatusEffect status in active.StatusEffects)
-                {
-                    if (status is Taunt)
-                    {
-                        effect = (Taunt)status;
-                    }
-                }
-                Target = effect.TauntTarget;
-                if (active.StatusEffects.Count > 0)
-                {
-                    MakeTauntedMove(battle, active, Target);
+                    battle.GameUI.wait = true;
+                    battle.GameUI.sfx.PlayPassSound(active);
                 }
             }
             else
             {
-                battle.GameUI.wait = true;
-                battle.GameUI.sfx.PlayPassSound(active);
+                active.AP = 0;
+                if (!(active is Ranger) && !HasStatusEffect(active, "Stun"))
+                {
+                    active.DefenseModifiers.Add(5);
+                    battle.GameUI.wait = true;
+                    battle.GameUI.sfx.PlayDefendSound(active);
+                }
+                else
+                {
+                    battle.GameUI.wait = true;
+                    battle.GameUI.sfx.PlayPassSound(active);
+                }
             }
-            
 
             
 
@@ -777,6 +795,88 @@ namespace Titans
 
 
             
+        }
+
+        //determine if a unit already has a particular status effect
+        public static bool HasStatusEffect(Unit unit, string effect)
+        {
+            switch(effect)
+            {
+                case "Stun":
+                    {
+                        foreach (StatusEffect fx in unit.StatusEffects)
+                        {
+                            if (fx is Stun)
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
+                case "Root":
+                    {
+                        foreach (StatusEffect fx in unit.StatusEffects)
+                        {
+                            if (fx is Root)
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
+                case "Taunt":
+                    {
+                        foreach (StatusEffect fx in unit.StatusEffects)
+                        {
+                            if (fx is Taunt)
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
+                case "Haste":
+                    {
+                        foreach (StatusEffect fx in unit.StatusEffects)
+                        {
+                            if (fx is Haste)
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
+                case "Slow":
+                    {
+                        foreach (StatusEffect fx in unit.StatusEffects)
+                        {
+                            if (fx is Slow)
+                            {
+                                return true;
+                            }
+                        }
+                        break;
+                    }
+                
+            }
+            return false;
+        }
+
+        public static bool HasEnemyUnit(Tile tile, Unit active)
+        {
+            if (tile.hasUnit)
+            {
+                if (tile.TileUnit.isPlayerUnit != active.isPlayerUnit)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
         }
      
     }

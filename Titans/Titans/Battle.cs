@@ -36,6 +36,8 @@ namespace Titans
         public bool specialMode6 { get; set; }
         public Unit CurrentTarget { get; set; }
         public Tile SelectedTile { get; set; }
+        public List<Ranger> rangersWithTargets { get; set; }
+        public List<Unit> rangerTarget { get; set; }
 
         //any more custom rule options go here
 
@@ -58,6 +60,8 @@ namespace Titans
             specialMode4 = false;
             specialMode5 = false;
             specialMode6 = false;
+            rangersWithTargets = new List<Ranger>();
+            rangerTarget = new List<Unit>();
         }
 
         public Battle(Map newMap)
@@ -79,6 +83,8 @@ namespace Titans
                     }
                 }
             }
+            rangersWithTargets = new List<Ranger>();
+            rangerTarget = new List<Unit>();
         }
 
         //Add units to the pregame roster
@@ -481,6 +487,7 @@ namespace Titans
 
         public bool SelectAttack()
         {
+            //artillery use 2 AP to attack
             if (ActiveUnit is Artillery && ActiveUnit.AP - 2 < 0)
             {
                 BattleMap.ClearHighlights();
@@ -531,11 +538,15 @@ namespace Titans
                 }
             }
 
-            //if (!validTargetExists)
-            //{
-            //    BattleMap.ClearHighlights();
-            //}
-            //else
+            if (ActiveUnit is Ranger)
+            {
+                if(rangersWithTargets.Contains(ActiveUnit))
+                {
+                    int rangerIndex = rangersWithTargets.IndexOf((Ranger)ActiveUnit);
+                    Unit special = rangerTarget.ElementAt(rangerIndex);
+                    BattleMap.AddSpecificRedHighlight(special.Location[0], special.Location[1]);
+                }
+            }
                 AttackMode = true;
             return validTargetExists;
 
@@ -561,6 +572,16 @@ namespace Titans
             {
                 ActiveUnit.AP = 0;
                 return 0;
+            }
+
+            //ranger gets to attack his special target once
+            if (ActiveUnit is Ranger)
+            {
+                if (rangerTarget.Contains(target) && rangersWithTargets.Contains((Ranger)ActiveUnit))
+                {
+                    int rangerIndex = rangerTarget.IndexOf(target);
+                    rangersWithTargets.Remove((Ranger)ActiveUnit);
+                }
             }
             SelectEnabled = true;
             BattleMap.ClearHighlights();
@@ -627,6 +648,23 @@ namespace Titans
             //check if the unit is dead. if it is, turf it
             if (target.HP <= 0)
             {
+                //if a ranger dies, it's target must be removed from the list
+                if (target is Ranger)
+                {
+                    if (rangersWithTargets.Contains(target))
+                    {
+                        int rangerIndex = rangersWithTargets.IndexOf((Ranger)target);
+                        rangersWithTargets.RemoveAt(rangerIndex);
+                        rangerTarget.RemoveAt(rangerIndex);
+                    }
+                }
+                if (rangerTarget.Contains(target))
+                {
+                    int rangerIndex = rangerTarget.IndexOf(target);
+                    rangersWithTargets.RemoveAt(rangerIndex);
+                }
+                
+                
                 GameUI.sfx.PlayDieSound(target);
                 //This is where a death animation would go IF WE HAD ONE
                 RemoveUnit(target.Location[0], target.Location[1]);
@@ -658,6 +696,8 @@ namespace Titans
                         player2HasUnits = true;
                     }
                 }
+
+
 
                 if (player1HasUnits && !player2HasUnits)
                 {
@@ -886,6 +926,22 @@ namespace Titans
         {
             if (target.HP <= 0)
             {
+                //if a ranger dies, it's target must be removed from the list
+                if (target is Ranger)
+                {
+                    if (rangersWithTargets.Contains(target))
+                    {
+                        int rangerIndex = rangersWithTargets.IndexOf((Ranger)target);
+                        rangersWithTargets.RemoveAt(rangerIndex);
+                        rangerTarget.RemoveAt(rangerIndex);
+                    }
+                }
+
+                if (rangerTarget.Contains(target))
+                {
+                    int rangerIndex = rangerTarget.IndexOf(target);
+                    rangersWithTargets.RemoveAt(rangerIndex);
+                }
                 GameUI.sfx.PlayDieSound(target);
                 //This is where a death animation would go IF WE HAD ONE
                 RemoveUnit(target.Location[0], target.Location[1]);
@@ -905,6 +961,12 @@ namespace Titans
                     {
                         player2HasUnits = true;
                     }
+                }
+
+                if (rangerTarget.Contains(target))
+                {
+                    int rangerIndex = rangerTarget.IndexOf(target);
+                    rangersWithTargets.RemoveAt(rangerIndex);
                 }
 
                 if (player1HasUnits && !player2HasUnits)

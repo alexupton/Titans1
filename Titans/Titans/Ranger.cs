@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Titans
 {
-    class Ranger : Unit
+    public class Ranger : Unit
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
@@ -27,6 +27,9 @@ namespace Titans
 
         public override List<int> AttackModifiers { get; set; } //list of modifiers applied to attacks
         public override List<int> DefenseModifiers { get; set; } //list of modifiers applied to defense, represent percentages of damage reduction
+
+        public Unit specialTarget { get; set; }
+        public int targetTimeRemaining { get; set; }
 
         //Set all attributes of the unit Ranger
         public Ranger()
@@ -61,11 +64,25 @@ namespace Titans
             Unit target = battle.CurrentTarget;
             int damage = AttackResolver.Attack(this, target, this.AttackModifiers) +10;
             battle.GameUI.unitDamage = damage;
-            target.HP -= 50;
+            target.HP -= 40;
             //animation for damage text
             battle.GameUI.displayDamage = true;
-            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
-            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 - 20;
+            if (!AI.HasStatusEffect(target, "Stun"))
+            {
+                Stun stun = new Stun(target);
+            }
+            else
+            {
+                foreach (StatusEffect effect in target.StatusEffects)
+                {
+                    if (effect is Stun)
+                    {
+                        
+                    }
+                }
+            }
             this.MP -= 15;
             this.AP--;
 
@@ -102,17 +119,24 @@ namespace Titans
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
         }
-        //Set the Target ability which costs 10 MP and....
+        //Target one unit, even if he moves out of range
         public override void Special3(Battle battle)
         {
-            Unit target = battle.CurrentTarget;
-            
-            MP -= 10;
-            this.AP--;
-        
-            battle.GameUI.timeSinceLastDamageFrame = 0;
-            battle.GameUI.frameCount = 0;
-            battle.GameUI.wait = true;
+            if (battle.rangersWithTargets.Contains(this))
+            {
+                battle.GameUI.sfx.PlayBuzzer();
+            }
+            else
+            {
+                battle.rangersWithTargets.Add(this);
+                battle.rangerTarget.Add(battle.CurrentTarget);
+                this.MP -= 10;
+                this.AP--;
+
+                battle.GameUI.timeSinceLastDamageFrame = 0;
+                battle.GameUI.frameCount = 0;
+                battle.GameUI.wait = true;
+            }
 
         }
         public override void Special4(Battle battle)

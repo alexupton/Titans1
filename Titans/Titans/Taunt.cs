@@ -14,7 +14,7 @@ namespace Titans
         {
             TauntTarget = sender;
             unit = target;
-            timeRemaining = 3;
+            timeRemaining = 4;
             unit.StatusEffects.Add(this);
         }
 
@@ -37,6 +37,10 @@ namespace Titans
         public override int GetTimeRemaining()
         {
             return timeRemaining;
+        }
+        public override void ResetTime()
+        {
+            timeRemaining = 4;
         }
     }
 }

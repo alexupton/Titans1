@@ -33,5 +33,10 @@ namespace Titans
         {
             return timeRemaining;
         }
+
+        public override void ResetTime()
+        {
+            timeRemaining = 2;
+        }
     }
 }

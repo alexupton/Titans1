@@ -15,7 +15,7 @@ namespace Titans
         {
             unit = target;
             target.StatusEffects.Add(this);
-            timeRemaining = 3;
+            timeRemaining = 4;
             originalSpeed = target.Speed;
         }
 
@@ -36,6 +36,10 @@ namespace Titans
         public override int GetTimeRemaining()
         {
             return timeRemaining;
+        }
+        public override void ResetTime()
+        {
+            timeRemaining = 4;
         }
     }
 }

@@ -1164,7 +1164,7 @@ namespace Titans
                         int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
                         int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
                         if (X >= 0 && X < battle.BattleMap.Size[0] && Y >= 0 && Y < battle.BattleMap.Size[1]
-                            && battle.BattleMap.GetTileAt(X, Y).IsHighlighted && battle.BattleMap.GetTileAt(X, Y).hasUnit &&
+                            && battle.BattleMap.GetTileAt(X, Y).IsHighlighted && battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted && battle.BattleMap.GetTileAt(X, Y).hasUnit &&
                             (battle.BattleMap.GetTileAt(X, Y).TileUnit.isPlayerUnit != battle.ActiveUnit.isPlayerUnit))
                         {
                             battle.BattleMap.ClearRedHighlights();
