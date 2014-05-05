@@ -77,6 +77,7 @@ namespace Titans
         }
         public void CustomGame()
         {
+           
             int numOfButtons= 11;
             game.customButtons = new List<Texture2D>();
             game.maps = new List<Texture2D>();
@@ -88,6 +89,7 @@ namespace Titans
             game.specialText = game.Content.Load<SpriteFont>(@"SpecialFont");
 
             //image loader
+            game.divider = game.Content.Load<Texture2D>(@"images\Divider");
             game.blankButton = game.Content.Load<Texture2D>(@"images\Blank");
             game.blankButtonUn = game.Content.Load<Texture2D>(@"images\Blank Not Selected");
             game.blankButtonIn = game.Content.Load<Texture2D>(@"images\Blank Higlight");

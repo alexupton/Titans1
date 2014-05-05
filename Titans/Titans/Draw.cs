@@ -38,7 +38,8 @@ namespace Titans
             {
                 specialColor[i] = Color.Black;
             }
-
+            Rectangle divider = new Rectangle(27, 0, 5, 800);
+            
         }
 
         //Draw the initial main menu you see at startup
@@ -69,14 +70,16 @@ namespace Titans
         public void customGame()
         {
             float x;
-            
             game.GraphicsDevice.Clear(Color.White);
             game.spriteBatch.Begin();
-
+            
+            game.GraphicsDevice.Clear(Color.White);
             game.spriteBatch.DrawString(game.bigText, "Custom Game", new Vector2(645, 60), Color.Black);
                        
             float buttonx = 144 / 2;
+            game.spriteBatch.Draw(game.divider, new Vector2(183, 233), Color.White);
             game.spriteBatch.DrawString(game.bigText, "Settings", new Vector2(250, 170), Color.Black);
+            
             //maps
             game.spriteBatch.DrawString(game.bigText, "Maps", new Vector2(1000, 170), Color.Black);
             game.spriteBatch.Draw(game.menuBox, new Vector2(750, 270), Color.White);

@@ -152,7 +152,8 @@ namespace Titans
         public List<Texture2D> maps;
         public List<Color> customColors;
         public int[] optionsSettings;
-
+        public Texture2D divider;
+       
         //ingame menu
         public Texture2D[] menuButtons;
         public Texture2D[] optionsButtons;

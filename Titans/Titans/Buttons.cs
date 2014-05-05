@@ -28,6 +28,11 @@ namespace Titans
         {
             MouseState mouseState = Mouse.GetState();
             Rectangle backClick = new Rectangle(15, 755, 141, 33);
+            Rectangle humanClick = new Rectangle(206, 237, 141, 33);
+            Rectangle mode1 = new Rectangle(206, 285, 141, 33);
+            Rectangle mode2 = new Rectangle(360, 285, 141, 33);
+            Rectangle mode3 = new Rectangle(514, 285, 141, 33);
+            Rectangle aIClick = new Rectangle(360, 237, 141, 33);
             bool mouseback = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(backClick);
 
             if (mouseback && Game.customButtons[0] == Game.blankButton)
@@ -35,7 +40,7 @@ namespace Titans
 
                     Game.customButtons[0] = Game.blankButtonIn;
                     Game.customColors[0] = Color.White;
-                    
+                  
                 }
                 else if (!mouseback)
                 {
@@ -57,6 +62,40 @@ namespace Titans
                     Game.mainMenu = true;
                     
                     
+                }
+                if (humanClick.Contains(mousePos))
+                {
+                    Game.customButtons[4] = Game.blankButton;
+                    Game.customButtons[5] = Game.blankButtonUn;
+                   
+                }
+                else if (aIClick.Contains(mousePos))
+                {
+
+                    Game.customButtons[4] = Game.blankButtonUn;
+                    Game.customButtons[5] = Game.blankButton;
+
+                   
+                }
+                if (mode1.Contains(mousePos))
+                {
+                    Game.customButtons[6] = Game.blankButton;
+                    Game.customButtons[7] = Game.blankButtonUn;
+                    Game.customButtons[8] = Game.blankButtonUn;
+                }
+                else if (mode2.Contains(mousePos))
+                {
+
+                    Game.customButtons[6] = Game.blankButtonUn;
+                    Game.customButtons[7] = Game.blankButton;
+                    Game.customButtons[8] = Game.blankButtonUn;
+                }
+                else if (mode3.Contains(mousePos))
+                {
+
+                    Game.customButtons[6] = Game.blankButtonUn;
+                    Game.customButtons[7] = Game.blankButtonUn;
+                    Game.customButtons[8] = Game.blankButton;
                 }
             }
         }
@@ -100,6 +139,7 @@ namespace Titans
                     Game.Exit();
 
                 }
+
 
             }
 
