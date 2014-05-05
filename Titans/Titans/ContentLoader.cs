@@ -482,7 +482,7 @@ namespace Titans
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Burn"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Haste"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Slow(15x26)"));
-                game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Stun(13x11"));
+                game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Stun(13x11)"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Target"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Taunt"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Imobilize"));
