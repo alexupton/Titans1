@@ -31,5 +31,10 @@ namespace Titans
             battle.GameUI.rooted = false;
             battle.GameUI.move = battle.GameUI.movetrue;
         }
+
+        public override int GetTimeRemaining()
+        {
+            return timeRemaining;
+        }
     }
 }

@@ -19,6 +19,13 @@ namespace Titans
                     else
                         return false;
                 }
+                else if (unit is Defender)
+                {
+                    if (unit.MP >= 10)
+                        return true;
+                    else
+                        return false;
+                }
             }
             else if (specialNumber == 2)
             {
@@ -29,12 +36,26 @@ namespace Titans
                     else
                         return false;
                 }
+                else if (unit is Defender)
+                {
+                    if (unit.MP >= 5)
+                        return true;
+                    else
+                        return false;
+                }
             }
             else if (specialNumber == 3)
             {
                 if (unit is Soldier)
                 {
                     if (unit.MP >= 10)
+                        return true;
+                    else
+                        return false;
+                }
+                else if (unit is Defender)
+                {
+                    if (unit.MP >= 15)
                         return true;
                     else
                         return false;

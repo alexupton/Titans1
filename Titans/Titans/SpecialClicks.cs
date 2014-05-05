@@ -126,6 +126,77 @@ namespace Titans
                     }
                 }
             }
+                //Defender confirm special
+            else if (active is Defender)
+            {
+                battle.SelectedTile = battle.BattleMap.GetTileAt(X, Y);
+                if (battle.specialMode1)
+                {
+                    if (battle.SelectedTile.hasUnit)
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        if (battle.CurrentTarget.isPlayerUnit != active.isPlayerUnit)
+                        {
+                            active.Special1(battle);
+                            EndSpecial();
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode2)
+                {
+                    if (battle.SelectedTile.hasUnit)
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        if (battle.CurrentTarget.isPlayerUnit != active.isPlayerUnit)
+                        {
+                            active.Special2(battle);
+                            EndSpecial();
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode3)
+                {
+                    if (battle.SelectedTile.hasUnit)
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        if (battle.CurrentTarget.isPlayerUnit != active.isPlayerUnit)
+                        {
+                            active.Special3(battle);
+                            EndSpecial();
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+            }
         }
 
         private void EndSpecial()

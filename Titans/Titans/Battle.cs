@@ -129,6 +129,15 @@ namespace Titans
 
         public List<Unit> RollInitiative()
         {
+            //if it's not the first turn, remove buffs from the current unit
+            if (TurnCount > 1)
+            {
+                foreach (StatusEffect effect in ActiveUnit.StatusEffects)
+                {
+                    effect.UnInvoke(this);
+                }
+
+            }
             //release the wait hold, other cleanup
             if (GameUI != null)
             {
@@ -151,6 +160,7 @@ namespace Titans
 
                 foreach (Unit unit in Units)
                 {
+                    unit.StatusEffects = new List<StatusEffect>();
                     unit.Init = unit.Speed + rand.Next(51);
                     unit.AP = 2;
                     if (unit.isPlayerUnit)
@@ -237,12 +247,32 @@ namespace Titans
             }
 
             ActiveUnit.Defense += defMod;
+
+            //apply status effects on the active unit
+            
+            for (int i = 0; i < ActiveUnit.StatusEffects.Count; i++ )
+            {
+                ActiveUnit.StatusEffects.ElementAt(i).DecreaseTime();
+                if (ActiveUnit.StatusEffects.ElementAt(i).GetTimeRemaining() <= 0)
+                {
+                    ActiveUnit.StatusEffects.Remove(ActiveUnit.StatusEffects.ElementAt(i));
+                }
+                else
+                {
+                    ActiveUnit.StatusEffects.ElementAt(i).Invoke(this);
+                }
+            }
             return turnOrder;
         }
         
         //after a unit moves, call this method to access the next unit in the battle queue
         public Unit NextPlayer()
         {
+
+                foreach (StatusEffect effect in ActiveUnit.StatusEffects)
+                {
+                    effect.UnInvoke(this);
+                }
             GameUI.wait = false;
             GameUI.ResetButtons();
             MoveMode = false;
@@ -308,6 +338,21 @@ namespace Titans
                 }
             }
             ActiveUnit.Defense += defMod;
+
+            //apply status effects on the active unit
+            //apply status effects on the active unit
+            for (int i = 0; i < ActiveUnit.StatusEffects.Count; i++)
+            {
+                ActiveUnit.StatusEffects.ElementAt(i).DecreaseTime();
+                if (ActiveUnit.StatusEffects.ElementAt(i).GetTimeRemaining() <= 0)
+                {
+                    ActiveUnit.StatusEffects.Remove(ActiveUnit.StatusEffects.ElementAt(i));
+                }
+                else
+                {
+                    ActiveUnit.StatusEffects.ElementAt(i).Invoke(this);
+                }
+            }
             return ActiveUnit;
         }
 

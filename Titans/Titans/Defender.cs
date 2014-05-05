@@ -68,7 +68,6 @@ namespace Titans
             battle.GameUI.displayDamage = true;
             battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
             battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 - 20;
-            //yet to be added stun effect
             MP-=10;
             this.AP--;
             battle.DeathCheck(target);
@@ -89,10 +88,11 @@ namespace Titans
             target.HP -= damage;
             //animation for damage text
             battle.GameUI.displayDamage = true;
-            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
-            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
-            
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 - 20;
 
+
+            this.DefenseModifiers.Add(5);
             this.DefendMode = true;
             this.MP-=10;
             this.AP -= 2;
@@ -135,14 +135,13 @@ namespace Titans
         }
         public override void SelectSpecial2(Battle battle)
         {
-            battle.DeselectSpecialNumber();
-            battle.SelectSpecialNumber(2);
 
         }
         public override void SelectSpecial3(Battle battle)
         {
             battle.DeselectSpecialNumber();
-            battle.SelectSpecialNumber(3);
+            this.Range = 5;
+            
         }
         public override void SelectSpecial4(Battle battle)
         {
@@ -158,20 +157,19 @@ namespace Titans
         }
         public override void DeselectSpecial1(Battle battle)
         {
+            this.Range = 1;
             List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap,battle.BattleMap.GetTileAt( this.Location[0], this.Location[1]));
             foreach (Tile adj in adjacent)
             {
                 adj.ClearBlueHighlight();
             }
-            battle.DeselectSpecialNumber();
         }
         public override void DeselectSpecial2(Battle battle)
         {
-            battle.DeselectSpecialNumber();
         }
         public override void DeselectSpecial3(Battle battle)
         {
-            battle.DeselectSpecialNumber();
+
         }
         public override void DeselectSpecial4(Battle battle)
         {

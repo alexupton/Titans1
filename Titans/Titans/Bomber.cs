@@ -52,6 +52,7 @@ namespace Titans
             Location[1] = -1;
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
+            StatusEffects = new List<StatusEffect>();
         }
         //Releases a bomb that deals 25 damage over 5 turns for the units hit
         public override void Special1(Battle battle)

@@ -31,5 +31,9 @@ namespace Titans
         {
             
         }
+        public override int GetTimeRemaining()
+        {
+            return timeRemaining;
+        }
     }
 }

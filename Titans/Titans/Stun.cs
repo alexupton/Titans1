@@ -12,7 +12,7 @@ namespace Titans
         public Stun(Unit target)
         {
             unit = target;
-            timeRemaining = 1;
+            timeRemaining = 2;
             unit.StatusEffects.Add(this);
         }
         public override void DecreaseTime()
@@ -28,6 +28,10 @@ namespace Titans
         public override void UnInvoke(Battle battle)
         {
 
+        }
+        public override int GetTimeRemaining()
+        {
+            return timeRemaining;
         }
     }
 }

@@ -49,6 +49,7 @@ namespace Titans
             Location[1] = -1;
             AttackModifiers = new List<int>();
             DefenseModifiers = new List<int>();
+            StatusEffects = new List<StatusEffect>();
         
         }
 

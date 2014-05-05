@@ -34,5 +34,9 @@ namespace Titans
         {
             battle.GameUI.taunted = false;
         }
+        public override int GetTimeRemaining()
+        {
+            return timeRemaining;
+        }
     }
 }

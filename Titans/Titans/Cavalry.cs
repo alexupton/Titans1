@@ -51,6 +51,7 @@ namespace Titans
             Location[1] = -1;
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
+            StatusEffects = new List<StatusEffect>();
         }
         //Set Pierce ability which has an attack modifier of 20 and uses 5 MP
         public override void Special1(Battle battle)
