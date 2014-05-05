@@ -422,6 +422,17 @@ namespace Titans
                     game.specialAttack = true;
                 }
             }
+
+            //Mage Highlighting
+            else if (active is Mage)
+            {
+                if (battle.specialMode1)
+                {
+                    battle.BattleMap.HighlightAttack(active);
+                    game.specialAttack = true;
+                }
+            }
+
         }
     }
 }

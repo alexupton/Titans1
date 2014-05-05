@@ -245,6 +245,52 @@ namespace Titans
                 }
 
             }
+            else if (active is Mage)
+            {
+                battle.SelectedTile = battle.BattleMap.GetTileAt(X, Y);
+                if (battle.specialMode1)
+                {
+                    if (AI.HasEnemyUnit(battle.SelectedTile, active))
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        active.Special1(battle);
+                        EndSpecial();
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode2)
+                {
+                    if (AI.HasEnemyUnit(battle.SelectedTile, active))
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        active.Special2(battle);
+                        EndSpecial();
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode3)
+                {
+                    if (AI.HasEnemyUnit(battle.SelectedTile, active))
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        active.Special3(battle);
+                        EndSpecial();
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+            }
         }
 
         private void EndSpecial()

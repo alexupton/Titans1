@@ -41,6 +41,13 @@ namespace Titans
                     else
                         return false;
                 }
+                else if (unit is Mage)
+                {
+                    if (unit.MP >= 40)
+                        return true;
+                    else
+                        return false;
+                }
             }
             else if (specialNumber == 2)
             {

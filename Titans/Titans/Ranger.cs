@@ -121,8 +121,8 @@ namespace Titans
 
             //animation for damage text
             battle.GameUI.displayDamage = true;
-            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
-            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 - 20;
             
             MP -= 10;
             this.AP--;

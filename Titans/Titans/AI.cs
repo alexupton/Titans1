@@ -560,7 +560,7 @@ namespace Titans
                         active.AP = 0;
                     }
                 }
-                else if (active.AP > 0)
+                else if (active.AP > 0 && battle.GameUI.taunted)
                 {
                     Taunt effect = null;
                     Unit Target = new Soldier();
@@ -572,11 +572,12 @@ namespace Titans
                             effect = (Taunt)status;
                         }
                     }
-                    Target = effect.TauntTarget;
-                    if (active.StatusEffects.Count > 0)
-                    {
-                        MakeTauntedMove(battle, active, Target);
-                    }
+
+                        Target = effect.TauntTarget;
+                        if (active.StatusEffects.Count > 0)
+                        {
+                            MakeTauntedMove(battle, active, Target);
+                        }
                 }
                 else
                 {

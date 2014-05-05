@@ -123,6 +123,47 @@ namespace Titans
             return legalmoves;
         }
 
+        public void HighlightAttack(Unit active)
+        {
+            int x = active.Location[0];
+            int y = active.Location[1];
+            List<int[]> rangeSquare = new List<int[]>();
+            List<int[]> actualRange = new List<int[]>();
+            int range = active.Range;
+            for (int i = (range * -1); i <= range; i++)
+            {
+                for (int j = (range * -1); j <= range; j++)
+                {
+                    if ((i + x) < Size[0] && (j + y) < Size[1] && (i + x) >= 0 & (j + y) >= 0)
+                    {
+                        rangeSquare.Add(new int[] { i + x, j + y });
+                    }
+                }
+            }
+
+            foreach (int[] tile in rangeSquare)
+            {
+                if ((Math.Abs(tile[0] - x) + Math.Abs(tile[1] - y)) <= range)
+                {
+                    actualRange.Add(tile);
+                }
+            }
+            List<Tile> tileRange = new List<Tile>();
+            foreach (int[] tile in actualRange)
+            {
+                tileRange.Add(map[tile[0]][tile[1]]);
+            }
+            foreach (Tile tile in tileRange)
+            {
+                if (AI.HasEnemyUnit(tile, active))
+                {
+                    AddSpecificRedHighlight(tile.X, tile.Y);
+                }
+                else
+                    AddSpecificBlueHighlight(tile.X, tile.Y);
+            }
+        }
+
         //Takes a set of tile coordinates and highlights each tile in the set
         public void HighlightTiles(List<int[]> tileCoordinates)
         {
