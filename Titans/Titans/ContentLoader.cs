@@ -79,6 +79,7 @@ namespace Titans
         {
             int numOfButtons= 11;
             game.customButtons = new List<Texture2D>();
+            game.maps = new List<Texture2D>();
             game.customColors = new List<Microsoft.Xna.Framework.Color>();
             //text loader
             game.text = game.Content.Load<SpriteFont>(@"Courier");
@@ -90,6 +91,8 @@ namespace Titans
             game.blankButton = game.Content.Load<Texture2D>(@"images\Blank");
             game.blankButtonUn = game.Content.Load<Texture2D>(@"images\Blank Not Selected");
             game.blankButtonIn = game.Content.Load<Texture2D>(@"images\Blank Higlight");
+            game.menuBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Menu Box");
+            game.maps.Add( game.Content.Load < Texture2D>(@"images\Maps\TestMap"));
 
             for (int i = 0; i < numOfButtons; i++)
             {

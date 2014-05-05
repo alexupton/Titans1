@@ -77,23 +77,42 @@ namespace Titans
                        
             float buttonx = 144 / 2;
             game.spriteBatch.DrawString(game.bigText, "Settings", new Vector2(250, 170), Color.Black);
+            //maps
             game.spriteBatch.DrawString(game.bigText, "Maps", new Vector2(1000, 170), Color.Black);
+            game.spriteBatch.Draw(game.menuBox, new Vector2(750, 270), Color.White);
+            game.spriteBatch.Draw(game.maps[0], new Vector2(765, 285), null, Color.White, 0, Vector2.Zero, 5f, SpriteEffects.None, 0);
+            game.spriteBatch.DrawString(game.text, "Test Map", new Vector2(800,450), game.customColors[1]);
 
-
+            
+            
+            //vs. buttons
             game.spriteBatch.Draw(game.customButtons[1], new Vector2(25, 237), Color.White);
-            x = game.text.MeasureString("VS.").X;
+            x = game.specialText.MeasureString("VS.").X;
             game.spriteBatch.DrawString(game.specialText, "VS.", new Vector2((buttonx - (x / 2)) + 25, 242), game.customColors[1]);
-           
-            game.spriteBatch.Draw(game.customButtons[4], new Vector2(206, 237), Color.White);
-            game.spriteBatch.Draw(game.customButtons[5], new Vector2(360, 237), Color.White);
 
+            x = game.specialText.MeasureString("Human").X;
+            game.spriteBatch.Draw(game.customButtons[4], new Vector2(206, 237), Color.White);
+            game.spriteBatch.DrawString(game.specialText, "Human", new Vector2((buttonx - (x / 2)) + 206, 242), game.customColors[1]);
+            x = game.specialText.MeasureString("AI").X;
+            game.spriteBatch.Draw(game.customButtons[5], new Vector2(360, 237), Color.White);
+            game.spriteBatch.DrawString(game.specialText, "AI", new Vector2((buttonx - (x / 2)) + 360, 242), game.customColors[1]);
+            
+            //gamemode buttons
             game.spriteBatch.Draw(game.customButtons[2], new Vector2(25, 285), Color.White);
-           
-            x = game.text.MeasureString("Game Mode").X;
+            x = game.specialText.MeasureString("Game Mode").X;
             game.spriteBatch.DrawString(game.specialText, "Game Mode", new Vector2((buttonx - (x / 2)) + 25, 290), game.customColors[2]);
             game.spriteBatch.Draw(game.customButtons[6], new Vector2(206, 285), Color.White);
+            x = game.specialText.MeasureString("Battle").X;
+            game.spriteBatch.DrawString(game.specialText, "Battle", new Vector2((buttonx - (x / 2)) + 206, 290), game.customColors[2]);
+            
             game.spriteBatch.Draw(game.customButtons[7], new Vector2(360, 285), Color.White);
+            x = game.specialText.MeasureString("Recruit").X;
+            game.spriteBatch.DrawString(game.specialText, "Recruit", new Vector2((buttonx - (x / 2)) + 360, 290), game.customColors[2]);
+            
             game.spriteBatch.Draw(game.customButtons[8], new Vector2(514, 285), Color.White);
+            x = game.specialText.MeasureString("King Match").X;
+            game.spriteBatch.DrawString(game.specialText, "King Match", new Vector2((buttonx - (x / 2)) + 514, 290), game.customColors[2]);
+            
 
             game.spriteBatch.Draw(game.customButtons[0], new Vector2(15, 755), Color.White);
              x = game.text.MeasureString("Back").X;
