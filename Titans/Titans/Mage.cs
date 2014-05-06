@@ -63,7 +63,7 @@ namespace Titans
         {
             Unit target = battle.CurrentTarget;
             this.Attack = 50;
-            int damage = AttackResolver.Attack(this, target, this.AttackModifiers);
+            int damage = 50;
             battle.GameUI.unitDamage = damage;
             target.HP -= damage;
             battle.GameUI.displayDamage = true;

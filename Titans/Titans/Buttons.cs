@@ -380,10 +380,10 @@ namespace Titans
                         Point mousePos = new Point(mouseState.X, mouseState.Y);
                         if (one.Contains(mousePos))
                         {
-                            Game.releaseWait = true;
+                            
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 1))
                             {
-
+                                Game.releaseWait = true;
                                 
                                 Game.specialButtons[0] = Game.specialSel;
                                 Game.specialButtons[1] = Game.specialUn;
@@ -406,9 +406,10 @@ namespace Titans
                         }
                         else if (two.Contains(mousePos))
                         {
-                            Game.releaseWait = true;
+                            
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 2))
                             {
+                                Game.releaseWait = true;
                                 Game.specialButtons[0] = Game.specialUn;
                                 Game.specialButtons[1] = Game.specialSel;
                                 Game.specialButtons[2] = Game.specialUn;
@@ -430,9 +431,10 @@ namespace Titans
                         }
                         else if (three.Contains(mousePos))
                         {
-                            Game.releaseWait = true;
+                            
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 3))
                             {
+                                Game.releaseWait = true;
                                 Game.specialButtons[0] = Game.specialUn;
                                 Game.specialButtons[1] = Game.specialUn;
                                 Game.specialButtons[2] = Game.specialSel;

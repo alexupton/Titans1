@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Titans
 {
@@ -274,7 +275,7 @@ namespace Titans
         //after a unit moves, call this method to access the next unit in the battle queue
         public Unit NextPlayer()
         {
-
+            System.Threading.Thread.Sleep(500);
                 foreach (StatusEffect effect in ActiveUnit.StatusEffects)
                 {
                     effect.UnInvoke(this);
@@ -414,7 +415,7 @@ namespace Titans
                 }
             }
             List<Tile> movePath = AI.GetPath(BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]), move, BattleMap);
-            GameUI.moveWait = true;
+            System.Threading.Thread.Sleep(500);
             pendingMoves = movePath.ToArray();
             pendingIndex = pendingMoves.Length - 1;
             GameUI.sfx.PlayMoveSound(ActiveUnit);
@@ -434,7 +435,7 @@ namespace Titans
                     MoveMode = false;
                     pendingIndex = 0;
                     pendingMoves = new Tile[0];
-
+                    GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
                     if (ActiveUnit is Defender) //if the unit is a defender, add its passive defense to nearby units
                     {
                         List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
@@ -582,7 +583,7 @@ namespace Titans
             }
             SelectEnabled = true;
             BattleMap.ClearHighlights();
-
+            GameUI.tickWait = true;
 
             
 

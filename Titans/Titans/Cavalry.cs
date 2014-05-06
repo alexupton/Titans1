@@ -42,7 +42,7 @@ namespace Titans
             Attack = 20;
             Defense = 15;
             Range = 1;
-            Speed = 475;
+            Speed = 250;
             Init = 75;
             AP = 2;
             Abilities = new List<string>();

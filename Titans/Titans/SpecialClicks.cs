@@ -278,7 +278,7 @@ namespace Titans
                 }
                 else if (battle.specialMode3)
                 {
-                    if (AI.HasEnemyUnit(battle.SelectedTile, active))
+                    if (!AI.HasEnemyUnit(battle.SelectedTile, active))
                     {
                         battle.CurrentTarget = battle.SelectedTile.TileUnit;
                         active.Special3(battle);
@@ -286,8 +286,7 @@ namespace Titans
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
+                      
                     }
                 }
                 else if (battle.specialMode4)
