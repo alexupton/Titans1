@@ -276,7 +276,7 @@ Wave Bank
     Wave
     {
         Name = ArtilleryAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ArtilleryAttack.wav;
+        File =ArtilleryAttack.wav;
         Build Settings Last Modified Low = 3531609251;
         Build Settings Last Modified High = 30370017;
 
@@ -299,7 +299,7 @@ Wave Bank
     Wave
     {
         Name = ArtilleryDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ArtilleryDefend.wav;
+        File = ArtilleryDefend.wav;
         Build Settings Last Modified Low = 3531619252;
         Build Settings Last Modified High = 30370017;
 
@@ -322,7 +322,7 @@ Wave Bank
     Wave
     {
         Name = ArtilleryDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ArtilleryDie.wav;
+        File = ArtilleryDie.wav;
         Build Settings Last Modified Low = 3531619252;
         Build Settings Last Modified High = 30370017;
 
@@ -345,7 +345,7 @@ Wave Bank
     Wave
     {
         Name = ArtilleryMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ArtilleryMove.wav;
+        File = ArtilleryMove.wav;
         Build Settings Last Modified Low = 3531629253;
         Build Settings Last Modified High = 30370017;
 
@@ -368,7 +368,7 @@ Wave Bank
     Wave
     {
         Name = ArtilleryPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ArtilleryPass.wav;
+        File = ArtilleryPass.wav;
         Build Settings Last Modified Low = 3531629253;
         Build Settings Last Modified High = 30370017;
 
@@ -391,7 +391,7 @@ Wave Bank
     Wave
     {
         Name = ArtillerySelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ArtillerySelect.wav;
+        File = ArtillerySelect.wav;
         Build Settings Last Modified Low = 3531639253;
         Build Settings Last Modified High = 30370017;
 
@@ -414,7 +414,7 @@ Wave Bank
     Wave
     {
         Name = Buzzer;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\Buzzer.wav;
+        File = Buzzer.wav;
         Build Settings Last Modified Low = 3531639253;
         Build Settings Last Modified High = 30370017;
 
@@ -437,7 +437,7 @@ Wave Bank
     Wave
     {
         Name = DefenderAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderAttack.wav;
+        File = DefenderAttack.wav;
         Build Settings Last Modified Low = 3531649254;
         Build Settings Last Modified High = 30370017;
 
@@ -460,7 +460,7 @@ Wave Bank
     Wave
     {
         Name = DefenderDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderDefend.wav;
+        File = DefenderDefend.wav;
         Build Settings Last Modified Low = 3531649254;
         Build Settings Last Modified High = 30370017;
 
@@ -483,7 +483,7 @@ Wave Bank
     Wave
     {
         Name = DefenderDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderDie.wav;
+        File = DefenderDie.wav;
         Build Settings Last Modified Low = 3531659254;
         Build Settings Last Modified High = 30370017;
 
@@ -506,7 +506,7 @@ Wave Bank
     Wave
     {
         Name = DefenderMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderMove.wav;
+        File = DefenderMove.wav;
         Build Settings Last Modified Low = 3531659254;
         Build Settings Last Modified High = 30370017;
 
@@ -529,7 +529,7 @@ Wave Bank
     Wave
     {
         Name = DefenderPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderPass.wav;
+        File = DefenderPass.wav;
         Build Settings Last Modified Low = 3531669255;
         Build Settings Last Modified High = 30370017;
 
@@ -552,7 +552,7 @@ Wave Bank
     Wave
     {
         Name = DefenderSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderSelect.wav;
+        File = DefenderSelect.wav;
         Build Settings Last Modified Low = 3531679255;
         Build Settings Last Modified High = 30370017;
 
@@ -575,7 +575,7 @@ Wave Bank
     Wave
     {
         Name = DefenderSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderSpecial1.wav;
+        File = DefenderSpecial1.wav;
         Build Settings Last Modified Low = 3531679255;
         Build Settings Last Modified High = 30370017;
 
@@ -598,7 +598,7 @@ Wave Bank
     Wave
     {
         Name = DefenderSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderSpecial2.wav;
+        File = DefenderSpecial2.wav;
         Build Settings Last Modified Low = 3531689256;
         Build Settings Last Modified High = 30370017;
 
@@ -621,7 +621,7 @@ Wave Bank
     Wave
     {
         Name = DefenderSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\DefenderSpecial3.wav;
+        File = DefenderSpecial3.wav;
         Build Settings Last Modified Low = 3531689256;
         Build Settings Last Modified High = 30370017;
 
@@ -644,7 +644,7 @@ Wave Bank
     Wave
     {
         Name = EArtilleryAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EArtilleryAttack.wav;
+        File = EArtilleryAttack.wav;
         Build Settings Last Modified Low = 3531699257;
         Build Settings Last Modified High = 30370017;
 
@@ -667,7 +667,7 @@ Wave Bank
     Wave
     {
         Name = EArtilleryDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EArtilleryDefend.wav;
+        File = EArtilleryDefend.wav;
         Build Settings Last Modified Low = 3531699257;
         Build Settings Last Modified High = 30370017;
 
@@ -690,7 +690,7 @@ Wave Bank
     Wave
     {
         Name = EArtilleryDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EArtilleryDie.wav;
+        File = EArtilleryDie.wav;
         Build Settings Last Modified Low = 3531709257;
         Build Settings Last Modified High = 30370017;
 
@@ -713,7 +713,7 @@ Wave Bank
     Wave
     {
         Name = EArtilleryMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EArtilleryMove.wav;
+        File = EArtilleryMove.wav;
         Build Settings Last Modified Low = 3531709257;
         Build Settings Last Modified High = 30370017;
 
@@ -736,7 +736,7 @@ Wave Bank
     Wave
     {
         Name = EArtilleryPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EArtilleryPass.wav;
+        File =EArtilleryPass.wav;
         Build Settings Last Modified Low = 3531719258;
         Build Settings Last Modified High = 30370017;
 
@@ -759,7 +759,7 @@ Wave Bank
     Wave
     {
         Name = EArtillerySelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EArtillerySelect.wav;
+        File = EArtillerySelect.wav;
         Build Settings Last Modified Low = 3531719258;
         Build Settings Last Modified High = 30370017;
 
@@ -782,7 +782,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderAttack.wav;
+        File =EDefenderAttack.wav;
         Build Settings Last Modified Low = 3531729258;
         Build Settings Last Modified High = 30370017;
 
@@ -805,7 +805,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderDefend.wav;
+        File =EDefenderDefend.wav;
         Build Settings Last Modified Low = 3531739259;
         Build Settings Last Modified High = 30370017;
 
@@ -828,7 +828,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderDie.wav;
+        File =EDefenderDie.wav;
         Build Settings Last Modified Low = 3531739259;
         Build Settings Last Modified High = 30370017;
 
@@ -851,7 +851,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderMove.wav;
+        File =EDefenderMove.wav;
         Build Settings Last Modified Low = 3531749259;
         Build Settings Last Modified High = 30370017;
 
@@ -874,7 +874,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderPass.wav;
+        File =EDefenderPass.wav;
         Build Settings Last Modified Low = 3531749259;
         Build Settings Last Modified High = 30370017;
 
@@ -897,7 +897,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderSelect.wav;
+        File = EDefenderSelect.wav;
         Build Settings Last Modified Low = 3531759260;
         Build Settings Last Modified High = 30370017;
 
@@ -920,7 +920,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderSpecial1.wav;
+        File = EDefenderSpecial1.wav;
         Build Settings Last Modified Low = 3531759260;
         Build Settings Last Modified High = 30370017;
 
@@ -943,7 +943,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderSpecial2.wav;
+        File = EDefenderSpecial2.wav;
         Build Settings Last Modified Low = 3531769261;
         Build Settings Last Modified High = 30370017;
 
@@ -966,7 +966,7 @@ Wave Bank
     Wave
     {
         Name = EDefenderSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EDefenderSpecial3.wav;
+        File = EDefenderSpecial3.wav;
         Build Settings Last Modified Low = 3531779261;
         Build Settings Last Modified High = 30370017;
 
@@ -989,7 +989,7 @@ Wave Bank
     Wave
     {
         Name = EMageAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageAttack.wav;
+        File = EMageAttack.wav;
         Build Settings Last Modified Low = 3531779261;
         Build Settings Last Modified High = 30370017;
 
@@ -1012,7 +1012,7 @@ Wave Bank
     Wave
     {
         Name = EMageDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageDefend.wav;
+        File = EMageDefend.wav;
         Build Settings Last Modified Low = 3531789262;
         Build Settings Last Modified High = 30370017;
 
@@ -1035,7 +1035,7 @@ Wave Bank
     Wave
     {
         Name = EMageDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageDie.wav;
+        File = EMageDie.wav;
         Build Settings Last Modified Low = 3531799262;
         Build Settings Last Modified High = 30370017;
 
@@ -1058,7 +1058,7 @@ Wave Bank
     Wave
     {
         Name = EMageMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageMove.wav;
+        File = EMageMove.wav;
         Build Settings Last Modified Low = 3531799262;
         Build Settings Last Modified High = 30370017;
 
@@ -1081,7 +1081,7 @@ Wave Bank
     Wave
     {
         Name = EMagePass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMagePass.wav;
+        File =EMagePass.wav;
         Build Settings Last Modified Low = 3531809263;
         Build Settings Last Modified High = 30370017;
 
@@ -1104,7 +1104,7 @@ Wave Bank
     Wave
     {
         Name = EMageSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageSelect.wav;
+        File =EMageSelect.wav;
         Build Settings Last Modified Low = 3531809263;
         Build Settings Last Modified High = 30370017;
 
@@ -1127,7 +1127,7 @@ Wave Bank
     Wave
     {
         Name = EMageSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageSpecial1.wav;
+        File =EMageSpecial1.wav;
         Build Settings Last Modified Low = 3531819263;
         Build Settings Last Modified High = 30370017;
 
@@ -1150,7 +1150,7 @@ Wave Bank
     Wave
     {
         Name = EMageSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageSpecial2.wav;
+        File = EMageSpecial2.wav;
         Build Settings Last Modified Low = 3531829264;
         Build Settings Last Modified High = 30370017;
 
@@ -1173,7 +1173,7 @@ Wave Bank
     Wave
     {
         Name = EMageSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageSpecial3.wav;
+        File = EMageSpecial3.wav;
         Build Settings Last Modified Low = 3531829264;
         Build Settings Last Modified High = 30370017;
 
@@ -1196,7 +1196,7 @@ Wave Bank
     Wave
     {
         Name = EMageSpecial4;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageSpecial4.wav;
+        File = EMageSpecial4.wav;
         Build Settings Last Modified Low = 3531839265;
         Build Settings Last Modified High = 30370017;
 
@@ -1219,7 +1219,7 @@ Wave Bank
     Wave
     {
         Name = EMageSpecial5;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageSpecial5.wav;
+        File =EMageSpecial5.wav;
         Build Settings Last Modified Low = 3531849265;
         Build Settings Last Modified High = 30370017;
 
@@ -1242,7 +1242,7 @@ Wave Bank
     Wave
     {
         Name = EMageSpecial6;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\EMageSpecial6.wav;
+        File = EMageSpecial6.wav;
         Build Settings Last Modified Low = 3531849265;
         Build Settings Last Modified High = 30370017;
 
@@ -1265,7 +1265,7 @@ Wave Bank
     Wave
     {
         Name = ERangerAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerAttack.wav;
+        File = ERangerAttack.wav;
         Build Settings Last Modified Low = 3531859266;
         Build Settings Last Modified High = 30370017;
 
@@ -1288,7 +1288,7 @@ Wave Bank
     Wave
     {
         Name = ERangerDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerDefend.wav;
+        File = ERangerDefend.wav;
         Build Settings Last Modified Low = 3531869266;
         Build Settings Last Modified High = 30370017;
 
@@ -1311,7 +1311,7 @@ Wave Bank
     Wave
     {
         Name = ERangerDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerDie.wav;
+        File = ERangerDie.wav;
         Build Settings Last Modified Low = 3531869266;
         Build Settings Last Modified High = 30370017;
 
@@ -1334,7 +1334,7 @@ Wave Bank
     Wave
     {
         Name = ERangerMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerMove.wav;
+        File =ERangerMove.wav;
         Build Settings Last Modified Low = 3531879267;
         Build Settings Last Modified High = 30370017;
 
@@ -1357,7 +1357,7 @@ Wave Bank
     Wave
     {
         Name = ERangerPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerPass.wav;
+        File = ERangerPass.wav;
         Build Settings Last Modified Low = 3531889267;
         Build Settings Last Modified High = 30370017;
 
@@ -1380,7 +1380,7 @@ Wave Bank
     Wave
     {
         Name = ERangerSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ERangerSelect.wav;
+        File = ERangerSelect.wav;
         Build Settings Last Modified Low = 3531899268;
         Build Settings Last Modified High = 30370017;
 
@@ -1403,7 +1403,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierAttack.wav;
+        File = ESoldierAttack.wav;
         Build Settings Last Modified Low = 3531899268;
         Build Settings Last Modified High = 30370017;
 
@@ -1426,7 +1426,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierDefend.wav;
+        File = ESoldierDefend.wav;
         Build Settings Last Modified Low = 3531909269;
         Build Settings Last Modified High = 30370017;
 
@@ -1449,7 +1449,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierDie.wav;
+        File = ESoldierDie.wav;
         Build Settings Last Modified Low = 3531919269;
         Build Settings Last Modified High = 30370017;
 
@@ -1472,7 +1472,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierMove.wav;
+        File = ESoldierMove.wav;
         Build Settings Last Modified Low = 3531919269;
         Build Settings Last Modified High = 30370017;
 
@@ -1495,7 +1495,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierPass.wav;
+        File = ESoldierPass.wav;
         Build Settings Last Modified Low = 3531929270;
         Build Settings Last Modified High = 30370017;
 
@@ -1518,7 +1518,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierSelect.wav;
+        File = ESoldierSelect.wav;
         Build Settings Last Modified Low = 3531939270;
         Build Settings Last Modified High = 30370017;
 
@@ -1541,7 +1541,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierSpecial1.wav;
+        File = ESoldierSpecial1.wav;
         Build Settings Last Modified Low = 3531939270;
         Build Settings Last Modified High = 30370017;
 
@@ -1564,7 +1564,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierSpecial2.wav;
+        File = ESoldierSpecial2.wav;
         Build Settings Last Modified Low = 3531949271;
         Build Settings Last Modified High = 30370017;
 
@@ -1587,7 +1587,7 @@ Wave Bank
     Wave
     {
         Name = ESoldierSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESoldierSpecial3.wav;
+        File = ESoldierSpecial3.wav;
         Build Settings Last Modified Low = 3531959271;
         Build Settings Last Modified High = 30370017;
 
@@ -1610,7 +1610,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanAttack.wav;
+        File =ESpearmanAttack.wav;
         Build Settings Last Modified Low = 3531959271;
         Build Settings Last Modified High = 30370017;
 
@@ -1633,7 +1633,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanDefend.wav;
+        File = ESpearmanDefend.wav;
         Build Settings Last Modified Low = 3531969272;
         Build Settings Last Modified High = 30370017;
 
@@ -1656,7 +1656,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanDie.wav;
+        File = ESpearmanDie.wav;
         Build Settings Last Modified Low = 3531979273;
         Build Settings Last Modified High = 30370017;
 
@@ -1679,7 +1679,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanMove.wav;
+        File = ESpearmanMove.wav;
         Build Settings Last Modified Low = 3531989273;
         Build Settings Last Modified High = 30370017;
 
@@ -1702,7 +1702,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanPass.wav;
+        File =ESpearmanPass.wav;
         Build Settings Last Modified Low = 3531989273;
         Build Settings Last Modified High = 30370017;
 
@@ -1725,7 +1725,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanSelect.wav;
+        File = ESpearmanSelect.wav;
         Build Settings Last Modified Low = 3531999274;
         Build Settings Last Modified High = 30370017;
 
@@ -1748,7 +1748,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanSpecial1.wav;
+        File =ESpearmanSpecial1.wav;
         Build Settings Last Modified Low = 3532009274;
         Build Settings Last Modified High = 30370017;
 
@@ -1771,7 +1771,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanSpecial2.wav;
+        File = ESpearmanSpecial2.wav;
         Build Settings Last Modified Low = 3532009274;
         Build Settings Last Modified High = 30370017;
 
@@ -1794,7 +1794,7 @@ Wave Bank
     Wave
     {
         Name = ESpearmanSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\ESpearmanSpecial3.wav;
+        File = ESpearmanSpecial3.wav;
         Build Settings Last Modified Low = 3532019275;
         Build Settings Last Modified High = 30370017;
 
@@ -1817,7 +1817,7 @@ Wave Bank
     Wave
     {
         Name = MageAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageAttack.wav;
+        File = MageAttack.wav;
         Build Settings Last Modified Low = 3532029275;
         Build Settings Last Modified High = 30370017;
 
@@ -1840,7 +1840,7 @@ Wave Bank
     Wave
     {
         Name = MageDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageDefend.wav;
+        File = MageDefend.wav;
         Build Settings Last Modified Low = 3532039276;
         Build Settings Last Modified High = 30370017;
 
@@ -1863,7 +1863,7 @@ Wave Bank
     Wave
     {
         Name = MageDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageDie.wav;
+        File = MageDie.wav;
         Build Settings Last Modified Low = 3532039276;
         Build Settings Last Modified High = 30370017;
 
@@ -1886,7 +1886,7 @@ Wave Bank
     Wave
     {
         Name = MageMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageMove.wav;
+        File = MageMove.wav;
         Build Settings Last Modified Low = 3532049277;
         Build Settings Last Modified High = 30370017;
 
@@ -1909,7 +1909,7 @@ Wave Bank
     Wave
     {
         Name = MagePass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MagePass.wav;
+        File = MagePass.wav;
         Build Settings Last Modified Low = 3532059277;
         Build Settings Last Modified High = 30370017;
 
@@ -1932,7 +1932,7 @@ Wave Bank
     Wave
     {
         Name = MageSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageSelect.wav;
+        File = MageSelect.wav;
         Build Settings Last Modified Low = 3532069278;
         Build Settings Last Modified High = 30370017;
 
@@ -1955,7 +1955,7 @@ Wave Bank
     Wave
     {
         Name = MageSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageSpecial1.wav;
+        File = MageSpecial1.wav;
         Build Settings Last Modified Low = 3532069278;
         Build Settings Last Modified High = 30370017;
 
@@ -1978,7 +1978,7 @@ Wave Bank
     Wave
     {
         Name = MageSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageSpecial2.wav;
+        File =MageSpecial2.wav;
         Build Settings Last Modified Low = 3532079278;
         Build Settings Last Modified High = 30370017;
 
@@ -2001,7 +2001,7 @@ Wave Bank
     Wave
     {
         Name = MageSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageSpecial3.wav;
+        File = MageSpecial3.wav;
         Build Settings Last Modified Low = 3532089279;
         Build Settings Last Modified High = 30370017;
 
@@ -2024,7 +2024,7 @@ Wave Bank
     Wave
     {
         Name = MageSpecial4;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageSpecial4.wav;
+        File = MageSpecial4.wav;
         Build Settings Last Modified Low = 3532099279;
         Build Settings Last Modified High = 30370017;
 
@@ -2047,7 +2047,7 @@ Wave Bank
     Wave
     {
         Name = MageSpecial5;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageSpecial5.wav;
+        File = MageSpecial5.wav;
         Build Settings Last Modified Low = 3532099279;
         Build Settings Last Modified High = 30370017;
 
@@ -2070,7 +2070,7 @@ Wave Bank
     Wave
     {
         Name = MageSpecial6;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\MageSpecial6.wav;
+        File = MageSpecial6.wav;
         Build Settings Last Modified Low = 3532109280;
         Build Settings Last Modified High = 30370017;
 
@@ -2093,7 +2093,7 @@ Wave Bank
     Wave
     {
         Name = RangerAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerAttack.wav;
+        File = RangerAttack.wav;
         Build Settings Last Modified Low = 3532119281;
         Build Settings Last Modified High = 30370017;
 
@@ -2116,7 +2116,7 @@ Wave Bank
     Wave
     {
         Name = RangerDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerDefend.wav;
+        File = RangerDefend.wav;
         Build Settings Last Modified Low = 3532129281;
         Build Settings Last Modified High = 30370017;
 
@@ -2139,7 +2139,7 @@ Wave Bank
     Wave
     {
         Name = RangerDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerDie.wav;
+        File = RangerDie.wav;
         Build Settings Last Modified Low = 3532139282;
         Build Settings Last Modified High = 30370017;
 
@@ -2162,7 +2162,7 @@ Wave Bank
     Wave
     {
         Name = RangerMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerMove.wav;
+        File = RangerMove.wav;
         Build Settings Last Modified Low = 3532139282;
         Build Settings Last Modified High = 30370017;
 
@@ -2185,7 +2185,7 @@ Wave Bank
     Wave
     {
         Name = RangerPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerPass.wav;
+        File =RangerPass.wav;
         Build Settings Last Modified Low = 3532149282;
         Build Settings Last Modified High = 30370017;
 
@@ -2208,7 +2208,7 @@ Wave Bank
     Wave
     {
         Name = RangerSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerSelect.wav;
+        File = RangerSelect.wav;
         Build Settings Last Modified Low = 3532159283;
         Build Settings Last Modified High = 30370017;
 
@@ -2231,7 +2231,7 @@ Wave Bank
     Wave
     {
         Name = RangerSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerSpecial1.wav;
+        File = RangerSpecial1.wav;
         Build Settings Last Modified Low = 3532169283;
         Build Settings Last Modified High = 30370017;
 
@@ -2254,7 +2254,7 @@ Wave Bank
     Wave
     {
         Name = RangerSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerSpecial2.wav;
+        File = RangerSpecial2.wav;
         Build Settings Last Modified Low = 3532179284;
         Build Settings Last Modified High = 30370017;
 
@@ -2277,7 +2277,7 @@ Wave Bank
     Wave
     {
         Name = RangerSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\RangerSpecial3.wav;
+        File = RangerSpecial3.wav;
         Build Settings Last Modified Low = 3532179284;
         Build Settings Last Modified High = 30370017;
 
@@ -2300,7 +2300,7 @@ Wave Bank
     Wave
     {
         Name = SoldierAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierAttack.wav;
+        File = SoldierAttack.wav;
         Build Settings Last Modified Low = 3532189285;
         Build Settings Last Modified High = 30370017;
 
@@ -2323,7 +2323,7 @@ Wave Bank
     Wave
     {
         Name = SoldierDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierDefend.wav;
+        File = SoldierDefend.wav;
         Build Settings Last Modified Low = 3532199285;
         Build Settings Last Modified High = 30370017;
 
@@ -2346,7 +2346,7 @@ Wave Bank
     Wave
     {
         Name = SoldierDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierDie.wav;
+        File = SoldierDie.wav;
         Build Settings Last Modified Low = 3532209286;
         Build Settings Last Modified High = 30370017;
 
@@ -2369,7 +2369,7 @@ Wave Bank
     Wave
     {
         Name = SoldierMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierMove.wav;
+        File = SoldierMove.wav;
         Build Settings Last Modified Low = 3532219286;
         Build Settings Last Modified High = 30370017;
 
@@ -2392,7 +2392,7 @@ Wave Bank
     Wave
     {
         Name = SoldierPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierPass.wav;
+        File = SoldierPass.wav;
         Build Settings Last Modified Low = 3532229287;
         Build Settings Last Modified High = 30370017;
 
@@ -2415,7 +2415,7 @@ Wave Bank
     Wave
     {
         Name = SoldierSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierSelect.wav;
+        File = SoldierSelect.wav;
         Build Settings Last Modified Low = 3532229287;
         Build Settings Last Modified High = 30370017;
 
@@ -2438,7 +2438,7 @@ Wave Bank
     Wave
     {
         Name = SoldierSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierSpecial1.wav;
+        File = SoldierSpecial1.wav;
         Build Settings Last Modified Low = 3532239287;
         Build Settings Last Modified High = 30370017;
 
@@ -2461,7 +2461,7 @@ Wave Bank
     Wave
     {
         Name = SoldierSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierSpecial2.wav;
+        File = SoldierSpecial2.wav;
         Build Settings Last Modified Low = 3532249288;
         Build Settings Last Modified High = 30370017;
 
@@ -2484,7 +2484,7 @@ Wave Bank
     Wave
     {
         Name = SoldierSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SoldierSpecial3.wav;
+        File = SoldierSpecial3.wav;
         Build Settings Last Modified Low = 3532259289;
         Build Settings Last Modified High = 30370017;
 
@@ -2507,7 +2507,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanAttack;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanAttack.wav;
+        File = SpearmanAttack.wav;
         Build Settings Last Modified Low = 3532269289;
         Build Settings Last Modified High = 30370017;
 
@@ -2530,7 +2530,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanDefend;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanDefend.wav;
+        File = SpearmanDefend.wav;
         Build Settings Last Modified Low = 3532279290;
         Build Settings Last Modified High = 30370017;
 
@@ -2553,7 +2553,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanDie;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanDie.wav;
+        File = SpearmanDie.wav;
         Build Settings Last Modified Low = 3532279290;
         Build Settings Last Modified High = 30370017;
 
@@ -2576,7 +2576,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanMove;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanMove.wav;
+        File = SpearmanMove.wav;
         Build Settings Last Modified Low = 3532289290;
         Build Settings Last Modified High = 30370017;
 
@@ -2599,7 +2599,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanPass;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanPass.wav;
+        File = SpearmanPass.wav;
         Build Settings Last Modified Low = 3532299291;
         Build Settings Last Modified High = 30370017;
 
@@ -2622,7 +2622,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanSelect;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanSelect.wav;
+        File = SpearmanSelect.wav;
         Build Settings Last Modified Low = 3532309291;
         Build Settings Last Modified High = 30370017;
 
@@ -2645,7 +2645,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanSpecial1;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanSpecial1.wav;
+        File = SpearmanSpecial1.wav;
         Build Settings Last Modified Low = 3532319292;
         Build Settings Last Modified High = 30370017;
 
@@ -2668,7 +2668,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanSpecial2;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanSpecial2.wav;
+        File = SpearmanSpecial2.wav;
         Build Settings Last Modified Low = 3532329293;
         Build Settings Last Modified High = 30370017;
 
@@ -2691,7 +2691,7 @@ Wave Bank
     Wave
     {
         Name = SpearmanSpecial3;
-        File = ..\..\..\..\..\..\Csci\313 - Games\Sound Clips\SpearmanSpecial3.wav;
+        File = SpearmanSpecial3.wav;
         Build Settings Last Modified Low = 3532339293;
         Build Settings Last Modified High = 30370017;
 

@@ -50,7 +50,7 @@ namespace Titans
             game.GraphicsDevice.Clear(Color.White);
             
             game.spriteBatch.Begin();
-            game.spriteBatch.Draw(game.backround, new Vector2(-500, -200), null, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0);
+            game.spriteBatch.Draw(game.backround, new Vector2(200, -50), null, Color.White, 0, Vector2.Zero, 1f, SpriteEffects.None, 0);
             game.spriteBatch.Draw(game.quick_battle, new Vector2((game.Window.ClientBounds.Width / 2) - (game.quick_battle.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.quick_battle.Height / 2)), Color.White);
             game.spriteBatch.Draw(game.campaign, new Vector2((game.Window.ClientBounds.Width / 2) - (game.campaign.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.quick_battle.Height - 55)), Color.White);
             game.spriteBatch.Draw(game.custom_battle, new Vector2((game.Window.ClientBounds.Width / 2) - (game.custom_battle.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.campaign.Height - 95)), Color.White);
