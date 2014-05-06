@@ -42,7 +42,7 @@ namespace Titans
             
 	    //Load all images for the main menu buttons
             game.spriteBatch = new SpriteBatch(game.GraphicsDevice);
-
+            game.backround = game.Content.Load<Texture2D>(@"images\Backround");
             game.quick_battle = game.Content.Load<Texture2D>(@"images\Quick Battle");
             game.campaign = game.Content.Load<Texture2D>(@"images\Campaign");
             game.campaign_invert = game.Content.Load<Texture2D>(@"images\Campaign(Inverted)");

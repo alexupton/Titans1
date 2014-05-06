@@ -154,6 +154,7 @@ namespace Titans
         public List<Color> customColors;
         public int[] optionsSettings;
         public Texture2D divider;
+        public Texture2D backround;
        
         //ingame menu
         public Texture2D[] menuButtons;
@@ -287,16 +288,16 @@ namespace Titans
             graphics = new GraphicsDeviceManager(this);
             this.graphics.PreferredBackBufferHeight = 800;
             this.graphics.PreferredBackBufferWidth = 1500;
-            
-            
             this.graphics.IsFullScreen = false;
+            Window.AllowUserResizing = true;
+            Window.Title = ("Titans Of Darkness");
             Content.RootDirectory = "Content";
             this.IsMouseVisible = true;
             mainMenu = true;
             demo = false;
             offsetY = 0;
             offsetX = 0;
-            //startTurn = true;
+            
             releaseWait = false;
             lastSelectedTile = new Tile();
             displayDamage = false;
@@ -310,6 +311,7 @@ namespace Titans
             moveWait = false;
             tickWait = false;
             endWait = false;
+            
             graphics.ApplyChanges();
 
             optionsSettings = new int []{2,2,2,5,5};
@@ -342,10 +344,7 @@ namespace Titans
 
         }
 
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
+      
         protected override void LoadContent()
         {
             if (mainMenu)
@@ -402,7 +401,7 @@ namespace Titans
                 Rectangle exitclickableArea = new Rectangle((Window.ClientBounds.Width / 2) - (exit.Width / 2), (Window.ClientBounds.Height - 70), 141, 33);
                 
 
-                // mousepos = new Point();
+                
                 bool mousestuffs = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(exitclickableArea);
                 bool mousequick = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(quickClick);
                 bool mousecampaign = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(campaignClick);
@@ -510,9 +509,6 @@ namespace Titans
                 if (mouseState.LeftButton == ButtonState.Pressed)
                 {
 
-                    // We now know the left mouse button is down and it wasn't down last frame
-                    // so we've detected a click
-                    // Now find the position 
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
                     if (exitclickableArea.Contains(mousePos))
                     {
@@ -520,7 +516,6 @@ namespace Titans
                     }
 
                 }
-                // TODO: Add your update logic here
                 if (mousequick && quick_battle == quick_temp)
                 {
                     quick_temp = quick_battle;

@@ -48,6 +48,7 @@ namespace Titans
             game.GraphicsDevice.Clear(Color.White);
             
             game.spriteBatch.Begin();
+            game.spriteBatch.Draw(game.backround, new Vector2(-500, -200), null, Color.White, 0, Vector2.Zero, 2f, SpriteEffects.None, 0);
             game.spriteBatch.Draw(game.quick_battle, new Vector2((game.Window.ClientBounds.Width / 2) - (game.quick_battle.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.quick_battle.Height / 2)), Color.White);
             game.spriteBatch.Draw(game.campaign, new Vector2((game.Window.ClientBounds.Width / 2) - (game.campaign.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.quick_battle.Height - 55)), Color.White);
             game.spriteBatch.Draw(game.custom_battle, new Vector2((game.Window.ClientBounds.Width / 2) - (game.custom_battle.Width / 2), (game.Window.ClientBounds.Height / 2) - (game.campaign.Height - 95)), Color.White);
@@ -356,7 +357,7 @@ namespace Titans
                             }
                             else if (effect is Root)
                             {
-                                game.spriteBatch.Draw(game.drawStatus[6], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
+                                game.spriteBatch.Draw(game.drawStatus[6], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), null, Color.White, 0, Vector2.Zero, .5f, SpriteEffects.None, 0);
                  
                             }
                             else if (effect is Haste)
