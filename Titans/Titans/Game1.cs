@@ -244,11 +244,14 @@ namespace Titans
         public int attackedUnitTrueX;
         public int attackedUnitTrueY;
         public int unitDamage;
+        public int unitHeal;
+        public Point HealLocation;
         public List<int> splashDamage;
         public List<Tile> splashLocations;
 
         //bool unitAttacked;
         public bool displayDamage;
+        public bool displayHeal;
         public bool musicStarted;
        public Draw draw;
         ContentLoader load;
@@ -956,7 +959,8 @@ namespace Titans
                         lastSelectedTile = battle.BattleMap.GetTileAt(X, Y);
 
                         //artillery splash highlighting
-                        if (battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted && battle.ActiveUnit is Artillery)
+                        if (battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted && battle.ActiveUnit is Artillery || (battle.ActiveUnit is Mage && battle.specialMode1)
+                            && battle.BattleMap.GetTileAt(X, Y).TileUnit != battle.ActiveUnit)
                         {
                             List<Tile> splashTiles = AI.GetAllAdjacentTiles(battle.BattleMap, lastSelectedTile);
                             foreach (Tile test in splashTiles)
@@ -1187,6 +1191,7 @@ namespace Titans
                             if (battle.ActiveUnit is Artillery)
                             {
                                 splashDamage = battle.GetSplashDamage(battle.BattleMap.GetTileAt(X, Y), unitDamage);
+
                             }
                             displayDamage = true;
                             timeSinceLastDamageFrame = 0;
@@ -1343,6 +1348,7 @@ namespace Titans
                     // Increment to next frame
                     wait = false;
                     displayDamage = false;
+                    displayHeal = false;
                     splashDamage.Clear();
                     splashLocations.Clear();
                     if (battle.ActiveUnit.AP <= 0 && frameCount == 2)

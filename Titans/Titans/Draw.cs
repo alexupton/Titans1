@@ -495,6 +495,11 @@ namespace Titans
                     }
                 }
             }
+            //Heal display
+            if (game.displayHeal)
+            {
+                game.spriteBatch.DrawString(game.text, "+" + game.unitHeal.ToString(), new Vector2(game.HealLocation.X + game.offsetX, game.HealLocation.Y + game.offsetY), Color.Green);
+            }
 
             if (game.p1win)
             {

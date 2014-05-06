@@ -36,7 +36,7 @@ namespace Titans
                 }
                 else if (unit is Ranger)
                 {
-                    if (unit.MP >= 7)
+                    if (unit.MP >= 15)
                         return true;
                     else
                         return false;
@@ -67,7 +67,14 @@ namespace Titans
                 }
                 else if (unit is Ranger)
                 {
-                    if (unit.MP >= 7)
+                    if (unit.MP >= 15)
+                        return true;
+                    else
+                        return false;
+                }
+                else if (unit is Mage)
+                {
+                    if (unit.MP >= 20)
                         return true;
                     else
                         return false;
@@ -96,6 +103,37 @@ namespace Titans
                     else
                         return false;
                 }
+                else if (unit is Mage)
+                {
+                    if (unit.MP >= 15)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            else if (specialNumber == 4)
+            {
+                if (unit.MP >= 20)
+                    return true;
+                else
+                    return false;
+
+            }
+            else if (specialNumber == 5)
+            {
+                if (unit.MP >= 20)
+                    return true;
+                else
+                    return false;
+
+            }
+            else if (specialNumber == 6)
+            {
+                if (unit.MP >= 20)
+                    return true;
+                else
+                    return false;
+
             }
             
             

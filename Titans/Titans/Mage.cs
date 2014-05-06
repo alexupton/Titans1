@@ -62,41 +62,30 @@ namespace Titans
         public override void Special1(Battle battle)
         {
             Unit target = battle.CurrentTarget;
-            int damage = 50;
+            this.Attack = 50;
+            int damage = AttackResolver.Attack(this, target, this.AttackModifiers);
             battle.GameUI.unitDamage = damage;
             target.HP -= damage;
             battle.GameUI.displayDamage = true;
-            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
-            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 - 20;
             battle.DeathCheck(target);
             //splash damage
-            List<Tile> enemyTiles = AI.GetAdjacentEnemyTiles(target, battle.BattleMap);
-            List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap, battle.BattleMap.GetTileAt(target.Location[0], target.Location[1]));
-            foreach (Tile tile in adjacent)
-            {
-                if (tile.hasUnit)
-                {
-                    if (tile.TileUnit.isPlayerUnit == this.isPlayerUnit)
-                    {
-                        enemyTiles.Add(tile);
-                    }
-                }
-            }
-            battle.GameUI.splashDamage.Clear();
-            battle.GameUI.splashLocations.Clear();
-            foreach (Tile tile in enemyTiles)
+            List<Tile> splashTiles = AI.GetSplashDamageTiles(target, battle.BattleMap);
+            foreach (Tile tile in splashTiles)
             {
                 battle.GameUI.splashLocations.Add(tile);
                 battle.GameUI.splashDamage.Add(25);
                 battle.GameUI.displayDamage = true;
 
-                tile.TileUnit.HP -= 25;
+                tile.TileUnit.HP -= damage / 2;
 
                 battle.DeathCheck(tile.TileUnit);
             }
          
             MP -= 40;
             this.AP-=2;
+            this.Attack = 15;
             
             
             battle.GameUI.timeSinceLastDamageFrame = 0;
@@ -108,17 +97,19 @@ namespace Titans
         {
            
             Unit target = battle.CurrentTarget;
-            int damage = 25;
+            this.Attack = 25;
+            int damage = AttackResolver.Attack(this, target, this.AttackModifiers);
             battle.GameUI.unitDamage = damage;
-            target.HP -= 25;
+            target.HP -= damage;
 
             battle.GameUI.displayDamage = true;
-            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
-            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 - 20;
             battle.DeathCheck(target);
 
             this.MP -= 20;
             this.AP--;
+            this.Attack = 15;
            
             
             battle.GameUI.timeSinceLastDamageFrame = 0;
@@ -128,18 +119,30 @@ namespace Titans
         //Set the Heal ability which costs 15 MP and heals target ally for 20 hp
         public override void Special3(Battle battle)
         {
-            
             Unit target = battle.CurrentTarget;
-            int heal = 20;
-            target.HP += heal;
-            //text animation for healing 
+            if (target.HP == target.MaxHP)
+            {
+                int heal = 20;
+                target.HP += heal;
+                battle.GameUI.displayHeal = true;
+                battle.GameUI.unitHeal = heal;
 
-            this.MP -= 15;
-            this.AP--;
-
-            battle.GameUI.timeSinceLastDamageFrame = 0;
-            battle.GameUI.frameCount = 0;
-            battle.GameUI.wait = true;
+                if (target.HP > target.MaxHP)
+                {
+                    target.HP = target.MaxHP;
+                }
+                this.MP -= 15;
+                this.AP--;
+            }
+            else
+            {
+                battle.GameUI.sfx.PlayBuzzer();
+                battle.GameUI.sfx.PlayBuzzer();
+            }
+                battle.GameUI.timeSinceLastDamageFrame = 0;
+                battle.GameUI.frameCount = 0;
+                battle.GameUI.wait = true;
+            
           
 
         }
@@ -148,8 +151,13 @@ namespace Titans
         {
            
             Unit target = battle.CurrentTarget;
-            //remove status effect on ally
-            //text animatoin
+            foreach (StatusEffect status in target.StatusEffects)
+            {
+                if (!(status is Haste))
+                {
+                    target.StatusEffects.Remove(status);
+                }
+            }
             this.MP -= 20;
             this.AP--;
             battle.GameUI.timeSinceLastDamageFrame = 0;
@@ -164,7 +172,20 @@ namespace Titans
            
             //set targets status
             //text animation
-            Haste haste = new Haste(target);
+            if (AI.HasStatusEffect(target, "Haste"))
+            {
+                foreach (StatusEffect effect in target.StatusEffects)
+                {
+                    if (effect is Haste)
+                    {
+                        effect.ResetTime();
+                    }
+                }
+            }
+            else
+            {
+                Haste haste = new Haste(target);
+            }
             this.MP -= 20;
             this.AP--;
             battle.GameUI.timeSinceLastDamageFrame = 0;

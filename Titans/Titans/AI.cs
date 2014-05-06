@@ -663,6 +663,28 @@ namespace Titans
 
             return enemyTiles;
         }
+        
+        //method better suited for splash damage
+        public static List<Tile> GetSplashDamageTiles(Unit target, Map map)
+        {
+            List<Tile> adjacent = GetAllAdjacentTiles(map, map.GetTileAt(target.Location[0], target.Location[1]));
+            List<Tile> enemyTiles = new List<Tile>();
+
+            foreach (Tile adj in adjacent)
+            {
+                if (adj.hasUnit)
+                {
+                    if (adj.TileUnit.isPlayerUnit == target.isPlayerUnit)
+                    {
+                        enemyTiles.Add(adj);
+                    }
+                }
+
+            }
+
+            return enemyTiles;
+        
+        }
 
         public static void MakeTauntedMove(Battle battle, Unit active, Unit target)
         {

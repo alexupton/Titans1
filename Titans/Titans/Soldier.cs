@@ -99,6 +99,7 @@ namespace Titans
             battle.GameUI.attackedUnitTrueX = target.Location[0] * 55  - 13;
             battle.GameUI.attackedUnitTrueY = target.Location[1] * 55  - 20;
 
+            target.HP -= damage + (damage / 2);
             battle.GameUI.splashDamage.Clear();
             battle.GameUI.splashLocations.Clear();
             battle.GameUI.splashDamage.Add(damage / 2);

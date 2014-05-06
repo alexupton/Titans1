@@ -290,6 +290,48 @@ namespace Titans
                         Game.sfx.PlayBuzzer();
                     }
                 }
+                else if (battle.specialMode4)
+                {
+                    if (!AI.HasEnemyUnit(battle.SelectedTile, active))
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        active.Special4(battle);
+                        EndSpecial();
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode5)
+                {
+                    if (!AI.HasEnemyUnit(battle.SelectedTile, active))
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        active.Special5(battle);
+                        EndSpecial();
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode6)
+                {
+                    if (AI.HasEnemyUnit(battle.SelectedTile, active))
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        active.Special6(battle);
+                        EndSpecial();
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
             }
         }
 

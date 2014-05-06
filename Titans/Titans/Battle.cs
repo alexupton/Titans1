@@ -858,6 +858,7 @@ namespace Titans
                 for (int i = 0; i < splash.Count; i++)
                 {
                     splashTiles.ElementAt(i).TileUnit.HP -= splash.ElementAt(i);
+                    DeathCheck(splashTiles.ElementAt(i).TileUnit);
                 }
                 GameUI.splashLocations = splashTiles;
             }

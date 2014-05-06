@@ -227,93 +227,144 @@ namespace Titans
                     }
                     else if (two.Contains(mousePos))
                     {
-                        Game.releaseWait = true;
-                        Game.specialButtons[0] = Game.specialUn;
-                        Game.specialButtons[1] = Game.specialSel;
-                        Game.specialButtons[2] = Game.specialUn;
-                        Game.specialButtons[3] = Game.specialUn;
-                        Game.specialButtons[4] = Game.specialUn;
-                        Game.specialButtons[5] = Game.specialUn;
+                        if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 2))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialSel;
+                            Game.specialButtons[2] = Game.specialUn;
+                            Game.specialButtons[3] = Game.specialUn;
+                            Game.specialButtons[4] = Game.specialUn;
+                            Game.specialButtons[5] = Game.specialUn;
 
-                        Game.draw.specialColor[0] = Color.White;
-                        Game.draw.specialColor[1] = Color.White;
-                        Game.draw.specialColor[2] = Color.White;
-                        Game.draw.specialColor[3] = Color.White;
-                        Game.draw.specialColor[4] = Color.White;
-                        Game.draw.specialColor[5] = Color.White;
-                        Game.battle.ActiveUnit.SelectSpecial2(Game.battle);
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.draw.specialColor[3] = Color.White;
+                            Game.draw.specialColor[4] = Color.White;
+                            Game.draw.specialColor[5] = Color.White;
+                            Game.battle.DeselectSpecialNumber();
+                            Game.battle.ActiveUnit.SelectSpecial2(Game.battle);
+                            Game.battle.SelectSpecialNumber(2);
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
                     }
                     else if (three.Contains(mousePos))
                     {
-                        Game.releaseWait = true;
-                        Game.specialButtons[0] = Game.specialUn;
-                        Game.specialButtons[1] = Game.specialUn;
-                        Game.specialButtons[2] = Game.specialSel;
-                        Game.specialButtons[3] = Game.specialUn;
-                        Game.specialButtons[4] = Game.specialUn;
-                        Game.specialButtons[5] = Game.specialUn;
+                        if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 3))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialSel;
+                            Game.specialButtons[3] = Game.specialUn;
+                            Game.specialButtons[4] = Game.specialUn;
+                            Game.specialButtons[5] = Game.specialUn;
 
-                        Game.draw.specialColor[0] = Color.White;
-                        Game.draw.specialColor[1] = Color.White;
-                        Game.draw.specialColor[2] = Color.White;
-                        Game.draw.specialColor[3] = Color.White;
-                        Game.draw.specialColor[4] = Color.White;
-                        Game.draw.specialColor[5] = Color.White;
-                        Game.battle.ActiveUnit.SelectSpecial3(Game.battle);
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.draw.specialColor[3] = Color.White;
+                            Game.draw.specialColor[4] = Color.White;
+                            Game.draw.specialColor[5] = Color.White;
+                            Game.battle.DeselectSpecialNumber();
+                            Game.battle.ActiveUnit.SelectSpecial3(Game.battle);
+                            Game.battle.SelectSpecialNumber(3);
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
                     }
                     else if (four.Contains(mousePos))
                     {
-                        Game.releaseWait = true;
-                        Game.specialButtons[0] = Game.specialUn;
-                        Game.specialButtons[1] = Game.specialUn;
-                        Game.specialButtons[2] = Game.specialUn;
-                        Game.specialButtons[3] = Game.specialSel;
-                        Game.specialButtons[4] = Game.specialUn;
-                        Game.specialButtons[5] = Game.specialUn;
+                        if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 4))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialUn;
+                            Game.specialButtons[3] = Game.specialSel;
+                            Game.specialButtons[4] = Game.specialUn;
+                            Game.specialButtons[5] = Game.specialUn;
 
-                        Game.draw.specialColor[0] = Color.White;
-                        Game.draw.specialColor[1] = Color.White;
-                        Game.draw.specialColor[2] = Color.White;
-                        Game.draw.specialColor[3] = Color.White;
-                        Game.draw.specialColor[4] = Color.White;
-                        Game.draw.specialColor[5] = Color.White;
-                        Game.battle.ActiveUnit.SelectSpecial4(Game.battle);
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.draw.specialColor[3] = Color.White;
+                            Game.draw.specialColor[4] = Color.White;
+                            Game.draw.specialColor[5] = Color.White;
+                            Game.battle.DeselectSpecialNumber();
+                            Game.battle.ActiveUnit.SelectSpecial4(Game.battle);
+                            Game.battle.SelectSpecialNumber(4);
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
+
                     }
                     else if (five.Contains(mousePos))
                     {
-                        Game.releaseWait = true;
-                        Game.specialButtons[0] = Game.specialUn;
-                        Game.specialButtons[1] = Game.specialUn;
-                        Game.specialButtons[2] = Game.specialUn;
-                        Game.specialButtons[3] = Game.specialUn;
-                        Game.specialButtons[4] = Game.specialSel;
-                        Game.specialButtons[5] = Game.specialUn;
+                        if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 5))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialUn;
+                            Game.specialButtons[3] = Game.specialUn;
+                            Game.specialButtons[4] = Game.specialSel;
+                            Game.specialButtons[5] = Game.specialUn;
 
-                        Game.draw.specialColor[0] = Color.White;
-                        Game.draw.specialColor[1] = Color.White;
-                        Game.draw.specialColor[2] = Color.White;
-                        Game.draw.specialColor[3] = Color.White;
-                        Game.draw.specialColor[4] = Color.White;
-                        Game.draw.specialColor[5] = Color.White;
-                        Game.battle.ActiveUnit.SelectSpecial5(Game.battle);
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.draw.specialColor[3] = Color.White;
+                            Game.draw.specialColor[4] = Color.White;
+                            Game.draw.specialColor[5] = Color.White;
+                            Game.battle.DeselectSpecialNumber();
+                            Game.battle.ActiveUnit.SelectSpecial5(Game.battle);
+                            Game.battle.SelectSpecialNumber(5);
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
                     }
                     else if (six.Contains(mousePos))
                     {
-                        Game.releaseWait = true;
-                        Game.specialButtons[0] = Game.specialUn;
-                        Game.specialButtons[1] = Game.specialUn;
-                        Game.specialButtons[2] = Game.specialUn;
-                        Game.specialButtons[3] = Game.specialUn;
-                        Game.specialButtons[4] = Game.specialUn;
-                        Game.specialButtons[5] = Game.specialSel;
+                        if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 6))
+                        {
+                            Game.releaseWait = true;
+                            Game.specialButtons[0] = Game.specialUn;
+                            Game.specialButtons[1] = Game.specialUn;
+                            Game.specialButtons[2] = Game.specialUn;
+                            Game.specialButtons[3] = Game.specialUn;
+                            Game.specialButtons[4] = Game.specialUn;
+                            Game.specialButtons[5] = Game.specialSel;
 
-                        Game.draw.specialColor[0] = Color.White;
-                        Game.draw.specialColor[1] = Color.White;
-                        Game.draw.specialColor[2] = Color.White;
-                        Game.draw.specialColor[3] = Color.White;
-                        Game.draw.specialColor[4] = Color.White;
-                        Game.draw.specialColor[5] = Color.White;
-                        Game.battle.ActiveUnit.SelectSpecial6(Game.battle);
+                            Game.draw.specialColor[0] = Color.White;
+                            Game.draw.specialColor[1] = Color.White;
+                            Game.draw.specialColor[2] = Color.White;
+                            Game.draw.specialColor[3] = Color.White;
+                            Game.draw.specialColor[4] = Color.White;
+                            Game.draw.specialColor[5] = Color.White;
+                            Game.battle.DeselectSpecialNumber();
+                            Game.battle.ActiveUnit.SelectSpecial6(Game.battle);
+                            Game.battle.SelectSpecialNumber(6);
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                            Game.sfx.PlayBuzzer();
+                        }
                     }
                 }
             }
