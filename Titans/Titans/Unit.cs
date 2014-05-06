@@ -69,7 +69,7 @@ namespace Titans
             }
             else if (this is Cavalry)
             {
-                return "Cavalry";
+                return "Spearman";
             }
             else if (this is Defender)
             {

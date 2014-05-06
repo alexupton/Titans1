@@ -81,6 +81,7 @@ namespace Titans
 
                 battle.GameUI.timeSinceLastDamageFrame = 0;
                 battle.GameUI.frameCount = 0;
+                battle.GameUI.sfx.PlaySpecialSound(this, 1);
             }
             else
             {
@@ -113,6 +114,7 @@ namespace Titans
             battle.GameUI.wait = true;
 
             battle.DeathCheck(target);
+            battle.GameUI.sfx.PlaySpecialSound(this, 2);
 
 
         }
@@ -134,6 +136,7 @@ namespace Titans
                 battle.GameUI.timeSinceLastDamageFrame = 0;
                 battle.GameUI.frameCount = 0;
                 battle.GameUI.wait = true;
+                battle.GameUI.sfx.PlaySpecialSound(this, 3);
             }
             else
             {

@@ -51,6 +51,30 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderAttack");
             }
+            else if (attacker is Cavalry && !attacker.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESpearmanAttack");
+            }
+            else if (attacker is Cavalry && attacker.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SpearmanAttack");
+            }
+            else if (attacker is Mage && !attacker.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EMageAttack");
+            }
+            else if (attacker is Mage && attacker.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("MageAttack");
+            }
+            else if (attacker is Artillery && !attacker.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EArtilleryAttack");
+            }
+            else if (attacker is Artillery && attacker.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ArtilleryAttack");
+            }
             else
             {
                 cue = soundBank.GetCue("EDefenderAttack");
@@ -82,6 +106,31 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderDie");
             }
+            else if (deadUnit is Cavalry && !deadUnit.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESpearmanDie");
+            }
+            else if (deadUnit is Cavalry && deadUnit.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SpearmanDie");
+            }
+            else if (deadUnit is Mage && !deadUnit.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EMageDie");
+            }
+            else if (deadUnit is Mage && deadUnit.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("MageDie");
+            }
+            else if (deadUnit is Artillery && !deadUnit.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EArtilleryDie");
+            }
+            else if (deadUnit is Artillery && deadUnit.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ArtilleryDie");
+            }
+
             else
             {
                 cue = soundBank.GetCue("EDefenderDie");
@@ -111,6 +160,30 @@ namespace Titans
             else if (mover is Defender && mover.isPlayerUnit)
             {
                 cue = soundBank.GetCue("DefenderMove");
+            }
+            else if (mover is Cavalry && !mover.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESpearmanMove");
+            }
+            else if (mover is Cavalry && mover.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SpearmanMove");
+            }
+            else if (mover is Mage && !mover.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EMageMove");
+            }
+            else if (mover is Mage && mover.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("MageMove");
+            }
+            else if (mover is Artillery && !mover.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EArtilleryMove");
+            }
+            else if (mover is Artillery && mover.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ArtilleryMove");
             }
             else
             {
@@ -142,6 +215,30 @@ namespace Titans
             else if (selected is Defender && selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("DefenderSelect");
+            }
+            else if (selected is Cavalry && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESpearmanSelect");
+            }
+            else if (selected is Cavalry && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SpearmanSelect");
+            }
+            else if (selected is Mage && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EMageSelect");
+            }
+            else if (selected is Mage && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("MageSelect");
+            }
+            else if (selected is Artillery && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EArtillerySelect");
+            }
+            else if (selected is Artillery && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ArtillerySelect");
             }
             else
             {
@@ -197,10 +294,27 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderPass");
             }
-            else
+            else if(selected is Defender && !selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("EDefenderPass");
             }
+            else if (selected is Cavalry && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESpearmanPass");
+            }
+            else if (selected is Cavalry && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SpearmanDefend");
+            }
+            else if (selected is Mage && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EMagePass");
+            }
+            else if (selected is Mage && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("MagePass");
+            }
+
 
             cue.Play();
         }
@@ -228,11 +342,37 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderDefend");
             }
+            else if (selected is Cavalry && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ESpearmanDefend");
+            }
+            else if (selected is Cavalry && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("SpearmanDefend");
+            }
+            else if (selected is Mage && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EMageDefend");
+            }
             else
             {
-                cue = soundBank.GetCue("EDefenderDefend");
+                cue = soundBank.GetCue("MageDefend");
             }
 
+
+            cue.Play();
+        }
+
+        public void PlaySpecialSound(Unit selected, int specialNumber)
+        {
+            if (selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue(selected.GetType() + "Special" + specialNumber.ToString());
+            }
+            else
+            {
+                cue = soundBank.GetCue("E" + selected.GetType() + "Special" + specialNumber.ToString());
+            }
             cue.Play();
         }
 

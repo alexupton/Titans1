@@ -93,6 +93,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 1);
         }
         //Set the Immobilize ability which adds an attack modifier of 15 and costs 10 MP and has chance to imobilize target
         public override void Special2(Battle battle)
@@ -137,12 +138,7 @@ namespace Titans
         //Target one unit, even if he moves out of range
         public override void Special3(Battle battle)
         {
-            if (battle.rangersWithTargets.Contains(this))
-            {
-                battle.GameUI.sfx.PlayBuzzer();
-            }
-            else
-            {
+
                 this.specialTarget = battle.CurrentTarget;
                 this.MP -= 10;
                 this.AP--;
@@ -150,7 +146,7 @@ namespace Titans
                 battle.GameUI.timeSinceLastDamageFrame = 0;
                 battle.GameUI.frameCount = 0;
                 battle.GameUI.wait = true;
-            }
+                battle.GameUI.sfx.PlaySpecialSound(this, 3);
 
         }
         public override void Special4(Battle battle)

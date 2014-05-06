@@ -268,7 +268,7 @@ namespace Titans
             game.soundBank = new SoundBank(game.engine, "Content\\Music\\Sound Bank.xsb");
             game.waveBank = new WaveBank(game.engine, "Content\\Music\\Wave Bank.xwb");
             //Start battle music in-game
-            game.cue = game.soundBank.GetCue("Battle");
+            game.cue = game.soundBank.GetCue("Epic");
             AudioCategory music = game.engine.GetCategory("Music");
             music.SetVolume(3.0f);
             game.cue.Play();

@@ -77,6 +77,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 1);
         }
         //Attacks enemy for half damage and puts defender in defensive position
         public override void Special2(Battle battle)
@@ -104,6 +105,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 2);
             
         }
         //Set Taunt ability which uses 15 MP and increases the unit's range to 5 for one turn
@@ -119,6 +121,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 3);
         }
         public override void Special4(Battle battle)
         {

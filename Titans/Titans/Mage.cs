@@ -57,6 +57,7 @@ namespace Titans
             Location[1] = -1;
             AttackModifiers = new List<int>();
             DefenseModifiers = new List<int>();
+
         }
         //Set the Firebolt ability which deals 50 damage to one target and half that to adjecent and costs 40 MP
         public override void Special1(Battle battle)
@@ -86,8 +87,8 @@ namespace Titans
             MP -= 40;
             this.AP-=2;
             this.Attack = 15;
-            
-            
+
+            battle.GameUI.sfx.PlaySpecialSound(this, 1);
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
@@ -115,6 +116,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 2);
         }
         //Set the Heal ability which costs 15 MP and heals target ally for 20 hp
         public override void Special3(Battle battle)
@@ -133,6 +135,7 @@ namespace Titans
                 }
                 this.MP -= 15;
                 this.AP--;
+                battle.GameUI.sfx.PlaySpecialSound(this, 3);
             }
             else
             {
@@ -163,6 +166,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 4);
             
         }
         //Set the Haste ability which costs 20 MP and gives target ally a 50 bounus to movement for three rounds
@@ -191,6 +195,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 5);
          
 
         }
@@ -207,6 +212,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
+            battle.GameUI.sfx.PlaySpecialSound(this, 6);
             
 
         }
