@@ -1224,7 +1224,8 @@ namespace Titans
                         buttons.SpecialButtons();
 
                     }
-
+                    
+                    
                     //choose special attacks
                     if (battle.specialMode && !releaseWait && !wait && !tickWait && !moveWait)
                     {
@@ -1235,6 +1236,7 @@ namespace Titans
                     {
                         specialClicks.EvaluateSpecialClick(mousePos);
                     }
+                    
 
 
 
@@ -1361,7 +1363,7 @@ namespace Titans
                         endWait = false;
                     }
 
-                    if (AILock && !moveWait)
+                    if (AILock && !moveWait && !wait)
                     {
                         battle.AIMove();
                     }
@@ -1399,7 +1401,7 @@ namespace Titans
                 // Increment to next frame
                 wait = false;
                 displayDamage = false;
-                if (battle.ActiveUnit.AP <= 0)
+                if (battle.ActiveUnit.AP <= 0 )
                 {
                     battle.NextPlayer();
                 }

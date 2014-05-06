@@ -551,7 +551,7 @@ namespace Titans
                     {
                         battle.StartMove(closest);
                         battle.GameUI.timeSinceLastDamageFrame = 0;
-                        battle.GameUI.wait = true;
+                        battle.GameUI.moveWait = true;
                         return;
                     }
                     else

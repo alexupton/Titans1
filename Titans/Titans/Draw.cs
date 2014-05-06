@@ -350,34 +350,34 @@ namespace Titans
                         //draw status effects
                         if (game.battle.BattleMap.map[x][y].TileUnit.StatusEffects.Count > 0)
                         {
-                           effect = game.battle.BattleMap.map[x][y].TileUnit.StatusEffects.ElementAt(i);
+                            effect = game.battle.BattleMap.map[x][y].TileUnit.StatusEffects.ElementAt(0);
                             if (effect is Stun)
                             {
                                 Point frameSize = new Point(13, 11);
-                                
-                                game.spriteBatch.Draw(game.drawStatus[3], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5),new Rectangle(0,0,frameSize.X,frameSize.Y), Color.White);
-                 
+
+                                game.spriteBatch.Draw(game.drawStatus[3], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), new Rectangle(0, 0, frameSize.X, frameSize.Y), Color.White);
+
                             }
                             else if (effect is Root)
                             {
                                 game.spriteBatch.Draw(game.drawStatus[6], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), null, Color.White, 0, Vector2.Zero, .5f, SpriteEffects.None, 0);
-                 
+
                             }
                             else if (effect is Haste)
                             {
                                 game.spriteBatch.Draw(game.drawStatus[1], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
-                 
+
                             }
                             else if (effect is Slow)
                             {
                                 Point frameSize = new Point(15, 26);
                                 game.spriteBatch.Draw(game.drawStatus[2], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), new Rectangle(0, 0, frameSize.X, frameSize.Y), Color.White);
-                 
+
                             }
                             else if (effect is Taunt)
                             {
                                 game.spriteBatch.Draw(game.drawStatus[5], new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
-                 
+
                             }
                             foreach (Unit er in game.battle.BattleQueue)
                             {
@@ -394,15 +394,6 @@ namespace Titans
                                     }
                                 }
                             }
-                            if (i == 6)
-                            {
-                                i = 0;
-                            }
-                            else
-                            {
-                            i++;
-                        }
-
                         }
                     
                     }

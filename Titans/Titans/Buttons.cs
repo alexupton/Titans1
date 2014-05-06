@@ -186,7 +186,6 @@ namespace Titans
         {
             if (Game.battle.ActiveUnit is Mage)
             {
-                
                 if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
                 {
                     Point mousePos = new Point(mouseState.X, mouseState.Y);
@@ -198,6 +197,7 @@ namespace Titans
                     Rectangle six = new Rectangle(565, 754, 161, 27);
                     if (one.Contains(mousePos))
                     {
+                        Game.releaseWait = true;
                         if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 1))
                         {
                             Game.releaseWait = true;
@@ -221,12 +221,12 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
 
                     }
                     else if (two.Contains(mousePos))
                     {
+                        Game.releaseWait = true;
                         if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 2))
                         {
                             Game.releaseWait = true;
@@ -250,11 +250,11 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else if (three.Contains(mousePos))
                     {
+                        Game.releaseWait = true;
                         if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 3))
                         {
                             Game.releaseWait = true;
@@ -278,11 +278,11 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else if (four.Contains(mousePos))
                     {
+                        Game.releaseWait = true;
                         if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 4))
                         {
                             Game.releaseWait = true;
@@ -306,12 +306,12 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
 
                     }
                     else if (five.Contains(mousePos))
                     {
+                        Game.releaseWait = true;
                         if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 5))
                         {
                             Game.releaseWait = true;
@@ -335,11 +335,11 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else if (six.Contains(mousePos))
                     {
+                        Game.releaseWait = true;
                         if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 6))
                         {
                             Game.releaseWait = true;
@@ -363,7 +363,6 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                 }
@@ -376,11 +375,11 @@ namespace Titans
 
                 //button clicks
                     if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
-                    {
+                    {                  
                         Point mousePos = new Point(mouseState.X, mouseState.Y);
                         if (one.Contains(mousePos))
                         {
-                            
+                            Game.releaseWait = true;
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 1))
                             {
                                 Game.releaseWait = true;
@@ -400,13 +399,12 @@ namespace Titans
                             else
                             {
                                 Game.sfx.PlayBuzzer();
-                                Game.sfx.PlayBuzzer();
                             }
 
                         }
                         else if (two.Contains(mousePos))
                         {
-                            
+                            Game.releaseWait = true;
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 2))
                             {
                                 Game.releaseWait = true;
@@ -425,13 +423,12 @@ namespace Titans
                             else
                             {
                                 Game.sfx.PlayBuzzer();
-                                Game.sfx.PlayBuzzer();
                             }
 
                         }
                         else if (three.Contains(mousePos))
                         {
-                            
+                            Game.releaseWait = true;
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 3))
                             {
                                 Game.releaseWait = true;
@@ -449,7 +446,6 @@ namespace Titans
                             }
                             else
                             {
-                                Game.sfx.PlayBuzzer();
                                 Game.sfx.PlayBuzzer();
                             }
 
@@ -646,7 +642,7 @@ namespace Titans
                     Game.optionsButtons[15] = Game.notSelected;
                     Game.optionsButtons[16] = Game.notSelected;
                     Game.optionsButtons[17] = Game.normal;
-                    Game.engine.GetCategory("Music").SetVolume(1f * 2);
+                    Game.engine.GetCategory("Music").SetVolume(2f * 2);
                     Game.releaseWait = true;
                 }
 
@@ -677,7 +673,6 @@ namespace Titans
                     Game.optionsButtons[22] = Game.notSelected;
                     Game.sfx.setfxfvolume(.25f*2);
                     Game.sfx.PlayBuzzer();
-                    Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
 
                 }
@@ -691,7 +686,6 @@ namespace Titans
                     Game.optionsButtons[22] = Game.notSelected;
                     Game.sfx.setfxfvolume(.5f * 2);
                     Game.sfx.PlayBuzzer();
-                    Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
                 else if (sfx3click.Contains(mousePos))
@@ -704,7 +698,6 @@ namespace Titans
                     Game.optionsButtons[22] = Game.notSelected;
                     Game.sfx.setfxfvolume(.75f * 2);
                     Game.sfx.PlayBuzzer();
-                    Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }
                 else if (sfxmaxclick.Contains(mousePos))
@@ -716,7 +709,6 @@ namespace Titans
                     Game.optionsButtons[21] = Game.notSelected;
                     Game.optionsButtons[22] = Game.normal;
                     Game.sfx.setfxfvolume(.1f * 2);
-                    Game.sfx.PlayBuzzer();
                     Game.sfx.PlayBuzzer();
                     Game.releaseWait = true;
                 }

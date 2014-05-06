@@ -264,6 +264,12 @@ Wave Bank
     Windows Bank Path Edited = 0;
     Seek Tables = 1;
     Compression Preset Name = <none>;
+    Xbox Bank Last Modified Low = 0;
+    Xbox Bank Last Modified High = 0;
+    PC Bank Last Modified Low = 0;
+    PC Bank Last Modified High = 0;
+    Header Last Modified Low = 0;
+    Header Last Modified High = 0;
     Bank Last Revised Low = 3566571251;
     Bank Last Revised High = 30370017;
 
@@ -2713,6 +2719,8 @@ Sound Bank
     Windows File = Win\Sound Bank.xsb;
     Xbox Bank Path Edited = 0;
     Windows Bank Path Edited = 0;
+    Header Last Modified High = 0;
+    Header Last Modified Low = 0;
 
     Sound
     {
@@ -2723,7 +2731,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -2770,7 +2778,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -2817,7 +2825,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -2864,7 +2872,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -2911,7 +2919,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -2958,7 +2966,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3005,7 +3013,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3052,7 +3060,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3099,7 +3107,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3146,7 +3154,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3193,7 +3201,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3240,7 +3248,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3287,7 +3295,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3334,7 +3342,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3381,7 +3389,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3428,7 +3436,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3475,7 +3483,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3522,7 +3530,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3569,7 +3577,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3616,7 +3624,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3663,7 +3671,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3710,7 +3718,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3757,7 +3765,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3804,7 +3812,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3851,7 +3859,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3898,7 +3906,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3945,7 +3953,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -3992,7 +4000,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4039,7 +4047,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4086,7 +4094,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4133,7 +4141,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4180,7 +4188,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4227,7 +4235,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4274,7 +4282,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4321,7 +4329,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4368,7 +4376,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4415,7 +4423,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4462,7 +4470,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4509,7 +4517,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4556,7 +4564,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4603,7 +4611,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4650,7 +4658,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4697,7 +4705,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4744,7 +4752,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4791,7 +4799,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4838,7 +4846,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4885,7 +4893,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4932,7 +4940,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -4979,7 +4987,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5026,7 +5034,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5073,7 +5081,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5120,7 +5128,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5167,7 +5175,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5214,7 +5222,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5261,7 +5269,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5308,7 +5316,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5355,7 +5363,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5402,7 +5410,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5449,7 +5457,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5496,7 +5504,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5543,7 +5551,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5590,7 +5598,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5637,7 +5645,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5684,7 +5692,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5731,7 +5739,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5778,7 +5786,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5825,7 +5833,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5872,7 +5880,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5919,7 +5927,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -5966,7 +5974,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6013,7 +6021,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6060,7 +6068,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6107,7 +6115,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6154,7 +6162,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6201,7 +6209,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6248,7 +6256,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6295,7 +6303,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6342,7 +6350,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6389,7 +6397,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6436,7 +6444,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6483,7 +6491,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6530,7 +6538,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6577,7 +6585,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6624,7 +6632,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6671,7 +6679,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6718,7 +6726,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6765,7 +6773,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6812,7 +6820,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6859,7 +6867,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6906,7 +6914,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -6953,7 +6961,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7000,7 +7008,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7047,7 +7055,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7094,7 +7102,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7141,7 +7149,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7188,7 +7196,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7235,7 +7243,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7282,7 +7290,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7329,7 +7337,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7376,7 +7384,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7423,7 +7431,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7470,7 +7478,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7517,7 +7525,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7564,7 +7572,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7611,7 +7619,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track
@@ -7658,7 +7666,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = SFX;
         }
 
         Track

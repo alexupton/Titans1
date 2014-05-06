@@ -270,7 +270,7 @@ namespace Titans
             //Start battle music in-game
             game.cue = game.soundBank.GetCue("Epic");
             AudioCategory music = game.engine.GetCategory("Music");
-            music.SetVolume(3.0f);
+            music.SetVolume(4f);
             game.cue.Play();
             game.sfx = new AudioManager(game);
 

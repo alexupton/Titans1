@@ -257,7 +257,7 @@ namespace Titans
 	//Play a buzzer sound when player clicks on something that doesn't do anything
         public void PlayBuzzer()
         {
-            //fxCat.SetVolume(10f);
+            //fxCat.SetVolume(5f);
             cue = soundBank.GetCue("Buzzer");
             cue.Play();
             //fxCat.SetVolume(6f);
@@ -304,7 +304,7 @@ namespace Titans
             }
             else if (selected is Cavalry && selected.isPlayerUnit)
             {
-                cue = soundBank.GetCue("SpearmanDefend");
+                cue = soundBank.GetCue("SpearmanPass");
             }
             else if (selected is Mage && !selected.isPlayerUnit)
             {
@@ -313,6 +313,14 @@ namespace Titans
             else if (selected is Mage && selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("MagePass");
+            }
+            else if (selected is Artillery && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EArtilleryPass");
+            }
+            else
+            {
+                cue = soundBank.GetCue("ArtilleryPass");
             }
 
 
@@ -353,6 +361,14 @@ namespace Titans
             else if (selected is Mage && !selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("EMageDefend");
+            }
+            else if (selected is Artillery && selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("ArtilleryDefend");
+            }
+            else if (selected is Mage && !selected.isPlayerUnit)
+            {
+                cue = soundBank.GetCue("EArtilleryDefend");
             }
             else
             {

@@ -165,9 +165,13 @@ namespace Titans
             List<Unit> player1Units = new List<Unit>();
             List<Unit> player2Units = new List<Unit>();
 
+
                 foreach (Unit unit in Units)
                 {
-                    unit.StatusEffects = new List<StatusEffect>();
+                    if (TurnCount == 1)
+                    {
+                        unit.StatusEffects = new List<StatusEffect>();
+                    }
                     unit.Init = unit.Speed + rand.Next(51);
                     unit.AP = 2;
                     if (unit.isPlayerUnit)
@@ -275,7 +279,6 @@ namespace Titans
         //after a unit moves, call this method to access the next unit in the battle queue
         public Unit NextPlayer()
         {
-            System.Threading.Thread.Sleep(500);
                 foreach (StatusEffect effect in ActiveUnit.StatusEffects)
                 {
                     effect.UnInvoke(this);
@@ -307,9 +310,10 @@ namespace Titans
             }
 
             DeselectAttack();
-            GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
 
+            GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
             GameUI.sfx.PlaySelectSound(ActiveUnit);
+
             if (ActiveUnit is Ranger)
             {
                 GameUI.defend = GameUI.defend_grey;
@@ -360,6 +364,7 @@ namespace Titans
                     ActiveUnit.StatusEffects.ElementAt(i).Invoke(this);
                 }
             }
+
             return ActiveUnit;
         }
 
@@ -414,8 +419,8 @@ namespace Titans
                     }
                 }
             }
+            GameUI.moveWait = true;
             List<Tile> movePath = AI.GetPath(BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]), move, BattleMap);
-            System.Threading.Thread.Sleep(500);
             pendingMoves = movePath.ToArray();
             pendingIndex = pendingMoves.Length - 1;
             GameUI.sfx.PlayMoveSound(ActiveUnit);
@@ -424,8 +429,9 @@ namespace Titans
         //if at the end, the move is finished
         public void ContinueMove()
         {
-                
+            
                 BattleMap.Move(ActiveUnit, pendingMoves[pendingIndex].X, pendingMoves[pendingIndex].Y);
+                GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
                 pendingIndex--;
                 if (pendingIndex == -1)
                 {
@@ -435,7 +441,6 @@ namespace Titans
                     MoveMode = false;
                     pendingIndex = 0;
                     pendingMoves = new Tile[0];
-                    GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
                     if (ActiveUnit is Defender) //if the unit is a defender, add its passive defense to nearby units
                     {
                         List<Tile> adjacent = AI.GetAllAdjacentTiles(BattleMap, BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]));
@@ -464,7 +469,6 @@ namespace Titans
                                 }
                             }
                         }
-
                 }
         }
 
@@ -583,7 +587,6 @@ namespace Titans
             }
             SelectEnabled = true;
             BattleMap.ClearHighlights();
-            GameUI.tickWait = true;
 
             
 
@@ -744,8 +747,6 @@ namespace Titans
             {
                 ActiveUnit.AP--;
             }
-            if (ActiveUnit.AP == 0 && !GameUI.wait)
-                NextPlayer();
 
             
 
@@ -756,7 +757,10 @@ namespace Titans
         //make an AI move
         public void AIMove()
         {
-            AI.MakeAIMove(this, ActiveUnit);
+            GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
+                AI.MakeAIMove(this, ActiveUnit);
+                GameUI.wait = true;
+                GameUI.timeSinceLastDamageFrame = 0;
         }
 
         public void ShowAttackRange(Unit selected)

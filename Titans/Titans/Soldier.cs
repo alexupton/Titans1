@@ -86,7 +86,6 @@ namespace Titans
             else
             {
                 battle.GameUI.sfx.PlayBuzzer();
-                battle.GameUI.sfx.PlayBuzzer();
             }
         }
         //Set the Double Attack ability which attacks a unit for 150% basic damage
@@ -140,7 +139,6 @@ namespace Titans
             }
             else
             {
-                battle.GameUI.sfx.PlayBuzzer();
                 battle.GameUI.sfx.PlayBuzzer();
             }
             

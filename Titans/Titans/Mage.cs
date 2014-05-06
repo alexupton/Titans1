@@ -122,7 +122,7 @@ namespace Titans
         public override void Special3(Battle battle)
         {
             Unit target = battle.CurrentTarget;
-            if (target.HP == target.MaxHP)
+            if (target.HP != target.MaxHP)
             {
                 int heal = 20;
                 target.HP += heal;
@@ -139,7 +139,6 @@ namespace Titans
             }
             else
             {
-                battle.GameUI.sfx.PlayBuzzer();
                 battle.GameUI.sfx.PlayBuzzer();
             }
                 battle.GameUI.timeSinceLastDamageFrame = 0;

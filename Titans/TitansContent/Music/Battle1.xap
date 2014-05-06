@@ -16,8 +16,8 @@ Global Settings
     Header File = Battle1.h;
     Exclude Category Names = 0;
     Exclude Variable Names = 0;
-    Last Modified Low = 30364372;
-    Last Modified High = 2577211698;
+    Last Modified Low = 2577211698;
+    Last Modified High = 30364372;
 
     Category
     {
@@ -434,7 +434,7 @@ Sound Bank
 
         Category Entry
         {
-            Name = Default;
+            Name = Music;
         }
 
         Track

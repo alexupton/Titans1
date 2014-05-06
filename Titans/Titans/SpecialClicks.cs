@@ -25,7 +25,11 @@ namespace Titans
             Battle battle = Game.battle;
             int X = (int)Math.Round(((double)mousePos.X - (double)Game.offsetX - 20) / (double)55);
             int Y = (int)Math.Round(((double)mousePos.Y - (double)Game.offsetY - 20) / (double)55);
-
+            if (!battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted)
+            {
+                Game.sfx.PlayBuzzer();
+                return;
+            }
             //soldier confirm special
             if (active is Soldier)
             {
@@ -40,7 +44,6 @@ namespace Titans
                             battle.DeselectSpecial();
                             battle.DeselectSpecialNumber();
 
-                            Game.releaseWait = true;
                             Game.isSpecial = false;
                             Game.battle.DeselectSpecialNumber();
                             Game.battle.DeselectSpecial();
@@ -72,12 +75,10 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
                         Game.sfx.PlayBuzzer();
                     }
                 }
@@ -98,7 +99,6 @@ namespace Titans
                     else
                     {
                         Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
                     }
                 }
                 else
@@ -116,12 +116,10 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
                         Game.sfx.PlayBuzzer();
                     }
                 }
@@ -143,12 +141,10 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
                         Game.sfx.PlayBuzzer();
                     }
                 }
@@ -165,12 +161,10 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
                         Game.sfx.PlayBuzzer();
                     }
                 }
@@ -187,12 +181,10 @@ namespace Titans
                         else
                         {
                             Game.sfx.PlayBuzzer();
-                            Game.sfx.PlayBuzzer();
                         }
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
                         Game.sfx.PlayBuzzer();
                     }
                 }
@@ -212,7 +204,6 @@ namespace Titans
                     else
                     {
                         Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
                     }
                 }
                 else if (battle.specialMode2)
@@ -226,7 +217,6 @@ namespace Titans
                     else
                     {
                         Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
                     }
                 }
                 else if (battle.specialMode3)
@@ -239,7 +229,6 @@ namespace Titans
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
                         Game.sfx.PlayBuzzer();
                     }
                 }
@@ -259,7 +248,6 @@ namespace Titans
                     else
                     {
                         Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
                     }
                 }
                 else if (battle.specialMode2)
@@ -273,7 +261,6 @@ namespace Titans
                     else
                     {
                         Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
                     }
                 }
                 else if (battle.specialMode3)
@@ -286,7 +273,7 @@ namespace Titans
                     }
                     else
                     {
-                      
+                        Game.sfx.PlayBuzzer();
                     }
                 }
                 else if (battle.specialMode4)
@@ -299,7 +286,6 @@ namespace Titans
                     }
                     else
                     {
-                        Game.sfx.PlayBuzzer();
                         Game.sfx.PlayBuzzer();
                     }
                 }
@@ -314,7 +300,6 @@ namespace Titans
                     else
                     {
                         Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
                     }
                 }
                 else if (battle.specialMode6)
@@ -328,7 +313,6 @@ namespace Titans
                     else
                     {
                         Game.sfx.PlayBuzzer();
-                        Game.sfx.PlayBuzzer();
                     }
                 }
             }
@@ -336,7 +320,6 @@ namespace Titans
 
         private void EndSpecial()
         {
-            Game.releaseWait = true;
             Game.isSpecial = false;
             Game.battle.DeselectSpecialNumber();
             Game.battle.DeselectSpecial();
