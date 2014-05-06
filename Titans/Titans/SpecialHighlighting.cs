@@ -305,7 +305,7 @@ namespace Titans
             {
                 if (battle.specialMode1)
                 {
-                    game.battle.GameUI.battle.GameUI.battle.GameUI.battle.BattleMap.HighlightAttack(active);
+                    game.battle.GameUI.battle.GameUI.battle.GameUI.battle.GameUI.battle.GameUI.battle.GameUI.battle.BattleMap.HighlightAttack(active);
                     game.specialAttack = true;
                 }
 
