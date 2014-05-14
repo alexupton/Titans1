@@ -136,7 +136,7 @@
     <Compile Include="Battle.cs" />
     <Compile Include="Bomber.cs" />
     <Compile Include="Buttons.cs" />
-    <Compile Include="Cavalry.cs" />
+    <Compile Include="Spearman.cs" />
     <Compile Include="ContentLoader.cs" />
     <Compile Include="Defender.cs" />
     <Compile Include="Draw.cs" />

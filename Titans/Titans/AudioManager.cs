@@ -24,6 +24,7 @@ namespace Titans
             waveBank = new WaveBank(engine, "Content\\SFX\\Wave Bank.xwb");
             fxCat = engine.GetCategory("SFX");
             fxCat.SetVolume(10f);
+            cue = soundBank.GetCue("SoldierSelect");
 
 
         }
@@ -51,11 +52,11 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderAttack");
             }
-            else if (attacker is Cavalry && !attacker.isPlayerUnit)
+            else if (attacker is Spearman && !attacker.isPlayerUnit)
             {
                 cue = soundBank.GetCue("ESpearmanAttack");
             }
-            else if (attacker is Cavalry && attacker.isPlayerUnit)
+            else if (attacker is Spearman && attacker.isPlayerUnit)
             {
                 cue = soundBank.GetCue("SpearmanAttack");
             }
@@ -106,11 +107,11 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderDie");
             }
-            else if (deadUnit is Cavalry && !deadUnit.isPlayerUnit)
+            else if (deadUnit is Spearman && !deadUnit.isPlayerUnit)
             {
                 cue = soundBank.GetCue("ESpearmanDie");
             }
-            else if (deadUnit is Cavalry && deadUnit.isPlayerUnit)
+            else if (deadUnit is Spearman && deadUnit.isPlayerUnit)
             {
                 cue = soundBank.GetCue("SpearmanDie");
             }
@@ -161,11 +162,11 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderMove");
             }
-            else if (mover is Cavalry && !mover.isPlayerUnit)
+            else if (mover is Spearman && !mover.isPlayerUnit)
             {
                 cue = soundBank.GetCue("ESpearmanMove");
             }
-            else if (mover is Cavalry && mover.isPlayerUnit)
+            else if (mover is Spearman && mover.isPlayerUnit)
             {
                 cue = soundBank.GetCue("SpearmanMove");
             }
@@ -216,11 +217,11 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderSelect");
             }
-            else if (selected is Cavalry && !selected.isPlayerUnit)
+            else if (selected is Spearman && !selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("ESpearmanSelect");
             }
-            else if (selected is Cavalry && selected.isPlayerUnit)
+            else if (selected is Spearman && selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("SpearmanSelect");
             }
@@ -257,6 +258,7 @@ namespace Titans
 	//Play a buzzer sound when player clicks on something that doesn't do anything
         public void PlayBuzzer()
         {
+            cue.Stop(AudioStopOptions.Immediate);
             //fxCat.SetVolume(5f);
             cue = soundBank.GetCue("Buzzer");
             cue.Play();
@@ -273,7 +275,6 @@ namespace Titans
 	//Determines what sound to make when an enemy or friendly unit passes
         public void PlayPassSound(Unit selected)
         {
-
             if (selected is Soldier && selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("SoldierPass");
@@ -298,11 +299,11 @@ namespace Titans
             {
                 cue = soundBank.GetCue("EDefenderPass");
             }
-            else if (selected is Cavalry && !selected.isPlayerUnit)
+            else if (selected is Spearman && !selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("ESpearmanPass");
             }
-            else if (selected is Cavalry && selected.isPlayerUnit)
+            else if (selected is Spearman && selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("SpearmanPass");
             }
@@ -350,11 +351,11 @@ namespace Titans
             {
                 cue = soundBank.GetCue("DefenderDefend");
             }
-            else if (selected is Cavalry && !selected.isPlayerUnit)
+            else if (selected is Spearman && !selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("ESpearmanDefend");
             }
-            else if (selected is Cavalry && selected.isPlayerUnit)
+            else if (selected is Spearman && selected.isPlayerUnit)
             {
                 cue = soundBank.GetCue("SpearmanDefend");
             }

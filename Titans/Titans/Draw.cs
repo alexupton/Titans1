@@ -252,7 +252,7 @@ namespace Titans
                             game.spriteBatch.Draw(game.Ranger, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
                                 new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
                         }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Cavalry)
+                        else if (game.battle.BattleMap.map[x][y].TileUnit is Spearman)
                         {
                             game.frameSize.X = 32;
                             game.frameSize.Y = 48;

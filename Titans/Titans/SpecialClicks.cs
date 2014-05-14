@@ -316,6 +316,65 @@ namespace Titans
                     }
                 }
             }
+
+                //cavalry confirm special
+            else if (active is Spearman)
+            {
+                battle.SelectedTile = battle.BattleMap.GetTileAt(X, Y);
+                if (battle.specialMode1)
+                {
+                    if (AI.HasEnemyUnit(battle.SelectedTile, active))
+                    {
+                        battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                        active.Special1(battle);
+                        EndSpecial();
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode2)
+                {
+                    if (battle.SelectedTile.hasUnit)
+                    {
+                        if (battle.SelectedTile.TileUnit == active)
+                        {
+                            battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                            active.Special2(battle);
+                            EndSpecial();
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                        }
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+                else if (battle.specialMode3)
+                {
+                    if (battle.SelectedTile.hasUnit)
+                    {
+                        if (battle.SelectedTile.TileUnit.isPlayerUnit == active.isPlayerUnit && battle.SelectedTile.TileUnit != active)
+                        {
+                            battle.CurrentTarget = battle.SelectedTile.TileUnit;
+                            active.Special3(battle);
+                            EndSpecial();
+                        }
+                        else
+                        {
+                            Game.sfx.PlayBuzzer();
+                        }
+                    }
+                    else
+                    {
+                        Game.sfx.PlayBuzzer();
+                    }
+                }
+            }
         }
 
         private void EndSpecial()

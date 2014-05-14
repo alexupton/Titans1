@@ -123,6 +123,7 @@ namespace Titans
             return legalmoves;
         }
 
+        //highlight entire unit attack range, highlighting enemies in red
         public void HighlightAttack(Unit active)
         {
             int x = active.Location[0];
@@ -164,6 +165,7 @@ namespace Titans
             }
         }
 
+        //highlight entire unit range, allies highlighted in red
         public void HighlightAllies(Unit active)
         {
             int x = active.Location[0];
