@@ -42,10 +42,10 @@ namespace Titans
                 List<Tile> adjacentTemp = new List<Tile>();
                 foreach (Tile adj in adjacent)
                 {
-                    //if(rangeSet.Contains(adj))
-                    //{
+                    if (rangeSet.Contains(adj))
+                    {
                         adjacentTemp.Add(adj);
-                    //}
+                    }
 
                     if (closed.Contains(adj))
                     {

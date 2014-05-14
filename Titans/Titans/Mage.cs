@@ -39,7 +39,7 @@ namespace Titans
             MaxMP = 100;
             Attack = 15;
             Defense = 10;
-            Range = 3;
+            Range = 5;
             Speed = 125;
             Init = 30;
             AP = 2;
