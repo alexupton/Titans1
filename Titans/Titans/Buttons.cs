@@ -459,6 +459,15 @@ namespace Titans
                             Game.releaseWait = true;
                             if (ManaEvaluator.SpecialAllowed(Game.battle.ActiveUnit, 2))
                             {
+                                if (Game.battle.ActiveUnit is Spearman)
+                                {
+                                    Spearman dummy = (Spearman)Game.battle.ActiveUnit;
+                                    if (dummy.isCharged)
+                                    {
+                                        Game.sfx.PlayBuzzer();
+                                        return;
+                                    }
+                                }
                                 Game.releaseWait = true;
                                 Game.specialButtons[0] = Game.specialUn;
                                 Game.specialButtons[1] = Game.specialSel;

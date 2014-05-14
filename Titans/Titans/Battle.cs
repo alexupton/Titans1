@@ -156,6 +156,19 @@ namespace Titans
             }
             SelectEnabled = true;
 
+            //undo effects of charge
+            if (ActiveUnit is Spearman)
+            {
+                Spearman dummy = (Spearman)ActiveUnit;
+                if (dummy.isCharged)
+                {
+                    dummy.Speed -= 50;
+                    dummy.isCharged = false;
+                    ActiveUnit = dummy;
+                }
+
+            }
+
 
 
             QueuePosition = 0;
@@ -282,6 +295,19 @@ namespace Titans
                 foreach (StatusEffect effect in ActiveUnit.StatusEffects)
                 {
                     effect.UnInvoke(this);
+                }
+
+            //undo effects of charge
+                if (ActiveUnit is Spearman)
+                {
+                    Spearman dummy = (Spearman)ActiveUnit;
+                    if (dummy.isCharged)
+                    {
+                        dummy.Speed -= 50;
+                        dummy.isCharged = false;
+                        ActiveUnit = dummy;
+                    }
+                    
                 }
             GameUI.wait = false;
             GameUI.ResetButtons();

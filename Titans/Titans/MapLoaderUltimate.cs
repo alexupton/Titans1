@@ -189,7 +189,7 @@ namespace Titans
                 {
                     case 0: unit = new Soldier(); break;
                     case 1: unit = new Defender(); break;
-                    case 2: unit = new Cavalry(); break;
+                    case 2: unit = new Spearman(); break;
                     case 3: unit = new Ranger(); break;
                     case 4: unit = new Mage(); break;
                     case 5: unit = new Artillery(); break;

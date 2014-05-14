@@ -305,7 +305,7 @@ namespace Titans
             {
                 if (battle.specialMode1)
                 {
-                    game.battle.GameUI.battle.GameUI.battle.GameUI.battle.GameUI.battle.GameUI.battle.GameUI.battle.BattleMap.HighlightAttack(active);
+                    game.battle.BattleMap.HighlightAttack(active);
                     game.specialAttack = true;
                 }
 
@@ -411,6 +411,47 @@ namespace Titans
                 {
                     battle.BattleMap.HighlightAttack(active);
                     game.specialAttack = true;
+                }
+            }
+                //spearman highlighting
+            else if (active is Spearman)
+            {
+                if (battle.specialMode1)
+                {
+                    battle.BattleMap.HighlightAttack(active);
+                    game.specialAttack = true;
+                }
+                else if (battle.specialMode2)
+                {
+                    game.specialAttack = true;
+                    if (battle.BattleMap.GetTileAt(X, Y).hasUnit)
+                    {
+                        if (battle.BattleMap.GetTileAt(X, Y).TileUnit == battle.ActiveUnit)
+                        {
+                            battle.BattleMap.AddSpecificRedHighlight(X, Y);
+                        }
+                        else
+                        {
+                            battle.BattleMap.ClearSpecificRedHighlight(active.Location[0], active.Location[1]);
+                        }
+                    }
+                    else
+                    {
+                        battle.BattleMap.ClearSpecificRedHighlight(active.Location[0], active.Location[1]);
+                    }
+                }
+
+                else
+                {
+                    battle.BattleMap.HighlightAllies(active);
+                    game.specialAttack = true;
+                    if (battle.BattleMap.GetTileAt(X, Y).hasUnit)
+                    {
+                        if (battle.BattleMap.GetTileAt(X, Y).TileUnit.isPlayerUnit == active.isPlayerUnit)
+                        {
+                            battle.BattleMap.AddSpecificRedHighlight(active.Location[0], active.Location[1]);
+                        }
+                    }
                 }
             }
 

@@ -67,7 +67,7 @@ namespace Titans
             {
                 return "Bomber";
             }
-            else if (this is Cavalry)
+            else if (this is Spearman)
             {
                 return "Spearman";
             }

@@ -6,7 +6,7 @@ using System.Text;
 namespace Titans
 {
     //Create the Cavalry unit
-    class Cavalry : Unit
+    class Spearman : Unit
     {
         public override int HP { get; set; }
         public override int MP { get; set; }
@@ -31,9 +31,11 @@ namespace Titans
 
         public override int StatusIndex { get; set; } //for status animation purposes
 
+        public bool isCharged { get; set; }
+
 
 	//Set all attributes of the unit Cavalry
-        public Cavalry()
+        public Spearman()
         {
             MaxHP = 50;
             HP = 50;
@@ -59,6 +61,7 @@ namespace Titans
             AttackModifiers.Add(0);
             DefenseModifiers.Add(0);
             StatusEffects = new List<StatusEffect>();
+            isCharged = false;
         }
         //Set Pierce ability which has an attack modifier of 20 and uses 5 MP
         public override void Special1(Battle battle)
@@ -133,14 +136,16 @@ namespace Titans
             int damage = AttackResolver.Attack(this, target, this.AttackModifiers);
             battle.GameUI.unitDamage = damage;
             battle.GameUI.displayDamage = true;
-            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 + battle.GameUI.offsetX - 13;
-            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55 + battle.GameUI.offsetY - 20;
+            battle.GameUI.attackedUnitTrueX = target.Location[0] * 55 - 13;
+            battle.GameUI.attackedUnitTrueY = target.Location[1] * 55  - 20;
+            target.HP -= damage;
             if (direction < 4)
             {
                 battle.GameUI.splashDamage.Clear();
                 battle.GameUI.splashLocations.Clear();
                 battle.GameUI.splashDamage.Add(damage / 2);
                 battle.GameUI.splashLocations.Add(battle.BattleMap.GetTileAt(secondary.Location[0], secondary.Location[1]));
+                secondary.HP -= damage / 2;
             }
 
             battle.GameUI.timeSinceLastDamageFrame = 0;
@@ -157,30 +162,35 @@ namespace Titans
         //Set Charge ability which adds 5 to the speed, not allowing the unit to attack this turn, and uses 10 MP
         public override void Special2(Battle battle)
         {
-
-            //NOT YET DONE
-            //pre abbility modifiers
-            Speed += 5;
-            Range = 0;
-            MP -= 10;
-            this.AP--;
-            //code for calling animation
-            //post abbility modifiers 
-            Speed -= 5;
-            Range = 1;
-            battle.GameUI.timeSinceLastDamageFrame = 0;
-            battle.GameUI.frameCount = 0;
-            battle.GameUI.wait = true;
-            battle.GameUI.sfx.PlaySpecialSound(this, 2);
+            if (!isCharged)
+            {
+                Speed += 100;
+                this.AP--;
+                this.MP -= 10;
+                battle.GameUI.timeSinceLastDamageFrame = 0;
+                battle.GameUI.frameCount = 0;
+                battle.GameUI.wait = true;
+                battle.GameUI.sfx.PlaySpecialSound(this, 2);
+                isCharged = true;
+            }
+            else
+            {
+                battle.GameUI.sfx.PlayBuzzer();
+            }
         }
         //Set Swap ability which allows the cavalry unit to swap places with another friendly unit using 10 MP
         public override void Special3(Battle battle)
         {
 
             Unit target = battle.CurrentTarget;
+            Tile targetLocation = battle.BattleMap.GetTileAt(target.Location[0], target.Location[1]);
+            Tile currentLocation = battle.BattleMap.GetTileAt(this.Location[0], this.Location[1]);
 
             battle.RemoveUnit(this.Location[0], this.Location[1]);
             battle.RemoveUnit(target.Location[0], target.Location[1]);
+
+            battle.PlaceUnit(this, targetLocation);
+            battle.PlaceUnit(target, currentLocation);
 
             
 
@@ -216,7 +226,7 @@ namespace Titans
             battle.GameUI.timeSinceLastDamageFrame = 0;
             battle.GameUI.frameCount = 0;
             battle.GameUI.wait = true;
-            battle.GameUI.sfx.PlaySpecialSound(this, 2);
+            battle.GameUI.sfx.PlaySpecialSound(this, 3);
         }
         public override void Special4(Battle battle)
         {

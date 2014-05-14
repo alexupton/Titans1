@@ -975,6 +975,76 @@ namespace Titans
                                 }
                             }
                         }
+                        //spearman Pierce highlighting
+                        if (battle.ActiveUnit is Spearman && battle.specialMode1)
+                        {
+                            Unit active = battle.ActiveUnit;
+                            battle.BattleMap.ClearRedHighlights();
+                            battle.BattleMap.HighlightAttack(active);
+                            if (battle.BattleMap.GetTileAt(X, Y).TileUnit != battle.ActiveUnit && battle.specialMode1 && battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted)
+                            {
+                                battle.BattleMap.ClearRedHighlights();
+                                Unit target = battle.BattleMap.GetTileAt(X, Y).TileUnit;
+                                
+
+                                //0 - left
+                                //1 - right
+                                //2 - up
+                                //3 - down
+                                int direction = 4;
+
+                                if (target.Location[0] == active.Location[0] - 1)
+                                {
+                                    direction = 0;
+                                }
+                                else if (target.Location[0] == active.Location[0] + 1)
+                                {
+                                    direction = 1;
+                                }
+                                else if (target.Location[1] == active.Location[1] - 1)
+                                {
+                                    direction = 2;
+                                }
+                                else if (target.Location[1] == active.Location[1] + 1)
+                                {
+                                    direction = 3;
+                                }
+
+                                if (direction == 0)
+                                {
+                                    if (AI.HasEnemyUnit(battle.BattleMap.GetTileAt(target.Location[0] - 1, target.Location[1]), active))
+                                    {
+                                        battle.BattleMap.AddSpecificHighlight(target.Location[0] - 1, target.Location[1]);
+                                        battle.BattleMap.AddSpecificRedHighlight(target.Location[0] - 1, target.Location[1]);
+                                    }
+                                }
+                                else if (direction == 1)
+                                {
+                                    if (AI.HasEnemyUnit(battle.BattleMap.GetTileAt(target.Location[0] + 1, target.Location[1]), active))
+                                    {
+                                        battle.BattleMap.AddSpecificHighlight(target.Location[0] + 1, target.Location[1]);
+                                        battle.BattleMap.AddSpecificRedHighlight(target.Location[0] + 1, target.Location[1]);
+                                    }
+                                }
+                                else if (direction == 2)
+                                {
+                                    if (AI.HasEnemyUnit(battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] - 1), active))
+                                    {
+                                        battle.BattleMap.AddSpecificHighlight(target.Location[0], target.Location[1] - 1);
+                                        battle.BattleMap.AddSpecificRedHighlight(target.Location[0], target.Location[1] - 1);
+                                    }
+                                }
+                                else if (direction == 3)
+                                {
+                                    if (AI.HasEnemyUnit(battle.BattleMap.GetTileAt(target.Location[0], target.Location[1] + 1), active))
+                                    {
+                                        battle.BattleMap.AddSpecificHighlight(target.Location[0], target.Location[1] + 1);
+                                        battle.BattleMap.AddSpecificRedHighlight(target.Location[0], target.Location[1] + 1);
+                                    }
+                                }
+                                
+                            }
+                        }
                     }
                 }
                 if (battle.specialMode1 || battle.specialMode2 || battle.specialMode3 || battle.specialMode4 || battle.specialMode5 || battle.specialMode6)

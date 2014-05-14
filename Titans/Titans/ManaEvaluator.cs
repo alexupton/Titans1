@@ -48,6 +48,13 @@ namespace Titans
                     else
                         return false;
                 }
+                else if (unit is Spearman)
+                {
+                    if (unit.MP >= 4)
+                        return true;
+                    else
+                        return false;
+                }
             }
             else if (specialNumber == 2)
             {
@@ -79,6 +86,13 @@ namespace Titans
                     else
                         return false;
                 }
+                else if (unit is Spearman)
+                {
+                    if (unit.MP >= 10)
+                        return true;
+                    else
+                        return false;
+                }
             }
             else if (specialNumber == 3)
             {
@@ -106,6 +120,13 @@ namespace Titans
                 else if (unit is Mage)
                 {
                     if (unit.MP >= 15)
+                        return true;
+                    else
+                        return false;
+                }
+                else if (unit is Spearman)
+                {
+                    if (unit.MP >= 10)
                         return true;
                     else
                         return false;
