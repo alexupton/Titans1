@@ -25,8 +25,8 @@ namespace Titans
         public Draw(Game1 currentGame)
         {
             game = currentGame;
-            textColor = new Color[5];
-            for (int i = 0; i < 5; i++)
+            textColor = new Color[7];
+            for (int i = 0; i < 7; i++)
             {
                 textColor[i] = Color.Black;
             }
@@ -537,8 +537,26 @@ namespace Titans
             game.spriteBatch.DrawString(game.text, "Options", new Vector2(725, 341), textColor[3]);
             game.spriteBatch.Draw(game.menuButtons[4], new Vector2(700, 400), Color.White);
             game.spriteBatch.DrawString(game.text, " Exit", new Vector2(725, 403), textColor[4]);
-            
+           
+
             game.spriteBatch.End();
+        }
+        public void exitInGame()
+        {
+            game.spriteBatch.Begin();
+            float x = (game.bigText.MeasureString("Exit to windows?").X);
+            float menubox = 600 / 2;
+            float buttonx = 116 / 2;
+            game.spriteBatch.Draw(game.menuBox, new Vector2(450, 137), Color.White);
+            game.spriteBatch.DrawString(game.bigText, "Exit to Windows?", new Vector2((menubox - (x / 2)) + 450, 160), Color.Black);
+            game.spriteBatch.Draw(game.menuButtons[5], new Vector2(535, 400), Color.White);
+            x = (game.text.MeasureString("Yes").X);
+            game.spriteBatch.DrawString(game.text, " Yes", new Vector2((buttonx - (x / 2)) + 535, 403), textColor[5]);
+            game.spriteBatch.Draw(game.menuButtons[6], new Vector2(816, 400), Color.White);
+            x = (game.text.MeasureString("No").X);
+            game.spriteBatch.DrawString(game.text, " No", new Vector2((buttonx - (x / 2)) + 816, 403),textColor[6]);
+            game.spriteBatch.End();
+
         }
         public void optionsIngame()
     {

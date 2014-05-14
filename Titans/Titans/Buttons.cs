@@ -101,21 +101,21 @@ namespace Titans
         }
         public void InGameButtons(MouseState mouseState)
         {
-            Rectangle resume = new Rectangle( 700, 227,116, 27);
-            Rectangle saveGame = new Rectangle(725, 267,116, 27);
-            Rectangle loadGame = new Rectangle(725, 304,116, 27);
-            Rectangle options = new Rectangle(725, 341,116, 27);
-            Rectangle exit = new Rectangle( 700, 400,116, 27);
-
+            Rectangle resume = new Rectangle(700, 227, 116, 27);
+            Rectangle saveGame = new Rectangle(725, 267, 116, 27);
+            Rectangle loadGame = new Rectangle(725, 304, 116, 27);
+            Rectangle options = new Rectangle(725, 341, 116, 27);
+            Rectangle exit = new Rectangle(700, 400, 116, 27);
+            
             bool resumeMouse = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(resume);
             bool saveMouse = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(saveGame);
             bool loadMouse = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(loadGame);
             bool optionsMouse = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(options);
             bool exitMouse = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(exit);
-           
+
 
             //button click logic
-            if (mouseState.LeftButton == ButtonState.Pressed&&!Game.releaseWait)
+            if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
             {
 
                 Point mousePos = new Point(mouseState.X, mouseState.Y);
@@ -127,60 +127,112 @@ namespace Titans
                     Game.releaseWait = true;
 
                 }
-                else if(options.Contains(mousePos))
+                else if (options.Contains(mousePos))
                 {
 
-                    Game.isOptions = true; 
+                    Game.isOptions = true;
                     Game.releaseWait = true;
                 }
                 else if (exit.Contains(mousePos))
                 {
+                    
+                    Game.exitGame = true;
+                   
+                    Game.releaseWait = true;
 
-                    Game.Exit();
+                    
 
+
+                }
+            }
+
+                //button highlight logic
+                if (resumeMouse && Game.menuButtons[0] == Game.normal)
+                {
+
+                    Game.menuButtons[0] = Game.invert;
+                    Game.draw.textColor[0] = Color.White;
+                }
+                else if (!resumeMouse)
+                {
+                    Game.menuButtons[0] = Game.normal;
+                    Game.draw.textColor[0] = Color.Black;
+                }
+                if (optionsMouse && Game.menuButtons[3] == Game.normal)
+                {
+
+                    Game.menuButtons[3] = Game.invert;
+                    Game.draw.textColor[3] = Color.White;
+                }
+                else if (!optionsMouse)
+                {
+                    Game.menuButtons[3] = Game.normal;
+                    Game.draw.textColor[3] = Color.Black;
+                }
+                if (exitMouse && Game.menuButtons[4] == Game.normal)
+                {
+
+                    Game.menuButtons[4] = Game.invert;
+                    Game.draw.textColor[4] = Color.White;
+                }
+                else if (!exitMouse)
+                {
+                    Game.menuButtons[4] = Game.normal;
+                    Game.draw.textColor[4] = Color.Black;
                 }
 
 
-            }
-
-          
-
-            //button highlight logic
-            if (resumeMouse && Game.menuButtons[0] == Game.normal)
-            {
-                
-                Game.menuButtons[0] = Game.invert;
-                Game.draw.textColor[0] = Color.White;
-            }
-            else if (!resumeMouse)
-            {
-                Game.menuButtons[0]= Game.normal;
-                Game.draw.textColor[0] = Color.Black;
-            }
-            if (optionsMouse && Game.menuButtons[3] == Game.normal)
-            {
-
-                Game.menuButtons[3] = Game.invert;
-                Game.draw.textColor[3] = Color.White;
-            }
-            else if (!optionsMouse)
-            {
-                Game.menuButtons[3] = Game.normal;
-                Game.draw.textColor[3] = Color.Black;
-            }
-            if (exitMouse && Game.menuButtons[4] == Game.normal)
-            {
-
-                Game.menuButtons[4] = Game.invert;
-                Game.draw.textColor[4] = Color.White;
-            }
-            else if (!exitMouse)
-            {
-                Game.menuButtons[4] = Game.normal;
-                Game.draw.textColor[4] = Color.Black;
-            }
             
-            
+        }
+        public void ExitGame(MouseState mouseState)
+        {
+            Game.ismenu = false;
+            Rectangle yes = new Rectangle(500, 400, 116, 27);
+            Rectangle no = new Rectangle(816, 400, 116, 27);
+
+            bool yesmouse = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(yes);
+            bool nomouse = new Rectangle(mouseState.X, mouseState.Y, 1, 1).Intersects(no);
+
+            if (mouseState.LeftButton == ButtonState.Pressed && !Game.releaseWait)
+
+            {
+                Point mousePos = new Point(mouseState.X, mouseState.Y);
+                if (yes.Contains(mousePos))
+                {
+
+                    Game.Exit();
+                }
+                else if (no.Contains(mousePos))
+                {
+                    Game.exitGame = false;
+                    Game.ismenu = true;
+                    Game.releaseWait = true;
+
+                }
+
+            }
+            if (yesmouse && Game.menuButtons[5] == Game.normal)
+            {
+
+                Game.menuButtons[5] = Game.invert;
+                Game.draw.textColor[5] = Color.White;
+            }
+            else if (!yesmouse)
+            {
+                Game.menuButtons[5] = Game.normal;
+                Game.draw.textColor[5] = Color.Black;
+            }
+            if (nomouse && Game.menuButtons[6] == Game.normal)
+            {
+
+                Game.menuButtons[6] = Game.invert;
+                Game.draw.textColor[6] = Color.White;
+            }
+            else if (!nomouse)
+            {
+                Game.menuButtons[6] = Game.normal;
+                Game.draw.textColor[6] = Color.Black;
+            }
         }
         public void SelectSpecial(MouseState mouseState)
         {

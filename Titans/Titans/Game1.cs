@@ -263,6 +263,7 @@ namespace Titans
         public bool p1win;
         public bool p2win;
         public Battle battle;
+        public bool exitGame=false;
         public bool ismenu=false;
         public bool isOptions = false;
         //bool startTurn;
@@ -890,7 +891,7 @@ namespace Titans
 
 
             }
-            else if (demo && !(p1win || p2win) && !ismenu && !isOptions)
+            else if (demo && !(p1win || p2win) && !ismenu && !isOptions && !exitGame)
             {
                 engine.Update();
                 sfx.Update();
@@ -1454,7 +1455,7 @@ namespace Titans
 
 
             //in game menu escape(to the new wolrd) logic
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && !ismenu&&demo)
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape) && !keyreleasewait && !ismenu && demo && !exitGame)
             {
                 ismenu = true;
                 
@@ -1480,6 +1481,10 @@ namespace Titans
             if (isOptions && !keyreleasewait)
             {
                 buttons.optionButtons(mouseState);
+            }
+            if (exitGame && !keyreleasewait)
+            {
+                buttons.ExitGame(mouseState);
             }
 
             base.Update(gameTime);
@@ -1510,7 +1515,7 @@ namespace Titans
             {
                 draw.OptionsMenu();
             }
-            else if (demo && !ismenu && !isOptions)
+            else if (demo && !ismenu && !isOptions&&!exitGame)
             {
                 draw.Demo();
             }
@@ -1525,7 +1530,11 @@ namespace Titans
                 draw.Demo();
                 draw.optionsIngame();
             }
-            
+            else if (exitGame)
+            {
+                draw.Demo();
+                draw.exitInGame();
+            }
 
             
 

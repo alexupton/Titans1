@@ -342,7 +342,7 @@ namespace Titans
             game.UI = game.Content.Load<Texture2D>(@"images\UI Fixed");
 
             //in Game Menu items
-            game.menuButtons = new Texture2D[5];
+            game.menuButtons = new Texture2D[7];
             game.optionsButtons = new Texture2D[25];
             game.menuBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Menu Box");
             game.optionsBox = game.Content.Load<Texture2D>(@"images\Menu(InGame)\Options Box");
@@ -357,7 +357,7 @@ namespace Titans
             {
                 game.specialButtons[i] = game.specialNor;
             }
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 game.menuButtons[i]=game.normal;
             }
