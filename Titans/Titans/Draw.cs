@@ -19,7 +19,6 @@ namespace Titans
         public Color[] textColor;
         public Color[] optionsColor;
         public Color[] specialColor;
-        int i;
         StatusEffect effect;
 
         public Draw(Game1 currentGame)
@@ -222,75 +221,142 @@ namespace Titans
                     //Draw units
                     if (game.battle.BattleMap.map[x][y].hasUnit)
                     {
-                        
-                        
-                        if (game.battle.BattleMap.map[x][y].TileUnit is Artillery)
+                        if (game.battle.BattleMap.map[x][y].TileUnit.isPlayerUnit)
                         {
-                            game.frameSize.X = 32;
-                            game.frameSize.Y = 48;
-                            game.spriteBatch.Draw(game.Artillery, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
-                        }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Defender)
-                        {
-                            game.frameSize.X = 32;
-                            game.frameSize.Y = 48;
-                            game.spriteBatch.Draw(game.Defender, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
-                        }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Mage)
-                        {
-                            game.frameSize.X = 32;
-                            game.frameSize.Y = 48;
-                            game.spriteBatch.Draw(game.Mage, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
-                        }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Ranger)
-                        {
-                            game.frameSize.X = 32;
-                            game.frameSize.Y = 48;
-                            game.spriteBatch.Draw(game.Ranger, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
-                        }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Spearman)
-                        {
-                            game.frameSize.X = 32;
-                            game.frameSize.Y = 48;
-                            game.spriteBatch.Draw(game.Cavalry, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
-                        }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Bomber)
-                        {
-                            game.frameSize.X = 29;
-                            game.frameSize.Y = 31;
-                            game.spriteBatch.Draw(game.Bomber, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
-                        }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Fighter)
-                        {
-                            game.frameSize.X = 31;
-                            game.frameSize.Y = 31;
-                            game.spriteBatch.Draw(game.Fighter, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
-                        }
-                        else if (game.battle.BattleMap.map[x][y].TileUnit is Scout)
-                        {
+                            if (game.battle.BattleMap.map[x][y].TileUnit is Artillery)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.Artillery, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Defender)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.Defender, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Mage)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.Mage, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Ranger)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.Ranger, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Spearman)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.Cavalry, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Bomber)
+                            {
+                                game.frameSize.X = 29;
+                                game.frameSize.Y = 31;
+                                game.spriteBatch.Draw(game.Bomber, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Fighter)
+                            {
+                                game.frameSize.X = 31;
+                                game.frameSize.Y = 31;
+                                game.spriteBatch.Draw(game.Fighter, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Scout)
+                            {
 
-                            game.frameSize.X = 31;
-                            game.frameSize.Y = 31;
-                            game.spriteBatch.Draw(game.Scout, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                                game.frameSize.X = 31;
+                                game.frameSize.Y = 31;
+                                game.spriteBatch.Draw(game.Scout, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.Soldier, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+
+
                         }
                         else
                         {
-                            game.frameSize.X = 32;
-                            game.frameSize.Y = 48;
-                            game.spriteBatch.Draw(game.Soldier, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
-                                new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            if (game.battle.BattleMap.map[x][y].TileUnit is Artillery)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.EArtillery, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Defender)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.EDefender, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Mage)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.EMage, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Ranger)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.ERanger, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Spearman)
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.ECavalry, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Bomber)
+                            {
+                                game.frameSize.X = 29;
+                                game.frameSize.Y = 31;
+                                game.spriteBatch.Draw(game.EBomber, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Fighter)
+                            {
+                                game.frameSize.X = 31;
+                                game.frameSize.Y = 31;
+                                game.spriteBatch.Draw(game.EFighter, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else if (game.battle.BattleMap.map[x][y].TileUnit is Scout)
+                            {
+
+                                game.frameSize.X = 31;
+                                game.frameSize.Y = 31;
+                                game.spriteBatch.Draw(game.EScout, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
+                            else
+                            {
+                                game.frameSize.X = 32;
+                                game.frameSize.Y = 48;
+                                game.spriteBatch.Draw(game.ESoldier, new Vector2(x * 55 + game.offsetX + 10, y * 55 + game.offsetY + 3),
+                                    new Rectangle(game.currentFrame.X * game.frameSize.X, game.currentFrame.Y * game.frameSize.Y, game.frameSize.X, game.frameSize.Y), Color.White);
+                            }
                         }
-                        
-                            
-                            
 
                     }
 
@@ -345,6 +411,15 @@ namespace Titans
                                 }
                                 game.spriteBatch.DrawString(game.text, "+" + defTotal.ToString(), new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42,
                                     game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.Magenta);
+                            }
+
+                            if (game.battle.BattleMap.map[x][y].TileUnit is Spearman)
+                            {
+                                Spearman dummy = (Spearman)game.battle.BattleMap.map[x][y].TileUnit;
+                                if (dummy.isCharged)
+                                {
+                                    game.spriteBatch.Draw(game.drawStatus.ElementAt(7), new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
+                                }
                             }
                         }
                         //draw status effects

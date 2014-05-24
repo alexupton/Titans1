@@ -130,37 +130,37 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI.cs" />
-    <Compile Include="Artillery.cs" />
+    <Compile Include="Units\Artillery.cs" />
     <Compile Include="AttackResolver.cs" />
     <Compile Include="AudioManager.cs" />
     <Compile Include="Battle.cs" />
-    <Compile Include="Bomber.cs" />
+    <Compile Include="Units\Bomber.cs" />
     <Compile Include="Buttons.cs" />
-    <Compile Include="Spearman.cs" />
+    <Compile Include="Units\Spearman.cs" />
     <Compile Include="ContentLoader.cs" />
-    <Compile Include="Defender.cs" />
+    <Compile Include="Units\Defender.cs" />
     <Compile Include="Draw.cs" />
-    <Compile Include="Fighter.cs" />
-    <Compile Include="Haste.cs" />
-    <Compile Include="Mage.cs" />
+    <Compile Include="Units\Fighter.cs" />
+    <Compile Include="Status Effects\Haste.cs" />
+    <Compile Include="Units\Mage.cs" />
     <Compile Include="ManaEvaluator.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapLoaderUltimate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Ranger.cs" />
-    <Compile Include="Root.cs" />
-    <Compile Include="Scout.cs" />
-    <Compile Include="Slow.cs" />
-    <Compile Include="Soldier.cs" />
+    <Compile Include="Units\Ranger.cs" />
+    <Compile Include="Status Effects\Root.cs" />
+    <Compile Include="Units\Scout.cs" />
+    <Compile Include="Status Effects\Slow.cs" />
+    <Compile Include="Units\Soldier.cs" />
     <Compile Include="SpecialClicks.cs" />
     <Compile Include="SpecialHighlighting.cs" />
-    <Compile Include="StatusEffect.cs" />
-    <Compile Include="Stun.cs" />
-    <Compile Include="Taunt.cs" />
+    <Compile Include="Status Effects\StatusEffect.cs" />
+    <Compile Include="Status Effects\Stun.cs" />
+    <Compile Include="Status Effects\Taunt.cs" />
     <Compile Include="Tile.cs" />
-    <Compile Include="Unit.cs" />
+    <Compile Include="Units\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Demo2.txt" />

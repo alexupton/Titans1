@@ -203,6 +203,16 @@ namespace Titans
         public Texture2D Fighter;
         public Texture2D Bomber;
         public Texture2D Scout;
+
+        public Texture2D EArtillery;
+        public Texture2D EDefender;
+        public Texture2D EMage;
+        public Texture2D ERanger;
+        public Texture2D ESoldier;
+        public Texture2D ECavalry;
+        public Texture2D EFighter;
+        public Texture2D EBomber;
+        public Texture2D EScout;
         public Point frameSize;
         public Point currentFrame;
         public Point sheetSize;

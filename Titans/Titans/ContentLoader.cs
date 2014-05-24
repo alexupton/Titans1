@@ -294,6 +294,7 @@ namespace Titans
 
 
             //Units
+            
             game.Artillery = game.Content.Load<Texture2D>(@"images\Units\Artillery");
             game.Defender = game.Content.Load<Texture2D>(@"images\Units\Defender");
             game.Mage = game.Content.Load<Texture2D>(@"images\Units\Mage");
@@ -303,6 +304,16 @@ namespace Titans
             game.Bomber = game.Content.Load<Texture2D>(@"images\Units\Bomber");
             game.Scout = game.Content.Load<Texture2D>(@"images\Units\Scout");
             game.Fighter = game.Content.Load<Texture2D>(@"images\Units\Fighter");
+
+            game.EArtillery = game.Content.Load<Texture2D>(@"images\Units\EArtillery");
+            game.EDefender = game.Content.Load<Texture2D>(@"images\Units\EDefender");
+            game.EMage = game.Content.Load<Texture2D>(@"images\Units\EMage");
+            game.ERanger = game.Content.Load<Texture2D>(@"images\Units\ERanger");
+            game.ESoldier = game.Content.Load<Texture2D>(@"images\Units\ESoldier");
+            game.ECavalry = game.Content.Load<Texture2D>(@"images\Units\ESpearman");
+            game.EBomber = game.Content.Load<Texture2D>(@"images\Units\Bomber");
+            game.EScout = game.Content.Load<Texture2D>(@"images\Units\Scout");
+            game.EFighter = game.Content.Load<Texture2D>(@"images\Units\Fighter");
             
             game.frameSize.X = 32;
             game.frameSize.Y = 48;
@@ -491,6 +502,7 @@ namespace Titans
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Target"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Taunt"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Imobilize"));
+                game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Charge"));
                
 
 

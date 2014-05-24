@@ -122,8 +122,10 @@ namespace Titans
         {
             location.TileUnit = unit;
             location.hasUnit = true;
+            location.IsImpassible = true;
             unit.Location[0] = location.X;
             unit.Location[1] = location.Y;
+
         }
 
         //Remove unit FROM THE MAP at the specified coodinates
