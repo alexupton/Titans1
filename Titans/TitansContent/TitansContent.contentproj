@@ -1453,9 +1453,16 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="images\Animations\Charge.png">
       <Name>Charge</Name>
     </Compile>
+=======
+<<<<<<< HEAD
+    <Compile Include="images\Animations\Charge.png">
+      <Name>Charge</Name>
+=======
+>>>>>>> 8d857eaf1771df130ce95448619d97936597728d
     <Compile Include="images\Units\EArtillery.png">
       <Name>EArtillery</Name>
       <Importer>TextureImporter</Importer>
@@ -1483,6 +1490,10 @@
     </Compile>
     <Compile Include="images\Units\ESpearman.png">
       <Name>ESpearman</Name>
+<<<<<<< HEAD
+=======
+>>>>>>> cf5238c119247441027cbe87e8e088e1628dea4d
+>>>>>>> 8d857eaf1771df130ce95448619d97936597728d
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
