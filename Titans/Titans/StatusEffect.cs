@@ -21,6 +21,19 @@ namespace Titans
             List<StatusEffect> sorted = new List<StatusEffect>();
             return sorted;
         }
+
+        public static bool HasNegativeStatusEffects(List<StatusEffect> effects)
+        {
+            foreach (StatusEffect effect in effects)
+            {
+                //the only "good" SE is haste
+                if(!(effect is Haste))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 
     

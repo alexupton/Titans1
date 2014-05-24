@@ -491,6 +491,7 @@ namespace Titans
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Target"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Taunt"));
                 game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Imobilize"));
+                game.drawStatus.Add(game.Content.Load<Texture2D>(@"images\Animations\Charge"));
                
 
 

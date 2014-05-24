@@ -123,8 +123,37 @@ namespace Titans
             return legalmoves;
         }
 
+        //get a list of tiles that are legal to move to
+        //way better than the shitty coordinates thing
+        public List<Tile> GetLegalMoveTiles(Unit active)
+        {
+            List<int[]> legalCoords = GetLegalMoveCoordinates(active);
+            List<Tile> legalTiles = new List<Tile>();
+            foreach(int[] coords in legalCoords)
+            {
+                legalTiles.Add(GetTileAt(coords[0], coords[1]));
+            }
+
+            return legalTiles;
+        }
+
         //highlight entire unit attack range, highlighting enemies in red
         public void HighlightAttack(Unit active)
+        {
+            List<Tile> tileRange = GetAttackRangeTiles(active);
+            foreach (Tile tile in tileRange)
+            {
+                if (AI.HasEnemyUnit(tile, active))
+                {
+                    AddSpecificRedHighlight(tile.X, tile.Y);
+                }
+                else
+                    AddSpecificBlueHighlight(tile.X, tile.Y);
+            }
+        }
+
+        //get the set of tiles that are within the attack range
+        public List<Tile> GetAttackRangeTiles(Unit active)
         {
             int x = active.Location[0];
             int y = active.Location[1];
@@ -154,17 +183,42 @@ namespace Titans
             {
                 tileRange.Add(map[tile[0]][tile[1]]);
             }
-            foreach (Tile tile in tileRange)
-            {
-                if (AI.HasEnemyUnit(tile, active))
-                {
-                    AddSpecificRedHighlight(tile.X, tile.Y);
-                }
-                else
-                    AddSpecificBlueHighlight(tile.X, tile.Y);
-            }
+            return tileRange;
         }
 
+        //gets a theoretical attack range of the specified unit at the specified test tile
+        public List<Tile> GetAttackRangeTiles(Tile test, Unit active)
+        {
+            int x = test.X;
+            int y = test.Y;
+            List<int[]> rangeSquare = new List<int[]>();
+            List<int[]> actualRange = new List<int[]>();
+            int range = active.Range;
+            for (int i = (range * -1); i <= range; i++)
+            {
+                for (int j = (range * -1); j <= range; j++)
+                {
+                    if ((i + x) < Size[0] && (j + y) < Size[1] && (i + x) >= 0 & (j + y) >= 0)
+                    {
+                        rangeSquare.Add(new int[] { i + x, j + y });
+                    }
+                }
+            }
+
+            foreach (int[] tile in rangeSquare)
+            {
+                if ((Math.Abs(tile[0] - x) + Math.Abs(tile[1] - y)) <= range)
+                {
+                    actualRange.Add(tile);
+                }
+            }
+            List<Tile> tileRange = new List<Tile>();
+            foreach (int[] tile in actualRange)
+            {
+                tileRange.Add(map[tile[0]][tile[1]]);
+            }
+            return tileRange;
+        }
         //highlight entire unit range, allies highlighted in red
         public void HighlightAllies(Unit active)
         {

@@ -371,6 +371,15 @@ namespace Titans
         {
             if (!battle.GameUI.taunted && active.AP > 0)
             {
+
+                if (active is Soldier)
+                {
+
+                    if (MakeSoldierMove(battle, active))
+                    {
+                        return;
+                    }
+                }
                 Map map = battle.BattleMap;
                 Tile location = map.GetTileAt(active.Location[0], active.Location[1]);
 
@@ -900,6 +909,421 @@ namespace Titans
             }
             else
                 return false;
+        }
+
+        //determines whether a unit is the range of any enemy
+        public static bool IsInEnemyRange(Battle battle, Unit active)
+        {
+            bool inRange = false;
+            List<Tile> cumulativeEnemyRange = new List<Tile>();
+            foreach (Unit unit in battle.BattleQueue)
+            {
+                if (unit.isPlayerUnit != active.isPlayerUnit)
+                {
+                    cumulativeEnemyRange.AddRange(battle.BattleMap.GetAttackRangeTiles(unit));
+                }
+            }
+
+            foreach (Tile test in cumulativeEnemyRange)
+            {
+                if (test.hasUnit)
+                {
+                    if (test.TileUnit == active)
+                    {
+                        inRange = true;
+                    }
+                }
+            }
+            return inRange;
+        }
+        //same as above, only tests to see if a tile is safely out of range of enemies
+        public static bool IsInEnemyRange(Battle battle, Unit active, Tile test)
+        {
+            bool inRange = false;
+            List<Tile> cumulativeEnemyRange = new List<Tile>();
+            foreach (Unit unit in battle.BattleQueue)
+            {
+                if (unit.isPlayerUnit != active.isPlayerUnit)
+                {
+                    cumulativeEnemyRange.AddRange(battle.BattleMap.GetAttackRangeTiles(unit));
+                }
+            }
+
+            foreach (Tile tile in cumulativeEnemyRange)
+            {
+                if (tile == test)
+                {
+                    inRange = true;
+                }
+            }
+            return inRange;
+        }
+        //helper method to get cumulative range from all enemies
+        public static List<Tile> GetCumulativeEnemyRange(Battle battle, Unit active)
+        {
+            List<Tile> cumulativeEnemyRange = new List<Tile>();
+            foreach (Unit unit in battle.BattleQueue)
+            {
+                if (unit.isPlayerUnit != active.isPlayerUnit)
+                {
+                    cumulativeEnemyRange.AddRange(battle.BattleMap.GetAttackRangeTiles(unit));
+                }
+            }
+            return cumulativeEnemyRange;
+        }
+
+        //get all enemy units in attack range
+        public static List<Unit> GetEnemiesInRange(Battle battle, Unit active)
+        {
+            List<Tile> rangeTiles = battle.BattleMap.GetAttackRangeTiles(active);
+            List<Unit> enemies = new List<Unit>();
+            foreach (Tile tile in rangeTiles)
+            {
+                if (HasEnemyUnit(tile, active))
+                {
+                    enemies.Add(tile.TileUnit);
+                }
+            }
+            return enemies;
+        }
+
+
+        //AI runs away, preferably to a defender
+        public static void AIFlee(Battle battle, Unit active)
+        {
+            List<Tile> enemyRange = GetCumulativeEnemyRange(battle, active);
+            List<Unit> defenders = new List<Unit>();
+            foreach (Unit unit in battle.BattleQueue)
+            {
+                if (unit is Defender && unit.isPlayerUnit == active.isPlayerUnit)
+                {
+                    defenders.Add(unit);
+                }
+            }
+
+            List<Tile> reachableTiles = battle.BattleMap.GetLegalMoveTiles(active);
+            List<Tile> safeTiles = reachableTiles;
+
+            foreach (Tile eTile in enemyRange)
+            {
+                if (safeTiles.Contains(eTile))
+                {
+                    safeTiles.Remove(eTile);
+                }
+            }
+            //if there are safe places to move, pick one close to defenders
+            if (safeTiles.Count > 0)
+            {
+                Tile destination = new Tile();
+                int maxDefenderCount = 0;
+                foreach (Tile safe in safeTiles)
+                {
+                    List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap, safe);
+                    int defenderCount = 0;
+
+                    foreach (Tile adj in adjacent)
+                    {
+                        if (adj.hasUnit)
+                        {
+                            if (defenders.Contains(adj.TileUnit))
+                            {
+                                defenderCount++;
+                            }
+                        }
+                    }
+
+                    if (defenderCount > maxDefenderCount)
+                    {
+                        maxDefenderCount = defenderCount;
+                        destination = safe;
+                    }
+
+                }
+
+                if (maxDefenderCount > 0)
+                {
+                    battle.StartMove(destination);
+                    return;
+                }
+                else
+                {
+                    Random rand = new Random();
+                    int next = rand.Next(safeTiles.Count);
+                    destination = safeTiles.ElementAt(next);
+
+                    battle.StartMove(destination);
+                    return;
+                }
+            }
+            else
+            {
+                Tile destination = new Tile();
+                int maxDefenderCount = 0;
+                foreach (Tile tile in reachableTiles)
+                {
+                    List<Tile> adjacent = AI.GetAllAdjacentTiles(battle.BattleMap, tile);
+                    int defenderCount = 0;
+
+                    foreach (Tile adj in adjacent)
+                    {
+                        if (adj.hasUnit)
+                        {
+                            if (defenders.Contains(adj.TileUnit))
+                            {
+                                defenderCount++;
+                            }
+                        }
+                    }
+
+                    if (defenderCount > maxDefenderCount)
+                    {
+                        maxDefenderCount = defenderCount;
+                        destination = tile;
+                    }
+
+                }
+
+                if (maxDefenderCount > 0)
+                {
+                    battle.StartMove(destination);
+                    return;
+                }
+                else
+                {
+                    //run in the exact opposite direction of nearest enemy
+                    Unit nearestEnemy = GetClosestEnemyUnit(battle, active);
+
+                    if (nearestEnemy != null)
+                    {
+                        Tile enemyTile = battle.BattleMap.GetTileAt(nearestEnemy.Location[0], nearestEnemy.Location[1]);
+                        Tile activeTile = battle.BattleMap.GetTileAt(active.Location[0], active.Location[1]);
+                        Tile escapeTile = reachableTiles.ElementAt(0);
+                        if (enemyTile.X < activeTile.X)
+                        {
+                            escapeTile = GetFurthestTile(battle, reachableTiles, 1);
+                        }
+                        else if (enemyTile.X > activeTile.X)
+                        {
+                            escapeTile = GetFurthestTile(battle, reachableTiles, 0);
+                        }
+                        else if (enemyTile.Y < activeTile.Y)
+                        {
+                            escapeTile = GetFurthestTile(battle, reachableTiles, 3);
+                        }
+                        else if (enemyTile.Y > activeTile.Y)
+                        {
+                            escapeTile = GetFurthestTile(battle, reachableTiles, 2);
+                        }
+
+                        battle.StartMove(escapeTile);
+                        return;
+                    }
+                }
+            }
+        }
+
+        //get furthest reachable tile in a certain direction
+        public static Tile GetFurthestTile(Battle battle, List<Tile> moveRange, int direction)
+        {
+            Tile moveTile = moveRange.ElementAt(0);
+            switch (direction)
+            {
+                case 0:
+                    {
+                        foreach (Tile tile in moveRange)
+                        {
+                            if (tile.X < moveTile.X)
+                            {
+                                moveTile = tile;
+                            }
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        foreach (Tile tile in moveRange)
+                        {
+                            if (tile.X > moveTile.X)
+                            {
+                                moveTile = tile;
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        foreach (Tile tile in moveRange)
+                        {
+                            if (tile.Y < moveTile.Y)
+                            {
+                                moveTile = tile;
+                            }
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        foreach (Tile tile in moveRange)
+                        {
+                            if (tile.Y > moveTile.Y)
+                            {
+                                moveTile = tile;
+                            }
+                        }
+                        break;
+                    }
+            }
+
+            return moveTile;
+        }
+        //returns the unit closest to a given unit that is also an enemy
+        public static Unit GetClosestEnemyUnit(Battle battle, Unit active)
+        {
+            Map map = battle.BattleMap;
+            Tile location = map.GetTileAt(active.Location[0], active.Location[1]);
+            List<Unit> enemies = new List<Unit>();
+            foreach (Unit unit in battle.BattleQueue)
+            {
+                if (unit.isPlayerUnit != unit.isPlayerUnit)
+                {
+                    enemies.Add(unit);
+                }
+            }
+            int nearestEnemyDistance = 500000;
+            Unit nearestEnemy = new Soldier();
+            Tile nearestLocation = new Tile();
+            foreach (Unit enemy in enemies)
+            {
+                Tile enemyTile = map.GetTileAt(enemy.Location[0], enemy.Location[1]);
+
+                List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile);
+                foreach (Tile adj in enemyAdjTiles)
+                {
+                    List<Tile> path = GetPath(location, adj, map);
+                    foreach (Tile p in path)
+                    {
+                        int pathTotal = 0;
+                        p.FScore = 0;
+                        p.GScore = 0;
+                        p.HScore = 0;
+                        p.parentTile = null;
+                        pathTotal += p.MoveCost;
+                        if (pathTotal < nearestEnemyDistance)
+                        {
+                            nearestEnemyDistance = pathTotal;
+                            nearestEnemy = enemy;
+                            nearestLocation = adj;
+                        }
+                    }
+                }
+
+
+
+
+            }
+
+            if (nearestEnemyDistance != 500000)
+            {
+                return nearestEnemy;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+
+        
+        //see how much damage will be done if every enemy in range attacks the active unit twice
+        public static int GetEstimatedCumulativeDamage(Battle battle, Unit active, List<Unit> enemies)
+        {
+            Tile activeTile = battle.BattleMap.GetTileAt(active.Location[0], active.Location[1]);
+            List<Unit> attackingEnemies = new List<Unit>();
+            foreach (Unit enemy in enemies)
+            {
+                List<Tile> enemyRange = battle.BattleMap.GetAttackRangeTiles(enemy);
+                foreach (Tile test in enemyRange)
+                {
+                    if (test == activeTile && !attackingEnemies.Contains(enemy))
+                    {
+                        attackingEnemies.Add(enemy);
+                    }
+                }
+            }
+
+            int potentialDamage = 0;
+
+            foreach (Unit enemy in attackingEnemies)
+            {
+                potentialDamage += AttackResolver.Attack(enemy, active, enemy.AttackModifiers) * 2;
+            }
+            return potentialDamage;
+        }
+
+        
+
+        //make AI move for soldiers
+        public static bool MakeSoldierMove(Battle battle, Unit active)
+        {
+            Tile activeTile = battle.BattleMap.GetTileAt(active.Location[0], active.Location[1]);
+            Random rand = new Random();
+            int chance = rand.Next(100);
+
+            //use First Aid on self to heal and remove status effects if any
+            if ((active.HP < active.MaxHP || StatusEffect.HasNegativeStatusEffects(active.StatusEffects)) && active.MP >= 10 && chance < 85)
+            {
+                active.Special3(battle);
+            }
+
+            List<Unit> enemies = GetEnemiesInRange(battle, active);
+
+            //Can I kill an enemy on this turn?
+            foreach (Unit enemy in enemies)
+            {
+                int theoreticalDamage = AttackResolver.Attack(active, enemy, active.AttackModifiers);
+
+                if (theoreticalDamage >= enemy.HP)
+                {
+                    battle.Attack(enemy); return true;
+                }
+                else if (theoreticalDamage * 2 >= enemy.HP && active.AP >= 2)
+                {
+                    battle.Attack(enemy); return true;
+                }
+                else if (theoreticalDamage * 3 >= enemy.HP && active.AP >= 2 && active.MP >= 20)
+                {
+                    battle.CurrentTarget = enemy;
+                    active.Special2(battle); return true;
+                }
+                else if (theoreticalDamage * 1.5 >= enemy.HP)
+                {
+                    battle.CurrentTarget = enemy;
+                    active.Special2(battle); return true;
+                }
+            }
+
+
+            //can my enemies kill me?
+            int potentialDamage = GetEstimatedCumulativeDamage(battle, active, enemies);
+            if (potentialDamage >= active.HP && chance < 70)
+            {
+                AIFlee(battle, active);
+                return true;
+            }
+                //even if they can't kill me, am I weak enough that i should defend myself?
+            else if (potentialDamage < active.HP && active.HP <= active.MaxHP / 2 && active.AP <= 1)
+            {
+                battle.SelectDefend();
+                return true;
+            }
+
+
+
+            
+
+
+            return false;
         }
      
     }

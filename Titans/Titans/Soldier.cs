@@ -117,7 +117,7 @@ namespace Titans
 
 
         }
-        //Set the First Aid ability which adds 5 HP, costs 10 MP, and reduces the range to 0
+        //Set the First Aid ability which adds 5 HP, costs 10 MP, and removes status effects
         public override void Special3(Battle battle)
         {
 
@@ -129,7 +129,13 @@ namespace Titans
                 {
                     HP = MaxHP;
                 }
-                //TODO: remove other statuses
+                foreach(StatusEffect effect in StatusEffects)
+                {
+                    if (!(effect is Haste))
+                    {
+                        StatusEffects.Remove(effect);
+                    }
+                }
                 MP -= 10;
                 AP--;
                 battle.GameUI.timeSinceLastDamageFrame = 0;

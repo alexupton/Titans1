@@ -346,6 +346,15 @@ namespace Titans
                                 game.spriteBatch.DrawString(game.text, "+" + defTotal.ToString(), new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42,
                                     game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.Magenta);
                             }
+
+                            if (game.battle.BattleMap.map[x][y].TileUnit is Spearman)
+                            {
+                                Spearman dummy = (Spearman)game.battle.BattleMap.map[x][y].TileUnit;
+                                if (dummy.isCharged)
+                                {
+                                    game.spriteBatch.Draw(game.drawStatus.ElementAt(7), new Vector2(game.battle.BattleMap.map[x][y].TileUnit.Location[0] * 55 + game.offsetX + 42, game.battle.BattleMap.map[x][y].TileUnit.Location[1] * 55 + game.offsetY + 5), Color.White);
+                                }
+                            }
                         }
                         //draw status effects
                         if (game.battle.BattleMap.map[x][y].TileUnit.StatusEffects.Count > 0)
