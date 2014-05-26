@@ -23,6 +23,7 @@ namespace Titans
         public override void Invoke(Battle battle)
         {
             unit.AP = 0;
+            battle.GameUI.sfx.PlayPassSound(battle.ActiveUnit);
         }
 
         public override void UnInvoke(Battle battle)

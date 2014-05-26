@@ -1434,9 +1434,15 @@ namespace Titans
                     displayHeal = false;
                     splashDamage.Clear();
                     splashLocations.Clear();
-                    if (battle.ActiveUnit.AP <= 0 && frameCount == 2)
+                    if (AILock && !moveWait && !wait && battle.ActiveUnit.AP > 0)
+                    {
+                        battle.AIMove();
+                        frameCount = 0;
+                    }
+                    if (battle.ActiveUnit.AP <= 0 &&(!AILock || frameCount >= 1))
                     {
                         battle.NextPlayer();
+                        frameCount = 0;
 
                     }
                     if (battle.gameOver)
@@ -1444,10 +1450,7 @@ namespace Titans
                         endWait = false;
                     }
 
-                    if (AILock && !moveWait && !wait)
-                    {
-                        battle.AIMove();
-                    }
+                    
                     frameCount++;
 
                 }
@@ -1482,10 +1485,10 @@ namespace Titans
                 // Increment to next frame
                 wait = false;
                 displayDamage = false;
-                if (battle.ActiveUnit.AP <= 0 )
-                {
-                    battle.NextPlayer();
-                }
+                //if (battle.ActiveUnit.AP <= 0)
+                //{
+                //    battle.NextPlayer();
+                //}
                 if (battle.gameOver)
                 {
                     endWait = false;

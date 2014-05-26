@@ -70,6 +70,8 @@ namespace Titans
                     battle.GameUI.splashLocations.Add(tile);
                     battle.GameUI.splashDamage.Add(15);
                     battle.GameUI.displayDamage = true;
+                    battle.GameUI.attackedUnitTrueX = 9000;
+                    battle.GameUI.attackedUnitTrueY = 9000;
 
                     tile.TileUnit.HP -= 15;
 
@@ -136,6 +138,10 @@ namespace Titans
                         StatusEffects.Remove(effect);
                     }
                 }
+                battle.GameUI.unitHeal = 5;
+                battle.GameUI.HealLocation.X = this.Location[0] * 55 - 13;
+                battle.GameUI.HealLocation.Y = this.Location[1] * 55 - 20;
+                battle.GameUI.displayHeal = true;
                 MP -= 10;
                 AP--;
                 battle.GameUI.timeSinceLastDamageFrame = 0;
