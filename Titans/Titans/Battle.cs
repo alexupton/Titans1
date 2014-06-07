@@ -448,7 +448,7 @@ namespace Titans
                 }
             }
             GameUI.moveWait = true;
-            List<Tile> movePath = AI.GetPath(BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]), move, BattleMap);
+            List<Tile> movePath = AI.GetPath(BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]), move, BattleMap, ActiveUnit);
             pendingMoves = movePath.ToArray();
             pendingIndex = pendingMoves.Length - 1;
             GameUI.sfx.PlayMoveSound(ActiveUnit);

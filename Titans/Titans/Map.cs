@@ -14,6 +14,8 @@ namespace Titans
         public int Music { get; set; } //determines which music track plays
 
         public Tile[][] map { get; set; } //the actual map state. Game.Draw() will read this to draw the screen
+
+        public Unit SavedUnit { get; set; } //used to remember unit locations when they are moved over i.e. by an air unit
        
         public Map(int[] size, int tileSet, int music)
         {
@@ -32,15 +34,44 @@ namespace Titans
         //Note there is no checking to make sure it is a legal move. This is done elsewhere
         public void Move(Unit mover, int X, int Y)
         {
-            map[mover.Location[0]][mover.Location[1]].TileUnit = null;
-            map[mover.Location[0]][mover.Location[1]].hasUnit = false;
-            map[mover.Location[0]][mover.Location[1]].IsImpassible = false;
+            
+            if (SavedUnit != null)
+            {
+                map[mover.Location[0]][mover.Location[1]].TileUnit = SavedUnit;
+                map[mover.Location[0]][mover.Location[1]].hasUnit = true;
+                
+                    map[mover.Location[0]][mover.Location[1]].IsImpassible = true;
 
+                SavedUnit = null;
+            }
+            else
+            {
+                map[mover.Location[0]][mover.Location[1]].TileUnit = null;
+                map[mover.Location[0]][mover.Location[1]].hasUnit = false;
+                map[mover.Location[0]][mover.Location[1]].IsImpassible = false;
+                if (map[mover.Location[0]][mover.Location[1]].type == "water")
+                {
+                    map[mover.Location[0]][mover.Location[1]].IsImpassible = true;
+                }
+                else
+                {
+                    map[mover.Location[0]][mover.Location[1]].IsImpassible = false;
+                }
+            }
+            if (map[X][Y].hasUnit)
+            {
+                SavedUnit = map[X][Y].TileUnit;
+            }
             map[X][Y].TileUnit = mover;
-            mover.Location[0] = X; //update unit location
-            mover.Location[1] = Y;
             map[X][Y].hasUnit = true;
             map[X][Y].IsImpassible = true;
+            
+            
+            mover.Location[0] = X; //update unit location
+            mover.Location[1] = Y;
+
+
+            
         }
         //return the tile object at a given coordinate pair
         public Tile GetTileAt(int X, int Y)
@@ -78,46 +109,62 @@ namespace Titans
 
             foreach (Tile tile in reachableTiles)
             {
-                if ((Math.Abs(tile.X - location.X) + Math.Abs(tile.Y - location.Y)) <= tileRange && !tile.IsImpassible)
+                if ((Math.Abs(tile.X - location.X) + Math.Abs(tile.Y - location.Y)) <= tileRange)
                 {
-                    trueReachableTiles.Add(tile);
+                    if (selected is Scout || selected is Bomber || selected is Fighter || !tile.IsImpassible)
+                    {
+                        trueReachableTiles.Add(tile);
+                    }
                 }
             }
             //Run possible tiles through pathfinding algorithm to see what tiles can actually be reached
             List<Tile> tempTileList = new List<Tile>();
-            foreach (Tile tile in trueReachableTiles)
+            if (!(selected is Scout || selected is Bomber || selected is Fighter))
             {
-                tile.IsRoot = false;
-                tile.parentTile = null;
-                tile.HScore = 0;
-                tile.GScore = 0;
-                tile.FScore = 0;
-                if(AI.PathExists(location, tile, this, trueReachableTiles, selected.Speed))
+                foreach (Tile tile in trueReachableTiles)
                 {
-                    tempTileList.Add(tile);
+                    tile.IsRoot = false;
+                    tile.parentTile = null;
+                    tile.HScore = 0;
+                    tile.GScore = 0;
+                    tile.FScore = 0;
+                    if (AI.PathExists(location, tile, this, trueReachableTiles, selected.Speed))
+                    {
+                        tempTileList.Add(tile);
+                    }
+                }
+
+                //Set list equal to actual tiles you can move to
+                trueReachableTiles = tempTileList;
+
+                //cleanup
+                foreach (Tile tile in trueReachableTiles)
+                {
+                    tile.IsRoot = false;
+                    tile.parentTile = null;
+                    tile.FScore = 0;
+                    tile.GScore = 0;
+                    tile.HScore = 0;
+                    tile.IsRedHighlighted = false;
+                }
+
+
+                foreach (Tile tile in trueReachableTiles)
+                {
+                    legalmoves.Add(new int[] { tile.X, tile.Y });
+                }
+
+            }
+            else
+            {
+                foreach (Tile tile in trueReachableTiles)
+                {
+                    if (!(tile.hasUnit))
+                    {
+                        legalmoves.Add(new int[]{tile.X, tile.Y});
+                    }
                 }
             }
-            //Set list equal to actual tiles you can move to
-            trueReachableTiles = tempTileList;
-
-            //cleanup
-            foreach (Tile tile in trueReachableTiles)
-            {
-                tile.IsRoot = false;
-                tile.parentTile = null;
-                tile.FScore = 0;
-                tile.GScore = 0;
-                tile.HScore = 0;
-                tile.IsRedHighlighted = false;
-            }
-
-
-            foreach (Tile tile in trueReachableTiles)
-            {
-                legalmoves.Add(new int[] { tile.X, tile.Y });
-            }
-
-        
 
             
             return legalmoves;

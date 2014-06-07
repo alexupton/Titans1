@@ -38,7 +38,7 @@ namespace Titans
                 open.Remove(current);
                 closed.Add(current);
 
-                List<Tile> adjacent = GetAdjacentLegalTiles(map, current);
+                List<Tile> adjacent = GetAdjacentLegalTiles(map, current, false);
                 List<Tile> adjacentTemp = new List<Tile>();
                 foreach (Tile adj in adjacent)
                 {
@@ -127,7 +127,7 @@ namespace Titans
              return true;
          }
      }
-     public static List<Tile> GetAdjacentLegalTiles(Map map, Tile currentTile)
+     public static List<Tile> GetAdjacentLegalTiles(Map map, Tile currentTile, bool isAirUnit)
         {
             List<Tile> adjacentTiles = new List<Tile>();
 
@@ -137,7 +137,7 @@ namespace Titans
             if (x - 1 >= 0)
             {
                 Tile left = map.map[x - 1][y];
-                if (!left.IsImpassible)
+                if (!left.IsImpassible || isAirUnit)
                 {
                     adjacentTiles.Add(left);
                 }
@@ -146,7 +146,7 @@ namespace Titans
             if (x + 1 < map.Size[0])
             {
                 Tile right = map.map[x + 1][y];
-                    if(!right.IsImpassible)
+                    if(!right.IsImpassible || isAirUnit)
                     {
                         adjacentTiles.Add(right);
                     }
@@ -155,7 +155,7 @@ namespace Titans
             if(y - 1 >= 0)
             {
                 Tile up = map.map[x][y - 1];
-                if(!up.IsImpassible)
+                if(!up.IsImpassible || isAirUnit)
                    adjacentTiles.Add(up);
                 
             }
@@ -163,7 +163,7 @@ namespace Titans
             if(y + 1 < map.Size[1])
             {
                 Tile down = map.map[x][y + 1];
-                if(!down.IsImpassible)
+                if(!down.IsImpassible || isAirUnit)
                 {
                     adjacentTiles.Add(down);
                 }
@@ -278,7 +278,7 @@ namespace Titans
 
 
         //same as above, only returns the path
-        public static List<Tile> GetPath(Tile startTile, Tile endTile, Map map)
+        public static List<Tile> GetPath(Tile startTile, Tile endTile, Map map, Unit active)
         {
             //HOLY SHIT, ANOTHER WORKING A* ALGORITHM
             startTile.IsRoot = true;
@@ -301,8 +301,15 @@ namespace Titans
                 }
                 open.Remove(current);
                 closed.Add(current);
-
-                List<Tile> adjacent = GetAdjacentLegalTiles(map, current);
+                List<Tile> adjacent;
+                if (active is Scout || active is Bomber || active is Fighter)
+                {
+                     adjacent = GetAdjacentLegalTiles(map, current, true);
+                }
+                else
+                {
+                    adjacent = GetAdjacentLegalTiles(map, current, false);
+                }
                 List<Tile> adjacentTemp = new List<Tile>();
                 foreach (Tile adj in adjacent)
                 {
@@ -367,6 +374,8 @@ namespace Titans
 
         }
 
+        
+
         public static void MakeAIMove(Battle battle, Unit active)
         {
             if (!battle.GameUI.taunted && active.AP > 0)
@@ -400,10 +409,10 @@ namespace Titans
                 {
                     Tile enemyTile = map.GetTileAt(enemy.Location[0], enemy.Location[1]);
 
-                    List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile);
+                    List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile, active is Scout || active is Bomber || active is Fighter);
                     foreach (Tile adj in enemyAdjTiles)
                     {
-                        List<Tile> path = GetPath(location, adj, map);
+                        List<Tile> path = GetPath(location, adj, map, active);
                         foreach (Tile p in path)
                         {
                             int pathTotal = 0;
@@ -543,7 +552,7 @@ namespace Titans
                         if (!test.hasUnit)
                         {
                             int pathCost = 0;
-                            List<Tile> path = GetPath(nearestLocation, test, map);
+                            List<Tile> path = GetPath(nearestLocation, test, map, active);
                             foreach (Tile p in path)
                             {
                                 pathCost += p.MoveCost;
@@ -759,14 +768,14 @@ namespace Titans
                     reachableTiles.Add(map.GetTileAt(coords[0], coords[1]));
                 }
 
-                List<Tile> enemyAdjacent = GetAdjacentLegalTiles(map, targetLocation);
+                List<Tile> enemyAdjacent = GetAdjacentLegalTiles(map, targetLocation, active is Scout || active is Fighter || active is Bomber);
                 int closestPathCost = 500000;
                 Tile closest = new Tile();
 
                 foreach (Tile adj in enemyAdjacent)
                 {
                     
-                    List<Tile> path = GetPath(activeLocation, adj, map);
+                    List<Tile> path = GetPath(activeLocation, adj, map, active);
                     int pathCost = 0;
                     foreach (Tile tile in path)
                     {
@@ -779,7 +788,7 @@ namespace Titans
                     }
                 }
                 Tile destination = closest;
-                List<Tile> destinationPath = GetPath(activeLocation, destination, map);
+                List<Tile> destinationPath = GetPath(activeLocation, destination, map, active);
                 if (Reachable(destinationPath, active.Speed) && destination != activeLocation)
                 {
                     battle.StartMove(destination);
@@ -790,7 +799,7 @@ namespace Titans
                     int closestReachableTileCost = 10000;
                     foreach (Tile test in reachableTiles)
                     {
-                        List<Tile> path = GetPath(test, destination, map);
+                        List<Tile> path = GetPath(test, destination, map, active);
                         int pathCost = 0;
                         foreach (Tile tile in path)
                         {
@@ -1196,10 +1205,10 @@ namespace Titans
             {
                 Tile enemyTile = map.GetTileAt(enemy.Location[0], enemy.Location[1]);
 
-                List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile);
+                List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile, active is Scout || active is Fighter || active is Bomber);
                 foreach (Tile adj in enemyAdjTiles)
                 {
-                    List<Tile> path = GetPath(location, adj, map);
+                    List<Tile> path = GetPath(location, adj, map, active);
                     foreach (Tile p in path)
                     {
                         int pathTotal = 0;
