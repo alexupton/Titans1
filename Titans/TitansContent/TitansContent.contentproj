@@ -1453,7 +1453,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-
     <Compile Include="images\Animations\Charge.png">
       <Name>Charge</Name>
     </Compile>
@@ -1484,6 +1483,50 @@
     </Compile>
     <Compile Include="images\Units\ESpearman.png">
       <Name>ESpearman</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="images\Move.png">
+      <Name>Move</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="images\Interface\Attack.png">
+      <Name>Attack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Interface\Defend.png">
+      <Name>Defend</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Interface\Item.png">
+      <Name>Item</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Interface\Move.png">
+      <Name>Move</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Interface\Special.png">
+      <Name>Special</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Interface\Stop.png">
+      <Name>Stop</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="images\Interface\Wheel.png">
+      <Name>Wheel</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
