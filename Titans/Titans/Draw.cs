@@ -478,10 +478,10 @@ namespace Titans
             //draw static UI elements
             Vector2 unitLoc = new Vector2(game.battle.ActiveUnit.Location[0] * 55 + game.offsetX, game.battle.ActiveUnit.Location[1] * 55 + game.offsetY);
             game.spriteBatch.Draw(game.Highlight, unitLoc, Color.White);
-            game.spriteBatch.Draw(game.move, new Vector2(680, 700), Color.White);
+            //game.spriteBatch.Draw(game.move, new Vector2(680, 700), Color.White);
             game.spriteBatch.Draw(game.pass, new Vector2(796, 700), Color.White);
-            game.spriteBatch.Draw(game.attack, new Vector2(680, 727), Color.White);
-            game.spriteBatch.Draw(game.defend, new Vector2(796, 727), Color.White);
+            //game.spriteBatch.Draw(game.attack, new Vector2(680, 727), Color.White);
+            //game.spriteBatch.Draw(game.defend, new Vector2(796, 727), Color.White);
             game.spriteBatch.Draw(game.special, new Vector2(680, 754), Color.White);
             game.spriteBatch.Draw(game.item, new Vector2(796, 754), Color.White);
             game.spriteBatch.Draw(game.UI, new Vector2(0, 0), Color.White);

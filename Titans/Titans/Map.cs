@@ -128,7 +128,7 @@ namespace Titans
                     tile.HScore = 0;
                     tile.GScore = 0;
                     tile.FScore = 0;
-                    if (AI.PathExists(location, tile, this, trueReachableTiles, selected.Speed))
+                    if (AI.PathExists(location, tile, this, trueReachableTiles, selected.Speed, selected))
                     {
                         tempTileList.Add(tile);
                     }

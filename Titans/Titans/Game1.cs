@@ -295,6 +295,14 @@ namespace Titans
         public bool taunted = false;
         public bool rooted = false;
 
+        //button locations
+        Rectangle moveclick = new Rectangle(680, 700, 116, 27);
+        Rectangle passclick = new Rectangle(796, 700, 116, 27);
+        Rectangle attackclick = new Rectangle(680, 727, 116, 27);
+        Rectangle defendclick = new Rectangle(796, 727, 116, 27);
+        Rectangle specialclick = new Rectangle(680, 754, 116, 27);
+        Rectangle itemclick = new Rectangle(796, 754, 116, 27);
+
 
         public Game1()
         {
@@ -914,12 +922,7 @@ namespace Titans
 
                 //boxes for intersecion of buttons
 
-                Rectangle moveclick = new Rectangle(680, 700, 116, 27);
-                Rectangle passclick = new Rectangle(796, 700, 116, 27);
-                Rectangle attackclick = new Rectangle(680, 727, 116, 27);
-                Rectangle defendclick = new Rectangle(796, 727, 116, 27);
-                Rectangle specialclick = new Rectangle(680, 754, 116, 27);
-                Rectangle itemclick = new Rectangle(796, 754, 116, 27);
+                
                 mouseState = Mouse.GetState();
                 bool moveenabled = true;
                 bool hilightenabled = true;
@@ -939,10 +942,11 @@ namespace Titans
                 {
                     LockButtons();
                 }
-                //Move mode highlighting
-                if (battle.MoveMode)
+                //Map highlighting
+                if (battle.MoveMode || battle.AttackMode)
                 {
-                    //THE ALL IMPORTANT MAP POSITION ESITMATION FUNCTION
+                    battle.BattleMap.ClearRedHighlights();
+                    //THE ALL IMPORTANT MAP POSITION ESTIMATION FUNCTION
                     int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
                     int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
 
@@ -951,11 +955,32 @@ namespace Titans
                     {
                         battle.BattleMap.AddSpecificHighlight(X, Y);
                         lastSelectedTile = battle.BattleMap.GetTileAt(X, Y);
+                        if (battle.moveArea.Contains(lastSelectedTile) && !battle.UnitHasMoved) //highlight valid tile
+                        {
+                            battle.BattleMap.AddSpecificRedHighlight(lastSelectedTile.X, lastSelectedTile.Y);
+                        }
+                        else if (AI.HasFriendlyUnit(lastSelectedTile, battle.ActiveUnit)) //highlight defend tile
+                        {
+                            if (lastSelectedTile.TileUnit == battle.ActiveUnit)
+                            {
+                                battle.BattleMap.AddSpecificRedHighlight(lastSelectedTile.X, lastSelectedTile.Y);
+                            }
+                        }
+                        else //highlight valid move tile
+                        {
+                            List<Tile> attackRange = battle.BattleMap.GetAttackRangeTiles(battle.ActiveUnit);
+                            if (attackRange.Contains(lastSelectedTile) && AI.HasEnemyUnit(lastSelectedTile, battle.ActiveUnit))
+                            {
+                                battle.BattleMap.AddSpecificRedHighlight(lastSelectedTile.X, lastSelectedTile.Y);
+                            }
+                        }
                     }
                     else
                     {
                         battle.BattleMap.AddSpecificHighlight(lastSelectedTile.X, lastSelectedTile.Y);
                     }
+
+                    
 
                 }
                 //AttackMode Highlighting
@@ -1067,102 +1092,113 @@ namespace Titans
                 if (mouseState.LeftButton == ButtonState.Pressed && !releaseWait && !AILock && mouseState.RightButton != ButtonState.Pressed && !taunted)
                 {
 
-                    //select move
-                    if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled && !rooted)
+                    //select special
+                    if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
                     {
-
-                        battle.BattleMap.ClearRedHighlights();
-                        releaseWait = true;
-                        move = move_invert;
-                        attack = attack_grey;
-                        defend = defend_grey;
-                        item = item_grey;
-                        pass = pass_grey;
-                        special = special_grey;
-                        hilightenabled = false;
-                        battle.AttackMode = false;
-                        battle.SelectMove();
-                        battle.BattleMap.ClearRedHighlights();
-                        //frameCount = 0;
-                        battle.SelectMove();
+                        buttons.SpecialButtons();
                     }
+                    ////select move
+                    //if (moveclick.Contains(mousePos) && move != move_invert && !moveWait && !tickWait && battle.SelectEnabled && !rooted && !battle.UnitHasMoved)
+                    //{
+
+                    //    battle.BattleMap.ClearRedHighlights();
+                    //    releaseWait = true;
+                    //    move = move_invert;
+                    //    attack = attack_grey;
+                    //    defend = defend_grey;
+                    //    item = item_grey;
+                    //    pass = pass_grey;
+                    //    special = special_grey;
+                    //    hilightenabled = false;
+                    //    battle.AttackMode = false;
+                    //    battle.SelectMove();
+                    //    battle.BattleMap.ClearRedHighlights();
+                    //    //frameCount = 0;
+                    //    battle.SelectMove();
+                    //}
                     //deselect move
-                    else if (moveclick.Contains(mousePos) && move == move_invert)
-                    {
-                        battle.BattleMap.ClearRedHighlights();
-                        releaseWait = true;
-                        move = movetrue;
-                        attack = attacktrue;
-                        if (battle.ActiveUnit is Ranger)
-                        {
-                            defend = defend_grey;
-                        }
-                        else
-                        {
-                            defend = defendtrue;
-                        }
-                        item = itemtrue;
-                        pass = passtrue;
-                        special = specialtrue;
-                        hilightenabled = true;
-                        battle.DeselectMove();
-                    }
-                    //select attack
-                    else if (attackclick.Contains(mousePos) && attack != attack_invert && !tickWait && !moveWait && battle.SelectEnabled)
-                    {
-                        releaseWait = true;
-                        move = move_grey;
-                        attack = attack_invert;
-                        defend = defend_grey;
-                        item = item_grey;
-                        pass = pass_grey;
-                        special = special_grey;
-                        hilightenabled = true;
+                    //else if (moveclick.Contains(mousePos) && move == move_invert)
+                    //{
+                    //    battle.BattleMap.ClearRedHighlights();
+                    //    releaseWait = true;
+                    //    move = movetrue;
+                    //    attack = attacktrue;
+                    //    if (battle.ActiveUnit is Ranger)
+                    //    {
+                    //        defend = defend_grey;
+                    //    }
+                    //    else
+                    //    {
+                    //        defend = defendtrue;
+                    //    }
+                    //    item = itemtrue;
+                    //    pass = passtrue;
+                    //    special = specialtrue;
+                    //    hilightenabled = true;
+                    //    battle.DeselectMove();
+                    //}
+                    //else if(moveclick.Contains(mousePos))
+                    //{
+                    //    releaseWait = true;
+                    //    sfx.PlayBuzzer();
+                    //}
+                
+                    ////select attack
+                    //if (attackclick.Contains(mousePos) && attack != attack_invert && !tickWait && !moveWait && battle.SelectEnabled)
+                    //{
+                    //    releaseWait = true;
+                    //    move = move_grey;
+                    //    attack = attack_invert;
+                    //    defend = defend_grey;
+                    //    item = item_grey;
+                    //    pass = pass_grey;
+                    //    special = special_grey;
+                    //    hilightenabled = true;
 
-                        //deselect other modes before selecting attack
-                        battle.DeselectMove();
-                        battle.SelectAttack();
+                    //    //deselect other modes before selecting attack
+                    //    battle.DeselectMove();
+                    //    battle.SelectAttack();
 
-                        //battle will get rid of attack mode if there are no valid targets
-                        if (!battle.AttackMode)
-                        {
-                            battle.SelectEnabled = true;
-                            if (!rooted)
-                            {
-                                move = movetrue;
-                            }
-                            attack = attacktrue;
-                            defend = defendtrue;
-                            item = itemtrue;
-                            pass = passtrue;
-                            special = specialtrue;
-                            hilightenabled = true;
-                            sfx.PlayBuzzer();
-                        }
-                    }
-                    //deselect attack
-                    else if (attackclick.Contains(mousePos) && attack == attack_invert)
-                    {
-                        releaseWait = true;
-                        if (!rooted)
-                        {
-                            move = movetrue;
-                        }
-                        attack = attacktrue;
-                        if (battle.ActiveUnit is Ranger)
-                        {
-                            defend = defend_grey;
-                        }
-                        else
-                        {
-                            defend = defendtrue;
-                        }
-                        item = itemtrue;
-                        pass = passtrue;
-                        special = specialtrue;
-                        hilightenabled = true;
-                        battle.DeselectAttack();
-                    }
+                    //    //battle will get rid of attack mode if there are no valid targets
+                    //    if (!battle.AttackMode)
+                    //    {
+                    //        battle.SelectEnabled = true;
+                    //        if (!rooted)
+                    //        {
+                    //            move = movetrue;
+                    //        }
+                    //        attack = attacktrue;
+                    //        defend = defendtrue;
+                    //        item = itemtrue;
+                    //        pass = passtrue;
+                    //        special = specialtrue;
+                    //        hilightenabled = true;
+                    //        sfx.PlayBuzzer();
+                    //    }
+                    //}
+                    ////deselect attack
+                    //else if (attackclick.Contains(mousePos) && attack == attack_invert)
+                    //{
+                    //    releaseWait = true;
+                    //    if (!rooted)
+                    //    {
+                    //        move = movetrue;
+                    //    }
+                    //    attack = attacktrue;
+                    //    if (battle.ActiveUnit is Ranger)
+                    //    {
+                    //        defend = defend_grey;
+                    //    }
+                    //    else
+                    //    {
+                    //        defend = defendtrue;
+                    //    }
+                    //    item = itemtrue;
+                    //    pass = passtrue;
+                    //    special = specialtrue;
+                    //    hilightenabled = true;
+                    //    battle.DeselectAttack();
+                    //}
                     //select pass
                     else if (passclick.Contains(mousePos) && !tickWait && !moveWait && battle.SelectEnabled)
                     {
@@ -1182,37 +1218,133 @@ namespace Titans
 
                     }
                     //select defend
-                    else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled && defend != defend_grey)
-                    {
-                        timeSinceLastDamageFrame = 0;
-                        wait = true;
-                        battle.MoveMode = false;
-                        battle.AttackMode = false;
-                        releaseWait = true;
-                        move = move_grey;
-                        attack = attack_grey;
-                        defend = defend_invert;
-                        item = item_grey;
-                        pass = pass_grey;
-                        special = special_grey;
-                        hilightenabled = true;
-                        battle.SelectDefend();
-                        frameCount = 0;
-
-                    }
-
-                    ////deselect if in move or attack mode and defend button clicked
-                    //else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && !battle.SelectEnabled)
+                    //else if (defendclick.Contains(mousePos) && !wait && !tickWait && !moveWait && battle.SelectEnabled && defend != defend_grey)
                     //{
+                    //    timeSinceLastDamageFrame = 0;
+                    //    wait = true;
                     //    battle.MoveMode = false;
                     //    battle.AttackMode = false;
-                    //    battle.SelectEnabled = true;
-                    //    buttons.SpecialButtons();
                     //    releaseWait = true;
-                    //    ResetButtons();
+                    //    move = move_grey;
+                    //    attack = attack_grey;
+                    //    defend = defend_invert;
+                    //    item = item_grey;
+                    //    pass = pass_grey;
+                    //    special = special_grey;
+                    //    hilightenabled = true;
+                    //    battle.SelectDefend();
+                    //    frameCount = 0;
+
                     //}
 
+                    //NEW CONTENT
+                    //quick actions
+                    int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
+                    int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
+                    Tile selected = battle.BattleMap.GetTileAt(X, Y);
 
+                       //quick attack
+                    if (X >= 0 && X < battle.BattleMap.Size[0] && Y >= 0 && Y < battle.BattleMap.Size[1]
+                        && AI.HasEnemyUnit(battle.BattleMap.GetTileAt(X, Y), battle.ActiveUnit) && !wait && !moveWait && !ButtonsClicked(mousePos)
+                        && !battle.specialMode)
+                    {
+                        
+                        List<Tile> attackTiles = battle.BattleMap.GetAttackRangeTiles(battle.ActiveUnit);
+                        if (attackTiles.Contains(selected))
+                        {
+                            battle.BattleMap.ClearRedHighlights();
+                            wait = true;
+                            if (!rooted)
+                            {
+                                move = movetrue;
+                            }
+                            attack = attacktrue;
+                            defend = defendtrue;
+                            item = itemtrue;
+                            pass = passtrue;
+                            special = specialtrue;
+                            hilightenabled = true;
+                            releaseWait = true;
+                            unitDamage = battle.Attack(battle.BattleMap.GetTileAt(X, Y).TileUnit);
+                            attackedUnitTrueX = X * 55 - 13;
+                            attackedUnitTrueY = Y * 55 - 20;
+                            if (battle.ActiveUnit is Artillery)
+                            {
+                                splashDamage = battle.GetSplashDamage(battle.BattleMap.GetTileAt(X, Y), unitDamage);
+
+                            }
+                            displayDamage = true;
+                            timeSinceLastDamageFrame = 0;
+                            frameCount = 0;
+                        }
+
+                    }
+                    //quick move
+                    else if (X >= 0 && X < battle.BattleMap.Size[0] && Y >= 0 && Y < battle.BattleMap.Size[1] &&
+                        !battle.BattleMap.GetTileAt(X, Y).IsImpassible && !wait && !moveWait && !battle.UnitHasMoved
+                        && !ButtonsClicked(mousePos) && !battle.specialMode)
+                    {
+                        if (battle.moveArea.Contains(battle.BattleMap.GetTileAt(X, Y)))
+                        {
+                            lastSelectedTile = battle.BattleMap.GetTileAt(X, Y);
+                            moveWait = true;
+                            move = movetrue;
+                            attack = attacktrue;
+                            defend = defendtrue;
+                            item = itemtrue;
+                            pass = passtrue;
+                            special = specialtrue;
+                            hilightenabled = true;
+                            releaseWait = true;
+                            battle.DeselectMove();
+                            battle.StartMove(lastSelectedTile);
+                            battle.BattleMap.ClearRedHighlights();
+                            frameCount = 0;
+                            if (battle.ActiveUnit.AP <= 1)
+                            {
+                                LockButtons();
+                            }
+                        }
+                    }
+
+                        //quick defend
+                    else if (X >= 0 && X < battle.BattleMap.Size[0] && Y >= 0 && Y < battle.BattleMap.Size[1] &&
+                         !wait && !moveWait && !ButtonsClicked(mousePos) && !battle.specialMode && AI.HasFriendlyUnit(selected, battle.ActiveUnit))
+                    {
+                        if (selected.TileUnit == battle.ActiveUnit && !(battle.ActiveUnit is Ranger))
+                        {
+                            timeSinceLastDamageFrame = 0;
+                            wait = true;
+                            battle.MoveMode = false;
+                            battle.AttackMode = false;
+                            releaseWait = true;
+                            move = move_grey;
+                            attack = attack_grey;
+                            defend = defend_invert;
+                            item = item_grey;
+                            pass = pass_grey;
+                            special = special_grey;
+                            hilightenabled = true;
+                            battle.SelectDefend();
+                            frameCount = 0;
+                        }
+                        else if (selected.TileUnit == battle.ActiveUnit)
+                        {
+                            sfx.PlayPassSound(battle.ActiveUnit);
+                            pass = pass_invert;
+                            timeSinceLastDamageFrame = 0;
+                            frameCount = 0;
+                            battle.ActiveUnit.AP = 0;
+                            releaseWait = true;
+                            move = movetrue;
+                            attack = attacktrue;
+                            defend = defendtrue;
+                            item = itemtrue;
+                            pass = passtrue;
+                            special = specialtrue;
+                            hilightenabled = true;
+                        }
+                    }
                     //confirm move
                     if (mouseState.LeftButton == ButtonState.Pressed && battle.MoveMode && !releaseWait && battle.BattleMap.GetTileAt(lastSelectedTile.X, lastSelectedTile.Y).IsRedHighlighted)
                     {
@@ -1247,8 +1379,7 @@ namespace Titans
                     //Confirm attack
                     if (mouseState.LeftButton == ButtonState.Pressed && battle.AttackMode && !releaseWait)
                     {
-                        int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
-                        int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
+                       
                         if (X >= 0 && X < battle.BattleMap.Size[0] && Y >= 0 && Y < battle.BattleMap.Size[1]
                             && battle.BattleMap.GetTileAt(X, Y).IsHighlighted && battle.BattleMap.GetTileAt(X, Y).IsRedHighlighted && battle.BattleMap.GetTileAt(X, Y).hasUnit &&
                             (battle.BattleMap.GetTileAt(X, Y).TileUnit.isPlayerUnit != battle.ActiveUnit.isPlayerUnit))
@@ -1291,20 +1422,13 @@ namespace Titans
                     if (!battle.AttackMode && !battle.MoveMode && !releaseWait && !wait && !tickWait && !moveWait && battle.SelectEnabled)
                     {
 
-                        int X = (int)Math.Round(((double)mousePos.X - (double)offsetX - 20) / (double)55);
-                        int Y = (int)Math.Round(((double)mousePos.Y - (double)offsetY - 20) / (double)55);
 
                         if (battle.BattleMap.GetTileAt(X, Y).hasUnit)
                         {
                             battle.ShowAttackRange(battle.BattleMap.GetTileAt(X, Y).TileUnit);
                         }
                     }
-                    //select special
-                    if (specialclick.Contains(mousePos) && !wait && !tickWait && !moveWait)
-                    {
-                        buttons.SpecialButtons();
-
-                    }
+                    
                     
                     
                     //choose special attacks
@@ -1361,19 +1485,19 @@ namespace Titans
                     }
                 }
                 //move the view with WASD
-                if (Keyboard.GetState().IsKeyDown(Keys.W) && offsetY < battle.BattleMap.Size[1] + 350)
+                if ((Keyboard.GetState().IsKeyDown(Keys.W) ||Keyboard.GetState().IsKeyDown(Keys.Up)) && offsetY < battle.BattleMap.Size[1] + 350)
                 {
                     offsetY += 10;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.S) && offsetY > battle.BattleMap.Size[1] * -51)
+                if ((Keyboard.GetState().IsKeyDown(Keys.S) ||Keyboard.GetState().IsKeyDown(Keys.Down)) && offsetY > battle.BattleMap.Size[1] * -51)
                 {
                     offsetY -= 10;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.A) && offsetX < battle.BattleMap.Size[0] * 10)
+                if ((Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.Left)) && offsetX < battle.BattleMap.Size[0] * 10)
                 {
                     offsetX += 10;
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.D) && offsetX > battle.BattleMap.Size[0] * -51)
+                if ((Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.Right)) && offsetX > battle.BattleMap.Size[0] * -51)
                 {
                     offsetX -= 10;
                 }
@@ -1669,6 +1793,21 @@ namespace Titans
             defend = defend_grey;
             item = item_grey;
             special = special_grey;
+        }
+
+        //determines whether the mouse is over the action buttons
+        private bool ButtonsClicked(Point mousePos)
+        {
+            if ( //moveclick.Contains(mousePos) || attackclick.Contains(mousePos) || 
+                //defendclick.Contains(mousePos)
+                specialclick.Contains(mousePos) || itemclick.Contains(mousePos) || passclick.Contains(mousePos))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

@@ -518,8 +518,11 @@ namespace Titans
         public void SpecialButtons()
         {
 
-            if (!Game.battle.specialMode && !Game.battle.MoveMode && !Game.battle.AttackMode)
+            if (!Game.battle.specialMode)
             {
+                Game.battle.BattleMap.ClearAllHighlights();
+                Game.battle.MoveMode = false;
+                Game.battle.AttackMode = false;
                 Game.releaseWait = true;
                 Game.isSpecial = true;
                 Game.move = Game.move_grey;
@@ -531,8 +534,10 @@ namespace Titans
                 Game.battle.SelectSpecial();
 
             }
-           else if(Game.battle.specialMode && !Game.battle.MoveMode && !Game.battle.AttackMode)
+           else if(Game.battle.specialMode)
             {
+                Game.battle.MoveMode = true;
+                Game.battle.AttackMode = true;
                 Game.releaseWait = true;
                 Game.isSpecial = false;
                 Game.battle.DeselectSpecialNumber();
@@ -793,6 +798,8 @@ namespace Titans
                 Game.draw.optionsColor[5] = Color.Black;
             }
         }
+
+        
     }
 
 }

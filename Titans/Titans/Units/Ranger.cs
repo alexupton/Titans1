@@ -47,7 +47,7 @@ namespace Titans
             Attack = 30;
             Defense = 10;
             Range = 7;
-            Speed = 150;
+            Speed = 180;
             Init = 40;
             AP = 2;
             Abilities.Add("Headshot");

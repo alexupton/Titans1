@@ -44,7 +44,7 @@ namespace Titans
             Attack = 20;
             Defense = 50;
             Range = 1;
-            Speed = 150;
+            Speed = 200;
             Init = 25;
             AP = 2;
             Abilities.Add("Shield Bash");

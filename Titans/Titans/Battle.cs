@@ -39,6 +39,9 @@ namespace Titans
         public Tile SelectedTile { get; set; }
         public List<Ranger> rangersWithTargets { get; set; }
         public List<Unit> rangerTarget { get; set; }
+        public List<Tile> moveArea { get; set; }
+        public bool UnitHasMoved { get; set; }
+        public Tile LastUnitLocation { get; set; }
 
         //any more custom rule options go here
 
@@ -48,7 +51,7 @@ namespace Titans
             Points = 1000; //suggested amount, can be changed
             TurnCount = 1;
             MoveMode = false;
-            AttackMode = false;
+            AttackMode = true;
             MoveEnabled = true;
             AttackEnabled = false;
             SelectEnabled = true;
@@ -63,6 +66,8 @@ namespace Titans
             specialMode6 = false;
             rangersWithTargets = new List<Ranger>();
             rangerTarget = new List<Unit>();
+            moveArea = new List<Tile>();
+            UnitHasMoved = false;
         }
 
         public Battle(Map newMap)
@@ -157,6 +162,9 @@ namespace Titans
                 GameUI.AILock = false;
             }
             SelectEnabled = true;
+            UnitHasMoved = false;
+            MoveMode = true;
+            AttackMode = true;
 
             //undo effects of charge
             if (ActiveUnit is Spearman)
@@ -288,6 +296,8 @@ namespace Titans
                     ActiveUnit.StatusEffects.ElementAt(i).Invoke(this);
                 }
             }
+
+            moveArea = BattleMap.GetLegalMoveTiles(ActiveUnit);
             return turnOrder;
         }
         
@@ -311,9 +321,12 @@ namespace Titans
                     }
                     
                 }
+                
+                UnitHasMoved = false;
             GameUI.wait = false;
             GameUI.ResetButtons();
-            MoveMode = false;
+            MoveMode = true;
+            AttackMode = true;
             AttackMode = false;
             GameUI.moveWait = false;
             GameUI.tickWait = false;
@@ -392,7 +405,7 @@ namespace Titans
                     ActiveUnit.StatusEffects.ElementAt(i).Invoke(this);
                 }
             }
-
+            moveArea = BattleMap.GetLegalMoveTiles(ActiveUnit);
             return ActiveUnit;
         }
 
@@ -402,7 +415,14 @@ namespace Titans
         {
             SelectEnabled = false;
             BattleMap.ClearRedHighlights();
-            List<int[]> moveTiles = BattleMap.GetLegalMoveCoordinates(ActiveUnit);
+            List<int[]> moveTiles = new List<int[]>();
+            foreach(Tile tile in moveArea)
+            {
+                if (!tile.hasUnit)
+                {
+                    moveTiles.Add(new int[] { tile.X, tile.Y });
+                }
+            }
             BattleMap.RedHighlightTiles(moveTiles);
             MoveMode = true;
         }
@@ -417,6 +437,7 @@ namespace Titans
         //generate a list of moves between the unit and desired tile, for animation purposes
         public void StartMove(Tile move)
         {
+            LastUnitLocation = BattleMap.GetTileAt(ActiveUnit.Location[0], ActiveUnit.Location[1]);
             //remove defender buffs from nearby units
             if (ActiveUnit is Defender)
             {
@@ -461,12 +482,15 @@ namespace Titans
                 BattleMap.Move(ActiveUnit, pendingMoves[pendingIndex].X, pendingMoves[pendingIndex].Y);
                 GameUI.SetOffsetValue(ActiveUnit.Location[0] * -55 + 750, ActiveUnit.Location[1] * -55 + 400);
                 pendingIndex--;
-                if (pendingIndex == -1)
+                if (pendingIndex == -1) //move is finished
                 {
+                    UnitHasMoved = true;
+                    GameUI.move = GameUI.move_grey;
                     GameUI.moveWait = false;
                     ActiveUnit.AP--;
                     BattleMap.ClearHighlights();
                     MoveMode = false;
+                    AttackMode = true;
                     pendingIndex = 0;
                     pendingMoves = new Tile[0];
                     if (ActiveUnit is Defender) //if the unit is a defender, add its passive defense to nearby units

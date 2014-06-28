@@ -44,7 +44,7 @@ namespace Titans
             Attack = 40;
             Defense = 25;
             Range = 1;
-            Speed = 150;
+            Speed = 200;
             Init = 50;
             AP = 2;
             Abilities.Add("Whirlwind");

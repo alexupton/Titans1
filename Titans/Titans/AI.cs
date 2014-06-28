@@ -9,7 +9,7 @@ namespace Titans
     {
         //runs path algorithm and checks if there is
         //path between two points
-        public static bool PathExists(Tile startTile, Tile endTile, Map map, List<Tile> rangeSet, int speed)
+        public static bool PathExists(Tile startTile, Tile endTile, Map map, List<Tile> rangeSet, int speed, Unit active)
         {
             //HOLY SHIT, A WORKING A* ALGORITHM
             startTile.IsRoot = true;
@@ -38,7 +38,7 @@ namespace Titans
                 open.Remove(current);
                 closed.Add(current);
 
-                List<Tile> adjacent = GetAdjacentLegalTiles(map, current, false);
+                List<Tile> adjacent = GetAdjacentLegalTiles(map, current, active);
                 List<Tile> adjacentTemp = new List<Tile>();
                 foreach (Tile adj in adjacent)
                 {
@@ -127,10 +127,11 @@ namespace Titans
              return true;
          }
      }
-     public static List<Tile> GetAdjacentLegalTiles(Map map, Tile currentTile, bool isAirUnit)
+     public static List<Tile> GetAdjacentLegalTiles(Map map, Tile currentTile, Unit active)
         {
             List<Tile> adjacentTiles = new List<Tile>();
 
+            bool isAirUnit = active is Fighter || active is Bomber || active is Scout;
             int x = currentTile.X;
             int y = currentTile.Y;
 
@@ -141,12 +142,21 @@ namespace Titans
                 {
                     adjacentTiles.Add(left);
                 }
+                else if (AI.HasFriendlyUnit(left, active))
+                {
+                    adjacentTiles.Add(left);
+                }
+                
             }
 
             if (x + 1 < map.Size[0])
             {
                 Tile right = map.map[x + 1][y];
                     if(!right.IsImpassible || isAirUnit)
+                    {
+                        adjacentTiles.Add(right);
+                    }
+                    else if (AI.HasFriendlyUnit(right, active))
                     {
                         adjacentTiles.Add(right);
                     }
@@ -157,6 +167,10 @@ namespace Titans
                 Tile up = map.map[x][y - 1];
                 if(!up.IsImpassible || isAirUnit)
                    adjacentTiles.Add(up);
+                else if (AI.HasFriendlyUnit(up, active))
+                {
+                    adjacentTiles.Add(up);
+                }
                 
             }
 
@@ -164,6 +178,10 @@ namespace Titans
             {
                 Tile down = map.map[x][y + 1];
                 if(!down.IsImpassible || isAirUnit)
+                {
+                    adjacentTiles.Add(down);
+                }
+                else if (AI.HasFriendlyUnit(down, active))
                 {
                     adjacentTiles.Add(down);
                 }
@@ -302,14 +320,8 @@ namespace Titans
                 open.Remove(current);
                 closed.Add(current);
                 List<Tile> adjacent;
-                if (active is Scout || active is Bomber || active is Fighter)
-                {
-                     adjacent = GetAdjacentLegalTiles(map, current, true);
-                }
-                else
-                {
-                    adjacent = GetAdjacentLegalTiles(map, current, false);
-                }
+                     adjacent = GetAdjacentLegalTiles(map, current, active);
+
                 List<Tile> adjacentTemp = new List<Tile>();
                 foreach (Tile adj in adjacent)
                 {
@@ -409,7 +421,7 @@ namespace Titans
                 {
                     Tile enemyTile = map.GetTileAt(enemy.Location[0], enemy.Location[1]);
 
-                    List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile, active is Scout || active is Bomber || active is Fighter);
+                    List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile, active);
                     foreach (Tile adj in enemyAdjTiles)
                     {
                         List<Tile> path = GetPath(location, adj, map, active);
@@ -768,7 +780,7 @@ namespace Titans
                     reachableTiles.Add(map.GetTileAt(coords[0], coords[1]));
                 }
 
-                List<Tile> enemyAdjacent = GetAdjacentLegalTiles(map, targetLocation, active is Scout || active is Fighter || active is Bomber);
+                List<Tile> enemyAdjacent = GetAdjacentLegalTiles(map, targetLocation, active);
                 int closestPathCost = 500000;
                 Tile closest = new Tile();
 
@@ -811,7 +823,7 @@ namespace Titans
                             closestReachableTileCost = pathCost;
                         }
                     }
-                    if (PathExists(location, closestReachableTile, map, actualRange, active.Speed))
+                    if (PathExists(location, closestReachableTile, map, actualRange, active.Speed, active))
                     {
                         battle.StartMove(closestReachableTile);
                     }
@@ -919,6 +931,24 @@ namespace Titans
             else
                 return false;
         }
+
+        public static bool HasFriendlyUnit(Tile tile, Unit active)
+        {
+            if (tile.hasUnit)
+            {
+                if (tile.TileUnit.isPlayerUnit == active.isPlayerUnit)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+
 
         //determines whether a unit is the range of any enemy
         public static bool IsInEnemyRange(Battle battle, Unit active)
@@ -1205,7 +1235,7 @@ namespace Titans
             {
                 Tile enemyTile = map.GetTileAt(enemy.Location[0], enemy.Location[1]);
 
-                List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile, active is Scout || active is Fighter || active is Bomber);
+                List<Tile> enemyAdjTiles = GetAdjacentLegalTiles(map, enemyTile, active);
                 foreach (Tile adj in enemyAdjTiles)
                 {
                     List<Tile> path = GetPath(location, adj, map, active);
